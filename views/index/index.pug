@@ -3,15 +3,12 @@ block main
   .container
     p(style='color: red;') The UNOFFICIAL staking site of Node101
     br
-    p.choose(style='color: yellow; font-size: 26px;margin-left:220px;margin-bottom:5px')
-      | choose network
+    p.choose(style='color: yellow; font-size: 26px;margin-left:220px;margin-bottom:5px') choose network
     .buttonStyle
       button#mainnet.button.connectStyle
         | Mainnet &rarr;
-      //
-        <button id="testnet" class="button connectStyle">
-        Testnet
-        </button>
+      //- button#testnet.button.connectStyle
+      //-   | Testnet &rarr;
       .tokenWrapper
         img#tokenImg(src='' width='60px' height='60px')
         span#tokenName

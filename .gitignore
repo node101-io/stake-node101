@@ -130,4 +130,5 @@ dist
 .pnp.*
 
 **/cosmjs.js
+**/cosmjs.js.LICENSE.txt
 **/.DS_Store

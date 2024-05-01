@@ -1,0 +1,34 @@
+extends ../partials/header
+block main
+  .container
+    p(style='color: red;') The UNOFFICIAL staking site of Node101
+    br
+    p.choose(style='color: yellow; font-size: 26px;margin-left:220px;margin-bottom:5px')
+      | choose network
+    .buttonStyle
+      button#mainnet.button.connectStyle
+        | Mainnet &rarr;
+      //
+        <button id="testnet" class="button connectStyle">
+        Testnet
+        </button>
+      .tokenWrapper
+        img#tokenImg(src='' width='60px' height='60px')
+        span#tokenName
+    .mainStyle
+      p#walletchain Chain
+      p#walletAdd Address
+      p#walletToken Token
+      p#walletBal Balance
+      input#amount.inputStyle(type='text')
+    .buttonStyle
+      button#connect.button.connectStyle
+        | Connect
+      button#stake.button.connectStyle
+        | Stake
+  // Modal
+  #tokenModal.modal
+    .modal-content
+      span.close &times;
+      h2 Choose Token
+      .token-list

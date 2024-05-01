@@ -1,0 +1,71 @@
+doctype html
+html(lang=__('en'))
+  head
+    //- // Google tag (gtag.js)
+    //- script(async='' src='https://www.googletagmanager.com/gtag/js?id=G-X8ZHYFMTRY')
+    //- script.
+    //-   window.dataLayer = window.dataLayer || [];
+    //-   function gtag(){dataLayer.push(arguments);}
+    //-   gtag('js', new Date());
+    //-   gtag('config', 'G-X8ZHYFMTRY');
+    meta(name='viewport' content='width=device-width, initial-scale=1.0, shrink-to-fit=no')
+    meta(content='text/html; charset=UTF-8' http-equiv='content-type')
+    if title
+      title #{title} | node101
+    else
+      title node101
+    link(rel='icon' href='/favicon-16.png' sizes='16x16')
+    link(rel='icon' href='/favicon-32.png' sizes='32x32')
+    link(rel='icon' href='/favicon-57.png' sizes='57x57')
+    link(rel='icon' href='/favicon-76.png' sizes='76x76')
+    link(rel='icon' href='/favicon-96.png' sizes='96x96')
+    link(rel='icon' href='/favicon-128.png' sizes='128x128')
+    link(rel='icon' href='/favicon-192.png' sizes='192x192')
+    link(rel='icon' href='/favicon-228.png' sizes='228x228')
+    link(rel='shortcut icon' href='/favicon-196.png' sizes='196x196')
+    link(rel='apple-touch-icon' href='/favicon-120.png' sizes='120x120')
+    link(rel='apple-touch-icon' href='/favicon-152.png' sizes='152x152')
+    link(rel='apple-touch-icon' href='/favicon-180.png' sizes='180x180')
+    meta(name='msapplication-TileColor' content='#C2CBF4')
+    meta(name='msapplication-TileImage' content='/favicon-144.png')
+    meta(name='msapplication-config' content='/browserconfig.xml')
+    link(rel='stylesheet' media='screen' href=`/fonts/style.css`)
+    if includes
+      if includes.meta
+        meta(property='og:type' content='website')
+        if includes.meta.author
+          meta(name='author' content=includes.meta.author)
+        if includes.meta.description
+          meta(name='description' content=includes.meta.description)
+        if includes.meta.image
+          meta(property='og:image' content=includes.meta.image)
+          meta(property='og:image:secure_url' content=includes.meta.image)
+          meta(property='og:image:type' content='image/png')
+          meta(property='og:image:alt' content=includes.meta.description)
+        if includes.meta.keywords
+          meta(name='keywords' content=includes.meta.keywords)
+        if includes.meta.title
+          meta(property='og:title' content=includes.meta.title)
+        if includes.meta.twitter
+          mata(name='twitter:card' content='summary_large_image')
+          meta(name='twitter:site' content='@node_101')
+          meta(name='twitter:creator' content='@node_101')
+          meta(name='twitter:title' content=includes.meta.title)
+          meta(name='twitter:description' content=includes.meta.description)
+          meta(name='twitter:image' content=includes.meta.image)
+          meta(name='twitter:image:alt' content=includes.meta.title)
+      if includes.external
+        if includes.external.css
+          each file_name in includes.external.css
+            if file_name == 'page'
+              link(rel='stylesheet' href=`/css/${page}.css`)
+            else
+              link(rel='stylesheet' href=`/css/general/${file_name}.css`)
+        if includes.external.js
+          each file_name in includes.external.js
+            if file_name == 'page'
+              script(src=`/js/${page}.js`)
+            else
+              script(src=`/js/functions/${file_name}.js`)
+  body
+  block content

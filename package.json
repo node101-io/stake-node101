@@ -1,0 +1,33 @@
+{
+  "name": "stake-node101",
+  "version": "1.0.0",
+  "main": "app",
+  "repository": "git@github.com:node101-io/stake-node101.git",
+  "author": "node101",
+  "license": "MIT",
+  "scripts": {
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production"
+  },
+  "dependencies": {
+    "@cosmjs/stargate": "^0.32.3",
+    "body-parser": "^1.20.2",
+    "cluster": "^0.7.7",
+    "connect-mongo": "^4.6.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "fs": "^0.0.1-security",
+    "http": "^0.0.1-security",
+    "i18n": "^0.15.1",
+    "mongoose": "^6.10.4",
+    "os": "^0.1.2",
+    "pug": "^3.0.2",
+    "serve-favicon": "^2.5.0",
+    "validator": "^13.7.0"
+  },
+  "devDependencies": {
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
+  }
+}

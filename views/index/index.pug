@@ -5,10 +5,8 @@ block main
     br
     p.choose(style='color: yellow; font-size: 26px;margin-left:220px;margin-bottom:5px') choose network
     .buttonStyle
-      button#mainnet.button.connectStyle
-        | Mainnet &rarr;
-      //- button#testnet.button.connectStyle
-      //-   | Testnet &rarr;
+      button#mainnet.button.connectStyle Mainnet
+      //- button#testnet.button.connectStyle Testnet
       .tokenWrapper
         img#tokenImg(src='' width='60px' height='60px')
         span#tokenName
@@ -19,11 +17,8 @@ block main
       p#walletBal Balance
       input#amount.inputStyle(type='text')
     .buttonStyle
-      button#connect.button.connectStyle
-        | Connect
-      button#stake.button.connectStyle
-        | Stake
-  // Modal
+      button#connect.button.connectStyle Connect
+      button#stake.button.connectStyle Stake
   #tokenModal.modal
     .modal-content
       span.close &times;

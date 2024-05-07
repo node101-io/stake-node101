@@ -6,13 +6,17 @@ const favicon = require('serve-favicon');
 const http = require('http');
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo');
+const os = require('os');
 const path = require('path');
 const session = require('express-session');
 
 const setLanguage = require('./middleware/setLanguage');
 
+const Job = require('./cron/Job');
+
 dotenv.config({ path: path.join(__dirname, '.env') });
-const numCPUs = process.env.WEB_CONCURRENCY || require('os').cpus().length;
+
+const numCPUs = process.env.WEB_CONCURRENCY || os.cpus().length;
 
 if (cluster.isMaster) {
   console.log(`Master ${process.pid} is running`);
@@ -62,5 +66,7 @@ if (cluster.isMaster) {
 
   server.listen(PORT, () => {
     console.log(`Server is on port ${PORT} as Worker ${cluster.worker.id} running @ process ${cluster.worker.process.pid}`);
+
+    Job.start();
   });
 };

@@ -6,6 +6,7 @@ module.exports = (chainInfo, callback) => {
     _id: chainInfo._id.toString(),
     chain_id: chainInfo.chain_id,
     rpc_url: chainInfo.rpc_url,
-    chain_info: chainInfo.chain_info
+    chain_info: chainInfo.chain_info,
+    is_active: chainInfo.is_active,
   });
 };

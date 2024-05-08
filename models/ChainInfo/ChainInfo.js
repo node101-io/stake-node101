@@ -41,11 +41,9 @@ const ChainInfoSchema = new Schema({
 ChainInfoSchema.statics.createChainInfo = function (data, callback) {
   const ChainInfo = this;
 
-  console.log(data);
   if (!data.chain_id || typeof data.chain_id != 'string' || data.chain_id.trim().length < 1 || data.chain_id.trim().length > MAX_DATABASE_TEXT_FIELD_LENGTH)
     return callback('bad_request');
 
-  console.log(data);
   if (!data.rpc_url || typeof data.rpc_url != 'string' || data.rpc_url.trim().length < 1 || data.rpc_url.trim().length > MAX_DATABASE_TEXT_FIELD_LENGTH)
     return callback('bad_request');
 
@@ -108,47 +106,45 @@ ChainInfoSchema.statics.createChainInfo = function (data, callback) {
 
 } */
 
-ChainInfoSchema.statics.findChainInfoByIdAndUpdate = function (chain_id, chain_info, callback) {
+ChainInfoSchema.statics.findChainInfoByIdAndUpdate = function (chain_id, data, callback) {
   const ChainInfo = this;
+
   if (!chain_id || typeof chain_id != 'string' || chain_id.trim().length < 1 || chain_id.trim().length > MAX_DATABASE_TEXT_FIELD_LENGTH)
     return callback('bad_request');
 
-  if (!chain_info)
-    {
-    console.log(chain_info);
-
+  if (!data || typeof data != 'object')
     return callback('bad_request');
-    }
-  /**
-   * newChainInfo.save((err, chainInfo) => {
-    if (err && err.code == DUPLICATED_UNIQUE_FIELD_ERROR_CODE)
-      return callback('duplicated_unique_field');
-    if (err)
+
+  const updateData = {};
+
+  if (data.chain_id && typeof data.chain_id == 'string' && data.chain_id.trim().length > 0 && data.chain_id.trim().length <= MAX_DATABASE_TEXT_FIELD_LENGTH)
+    updateData.chain_id = data.chain_id.trim();
+
+  if (data.rpc_url && typeof data.rpc_url == 'string' && data.rpc_url.trim().length > 0 && data.rpc_url.trim().length <= MAX_DATABASE_TEXT_FIELD_LENGTH)
+    updateData.rpc_url = data.rpc_url.trim();
+
+  if (data.chain_info && typeof data.chain_info == 'string' && data.chain_info.trim().length > 0 && data.chain_info.trim().length <= MAX_DATABASE_TEXT_FIELD_LENGTH)
+    updateData.chain_info = data.chain_info.trim();
+
+  if (typeof data.is_active == 'boolean')
+    updateData.is_active = data.is_active;
+
+  // TODO: finish this function
+
+  console.log("333333333");
+  ChainInfo.findOneAndUpdate({ chain_id: chain_id }, { updateData }, (err, chainInfo) => {
+    console.log(err, chainInfo);
+
+    if (err) {
+      console.log("yyyyyyyyyyyyyyy");
+      console.log(typeof chain_info);
+      console.log(typeof chain_info == 'object');
       return callback('database_error');
+    };
 
     formatChainInfo(chainInfo, callback);
-   */
-  console.log("11111111");
-  console.log(chain_info);
-  console.log(chain_id);
-  console.log("22222222");
-/*   const id  = ChainInfo.findOne({chain_id: chain_id});
-  console.log(id); */
-  console.log("333333333");
-   ChainInfo.findOneAndUpdate({chain_id:chain_id},
-    { chain_info}, {new: true}, 
-     (err, chainInfo) => {
-    console.log("4444444444444");
-    console.log(chainInfo);
-    console.log("5555555555555");
-      if (err){
-        console.log("yyyyyyyyyyyyyyy");
-        console.log(typeof chain_info);
-        console.log(typeof chain_info == 'object'); 
-        return callback('database_error');}
-      formatChainInfo(chainInfo, callback);
-    }); 
-  };
+  });
+};
 
 ChainInfoSchema.statics.findAllChainInfoIds = function(callback) {
   const ChainInfo = this;
@@ -164,7 +160,7 @@ ChainInfoSchema.statics.findAllChainInfoIds = function(callback) {
     callback(null, chainIds);
   });
 };
-  
+
 
 // create chain info
  const chax = mongoose.model('ChainInfo', ChainInfoSchema);

@@ -7,34 +7,29 @@ const chainInfoIds = [ 'cosmoshub'];
 const Job = {
   start: () => {
 
-    Cron('*/5 * * * * *', async () => {
+    Cron('*/5 * * * * *', () => {
       console.log('Job is running');
-      
+
       ChainInfo.findAllChainInfoIds((err, chainInfoIds) => {
         if (err)
           return console.error(err);
-    
+
         chainInfoIds.forEach(chainInfoId => {
-          sendMessage({ id: chainInfoId }, async (err, res) => {
+          sendMessage({ id: chainInfoId }, (err, res) => { // TODO: change function name
             if (err)
               return console.error(err);
-    
+
             if (!res)
               return console.error('bad_request');
-    
-            try {
-              console.log(JSON.stringify(res));
-              await ChainInfo.findChainInfoByIdAndUpdate(chainInfoId,   JSON.stringify(res) );
-              console.log("xcvb");
-/*               console.log(updatedChainInfo);
- */            } catch (updateErr) {
-              console.error(updateErr);
-            }
+
+            console.log(JSON.stringify(res));
+            ChainInfo.findChainInfoByIdAndUpdate(chainInfoId, JSON.stringify(res), () => { }); // callback
+            console.log("xcvb");
           });
         });
       });
     });
-    
+
   }
 };
 

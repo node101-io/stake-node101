@@ -16,7 +16,7 @@ const Job = require('./cron/Job');
 
 dotenv.config({ path: path.join(__dirname, '.env') });
 
-const numCPUs = 1;//process.env.WEB_CONCURRENCY || os.cpus().length;
+const numCPUs = process.env.WEB_CONCURRENCY || os.cpus().length;
 
 if (cluster.isMaster) {
   console.log(`Master ${process.pid} is running`);
@@ -67,6 +67,6 @@ if (cluster.isMaster) {
   server.listen(PORT, () => {
     console.log(`Server is on port ${PORT} as Worker ${cluster.worker.id} running @ process ${cluster.worker.process.pid}`);
 
-      Job.start();
+    Job.start();
   });
 };

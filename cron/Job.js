@@ -1,36 +1,48 @@
 const { Cron } = require('croner');
 
 const ChainInfo = require('../models/ChainInfo/ChainInfo');
-const sendMessage = require('../models/ChainInfo/functions/getGithubData');
+const getFromGithub = require('../models/ChainInfo/functions/getGithubData');
 
-const chainInfoIds = [ 'cosmoshub'];
+const chainInfoIds = [ 
+    'cosmoshub',
+    'agoric',
+    'celestia',
+    ];
+
+let currentChainInfoIdIndex = 0;
+
 const Job = {
   start: () => {
 
-    Cron('*/5 * * * * *', () => {
-      console.log('Job is running');
-
-      ChainInfo.findAllChainInfoIds((err, chainInfoIds) => {
-        if (err)
-          return console.error(err);
-
-        chainInfoIds.forEach(chainInfoId => {
-          sendMessage({ id: chainInfoId }, (err, res) => { // TODO: change function name
+    Cron('*/20 * * * * *', () => {
+      for (let chainInfoId of chainInfoIds) {
+        console.log("chainInfoId: ", chainInfoId)
+        getFromGithub(chainInfoId , (err, res) => {
             if (err)
               return console.error(err);
 
             if (!res)
               return console.error('bad_request');
 
-            console.log(JSON.stringify(res));
-            ChainInfo.findChainInfoByIdAndUpdate(chainInfoId, JSON.stringify(res), () => { }); // callback
-            console.log("xcvb");
+          let data = {
+              "chain_id": chainInfoId,
+              "rpc_url": "https://rpc.cosmos.network:443",
+              "chain_info": JSON.stringify(res),
+              "is_active": chainInfoId == "celestia" ? false : true
+            }
+            ChainInfo.findChainInfoByIdAndUpdate(chainInfoId, data, (err, res) => {
+              if (err)
+                return console.error(err);
+              
+              console.log(res);
+             }); 
+            console.log("done successfully");
           });
-        });
-      });
-    });
-
+          currentChainInfoIdIndex = (currentChainInfoIdIndex + 1) % chainInfoIds.length;
+      }
+    }
+  );
   }
 };
 
-module.exports = Job;
+module.exports = Job; 

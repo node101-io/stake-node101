@@ -38,7 +38,7 @@ const ChainInfoSchema = new Schema({
 
 ChainInfoSchema.statics.createChainInfo = function (data, callback) {
   const ChainInfo = this;
-  
+
   if (!data.chain_id || typeof data.chain_id != 'string' || data.chain_id.trim().length < 1 || data.chain_id.trim().length > MAX_DATABASE_TEXT_FIELD_LENGTH)
     return callback('bad_request');
 
@@ -48,14 +48,12 @@ ChainInfoSchema.statics.createChainInfo = function (data, callback) {
   if (!data.chain_info || typeof data.chain_info != 'string' || data.chain_info.trim().length < 1 || data.chain_info.trim().length > MAX_DATABASE_TEXT_FIELD_LENGTH)
     return callback('bad_request');
 
-  if (typeof data.is_active != 'boolean')
+  if ('is_active' in data && typeof data.is_active != 'boolean')
     return callback('bad_request');
 
-  if (!Object.keys(data).length) {{
+  if (!Object.keys(data).length)
     return callback('bad_request');
-  }}
 
-  
   const newChainInfo = new ChainInfo({
     chain_id: data.chain_id.trim(),
     rpc_url: data.rpc_url.trim(),
@@ -73,9 +71,10 @@ ChainInfoSchema.statics.createChainInfo = function (data, callback) {
   });
 };
 
-
+// TODO: findChainInfoByChainIdAndUpdate change function name
 ChainInfoSchema.statics.findChainInfoByIdAndUpdate = function (chain_id, data, callback) {
   const ChainInfo = this;
+
   if (!chain_id || typeof chain_id != 'string' || chain_id.trim().length < 1 || chain_id.trim().length > MAX_DATABASE_TEXT_FIELD_LENGTH)
     return callback('bad_request');
 
@@ -93,21 +92,23 @@ ChainInfoSchema.statics.findChainInfoByIdAndUpdate = function (chain_id, data, c
   if (data.chain_info && typeof data.chain_info == 'string' && data.chain_info.trim().length > 0 && data.chain_info.trim().length <= MAX_DATABASE_TEXT_FIELD_LENGTH)
     updateData.chain_info = data.chain_info.trim();
 
-  if (typeof data.is_active == 'boolean')
+  if ('is_active' in data && typeof data.is_active == 'boolean')
     updateData.is_active = data.is_active;
 
-  ChainInfo.findOneAndUpdate({ chain_id },  updateData , { returnOriginal: false }, (err, updateData) => {
+  if (!Object.keys(updateData).length)
+    return callback('bad_request');
 
-    if (err) {
+  ChainInfo.findOneAndUpdate({ chain_id }, updateData, (err, chainInfo) => {
+    if (err)
       return callback('database_error');
-    };
-    formatChainInfo(updateData, callback);
+
+    formatChainInfo(chainInfo, callback);
   });
 };
 
 
 // create chain info
-/* 
+/*
   const chax = mongoose.model('ChainInfo', ChainInfoSchema);
   const instance1 = chax.createChainInfo({
   chain_id: 'cosmoshub-4',
@@ -118,7 +119,7 @@ ChainInfoSchema.statics.findChainInfoByIdAndUpdate = function (chain_id, data, c
   if (err)
     return console.error(err);
 
-});   
+});
 */
 
 
@@ -132,7 +133,7 @@ ChainInfoSchema.statics.findChainInfoByIdAndUpdate = function (chain_id, data, c
 }, (err, chainInfo) => {
   if (err)
     return console.error(err);
-});  */  
- 
+});  */
+
 
 module.exports = mongoose.model('ChainInfo', ChainInfoSchema);

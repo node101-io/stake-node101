@@ -1,12 +1,12 @@
 const fetch = require('node-fetch');
 
-
-const getFromGithub = (message, callback) => {
-  fetch(`https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/cosmos/cosmoshub.json`)
+const getFromGithub = (chain_id, callback) => {
+  fetch(`https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/cosmos/${chain_id}.json`)
     .then(res => res.json())
     .then(res => {
       if (!res)
-        return callback('bad_request');
+        return callback('document_not_found');
+
       return callback(null, res);
     })
     .catch(_ => {
@@ -14,5 +14,6 @@ const getFromGithub = (message, callback) => {
     });
 };
 
-
 module.exports = getFromGithub;
+
+// TODO: getChainInfoFromGithub change function and file name

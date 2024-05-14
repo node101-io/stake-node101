@@ -61,11 +61,11 @@ window.addEventListener('load', async () => {
   const offlineSigner = keplr.getOfflineSigner(chainId);
   const accounts = (await offlineSigner.getAccounts())[0];
   const address = accounts.address;
+
   const signingClient = await SigningStargateClient.connectWithSigner(
-    rpcUrl,
+    rpcUrl, // rpc.cosmos.directory/${identifier}
     offlineSigner
   );
-
   const myBalance = (
     await signingClient.getBalance(address, coinMinimalDenom)
   ).amount;

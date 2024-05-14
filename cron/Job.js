@@ -15,95 +15,109 @@ class ChainInfoClass {
   }
 }
 
-const ChainsToStake = [
-  new ChainInfoClass(
-    "cosmoshub",
-    "cosmoshub-4",
-    "cosmoshub",
-    "cosmoshub",
-    "cosmoshub"
-  ),
-  new ChainInfoClass(
-    "agoric",
-    "agoric-3",
-    "agoric",
-    "agoric"
-  ),
-  new ChainInfoClass(
-    "celestia",
-    "celestia",
-    "celestia",
-    "celestia",
-    "celestia"
-  ),
-   new ChainInfoClass(
-    "laozi-mainnet",
-    "laozi-mainnet",
-    "bandchain",
-    "bandchain"
-  ),
-  /*
-  new ChainInfoClass(
-    "canto_7700",
-    "canto_7700-1",
-    "canto",
-    "canto"
-  ),
-  new ChainInfoClass(
-    "shentu-2.2",
-    "shentu-2.2",
-    "shentu",
-    "shentu"
-  ),
-  new ChainInfoClass(
-    "irishub",
-    "irishub-1",
-    "irisnet",
-    "irisnet"
-  ),
-  new ChainInfoClass(
-    "cheqd-mainnet",
-    "cheqd-mainnet-1",
-    "cheqd",
-    "cheqd"
-  ),
-  new ChainInfoClass(
-    "centauri",
-    "centauri-1",
-    "composable",
-    "composable"
-  ),
-  new ChainInfoClass(
-    "kyve",
-    "kyve-1",
-    "kyve",
-    "kyve"
-  ),
-  new ChainInfoClass(
-    "umee",
-    "umee-1",
-    "umee",
-    "umee"
-  ),  
-  new ChainInfoClass(
-    "assetmantle",
-    "mantle",
-    "assetmantle",
-    "assetmantle"
-  ),
-  new ChainInfoClass(
-    "desmos",
-    "desmos-mainnet",
-    "desmos",
-    "desmos"
-  ),
-  new ChainInfoClass(
-    "emoney",
-    "emoney",
-    "emoney",
-    "emoney"
-  ) */
-]
+const chainsToStake = {
+  cosmoshub: {
+    chainRegistryIdentifier: 'cosmoshub',
+    chainId: 'cosmoshub-4',
+    keplrName: 'cosmoshub',
+  },
+  agoric: {
+    chainRegistryIdentifier: 'agoric',
+    chainId: 'agoric-3',
+    keplrName: 'agoric',
+  },
+  // TODO: add others
+};
+
+// const ChainsToStake = [
+//   new ChainInfoClass(
+//     "cosmoshub",
+//     "cosmoshub-4",
+//     "cosmoshub",
+//     "cosmoshub",
+//     "cosmoshub"
+//   ),
+//   new ChainInfoClass(
+//     "agoric",
+//     "agoric-3",
+//     "agoric",
+//     "agoric"
+//   ),
+//   new ChainInfoClass(
+//     "celestia",
+//     "celestia",
+//     "celestia",
+//     "celestia",
+//     "celestia"
+//   ),
+//    new ChainInfoClass(
+//     "laozi-mainnet",
+//     "laozi-mainnet",
+//     "bandchain",
+//     "bandchain"
+//   ),
+//   new ChainInfoClass(
+//     "centauri",
+//     "centauri-1",
+//     "composable",
+//     "composable"
+//   ),
+//   /*
+//   new ChainInfoClass(
+//     "canto_7700",
+//     "canto_7700-1",
+//     "canto",
+//     "canto"
+//   ),
+//   new ChainInfoClass(
+//     "shentu-2.2",
+//     "shentu-2.2",
+//     "shentu",
+//     "shentu"
+//   ),
+//   new ChainInfoClass(
+//     "irishub",
+//     "irishub-1",
+//     "irisnet",
+//     "irisnet"
+//   ),
+//   new ChainInfoClass(
+//     "cheqd-mainnet",
+//     "cheqd-mainnet-1",
+//     "cheqd",
+//     "cheqd"
+//   ),
+//   new ChainInfoClass(
+//     "kyve",
+//     "kyve-1",
+//     "kyve",
+//     "kyve"
+//   ),
+//   new ChainInfoClass(
+//     "umee",
+//     "umee-1",
+//     "umee",
+//     "umee"
+//   ),
+//   new ChainInfoClass(
+//     "assetmantle",
+//     "mantle",
+//     "assetmantle",
+//     "assetmantle"
+//   ),
+//   new ChainInfoClass(
+//     "desmos",
+//     "desmos-mainnet",
+//     "desmos",
+//     "desmos"
+//   ),
+//   new ChainInfoClass(
+//     "emoney",
+//     "emoney",
+//     "emoney",
+//     "emoney"
+//   ) */
+// ]
 
 /*   "cosmoshub": "cosmoshub-4", //Not ok
   "celestia": "celestia",
@@ -133,31 +147,30 @@ const chainInfoIds = [
 const Job = {
   start: () => {
     Cron('*/5 * * * * *', () => {
-      for (const chains of ChainsToStake) {
-        getFromGithub(chains.chainName, (err, chainInfores) => {
+      for (const chains of chainsToStake) {
+        getFromGithub(chains.chainName, (err, chainInfo) => {
           if (err)
             return console.error(err);
 
-          if (!chainInfores)
-            return console.error('bad_request');
           let rpcUrltry = "";
-          let rpcUrlLink =  `https://rpc.cosmos.directory/${chains.chainRegistry}`
-          CheckRpcUrl(rpcUrlLink, (err, res) => {
-            if (err || !res){
+          let rpcUrlLink = `https://rpc.cosmos.directory/${chains.chainRegistry}` // TODO: never save this to database
+
+          CheckRpcUrl(rpcUrlLink, (err, res) => { // TODO: lower the first letter of function name
+            if (err || !res) {
                 getRpcUrl(chains.chainRegistry, (err, responseList) => {
                   if (err){
                     return console.error(err)
                   }
                   rpcUrltry = responseList[0];
                   ChainInfo.findChainInfoByIdAndUpdate(chains.chainId, {
-                    chain_id: chains.chainId, 
-                    rpc_url: rpcUrltry, 
-                    chain_info: JSON.stringify(chainInfores),
+                    chain_id: chains.chainId,
+                    rpc_url: rpcUrltry,
+                    chain_info: JSON.stringify(chainInfo),
                     is_active: true
-                  }, (err, chainInfores) => {
+                  }, (err, chainInfo) => {
                     if (err)
                       return console.error(err);
-      
+
                   });
            /*        for (rpcResponse of responseList){
                     console.log("2Stratiiiing")
@@ -179,17 +192,17 @@ const Job = {
             else {
               rpcUrltry = rpcUrlLink;
               ChainInfo.findChainInfoByIdAndUpdate(chains.chainId, {
-                chain_id: chains.chainId, 
-                rpc_url: rpcUrltry, 
-                chain_info: JSON.stringify(chainInfores),
+                chain_id: chains.chainId,
+                rpc_url: rpcUrltry,
+                chain_info: JSON.stringify(chainInfo),
                 is_active: true
-              }, (err, chainInfores) => {
+              }, (err, chainInfo) => {
                 if (err)
                   return console.error(err);
-  
+
               });
             }
-  
+
         });
         });
       };

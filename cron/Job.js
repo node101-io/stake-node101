@@ -9,6 +9,7 @@ class ChainInfoClass {
   constructor(chainName, chainId,KeplrName, chainRegistry,chainRegistryGithub, validator_address=""){
     this.chainName = chainName;
     this.chainId = chainId;
+    this.KeplrName = KeplrName;
     this.chainRegistry = chainRegistry;
     this.chainRegistryGithub = chainRegistryGithub;
   }

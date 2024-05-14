@@ -123,17 +123,17 @@ ChainInfoSchema.statics.findChainInfoByIdAndUpdate = function (chain_id, data, c
 */
 
 
-
-/*   const chax = mongoose.model('ChainInfo', ChainInfoSchema);
+/* 
+  const chax = mongoose.model('ChainInfo', ChainInfoSchema);
   const instance1 = chax.createChainInfo({
-  chain_id: 'clestia',
+  chain_id: 'laozi-mainnet',
   rpc_url: 'https://rpc.celestia.network:26657',
   chain_info: 'celestia',
   is_active: true
 }, (err, chainInfo) => {
   if (err)
     return console.error(err);
-});  */
+});   */
 
 
 module.exports = mongoose.model('ChainInfo', ChainInfoSchema);

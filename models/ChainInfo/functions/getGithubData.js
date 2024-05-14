@@ -5,12 +5,11 @@ const getFromGithub = (chain_id, callback) => {
     .then(res => res.json())
     .then(res => {
       if (!res)
-        return callback('document_not_found');
-
-      return callback(null, res);
+        return callback('document_not_found',null);
+      return callback(null, res) 
     })
     .catch(_ => {
-      return callback('network_error');
+      return callback('network_error',null);
     });
 };
 

@@ -6,12 +6,11 @@ const ChainInfo = require('../models/ChainInfo/ChainInfo');
 
 
 class ChainInfoClass {
-  constructor(chainName, chainId,KeplrName, chainRegistry,chainRegistryGithub, validator_address=""){ //chainRegistry){
+  constructor(chainName, chainId,KeplrName, chainRegistry,chainRegistryGithub, validator_address=""){
     this.chainName = chainName;
     this.chainId = chainId;
     this.chainRegistry = chainRegistry;
     this.chainRegistryGithub = chainRegistryGithub;
-  //  this.chainRegistry = chainRegistry
   }
 }
 
@@ -140,18 +139,14 @@ const Job = {
 
           if (!chainInfores)
             return console.error('bad_request');
-          let rpcUrltry;
+          let rpcUrltry = "";
           let rpcUrlLink =  `https://rpc.cosmos.directory/${chains.chainRegistry}`
           CheckRpcUrl(rpcUrlLink, (err, res) => {
-            console.log("Whatsup", res)
             if (err || !res){
-                console.log("Startingggggggggggg","err", err,"res",res)
                 getRpcUrl(chains.chainRegistry, (err, responseList) => {
                   if (err){
-                    console.log("Error")
                     return console.error(err)
                   }
-                  console.log("No error")
                   rpcUrltry = responseList[0];
                   ChainInfo.findChainInfoByIdAndUpdate(chains.chainId, {
                     chain_id: chains.chainId, 
@@ -162,7 +157,6 @@ const Job = {
                     if (err)
                       return console.error(err);
       
-                 //  console.log(chainInfores);
                   });
            /*        for (rpcResponse of responseList){
                     console.log("2Stratiiiing")
@@ -192,7 +186,6 @@ const Job = {
                 if (err)
                   return console.error(err);
   
-             //  console.log(chainInfores);
               });
             }
   

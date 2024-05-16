@@ -1,109 +1,106 @@
-const { Cron } = require('croner');
+const Cron = require('croner');
 
-const getChainInfoFromGithub = require('../models/ChainInfo/functions/getChainInfoFromGithub');
-const { getRpcUrlFromGithub, checkRpcUrl } = require('../models/ChainInfo/functions/getRpcUrlDataFromGithub');
 const ChainInfo = require('../models/ChainInfo/ChainInfo');
-
+const getChainInfoFromGithub = require('../models/ChainInfo/functions/getChainInfoFromGithub');
+const getRpcUrlFromGithub = require('../models/ChainInfo/functions/getRpcUrlDataFromGithub');
 
 const chainsToStake = {
   "cosmoshub": {
-    chainKeplrName: "cosmoshub",
     chainId: "cosmoshub-4",
+    chainKeplrIdentifier: "cosmoshub",
     chainRegistryIdentifier: "cosmoshub",
   },
   "agoric": {
-    chainKeplrName: "agoric",
     chainId: "agoric-3",
-    chainRegistryIdentifier: "agoric", 
+    chainKeplrIdentifier: "agoric",
+    chainRegistryIdentifier: "agoric",
   },
   "celestia": {
-    chainKeplrName: "celestia",
     chainId: "celestia",
+    chainKeplrIdentifier: "celestia",
     chainRegistryIdentifier: "celestia",
   },
   "laozi-mainnet": {
-    chainKeplrName: "laozi-mainnet",
     chainId: "laozi-mainnet",
+    chainKeplrIdentifier: "laozi-mainnet",
     chainRegistryIdentifier: "bandchain",
   },
   "canto_7700": {
-    chainKeplrName: "canto_7700",
     chainId: "canto_7700-1",
+    chainKeplrIdentifier: "canto_7700",
     chainRegistryIdentifier: "canto",
   },
   "shentu-2.2": {
-    chainKeplrName: "shentu-2.2",
     chainId: "shentu-2.2",
+    chainKeplrIdentifier: "shentu-2.2",
     chainRegistryIdentifier: "shentu",
   },
   "irishub": {
-    chainKeplrName: "irishub",
     chainId: "irishub-1",
+    chainKeplrIdentifier: "irishub",
     chainRegistryIdentifier: "irisnet",
   },
   "cheqd-mainnet": {
-    chainKeplrName: "cheqd-mainnet",
     chainId: "cheqd-mainnet-1",
+    chainKeplrIdentifier: "cheqd-mainnet",
     chainRegistryIdentifier: "cheqd",
   },
   "centauri": {
-    chainKeplrName: "centauri",
     chainId: "centauri-1",
+    chainKeplrIdentifier: "centauri",
     chainRegistryIdentifier: "composable",
   },
   "kyve": {
-    chainKeplrName: "kyve",
     chainId: "kyve-1",
+    chainKeplrIdentifier: "kyve",
     chainRegistryIdentifier: "kyve",
   },
   "umee": {
-    chainKeplrName: "umee",
     chainId: "umee-1",
+    chainKeplrIdentifier: "umee",
     chainRegistryIdentifier: "umee",
   },
   "assetmantle": {
-    chainKeplrName: "mantle",
     chainId: "mantle-1",
+    chainKeplrIdentifier: "mantle",
     chainRegistryIdentifier: "assetmantle",
   },
   "desmos": {
-    chainKeplrName: "desmos-mainnet",
     chainId: "desmos-mainnet",
+    chainKeplrIdentifier: "desmos-mainnet",
     chainRegistryIdentifier: "desmos",
   },
   "emoney": {
-    chainKeplrName: "emoney",
     chainId: "emoney",
+    chainKeplrIdentifier: "emoney",
     chainRegistryIdentifier: "emoney",
   },
-}
+};
 
 const Job = {
   start: () => {
     Cron('*/10 * * * * *', () => {
       for (const chains of Object.values(chainsToStake)) {
-        console.log(`Checking ${chains.chainKeplrName} chain info`);
-        getChainInfoFromGithub(chains.chainKeplrName, (err, chainInfo) => {
+        getChainInfoFromGithub(chains.chainKeplrIdentifier, (err, chainInfo) => {
           if (err)
             return console.error(err);
-              getRpcUrlFromGithub(chains.chainRegistryIdentifier, (err, responseList) => {
-                  if (err){
-                    return console.error(err)
-                  }
-                  ChainInfo.findChainInfoByIdAndUpdate(chains.chainId, {
-                    chain_id: chains.chainId,
-                    rpc_url: responseList[0],
-                    chain_info: JSON.stringify(chainInfo),
-                    is_active: true
-                  }, (err, chainInfo) => {
-                    if (err)
-                      return console.error(err);
-                  });
-                })
-            })
-          }
+
+          getRpcUrlFromGithub(chains.chainRegistryIdentifier, (err, rpcUrl) => {
+            if (err)
+              return console.error(err)
+
+            ChainInfo.findChainInfoByChainIdAndUpdate(chains.chainId, {
+              rpc_url: rpcUrl,
+              chain_info: JSON.stringify(chainInfo)
+            }, (err, chainInfo) => {
+              if (err)
+                return console.error(err);
+            });
           });
-        }
-      }
+        });
+      };
+    });
+  }
+};
 
 module.exports = Job;

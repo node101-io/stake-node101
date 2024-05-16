@@ -136,4 +136,175 @@ ChainInfoSchema.statics.findChainInfoByIdAndUpdate = function (chain_id, data, c
 });   */
 
 
+/*
+
+/*   "canto_7700": {
+    chainKeplrName: "canto_7700",
+    chainId: "canto_7700-1",
+    chainRegistryIdentifier: "canto",
+  },
+  "shentu-2.2": {
+    chainKeplrName: "shentu-2.2",
+    chainId: "shentu-2.2",
+    chainRegistryIdentifier: "shentu",
+  },
+  "irishub": {
+    chainKeplrName: "irishub",
+    chainId: "irishub-1",
+    chainRegistryIdentifier: "irisnet",
+  },
+  "cheqd-mainnet": {
+    chainKeplrName: "cheqd-mainnet",
+    chainId: "cheqd-mainnet-1",
+    chainRegistryIdentifier: "cheqd",
+  },
+  "centauri": {
+    chainKeplrName: "centauri",
+    chainId: "centauri-1",
+    chainRegistryIdentifier: "composable",
+  },
+  "kyve": {
+    chainKeplrName: "kyve",
+    chainId: "kyve-1",
+    chainRegistryIdentifier: "kyve",
+  },
+  "umee": {
+    chainKeplrName: "umee",
+    chainId: "umee-1",
+    chainRegistryIdentifier: "umee",
+  },
+  "assetmantle": {
+    chainKeplrName: "assetmantle",
+    chainId: "mantle",
+    chainRegistryIdentifier: "assetmantle",
+  },
+  "desmos": {
+    chainKeplrName: "desmos",
+    chainId: "desmos-mainnet",
+    chainRegistryIdentifier: "desmos",
+  },
+  "emoney": {
+    chainKeplrName: "emoney",
+    chainId: "emoney",
+    chainRegistryIdentifier: "emoney",
+  }, */
+/* 
+  const chax = mongoose.model('ChainInfo', ChainInfoSchema);
+  const instance1 = chax.createChainInfo({
+  chain_id: 'canto_7700-1',
+  rpc_url: 'https://rpc.canto.network:26657',
+  chain_info: 'canto_7700',
+  is_active: true
+}, (err, chainInfo) => {
+  if (err)
+    return console.error(err);
+})
+
+const instance2 = chax.createChainInfo({
+  chain_id: 'shentu-2.2',
+  rpc_url: 'https://rpc.shentu.network:26657',
+  chain_info: 'shentu-2.2',
+  is_active: true
+}, (err, chainInfo) => {
+  if (err)
+    return console.error(err);
+});
+
+const instance3 = chax.createChainInfo({
+  chain_id: 'irishub-1',
+  rpc_url: 'https://rpc.irisnet.network:26657',
+  chain_info: 'irishub',
+  is_active: true
+}, (err, chainInfo) => {
+  if (err)
+    return console.error(err);
+});
+
+const instance4 = chax.createChainInfo({
+  chain_id: 'cheqd-mainnet-1',
+  rpc_url: 'https://rpc.cheqd.network:26657',
+  chain_info: 'cheqd-mainnet',
+  is_active: true
+}, (err, chainInfo) => {
+  if (err)
+    return console.error(err);
+});
+
+const instance5 = chax.createChainInfo({
+  chain_id: 'centauri-1',
+  rpc_url: 'https://rpc.composable.network:26657',
+  chain_info: 'centauri',
+  is_active: true
+}, (err, chainInfo) => {
+  if (err)
+    return console.error(err);
+});
+
+
+const instance6 = chax.createChainInfo({
+  chain_id: 'kyve-1',
+  rpc_url: 'https://rpc.kyve.network:26657',
+  chain_info: 'kyve',
+  is_active: true
+}, (err, chainInfo) => {
+  if (err)
+    return console.error(err);
+});
+
+
+const instance7 = chax.createChainInfo({
+  chain_id: 'umee-1',
+  rpc_url: 'https://rpc.umee.network:26657',
+  chain_info: 'umee',
+  is_active: true
+}, (err, chainInfo) => {
+  if (err)
+    return console.error(err);
+});
+
+
+const instance8 = chax.createChainInfo({
+  chain_id: 'mantle',
+  rpc_url: 'https://rpc.assetmantle.network:26657',
+  chain_info: 'assetmantle',
+  is_active: true
+}, (err, chainInfo) => {
+  if (err)
+    return console.error(err);
+});
+
+
+const instance9 = chax.createChainInfo({
+  chain_id: 'desmos-mainnet',
+  rpc_url: 'https://rpc.desmos.network:26657',
+  chain_info: 'desmos',
+  is_active: true
+}, (err, chainInfo) => {
+  if (err)
+    return console.error(err);
+});
+
+
+const instance10 = chax.createChainInfo({
+  chain_id: 'emoney',
+  rpc_url: 'https://rpc.emoney.network:26657',
+  chain_info: 'emoney',
+  is_active: true
+}, (err, chainInfo) => {
+  if (err)
+    return console.error(err);
+});
+
+
+
+
+
+
+
+
+
+
+
+ */
+
 module.exports = mongoose.model('ChainInfo', ChainInfoSchema);

@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 
-const getFromGithub = (chain_id, callback) => {
+const getChainInfoFromGithub = (chain_id, callback) => {
   fetch(`https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/cosmos/${chain_id}.json`)
     .then(res => res.json())
     .then(res => {
@@ -14,6 +14,5 @@ const getFromGithub = (chain_id, callback) => {
     });
 };
 
-module.exports = getFromGithub;
+module.exports = getChainInfoFromGithub;
 
-// TODO: getChainInfoFromGithub change function and file name

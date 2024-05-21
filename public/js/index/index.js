@@ -1,33 +1,71 @@
-const listToken = [
+
+const listToken =  [
   "cosmoshub",
-  // "celestia",
   "agoric",
-  // "irisnet",
-  // "kyve",
-  // "ux",
-  // "assetmantle",
-  // "desmos",
-  // "emoney",
-  // "crescent",
-  // "oraichain",
-  // "shentu",
-  // "composable",
-  // "bandchain",
+]
 
-  /*  "canto",
-   "cheqd",
-   "fxcore",
-   "neutron",
-   "stride" */
+let chainName  = "cosmoshub";
+let currentChainInfo = "";
+const memo = "Use your power wisely";
 
-];
 
-let chainName = "cosmoshub";
-console.log(listToken)
+function getChain(chain_id, chain_name){
+  const response = fetch(`/chain/${chain_id}`)
+  .then(res => res.json())
+  .then(res => {
+    const rpc_url = res.rpc_url;
+    const validator_address = res.validator_address;
+    const chain_info = JSON.parse(res.chain_info);
+ 
+    chain_info.rpc = `https://rpc.cosmos.directory/${chain_name}`;
+    chain_info.validatorAddress = validator_address;
+    console.log(chain_info);
+    currentChainInfo = chain_info;
+  })
+}
+
+function getChainRealName(){
+  return currentChainInfo.chain_name;
+
+}
+
+function getChainId(){
+  return currentChainInfo.chain_id;
+}
+
+function getRpcUrl(){
+  return currentChainInfo.rpc;
+}
+
+function getCurrency(){
+  return currentChainInfo.currencies[0].coinDenom;
+}
+
+function getCoinMinimalDenom(){
+  return currentChainInfo.currencies[0].coinMinimalDenom;
+}
+
+
+
+function getCoinImageUrl(){
+  return currentChainInfo.currencies[0].coinImageUrl;
+}
+
+function getCoinDenom(){
+  return currentChainInfo.currencies[0].coinDenom;
+}
+
+function setTextContent(elementId, text) {
+  elementId.textContent = text;
+}
+
+
+
+
+
 
 window.addEventListener('load', async () => {
-  const keplr = window.keplr;
-
+  getChain("cosmoshub-4", "cosmoshub");
   const inputAmount = document.getElementById('amount');
   const walletAdd = document.getElementById('walletAdd');
   const walletBal = document.getElementById('walletBal');
@@ -39,176 +77,151 @@ window.addEventListener('load', async () => {
   const tokenWrapper = document.querySelector('.tokenWrapper');
 
   const connectButton = document.getElementById('connect');
+  connectButton.style.backgroundColor = "#fff";
   const stakeButton = document.getElementById('stake');
+  const keplr = window.keplr;
 
-
-  console.log("chainName", chainName)
-  const chainRealName = chains[chainName].chainName;
-  const chainId = chains[chainName].chainId;
-  const rpcUrl = chains[chainName].rpc;
-  const currency = chains[chainName].currencies[0].coinDenom;
-  const coinMinimalDenom = chains[chainName].currencies[0].coinMinimalDenom;
-
-  const memo = "Use your power wisely";
-
-  console.log("img src", chains[chainName].currencies[0].coinImageUrl)
-  tokenImg.src = chains[chainName].currencies[0].coinImageUrl;
-  tokenNameX.textContent = chains[chainName].currencies[0].coinDenom;
-  // make the text align center
-  tokenNameX.style.marginLeft = "15px"
-
-
-  const offlineSigner = keplr.getOfflineSigner(chainId);
+  function setDashboard(address, myBalance){  
+    setTextContent(walletAdd, "Address" +": "+ address.slice(0, 5) + "..." + (address).slice(-5));
+    setTextContent(walletBal,"Balance: " +  myBalance/1000000 + " " + currentChainInfo.currencies[0].coinDenom);
+    setTextContent(walletChain, "Chain: " + currentChainInfo.chainName);
+    setTextContent(walletToken, "Token: " + currentChainInfo.currencies[0].coinDenom);
+}
+/*   tokenImg.src = chains[chainName].currencies[0].coinImageUrl;
+ */  /* tokenNameX.textContent = chains[chainName].currencies[0].coinDenom;
+  tokenNameX.style.marginLeft = "15px" */
+/* 
+  const offlineSigner = keplr.getOfflineSigner(currentChainInfo.chainId);
   const accounts = (await offlineSigner.getAccounts())[0];
   const address = accounts.address;
-
   const signingClient = await SigningStargateClient.connectWithSigner(
-    rpcUrl, // rpc.cosmos.directory/${identifier}
+    rpcUrl,
     offlineSigner
-  );
-  const myBalance = (
-    await signingClient.getBalance(address, coinMinimalDenom)
-  ).amount;
+  ); 
 
-  console.log("chainId7", chainId)
-  setTextContent(walletAdd, "Address" + ": " + address.slice(0, 5) + "..." + (accounts.address).slice(-5));
-  setTextContent(walletBal, "Balance: " + myBalance / 1000000 + " " + currency);
+    const myBalance = (
+          await signingClient.getBalance(address, getCoinMinimalDenom())
+    ).amount; */
+
+/*   setTextContent(walletAdd, "Address" +": "+ address.slice(0, 5) + "..." + (accounts.address).slice(-5));
+  setTextContent(walletBal,"Balance: " +  myBalance/1000000 + " " + currency );
   setTextContent(walletChain, "Chain: " + chainRealName);
-  setTextContent(walletToken, "Token: " + currency);
+  setTextContent(walletToken, "Token: " + currency); */
 
 
   const tokenListContainer = document.querySelector('.token-list');
 
-  // Populate the token list dynamically
   listToken.forEach(tokenName => {
-    const tokenTile = document.createElement('div');
-    tokenTile.classList.add('token-tile');
+      const tokenTile = document.createElement('div');
+      tokenTile.classList.add('token-tile');
 
-    const img = document.createElement('img');
-    img.classList.add('tokenimage')
-    img.src = chains[tokenName].currencies[0].coinImageUrl; // Replace with the actual path to your token images
-    img.alt = tokenName;
-    img.width = 50;
-    img.height = 50;
+      const img = document.createElement('img');
+      img.classList.add('tokenimage')
+      img.src =  chains[tokenName].currencies[0].coinImageUrl ; // Replace with the actual path to your token images
+      img.alt = tokenName;
+      img.width = 50;
+      img.height = 50;
 
-    const span = document.createElement('span');
-    span.classList.add('token-name');
-    span.textContent = tokenName;
+      const span = document.createElement('span');
+      span.classList.add('token-name');
+      span.textContent = tokenName;
 
-    tokenTile.appendChild(img);
-    tokenTile.appendChild(span);
+      tokenTile.appendChild(img);
+      tokenTile.appendChild(span);
 
-    tokenTile.addEventListener('click', async () => {
-      // Update the chain name when a token is clicked
-      chainName = tokenName;
-      const img = document.getElementById('tokenImg');
-      console.log("Ne oluyor", chains[chainName].currencies[0].coinImageUrl)
-      img.src = chains[chainName].currencies[0].coinImageUrl; // Replace with the actual path to your token images
-      img.alt = chainName;
-      tokenNameX.textContent = chains[chainName].currencies[0].coinDenom;
+      tokenTile.addEventListener('click', async () => {
+        chainName = tokenName;
+        const img = document.getElementById('tokenImg');
+        img.src =  chains[chainName].currencies[0].coinImageUrl ; // Replace with the actual path to your token images
+        img.alt = chainName;
+        tokenNameX.textContent = chains[chainName].currencies[0].coinDenom;
 
 
 
-      console.log("changed")
-      try {
-        await keplr.experimentalSuggestChain(chains[chainName]);
-        console.log("sleep", chains[chainName].chainId)
-        await keplr.enable(chains[chainName].chainId);
+        try {
 
-        const offlineSigner = keplr.getOfflineSigner(chains[chainName].chainId);
-        const accounts = (await offlineSigner.getAccounts())[0];
-        const address = accounts.address;
-        const signingClient = await SigningStargateClient.connectWithSigner(
-          chains[chainName].rpc,
-          offlineSigner
-        );
+          await keplr.experimentalSuggestChain(chains[chainName]);
+          await keplr.enable(chains[chainName].chainId);
 
-        const myBalance = (
-          await signingClient.getBalance(address, coinMinimalDenom)
-        ).amount;
+          const offlineSigner = keplr.getOfflineSigner(chains[chainName].chainId);
+          const accounts = (await offlineSigner.getAccounts())[0];
+          const address = accounts.address;
+          console.log(address)
 
-        console.log("chainId7", chains[chainName].chainId)
-        setTextContent(walletAdd, "Address" + ": " + address.slice(0, 5) + "..." + (accounts.address).slice(-5));
-        setTextContent(walletBal, "Balance: " + myBalance / 1000000 + " " + chains[chainName].currencies[0].coinDenom);
-        setTextContent(walletChain, "Chain: " + chains[chainName].chainName);
-        setTextContent(walletToken, "Token: " + chains[chainName].currencies[0].coinDenom);
+          const signingClient = await SigningStargateClient.connectWithSigner(
+                  chains[chainName].rpc,
+                  offlineSigner
+          );
+          const coinMinimalDen = chains[chainName].currencies[0].coinMinimalDenom;
+          console.log("coinMinimalDen",coinMinimalDen)
+          const myBalanc = (
+            await signingClient.getBalance(address, coinMinimalDen)
+          ).amount;
+         
 
-      } catch (err) {
-        if (err instanceof Error) {
-          console.log(err.message);
-        } else {
-          console.log("Unexpected error", err);
+     
+        setDashboard(address, myBalanc, chains[chainName].chainName, chains[chainName].currencies[0].coinDenom, chains[chainName].currencies[0].coinImageUrl);
+        } catch (err) {
+          if (err instanceof Error) {
+            console.log(err.message);
+          } else {
+            console.log("Unexpected error", err);
+          }
         }
-      }
 
-      // Update other elements accordingly
-      // Hide the modal after selecting a token
-      closeModal();
-
+        closeModal();
+     
     });
 
-    tokenListContainer.appendChild(tokenTile);
+      tokenListContainer.appendChild(tokenTile);
   });
 
 
 
-  function closeModal() {
+function closeModal() {
     const modal = document.getElementById('tokenModal');
     modal.style.display = 'none';
-  }
+}
 
-  function setTextContent(elementId, text) {
-    elementId.textContent = text;
-  }
+
 
   function showModal() {
     const modal = document.getElementById('tokenModal');
     modal.style.display = 'block';
 
-    // Close the modal when clicking outside of it
-    window.onclick = function (event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
     }
   }
 
-  tokenWrapper.addEventListener('click', () => {
-    // Show the modal pop-up
-    showModal();
-  });
+    /*   tokenWrapper.addEventListener('click', () => {
+        showModal();
+      }); */
 
   connectButton.addEventListener("click", async () => {
-
-    console.log("Yaay")
+    getChain("cosmoshub-4", "cosmoshub");
     if (!keplr) {
       console.log("Keplr extension not installed");
       return;
     }
 
     try {
-      await keplr.experimentalSuggestChain(chains[chainName]);
-      await keplr.enable(chainId);
-
-      const offlineSigner = keplr.getOfflineSigner(chainId);
+     // await window.keplr.experimentalSuggestChain(currentChainInfo);
+      await keplr.enable(currentChainInfo.chainId);
+      const offlineSigner = keplr.getOfflineSigner(currentChainInfo.chainId);
       const accounts = (await offlineSigner.getAccounts())[0];
       const address = accounts.address;
       const signingClient = await SigningStargateClient.connectWithSigner(
-        rpcUrl,
+        currentChainInfo.rpc,
         offlineSigner
-      );
+      ); 
 
-      const myBalance = (
-        await signingClient.getBalance(address, coinMinimalDenom)
-      ).amount;
-
-      setTextContent(walletAdd, "Address" + ": " + address.slice(0, 5) + "..." + (accounts.address).slice(-5));
-      setTextContent(walletBal, "Balance: " + myBalance / 1000000 + " " + currency);
-      setTextContent(walletChain, "Chain: " + chainRealName);
-      setTextContent(walletToken, "Token: " + currency);
-
-
-
+    const myBalance = (
+    await signingClient.getBalance(address, currentChainInfo.currencies[0].coinMinimalDenom)
+    ).amount;
+    setDashboard(address, myBalance, currentChainInfo.chainName, currentChainInfo.currencies[0].coinDenom, currentChainInfo.currencies[0].coinImageUrl);
 
 
     } catch (err) {
@@ -219,57 +232,55 @@ window.addEventListener('load', async () => {
       }
     }
   });
-
+  
   stakeButton.addEventListener("click", async () => {
-    console.log("Hello delegate!")
-    const value = inputAmount.value
-
-      ;
-    const offlineSigner = keplr.getOfflineSigner(chains[chainName].chainId);
+    const value = inputAmount.value;
+    const offlineSigner = keplr.getOfflineSigner(currentChainInfo.chainId);
     const accounts = (await offlineSigner.getAccounts())[0];
-    const address = accounts.address;
 
-    console.log(chains[chainName].validator_address)
-
+    
     const msg = MsgDelegate.fromPartial({
-      delegatorAddress: address, //01node
-      validatorAddress: chains[chainName].validator_address,
-      amount: { denom: chains[chainName].currencies[0].coinMinimalDenom, amount: value },
-    });
-    console.log("msg", msg)
+    delegatorAddress: accounts.address, 
+    validatorAddress: currentChainInfo.validatorAddress,
+    amount: { 
+      denom: currentChainInfo.currencies[0].coinMinimalDenom, 
+      amount: value 
+    },
+  }); 
 
-    const signingClient = await SigningStargateClient.connectWithSigner(
-      chains[chainName].rpc,
-      offlineSigner
-    );
+   const signingClient = await SigningStargateClient.connectWithSigner(
+    currentChainInfo.rpc,
+    offlineSigner
+  ); 
 
-    const msgAny = {
-      typeUrl: "/cosmos.staking.v1beta1.MsgDelegate",
-      value: msg,
-    };
-    const fee = {
-      amount: [
-        {
-          denom: chains[chainName].currencies[0].coinMinimalDenom,
-          amount: value,
-        },
-      ],
-      gas: "980000", // 180k
-    };
-    console.log(msgAny)
-    const gasUsed = await signingClient.signAndBroadcast(
-      address,
+   const msgAny = {
+    typeUrl: "/cosmos.staking.v1beta1.MsgDelegate",
+    value: msg,
+  }; 
+  const stakingdenom = currentChainInfo.feeCurrencies[0].coinMinimalDenom;
+
+  const fee = {
+    amount: [
+      {
+        denom: stakingdenom,
+        amount: value,
+      },
+    ],
+    gas: "980000", // 180k
+  };
+  const gasUsed = await signingClient.signAndBroadcast(
+      accounts.address,
       [msgAny],
-      fee,
-      memo
-    );
-    console.log("Gas used: ", gasUsed);
-    console.log("codee", gasUsed.code)
-    if (gasUsed.code === 0) {
-      alert("Transaction successful");
-    } else {
-      alert("Transaction failed");
-    }
-  }
+    fee,
+    memo
+  ); 
+  console.log("Gas used: ", gasUsed);
+  console.log("codee", gasUsed.code) 
+  if (gasUsed.code === 0) {
+    alert("Transaction successful");
+  } else  {
+    alert("Transaction failed");
+  }}
   );
+
 });

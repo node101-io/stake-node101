@@ -53,7 +53,7 @@ if (cluster.isMaster) {
     extended: true
   }));
   app.use(session({
-    secret: process.env.SESSION_SECRET || 'node101',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({

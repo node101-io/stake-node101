@@ -23,6 +23,14 @@ const ChainInfoSchema = new Schema({
     minlength: 1,
     maxlength: MAX_DATABASE_TEXT_FIELD_LENGTH
   },
+  validator_address: {
+    type: String,
+    required: true,
+    trim: true,
+    minlength: 1,
+    maxlength: MAX_DATABASE_TEXT_FIELD_LENGTH
+  
+  },
   chain_info: {
     type: Object,
     required: true,
@@ -45,6 +53,10 @@ ChainInfoSchema.statics.createChainInfo = function (data, callback) {
   if (!data.rpc_url || typeof data.rpc_url != 'string' || data.rpc_url.trim().length < 1 || data.rpc_url.trim().length > MAX_DATABASE_TEXT_FIELD_LENGTH)
     return callback('bad_request');
 
+  if (!data.validator_address || typeof data.validator_address != 'string' || data.validator_address.trim().length < 1 || data.validator_address.trim().length > MAX_DATABASE_TEXT_FIELD_LENGTH){
+    return callback('bad_request');
+  }
+  
   if (!data.chain_info || typeof data.chain_info != 'string' || data.chain_info.trim().length < 1 || data.chain_info.trim().length > MAX_DATABASE_TEXT_FIELD_LENGTH)
     return callback('bad_request');
 
@@ -92,6 +104,9 @@ ChainInfoSchema.statics.findChainInfoByChainIdAndUpdate = function (chain_id, da
 
   if (data.rpc_url && typeof data.rpc_url == 'string' && data.rpc_url.trim().length > 0 && data.rpc_url.trim().length <= MAX_DATABASE_TEXT_FIELD_LENGTH)
     updateData.rpc_url = data.rpc_url.trim();
+
+  if (data.validator_address && typeof data.validator_address == 'string' && data.validator_address.trim().length > 0 && data.validator_address.trim().length <= MAX_DATABASE_TEXT_FIELD_LENGTH)
+    updateData.validator_address = data.validator_address.trim();
 
   if (data.chain_info && typeof data.chain_info == 'string' && data.chain_info.trim().length > 0 && data.chain_info.trim().length <= MAX_DATABASE_TEXT_FIELD_LENGTH)
     updateData.chain_info = data.chain_info.trim();

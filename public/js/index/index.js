@@ -87,26 +87,9 @@ window.addEventListener('load', async () => {
     setTextContent(walletChain, "Chain: " + currentChainInfo.chainName);
     setTextContent(walletToken, "Token: " + currentChainInfo.currencies[0].coinDenom);
 }
-/*   tokenImg.src = chains[chainName].currencies[0].coinImageUrl;
- */  /* tokenNameX.textContent = chains[chainName].currencies[0].coinDenom;
-  tokenNameX.style.marginLeft = "15px" */
-/* 
-  const offlineSigner = keplr.getOfflineSigner(currentChainInfo.chainId);
-  const accounts = (await offlineSigner.getAccounts())[0];
-  const address = accounts.address;
-  const signingClient = await SigningStargateClient.connectWithSigner(
-    rpcUrl,
-    offlineSigner
-  ); 
-
-    const myBalance = (
-          await signingClient.getBalance(address, getCoinMinimalDenom())
-    ).amount; */
-
-/*   setTextContent(walletAdd, "Address" +": "+ address.slice(0, 5) + "..." + (accounts.address).slice(-5));
-  setTextContent(walletBal,"Balance: " +  myBalance/1000000 + " " + currency );
-  setTextContent(walletChain, "Chain: " + chainRealName);
-  setTextContent(walletToken, "Token: " + currency); */
+  tokenImg.src = chains[chainName].currencies[0].coinImageUrl;
+  tokenNameX.textContent = chains[chainName].currencies[0].coinDenom;
+  tokenNameX.style.marginLeft = "15px" 
 
 
   const tokenListContainer = document.querySelector('.token-list');

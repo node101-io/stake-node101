@@ -1,4 +1,10 @@
+const ChainInfo = require('../../models/ChainInfo/ChainInfo');
+
 module.exports = (req, res) => {
+  // TODO: chainId'yi burada al ve DB'den çek
+
+  // chainId == cosmoshub-4 fallback
+
   return res.render('index/index', {
     page: 'index/index',
     title: res.__('For you to make most of the distributed value'),
@@ -13,7 +19,7 @@ module.exports = (req, res) => {
         image: '/res/images/open-graph/header.png',
         twitter: true
       }
-    }
+    },
+    // TODO: chainInfo'yu burada gönder
   });
 };
-

@@ -6,6 +6,7 @@ const indexGetController = require('../controllers/index/get');
 const findChainByChainId = require('../controllers/index/findChainByChainId.js');
 
 router.get('/',indexGetController);
-router.get('/chain/:chainId', findChainByChainId);
+// TODO: ikinci bir routea gerek yok
+router.get('/chain/:chainId', findChainByChainId); // TODO: query kullan
 
 module.exports = router;

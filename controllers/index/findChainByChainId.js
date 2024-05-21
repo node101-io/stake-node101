@@ -18,3 +18,5 @@ function findChainByChainId (req, res, chainId) {
 }
 
 module.exports = findChainByChainId;
+
+// TODO: remove this file

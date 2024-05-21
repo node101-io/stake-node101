@@ -2,67 +2,26 @@
 const listToken =  [
   "cosmoshub",
   "agoric",
-]
+] // TODO: bundan kurtul
 
 let chainName  = "cosmoshub";
 let currentChainInfo = "";
 const memo = "Use your power wisely";
 
-
 function getChain(chain_id, chain_name){
-  const response = fetch(`/chain/${chain_id}`)
-  .then(res => res.json())
-  .then(res => {
-    const rpc_url = res.rpc_url;
-    const validator_address = res.validator_address;
-    const chain_info = JSON.parse(res.chain_info);
- 
-    chain_info.rpc = `https://rpc.cosmos.directory/${chain_name}`;
-    chain_info.validatorAddress = validator_address;
-    console.log(chain_info);
-    currentChainInfo = chain_info;
-  })
-}
+  const response = fetch(`/chain/${chain_id}`) // TODO: fetch yerine serverRequest kullan
+    .then(res => res.json())
+    .then(res => {
+      const rpc_url = res.rpc_url;
+      const validator_address = res.validator_address;
+      const chain_info = JSON.parse(res.chain_info);
 
-function getChainRealName(){
-  return currentChainInfo.chain_name;
-
-}
-
-function getChainId(){
-  return currentChainInfo.chain_id;
-}
-
-function getRpcUrl(){
-  return currentChainInfo.rpc;
-}
-
-function getCurrency(){
-  return currentChainInfo.currencies[0].coinDenom;
-}
-
-function getCoinMinimalDenom(){
-  return currentChainInfo.currencies[0].coinMinimalDenom;
-}
-
-
-
-function getCoinImageUrl(){
-  return currentChainInfo.currencies[0].coinImageUrl;
-}
-
-function getCoinDenom(){
-  return currentChainInfo.currencies[0].coinDenom;
-}
-
-function setTextContent(elementId, text) {
-  elementId.textContent = text;
-}
-
-
-
-
-
+      chain_info.rpc = `https://rpc.cosmos.directory/${chain_name}`;
+      chain_info.validatorAddress = validator_address;
+      console.log(chain_info);
+      currentChainInfo = chain_info;
+    });
+};
 
 window.addEventListener('load', async () => {
   getChain("cosmoshub-4", "cosmoshub");
@@ -81,7 +40,7 @@ window.addEventListener('load', async () => {
   const stakeButton = document.getElementById('stake');
   const keplr = window.keplr;
 
-  function setDashboard(address, myBalance){  
+  function setDashboard(address, myBalance){
     setTextContent(walletAdd, "Address" +": "+ address.slice(0, 5) + "..." + (address).slice(-5));
     setTextContent(walletBal,"Balance: " +  myBalance/1000000 + " " + currentChainInfo.currencies[0].coinDenom);
     setTextContent(walletChain, "Chain: " + currentChainInfo.chainName);
@@ -89,7 +48,7 @@ window.addEventListener('load', async () => {
 }
   tokenImg.src = chains[chainName].currencies[0].coinImageUrl;
   tokenNameX.textContent = chains[chainName].currencies[0].coinDenom;
-  tokenNameX.style.marginLeft = "15px" 
+  tokenNameX.style.marginLeft = "15px"
 
 
   const tokenListContainer = document.querySelector('.token-list');
@@ -140,9 +99,9 @@ window.addEventListener('load', async () => {
           const myBalanc = (
             await signingClient.getBalance(address, coinMinimalDen)
           ).amount;
-         
 
-     
+
+
         setDashboard(address, myBalanc, chains[chainName].chainName, chains[chainName].currencies[0].coinDenom, chains[chainName].currencies[0].coinImageUrl);
         } catch (err) {
           if (err instanceof Error) {
@@ -153,7 +112,7 @@ window.addEventListener('load', async () => {
         }
 
         closeModal();
-     
+
     });
 
       tokenListContainer.appendChild(tokenTile);
@@ -199,7 +158,7 @@ function closeModal() {
       const signingClient = await SigningStargateClient.connectWithSigner(
         currentChainInfo.rpc,
         offlineSigner
-      ); 
+      );
 
     const myBalance = (
     await signingClient.getBalance(address, currentChainInfo.currencies[0].coinMinimalDenom)
@@ -215,31 +174,31 @@ function closeModal() {
       }
     }
   });
-  
+
   stakeButton.addEventListener("click", async () => {
     const value = inputAmount.value;
     const offlineSigner = keplr.getOfflineSigner(currentChainInfo.chainId);
     const accounts = (await offlineSigner.getAccounts())[0];
 
-    
+
     const msg = MsgDelegate.fromPartial({
-    delegatorAddress: accounts.address, 
-    validatorAddress: currentChainInfo.validatorAddress,
-    amount: { 
-      denom: currentChainInfo.currencies[0].coinMinimalDenom, 
-      amount: value 
-    },
-  }); 
+      delegatorAddress: accounts.address,
+      validatorAddress: currentChainInfo.validatorAddress,
+      amount: {
+        denom: currentChainInfo.currencies[0].coinMinimalDenom,
+        amount: value
+      },
+    });
 
    const signingClient = await SigningStargateClient.connectWithSigner(
     currentChainInfo.rpc,
     offlineSigner
-  ); 
+  );
 
    const msgAny = {
-    typeUrl: "/cosmos.staking.v1beta1.MsgDelegate",
-    value: msg,
-  }; 
+      typeUrl: "/cosmos.staking.v1beta1.MsgDelegate",
+      value: msg,
+    };
   const stakingdenom = currentChainInfo.feeCurrencies[0].coinMinimalDenom;
 
   const fee = {
@@ -252,13 +211,19 @@ function closeModal() {
     gas: "980000", // 180k
   };
   const gasUsed = await signingClient.signAndBroadcast(
-      accounts.address,
-      [msgAny],
+    accounts.address,
+    [msgAny],
     fee,
     memo
-  ); 
+  );
+
+    function sendStakeTransaction(data) {
+      data.address
+
+      // TODO: burayı biraz dene kurcala
+    };
   console.log("Gas used: ", gasUsed);
-  console.log("codee", gasUsed.code) 
+  console.log("codee", gasUsed.code)
   if (gasUsed.code === 0) {
     alert("Transaction successful");
   } else  {
@@ -266,4 +231,5 @@ function closeModal() {
   }}
   );
 
+  // TODO: document.addEventListener('click', () => { ... }) kullan
 });

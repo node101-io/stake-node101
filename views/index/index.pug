@@ -2,6 +2,8 @@ extends ../partials/header
 block main
   .container
     p(style='color: red;') The UNOFFICIAL staking site of Node101
+    p#chainInfoElement(style='display: none;') #{chainInfo}
+    p#validatorInfoElement(style='display:none') #{validatorAddress}
     br
     p.choose(style='color: yellow; font-size: 26px;margin-left:220px;margin-bottom:5px') choose network
     .buttonStyle
@@ -13,16 +15,16 @@ block main
     .mainStyle
       .eachRow
         p#walletchain Chain 
-        p#walletchainValue CX
+        p#walletchainValue #{chainName}
       .eachRow
         p#walletAdd Address
-        p#walletAddValue X
+        p#walletAddValue -
       .eachRow
         p#walletToken Token
-        p#walletTokenValue X
+        p#walletTokenValue #{tokenName}
       .eachRow
         p#walletBal Balance
-        p#walletBalValue X
+        p#walletBalValue -
       input#amount.inputStyle(type='text' value=test) 
     .buttonStyle
       button#connect.button.connectStyle Connect

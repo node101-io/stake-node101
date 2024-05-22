@@ -41,6 +41,7 @@ const ChainInfoSchema = new Schema({
     type: Boolean,
     default: true
   }
+  // TODO: chain_registry_identifier
 });
 
 ChainInfoSchema.statics.createChainInfo = function (data, callback) {
@@ -99,7 +100,7 @@ ChainInfoSchema.statics.findChainInfoByChainId = function (chain_id, callback) {
     formatChainInfo(chainInfo, (err, chainInfo) => {
       if (err)
         return callback('database_error');
-      
+
       return callback(null, chainInfo);
     });
   });

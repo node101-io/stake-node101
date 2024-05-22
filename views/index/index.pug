@@ -1,9 +1,11 @@
 extends ../partials/header
 block main
+  - const chainInfo = // try catch parse
+  //- TODO: chainInfo'yu input.display-none(value=JSON.stringify(chainInfo)) ile gizle
   .container
     p(style='color: red;') The UNOFFICIAL staking site of Node101
     p#chainInfoElement(style='display: none;') #{chainInfo}
-    p#validatorInfoElement(style='display:none') #{validatorAddress}
+    p#validatorInfoElement(style='display:none') #{chainInfo.validatorAddress}
     br
     p.choose(style='color: yellow; font-size: 26px;margin-left:220px;margin-bottom:5px') choose network
     .buttonStyle
@@ -14,7 +16,7 @@ block main
         span#tokenName
     .mainStyle
       .eachRow
-        p#walletchain Chain 
+        p#walletchain Chain
         p#walletchainValue #{chainName}
       .eachRow
         p#walletAdd Address
@@ -25,7 +27,7 @@ block main
       .eachRow
         p#walletBal Balance
         p#walletBalValue -
-      input#amount.inputStyle(type='text' value=test) 
+      input#amount.inputStyle(type='text' value=test)
     .buttonStyle
       button#connect.button.connectStyle Connect
       button#stake.button.connectStyle Stake
@@ -34,3 +36,4 @@ block main
       span.close &times;
       h2 Choose Token
       .token-list
+//- TODO: listOfToken'ı get.js'te ver, burada each ile dönerek token'ları listele

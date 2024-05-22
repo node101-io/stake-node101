@@ -127,3 +127,11 @@ body {
   text-decoration: none;
   cursor: pointer;
 }
+
+.eachRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: auto 20px;
+}

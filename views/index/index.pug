@@ -11,11 +11,19 @@ block main
         img#tokenImg(src='' width='60px' height='60px')
         span#tokenName
     .mainStyle
-      p#walletchain Chain
-      p#walletAdd Address
-      p#walletToken Token
-      p#walletBal Balance
-      input#amount.inputStyle(type='text')
+      .eachRow
+        p#walletchain Chain 
+        p#walletchainValue CX
+      .eachRow
+        p#walletAdd Address
+        p#walletAddValue X
+      .eachRow
+        p#walletToken Token
+        p#walletTokenValue X
+      .eachRow
+        p#walletBal Balance
+        p#walletBalValue X
+      input#amount.inputStyle(type='text' value=test) 
     .buttonStyle
       button#connect.button.connectStyle Connect
       button#stake.button.connectStyle Stake

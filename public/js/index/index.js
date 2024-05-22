@@ -20,6 +20,7 @@ function getChain(chain_id, chain_name){
       chain_info.validatorAddress = validator_address;
       console.log(chain_info);
       currentChainInfo = chain_info;
+      return chain_info;
     });
 };
 
@@ -45,7 +46,7 @@ window.addEventListener('load', async () => {
     setTextContent(walletBal,"Balance: " +  myBalance/1000000 + " " + currentChainInfo.currencies[0].coinDenom);
     setTextContent(walletChain, "Chain: " + currentChainInfo.chainName);
     setTextContent(walletToken, "Token: " + currentChainInfo.currencies[0].coinDenom);
-}
+  }
   tokenImg.src = chains[chainName].currencies[0].coinImageUrl;
   tokenNameX.textContent = chains[chainName].currencies[0].coinDenom;
   tokenNameX.style.marginLeft = "15px"

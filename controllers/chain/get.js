@@ -1,3 +1,14 @@
-// TODO: query'den chainId'yi al ve json olarak döndür
-// error varsa res.json({ error: error });
-// return res.json({ chainInfo: chainInfo });
+const ChainInfo = require('../../models/ChainInfo/ChainInfo');
+
+function findChainByChainId (req, res) {
+  const chainId = req.query.chainid;
+
+  ChainInfo.findChainInfoByChainId(chainId, (error, chainInfo) => {
+      if (error) {
+        return res.json({ error: error });
+      }
+        return res.json({ chainInfo: chainInfo });
+    });
+}
+
+module.exports = findChainByChainId;

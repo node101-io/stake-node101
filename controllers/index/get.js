@@ -2,10 +2,20 @@ const ChainInfo = require('../../models/ChainInfo/ChainInfo');
 
 module.exports = (req, res) => {
   // TODO: chainId'yi burada al ve DB'den çek
+  const chainId = "cosmoshub-4"
 
-  // chainId == cosmoshub-4 fallback
+  const chainInfo = ChainInfo.findChainInfoByChainId(chainId, (err, chainInfo) => {
+    if (err) {
+      console.log("Error: ", err);
+      return;
+    }
+
+    console.log(chainInfo);
+  });
+
 
   return res.render('index/index', {
+    test: 100,
     page: 'index/index',
     title: res.__('For you to make most of the distributed value'),
     includes: {

@@ -86,7 +86,24 @@ ChainInfoSchema.statics.createChainInfo = function (data, callback) {
   });
 };
 
-// TODO: findChainInfoByChainId fonksiyonunu yaz
+ChainInfoSchema.statics.findChainInfoByChainId = function (chain_id, callback) {
+  const ChainInfo = this;
+;
+  if (!chain_id || typeof chain_id != 'string' || chain_id.trim().length < 1 || chain_id.trim().length > MAX_DATABASE_TEXT_FIELD_LENGTH)
+    return callback('bad_request');
+
+    ChainInfo.findOne({ chain_id }, (err, chainInfo) => {
+    if (err)
+      return callback('database_error');
+
+    formatChainInfo(chainInfo, (err, chainInfo) => {
+      if (err)
+        return callback('database_error');
+      
+      return callback(null, chainInfo);
+    });
+  });
+}
 
 ChainInfoSchema.statics.findChainInfoByChainIdAndUpdate = function (chain_id, data, callback) {
   const ChainInfo = this;

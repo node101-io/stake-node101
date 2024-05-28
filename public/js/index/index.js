@@ -1,3 +1,5 @@
+
+
 listOfToken = {
   "cosmoshub": {
     "chainId": "cosmoshub-4",
@@ -65,8 +67,11 @@ window.addEventListener('load', async () => {
   const validatorInfoElement = document.getElementById('validatorInfoElement');
 
 
-  let currentChainInfo = JSON.parse(chainInfoElement.textContent);
+  let currentChain = JSON.parse(chainInfoElement.textContent);
+  let currentChainInfo = JSON.parse(currentChain.chain_info);
   const validatorAddress = validatorInfoElement.textContent
+
+
 
 
   const walletAdd = document.getElementById('walletAdd');
@@ -104,15 +109,17 @@ window.addEventListener('load', async () => {
   try {
 
     // await keplr.experimentalSuggestChain(chains[chainName]);
-    await keplr.enable(currentChainInfo.chainId);
-    const offlineSigner = keplr.getOfflineSigner(currentChainInfo.chainId);
+    console.log(currentChainInfo);
+    await keplr.enable(currentChain.chain_id);
+    const offlineSigner = keplr.getOfflineSigner(currentChain.chain_id);
     const accounts = (await offlineSigner.getAccounts())[0];
     const address = accounts.address;
-
+    console.log("11111111111")
     const signingClient = await SigningStargateClient.connectWithSigner(
-      currentChainInfo.rpc,
+      currentChain.rpc_url,
       offlineSigner
     );
+    console.log("222222222222")
     const coinMinimalDen = currentChainInfo.currencies[0].coinMinimalDenom;
     const myBalanc = (
       await signingClient.getBalance(address, coinMinimalDen)
@@ -149,9 +156,20 @@ window.addEventListener('load', async () => {
     tokenTile.appendChild(span);
 
     tokenTile.addEventListener('click', () => {
-      window.location.href = `/chain?chainId=${listOfToken[tokenName].chainId}`;
+        
+    serverRequest('http://localhost:3000/chain?chainid=celestia', 'GET', {}, (err, data) => {
+        if (err) {
+            console.log(err.message);
+        } else{
+        console.log("data", data);
+        console.log(JSON.parse(chainInfoElement.textContent));
+        }
     });
-    //   closeModal();
+     
+      closeModal();
+
+      
+    });
 
 
 
@@ -170,6 +188,10 @@ window.addEventListener('load', async () => {
   //   };
   // });
 
+  function closeModal() {
+    const modal = document.getElementById('tokenModal');
+    modal.style.display = 'none';
+  }
 
 
   function showModal() {
@@ -195,12 +217,13 @@ window.addEventListener('load', async () => {
 
     try {
       // await window.keplr.experimentalSuggestChain(currentChainInfo);
-      await keplr.enable(currentChainInfo.chainId);
-      const offlineSigner = keplr.getOfflineSigner(currentChainInfo.chainId);
+ 
+      await keplr.enable(currentChainInfo.chain_id);
+      const offlineSigner = keplr.getOfflineSigner(currentChainInfo.chain_id);
       const accounts = (await offlineSigner.getAccounts())[0];
       const address = accounts.address;
       const signingClient = await SigningStargateClient.connectWithSigner(
-        currentChainInfo.rpc,
+        currentChainInfo.rpc_url,
         offlineSigner
       );
 
@@ -236,7 +259,7 @@ window.addEventListener('load', async () => {
     });
 
     const signingClient = await SigningStargateClient.connectWithSigner(
-      currentChainInfo.rpc,
+      currentChain.rpc,
       offlineSigner
     );
 

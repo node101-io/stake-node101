@@ -107,7 +107,7 @@ const Job = {
               return console.error(err)
 
             ChainInfo.findChainInfoByChainIdAndUpdate(chains.chainId, {
-              rpc_url: rpcUrl,
+              rpc_url: `https://rpc.cosmos.directory/${chains.chainRegistryIdentifier}`,//rpcUrl
               validator_address: chains.validatorAddress,
               chain_info: JSON.stringify(chainInfo)
             }, (err, chainInfo) => {

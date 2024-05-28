@@ -1,16 +1,15 @@
 extends ../partials/header
 block main
-  - const chainInfo = // try catch parse
-  //- TODO: chainInfo'yu input.display-none(value=JSON.stringify(chainInfo)) ile gizle
+  - const chainInfo1 = JSON.stringify(chainInfo);
+  - console.log("x");
   .container
     p(style='color: red;') The UNOFFICIAL staking site of Node101
-    p#chainInfoElement(style='display: none;') #{chainInfo}
+    p#chainInfoElement(style='display: none;') #{chainInfo1}
     p#validatorInfoElement(style='display:none') #{chainInfo.validatorAddress}
     br
     p.choose(style='color: yellow; font-size: 26px;margin-left:220px;margin-bottom:5px') choose network
     .buttonStyle
       button#mainnet.button.connectStyle Mainnet
-      //- button#testnet.button.connectStyle Testnet
       .tokenWrapper
         img#tokenImg(src='' width='60px' height='60px')
         span#tokenName
@@ -36,4 +35,4 @@ block main
       span.close &times;
       h2 Choose Token
       .token-list
-//- TODO: listOfToken'ı get.js'te ver, burada each ile dönerek token'ları listele
+

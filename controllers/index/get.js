@@ -1,19 +1,13 @@
 const ChainInfo = require('../../models/ChainInfo/ChainInfo');
 
 module.exports = (req, res) => {
-  const chainId = req.query.chainId && typeof req.query.chainId == 'string' ? req.query.chainId : "celestia";
+  const chainId = req.query.chainid && typeof req.query.chainid == 'string' ? req.query.chainId : "cosmoshub-4";
 
   ChainInfo.findChainInfoByChainId(chainId, (err, chainInfo) => {
     if (err)
       return res.json({ error: err });
 
-    let chain = JSON.parse(chainInfo.chain_info); // TODO: jsonify, burada yapmaya gerek yok
-
     return res.render('index/index', {
-      // chainName: chain.chainName,
-      // tokenName: chain.currencies[0].coinDenom,
-      // chainInfo: JSON.stringify(chain),
-      // validatorAddress: chainInfo.validator_address,
       chainInfo: chainInfo,
       page: 'index/index',
       title: res.__('For you to make most of the distributed value'),

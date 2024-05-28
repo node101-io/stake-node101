@@ -42,9 +42,11 @@ function serverRequest(url, method, data, callback) {
   } else if (method == 'GET') {
     req.open('GET', url);
     req.send();
+    
   } else if (method == 'POST') {
     req.open('POST', url);
     req.setRequestHeader('Content-type', 'application/json');
     req.send(JSON.stringify(data));
   };
 };
+

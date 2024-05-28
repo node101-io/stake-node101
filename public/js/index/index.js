@@ -59,75 +59,34 @@ listOfToken = {
   }, */
 };
 
-const memo = "Use your power wisely";
-
-window.addEventListener('load', async () => {
-  const inputAmount = document.getElementById('amount');
-  const chainInfoElement = document.getElementById('chainInfoElement');
-  const validatorInfoElement = document.getElementById('validatorInfoElement');
-
-
-  let currentChain = JSON.parse(chainInfoElement.textContent);
-  let currentChainInfo = JSON.parse(currentChain.chain_info);
-  const validatorAddress = validatorInfoElement.textContent
-
-
-
-
-  const walletAdd = document.getElementById('walletAdd');
-  const walletAddValue = document.getElementById('walletAddValue');
-
-  const walletBal = document.getElementById('walletBal');
-  const walletBalValue = document.getElementById('walletBalValue');
-
-  const walletChain = document.getElementById('walletchain');
-  const walletChainValue = document.getElementById('walletChainValue');
-
-  const walletToken = document.getElementById('walletToken');
-  const walletTokenValue = document.getElementById('walletTokenValue');
-
-  const tokenImg = document.getElementById('tokenImg');
-  const tokenNameX = document.getElementById('tokenName');
-  const tokenWrapper = document.querySelector('.tokenWrapper');
-
-  const connectButton = document.getElementById('connect');
-  connectButton.style.backgroundColor = "#fff";
-  const stakeButton = document.getElementById('stake');
-  const keplr = window.keplr;
-
-
-
-  tokenImg.src = currentChainInfo.currencies[0].coinImageUrl;
-  tokenNameX.textContent = currentChainInfo.currencies[0].coinDenom;
-  tokenNameX.style.marginLeft = "15px"
-
-
-  const tokenListContainer = document.querySelector('.token-list');
-
-
-  // TODO: write wrapper function to this code, addChainToKeplr()
+async function addChainToKeplr(currentChain) {
   try {
 
     // await keplr.experimentalSuggestChain(chains[chainName]);
-    console.log(currentChainInfo);
+    let currentChainInfo = JSON.parse(currentChain.chain_info);
+
     await keplr.enable(currentChain.chain_id);
     const offlineSigner = keplr.getOfflineSigner(currentChain.chain_id);
     const accounts = (await offlineSigner.getAccounts())[0];
     const address = accounts.address;
-    console.log("11111111111")
+
     const signingClient = await SigningStargateClient.connectWithSigner(
       currentChain.rpc_url,
       offlineSigner
     );
-    console.log("222222222222")
+
     const coinMinimalDen = currentChainInfo.currencies[0].coinMinimalDenom;
     const myBalanc = (
       await signingClient.getBalance(address, coinMinimalDen)
     ).amount;
 
-
     walletAddValue.textContent = address.slice(0, 5) + "..." + (accounts.address).slice(-5);
     walletBalValue.textContent = myBalanc / 1000000 + " " + currentChainInfo.currencies[0].coinDenom
+
+    tokenImg.src = currentChainInfo.currencies[0].coinImageUrl;
+    tokenNameX.textContent = currentChainInfo.currencies[0].coinMinimalDenom;
+    tokenNameX.style.marginLeft = "15px"
+
   } catch (err) {
     if (err instanceof Error) {
       console.log(err.message);
@@ -135,10 +94,62 @@ window.addEventListener('load', async () => {
       console.log("Unexpected error", err);
     }
   }
+}
+
+function closeModal() {
+  const modal = document.getElementById('tokenModal');
+  modal.style.display = 'none';
+}
+
+
+function showModal() {
+  const modal = document.getElementById('tokenModal');
+  modal.style.display = 'block';
+
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+}
+
+
+
+
+window.addEventListener('load', async () => {
+
+  const memo = "Use your power wisely";
+  const inputAmount = document.getElementById('amount');
+  const chainInfoElement = document.getElementById('chainInfoElement');
+  const validatorInfoElement = document.getElementById('validatorInfoElement');
+
+  let currentChain = JSON.parse(chainInfoElement.value);
+  const validatorAddress = validatorInfoElement.value;
+
+  const walletAdd = document.getElementById('walletAdd');
+  const walletAddValue = document.getElementById('walletAddValue');
+  const walletBal = document.getElementById('walletBal');
+  const walletBalValue = document.getElementById('walletBalValue');
+  const walletChain = document.getElementById('walletchain');
+  const walletChainValue = document.getElementById('walletChainValue');
+  const walletToken = document.getElementById('walletToken');
+  const walletTokenValue = document.getElementById('walletTokenValue');
+  const tokenImg = document.getElementById('tokenImg');
+  const tokenNameX = document.getElementById('tokenName');
+  const tokenWrapper = document.querySelector('.tokenWrapper');
+
+  const connectButton = document.getElementById('connect');
+  const stakeButton = document.getElementById('stake');
+
+  const tokenListContainer = document.querySelector('.token-list');
+  const tokenTile = document.createElement('div');
+  tokenTile.classList.add('token-tile');
+
+
+  addChainToKeplr(currentChain);
 
   Object.keys(listOfToken).forEach(tokenName => {
 
-    const tokenTile = document.createElement('div');
     tokenTile.classList.add('token-tile');
 
     const img = document.createElement('img');
@@ -155,150 +166,106 @@ window.addEventListener('load', async () => {
     tokenTile.appendChild(img);
     tokenTile.appendChild(span);
 
-    tokenTile.addEventListener('click', () => {
-        
-    serverRequest('http://localhost:3000/chain?chainid=celestia', 'GET', {}, (err, data) => {
-        if (err) {
-            console.log(err.message);
-        } else{
-        console.log("data", data);
-        console.log(JSON.parse(chainInfoElement.textContent));
-        }
-    });
-     
-      closeModal();
-
-      
-    });
 
 
 
     tokenListContainer.appendChild(tokenTile);
-  }); // TODO: pug'da yap
+  }); 
 
 
 
 
+  document.addEventListener('click',async (e) => {
+    if (event.target.closest('.token-tile')){
+      serverRequest('/chain?chainid=celestia', 'GET', {}, (err, data) => {
+        console.log(err, data);  
+        if (err) {
+              console.log(err.message);
+          } else{
+          console.log("data", data);
+          console.log(JSON.parse(chainInfoElement.textContent));
+          }
+      });
+       
+        closeModal();
+    }
 
+    if (event.target.closest('.tokenWrapper')){
+      showModal();
+    }
 
-  // document.addEventListener('click', event => {
-  //   if (event.target.closest('.close-modal-button')) {
-  //     const modal = document.getElementById('tokenModal');
-  //     modal.style.display = 'none';
-  //   };
-  // });
-
-  function closeModal() {
-    const modal = document.getElementById('tokenModal');
-    modal.style.display = 'none';
-  }
-
-
-  function showModal() {
-    const modal = document.getElementById('tokenModal');
-    modal.style.display = 'block';
-
-    window.onclick = function (event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
+    if (event.target.closest('#connect')){
+      if (!keplr) {
+        console.log("Keplr extension not installed");
+        return;
       }
-    }
-  }
-
-  tokenWrapper.addEventListener('click', () => {
-    showModal();
-  });
-
-  connectButton.addEventListener("click", async () => {
-    if (!keplr) {
-      console.log("Keplr extension not installed");
-      return;
+  
+      addChainToKeplr(currentChainInfo);
     }
 
-    try {
-      // await window.keplr.experimentalSuggestChain(currentChainInfo);
- 
-      await keplr.enable(currentChainInfo.chain_id);
-      const offlineSigner = keplr.getOfflineSigner(currentChainInfo.chain_id);
+    if (event.target.closest('#stake')){
+      const value = inputAmount.value;
+      const offlineSigner = keplr.getOfflineSigner(currentChainInfo.chainId);
       const accounts = (await offlineSigner.getAccounts())[0];
-      const address = accounts.address;
+  
+  
+      const msg = MsgDelegate.fromPartial({
+        delegatorAddress: accounts.address,
+        validatorAddress: validatorAddress,
+        amount: {
+          denom: currentChainInfo.currencies[0].coinMinimalDenom,
+          amount: value
+        },
+      });
+  
       const signingClient = await SigningStargateClient.connectWithSigner(
-        currentChainInfo.rpc_url,
+        currentChain.rpc,
         offlineSigner
       );
-
-      const myBalance = (
-        await signingClient.getBalance(address, currentChainInfo.currencies[0].coinMinimalDenom)
-      ).amount;
-      walletAddValue.textContent = address.slice(0, 5) + "..." + (accounts.address).slice(-5);
-      walletBalValue.textContent = myBalance / 1000000 + " " + currentChainInfo.currencies[0].coinDenom
-
-
-    } catch (err) {
-      if (err instanceof Error) {
-        console.log(err.message);
+  
+      const msgAny = {
+        typeUrl: "/cosmos.staking.v1beta1.MsgDelegate",
+        value: msg,
+      };
+      const stakingdenom = currentChainInfo.feeCurrencies[0].coinMinimalDenom;
+  
+      const fee = {
+        amount: [
+          {
+            denom: stakingdenom,
+            amount: value,
+          },
+        ],
+        gas: "980000", // 180k
+      };
+      const completeStaking = await signingClient.signAndBroadcast(
+        accounts.address,
+        [msgAny],
+        fee,
+        memo
+      );
+  
+      console.log("Gas used: ", completeStaking);
+      console.log("codee", completeStaking.code)
+      if (completeStaking.code === 0) {
+        alert("Transaction successful");
       } else {
-        console.log("Unexpected error", err);
+        alert("Transaction failed");
       }
     }
+  
   });
 
-  stakeButton.addEventListener("click", async () => {
-    const value = inputAmount.value;
-    const offlineSigner = keplr.getOfflineSigner(currentChainInfo.chainId);
-    const accounts = (await offlineSigner.getAccounts())[0];
 
 
-    const msg = MsgDelegate.fromPartial({
-      delegatorAddress: accounts.address,
-      validatorAddress: validatorAddress,
-      amount: {
-        denom: currentChainInfo.currencies[0].coinMinimalDenom,
-        amount: value
-      },
-    });
 
-    const signingClient = await SigningStargateClient.connectWithSigner(
-      currentChain.rpc,
-      offlineSigner
-    );
 
-    const msgAny = {
-      typeUrl: "/cosmos.staking.v1beta1.MsgDelegate",
-      value: msg,
-    };
-    const stakingdenom = currentChainInfo.feeCurrencies[0].coinMinimalDenom;
 
-    const fee = {
-      amount: [
-        {
-          denom: stakingdenom,
-          amount: value,
-        },
-      ],
-      gas: "980000", // 180k
-    };
-    const gasUsed = await signingClient.signAndBroadcast(
-      accounts.address,
-      [msgAny],
-      fee,
-      memo
-    );
 
-    function sendStakeTransaction(data) {
-      data.address
+  //tokenTile.addEventListener('click', () => {});
+  //tokenWrapper.addEventListener('click', () => {});
+  //connectButton.addEventListener("click", async () => {});
+  //stakeButton.addEventListener("click", async () => {});
+   
 
-      // TODO: burayı biraz dene kurcala
-    };
-    console.log("Gas used: ", gasUsed);
-    console.log("codee", gasUsed.code)
-    if (gasUsed.code === 0) {
-      alert("Transaction successful");
-    } else {
-      alert("Transaction failed");
-    }
-  }
-  );
-
-  // TODO: document.addEventListener('click', () => { ... }) kullan
 });

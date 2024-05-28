@@ -1,14 +1,14 @@
 const ChainInfo = require('../../models/ChainInfo/ChainInfo');
 
 module.exports = (req, res) => {
-  const chainId = req.query.chainid && typeof req.query.chainid == 'string' ? req.query.chainId : "cosmoshub-4";
-
+  const chainId = "cosmoshub-4"
   ChainInfo.findChainInfoByChainId(chainId, (err, chainInfo) => {
     if (err)
       return res.json({ error: err });
 
     return res.render('index/index', {
       chainInfo: chainInfo,
+      test: 1,
       page: 'index/index',
       title: res.__('For you to make most of the distributed value'),
       includes: {

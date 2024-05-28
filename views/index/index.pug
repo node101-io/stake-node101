@@ -1,11 +1,12 @@
 extends ../partials/header
 block main
   - const chainInfo1 = JSON.stringify(chainInfo);
-  - console.log("x");
+  - console.log(test);
   .container
-    p(style='color: red;') The UNOFFICIAL staking site of Node101
-    p#chainInfoElement(style='display: none;') #{chainInfo1}
-    p#validatorInfoElement(style='display:none') #{chainInfo.validatorAddress}
+   
+    p(style='color: red;') #{test}
+    input#chainInfoElement(style='display: none;')(type="text" value=chainInfo1)
+    input#validatorInfoElement(style='display:none')(type="text" value=chainInfo1.validatorAddress)
     br
     p.choose(style='color: yellow; font-size: 26px;margin-left:220px;margin-bottom:5px') choose network
     .buttonStyle
@@ -26,7 +27,7 @@ block main
       .eachRow
         p#walletBal Balance
         p#walletBalValue -
-      input#amount.inputStyle(type='text' value=test)
+      input#amount.inputStyle(type='text')
     .buttonStyle
       button#connect.button.connectStyle Connect
       button#stake.button.connectStyle Stake

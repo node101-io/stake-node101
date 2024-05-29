@@ -35,3 +35,5 @@ const getRpcUrlFromGithub = (identifier, callback) => {
 // };
 
 module.exports = getRpcUrlFromGithub;
+
+//default name

@@ -4,6 +4,7 @@ const formatChainInfo = require('./functions/formatChainInfo');
 
 const DUPLICATED_UNIQUE_FIELD_ERROR_CODE = 11000;
 const MAX_DATABASE_TEXT_FIELD_LENGTH = 1e4;
+const DEFAULT_IS_ACTIVE = true;
 
 const Schema = mongoose.Schema;
 
@@ -69,7 +70,7 @@ ChainInfoSchema.statics.createChainInfo = function (data, callback) {
     chain_id: data.chain_id.trim(),
     rpc_url: data.rpc_url.trim(),
     chain_info: data.chain_info.trim(),
-    is_active: data.is_active
+    is_active: 'is_active' in data ? data.is_active : true
   });
 
   newChainInfo.save((err, chainInfo) => {
@@ -89,11 +90,11 @@ ChainInfoSchema.statics.createChainInfo = function (data, callback) {
 
 ChainInfoSchema.statics.findChainInfoByChainId = function (chain_id, callback) {
   const ChainInfo = this;
-;
+
   if (!chain_id || typeof chain_id != 'string' || chain_id.trim().length < 1 || chain_id.trim().length > MAX_DATABASE_TEXT_FIELD_LENGTH)
     return callback('bad_request');
 
-    ChainInfo.findOne({ chain_id }, (err, chainInfo) => {
+  ChainInfo.findOne({ chain_id }, (err, chainInfo) => {
     if (err)
       return callback('database_error');
 
@@ -104,7 +105,7 @@ ChainInfoSchema.statics.findChainInfoByChainId = function (chain_id, callback) {
       return callback(null, chainInfo);
     });
   });
-}
+};
 
 ChainInfoSchema.statics.findChainInfoByChainIdAndUpdate = function (chain_id, data, callback) {
   const ChainInfo = this;

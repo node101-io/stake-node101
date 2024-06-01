@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 
-const getRpcUrlFromGithub = (identifier, callback) => {
+module.exports = (identifier, callback) => {
   fetch(`https://raw.githubusercontent.com/cosmos/chain-registry/master/${identifier}/chain.json`)
     .then(res => res.json())
     .then(res => {
@@ -33,7 +33,3 @@ const getRpcUrlFromGithub = (identifier, callback) => {
 //       return callback('document_not_found');
 //     });
 // };
-
-module.exports = getRpcUrlFromGithub;
-
-//default name

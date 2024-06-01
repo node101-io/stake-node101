@@ -5,7 +5,10 @@ module.exports = (chainInfo, callback) => {
   return callback(null, {
     _id: chainInfo._id.toString(),
     chain_id: chainInfo.chain_id,
+    chain_keplr_identifier: chainInfo.chain_keplr_identifier,
+    chain_registry_identifier: chainInfo.chain_registry_identifier,
     rpc_url: chainInfo.rpc_url,
+    imgUrl: chainInfo.imgUrl,
     chain_info: chainInfo.chain_info,
     validator_address: chainInfo.validator_address,
     is_active: chainInfo.is_active,

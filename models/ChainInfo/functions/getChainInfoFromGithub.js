@@ -1,6 +1,7 @@
 const fetch = require('node-fetch');
 
-const getChainInfoFromGithub = (identifier, callback) => {
+module.exports = (identifier, callback) => {
+  console.log('identifier', identifier);
   fetch(`https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/cosmos/${identifier}.json`)
     .then(res => res.json())
     .then(res => {
@@ -13,5 +14,3 @@ const getChainInfoFromGithub = (identifier, callback) => {
       return callback('network_error');
     });
 };
-
-module.exports = getChainInfoFromGithub;

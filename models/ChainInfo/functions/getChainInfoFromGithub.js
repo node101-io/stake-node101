@@ -1,7 +1,6 @@
 const fetch = require('node-fetch');
 
 module.exports = (identifier, callback) => {
-  console.log('identifier', identifier);
   fetch(`https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/cosmos/${identifier}.json`)
     .then(res => res.json())
     .then(res => {

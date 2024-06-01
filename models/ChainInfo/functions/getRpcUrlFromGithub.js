@@ -13,7 +13,6 @@ module.exports = (identifier, callback) => {
 
       if (!rpc_api_list.length)
         return callback('document_not_found');
-
       return callback(null, rpc_api_list[0]);
     })
     .catch(_ => {

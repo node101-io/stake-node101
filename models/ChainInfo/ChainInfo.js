@@ -61,6 +61,7 @@ const ChainInfoSchema = new Schema({
   },
   is_active: {
     type: Boolean,
+    required: true,
     default: DEFAULT_IS_ACTIVE
   }
 });
@@ -103,7 +104,7 @@ ChainInfoSchema.statics.createChainInfo = function (data, callback) {
     img_url: data.img_url.trim(),
     validator_address: data.validator_address.trim(),
     chain_info: data.chain_info.trim(),
-    is_active: 'is_active' in data ? data.is_active : true //???
+    is_active:  data.is_active,
   });
 
   newChainInfo.save((err, chainInfo) => {
@@ -137,6 +138,19 @@ ChainInfoSchema.statics.findChainInfoByChainId = function (chain_id, callback) {
 
       return callback(null, chainInfo);
     });
+  });
+};
+
+ChainInfoSchema.statics.findByFilter = function (data, callback) {
+  const ChainInfo = this;
+
+  if (!data || typeof data != 'object')
+  return callback('bad_request');
+
+  ChainInfo.find(data, (err, chainInfo) => {
+    if (err)
+      return callback('database_error');
+    return callback(null, chainInfo);
   });
 };
 
@@ -178,5 +192,6 @@ ChainInfoSchema.statics.findChainInfoByChainIdAndUpdate = function (chain_id, da
     });
   });
 };
+
 
 module.exports = mongoose.model('ChainInfo', ChainInfoSchema);

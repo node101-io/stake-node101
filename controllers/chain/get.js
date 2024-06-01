@@ -8,8 +8,8 @@ module.exports = (req, res) => {
       return res.json({ error: err });
 
       return res.json({
-        test: 2,
         chainInfo: chainInfo,
+        test: 2,
     });
   })
 }

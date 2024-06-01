@@ -4,10 +4,10 @@ block main
   - console.log(test);
   - const listofToken1 = JSON.stringify(listOfToken);
   .container
-    p(style='color: red;') Staking site of Node101 #{test}
-    input#chainInfoElement(style='display: none;')(type="text" value=chainInfo1)
-    input#validatorInfoElement(style='display:none')(type="text" value=chainInfo1.validatorAddress)
-    input#listofTokenElement(style='display:none')(type="text" value=listofToken1)
+    p(style='color: red;') #{test}
+    input#chainInfoElement(style='display: none;' type="text" value=chainInfo1)
+    input#validatorInfoElement(style='display:none' type="text" value=chainInfo1.validatorAddress)
+    input#listofTokenElement(style='display:none' type="text" value=listofToken1)
     br
     p.choose(style='color: yellow; font-size: 26px;margin-left:220px;margin-bottom:5px') choose network
     .buttonStyle
@@ -37,4 +37,3 @@ block main
       span.close &times;
       h2 Choose Token
       .token-list
-

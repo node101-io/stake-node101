@@ -141,15 +141,18 @@ ChainInfoSchema.statics.findChainInfoByChainId = function (chain_id, callback) {
   });
 };
 
-ChainInfoSchema.statics.findByFilter = function (data, callback) {
+ChainInfoSchema.statics.findByFilter = function (data, callback) { // TODO: ismini değiştir convention'a uysun
   const ChainInfo = this;
 
   if (!data || typeof data != 'object')
-  return callback('bad_request');
+    return callback('bad_request');
+
+  // TODO: findChainInfoByChainIdAndUpdate fonksiyonundaki gibi boş obje oluştur gerekli fieldleri check edip ekle
 
   ChainInfo.find(data, (err, chainInfo) => {
     if (err)
       return callback('database_error');
+
     return callback(null, chainInfo);
   });
 };
@@ -192,6 +195,5 @@ ChainInfoSchema.statics.findChainInfoByChainIdAndUpdate = function (chain_id, da
     });
   });
 };
-
 
 module.exports = mongoose.model('ChainInfo', ChainInfoSchema);

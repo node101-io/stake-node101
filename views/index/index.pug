@@ -2,18 +2,15 @@ extends ../partials/header
 block main
   - const chainInfo1 = JSON.stringify(chainInfo);
 
-  .container
-    p(style='color: red;') #{test}
+  .all-wrapper-container
     input#chainInfoElement(style='display: none;' type="text" value=chainInfo1)
-    input#validatorInfoElement(style='display:none' type="text" value=chainInfo1.validatorAddress)
-    input#listofTokenElement(style='display:none' type="text" value=listofToken)
     br
-    p.choose(style='color: yellow; font-size: 26px;margin-left:220px;margin-bottom:5px') choose network
+    p.selectNetworkLabel choose network
     .buttonStyle
       button#mainnet.button.connectStyle Mainnet
       .tokenWrapper
-        img#tokenImg(src=Object.values(listOfToken)[0].imgUrl width='60px' height='60px')
-        span#tokenName #{Object.values(listOfToken)[0].coinDenom}
+        img#tokenImg(src=Object.values(listOfToken)[0].img_url width='60px' height='60px')
+        span#tokenName #{Object.values(listOfToken)[0].coin_denom}
     .mainStyle
       .eachRow
         p#walletchain Chain
@@ -23,7 +20,7 @@ block main
         p#walletAddValue -
       .eachRow
         p#walletToken Token
-        p#walletTokenValue #{Object.values(listOfToken)[0].coinDenom}
+        p#walletTokenValue #{Object.values(listOfToken)[0].coin_denom}
       .eachRow
         p#walletBal Balance
         p#walletBalValue -
@@ -38,7 +35,7 @@ block main
       .token-list
         - Object.keys(listOfToken).forEach(tokenName => {
           .token-tile
-            img(src=listOfToken[tokenName].imgUrl alt=tokenName width='50' height='50' class='tokenimage')
+            img(src=listOfToken[tokenName].img_url alt=tokenName width='50' height='50' class='tokenimage')
             span.tokenimage #{tokenName}
-            input#tokenId(style='display:none' type='text' value=listOfToken[tokenName].chainId)
+            input#tokenId(style='display:none' type='text' value=listOfToken[tokenName].chain_id)
         - });

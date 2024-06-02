@@ -176,10 +176,6 @@ ChainInfoSchema.statics.findChainInfoByFilters = function (data, callback) {
   if (!Object.keys(filters).length)
     return callback('bad_request');
 
-  
-
-
-
   ChainInfo.find(filters, (err, chainInfo) => {
     if (err)
       return callback('database_error');

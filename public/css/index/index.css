@@ -7,7 +7,7 @@ body {
   flex-direction: column;
 }
 
-.container {
+.all-wrapper-container {
   background-color: rgb(22, 16, 44);
   width: 60%;
   height: 60%;
@@ -20,6 +20,12 @@ body {
 
 }
 
+.selectNetworkLabel {
+  color: yellow; 
+  font-size: 26px;
+  margin-left:220px;
+  margin-bottom:5px
+}
 .mainStyle {
   height: 90% !important;
   padding: 5px;

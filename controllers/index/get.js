@@ -10,7 +10,7 @@ module.exports = (req, res) => {
       return console.error(err);
     
       const listOfToken = {};
-      for (let i = 0;i < 3 && i < chainInfos.length; i++) {
+      for (let i = 0;i < 4 && i < chainInfos.length; i++) {
         const chainName = JSON.parse(chainInfos[i].chain_info).chainName;
         listOfToken[chainName] = {
           "chainId": chainInfos[i].chain_id,
@@ -40,7 +40,6 @@ module.exports = (req, res) => {
       },
       chainInfo: chainInfo,
       listOfToken: listOfToken,
-      test: 1
     });
   });
 

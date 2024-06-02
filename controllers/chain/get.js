@@ -9,7 +9,6 @@ module.exports = (req, res) => {
 
     return res.json({
       chainInfo: chainInfo,
-      test: 2,
     });
   })
 }

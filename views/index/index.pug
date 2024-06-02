@@ -1,7 +1,6 @@
 extends ../partials/header
 block main
   - const chainInfo1 = JSON.stringify(chainInfo);
-  - console.log(test);
 
   .container
     p(style='color: red;') #{test}
@@ -15,17 +14,16 @@ block main
       .tokenWrapper
         img#tokenImg(src=Object.values(listOfToken)[0].imgUrl width='60px' height='60px')
         span#tokenName #{Object.values(listOfToken)[0].coinDenom}
-
     .mainStyle
       .eachRow
         p#walletchain Chain
-        p#walletchainValue #{chainName}
+        p#walletchainValue #{Object.keys(listOfToken)[0]}
       .eachRow
         p#walletAdd Address
         p#walletAddValue -
       .eachRow
         p#walletToken Token
-        p#walletTokenValue #{tokenName}
+        p#walletTokenValue #{Object.values(listOfToken)[0].coinDenom}
       .eachRow
         p#walletBal Balance
         p#walletBalValue -
@@ -42,4 +40,5 @@ block main
           .token-tile
             img(src=listOfToken[tokenName].imgUrl alt=tokenName width='50' height='50' class='tokenimage')
             span.tokenimage #{tokenName}
+            input#tokenId(style='display:none' type='text' value=listOfToken[tokenName].chainId)
         - });

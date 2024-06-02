@@ -141,10 +141,16 @@ window.addEventListener('load', async () => {
 
        console.log("Gas used: ", completeStaking);
        if (completeStaking.code === 0) {
+
          alert("Transaction successful");
        } else {
          alert("Transaction failed");
        };
+       const myBalanc = (
+        await signingClient.getBalance(accounts.address, stakingdenom)
+      ).amount;
+   
+      walletBalValue.textContent = myBalanc / 1000000 + " " + stakingdenom;
     };
   });
 });

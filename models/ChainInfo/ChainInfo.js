@@ -141,15 +141,46 @@ ChainInfoSchema.statics.findChainInfoByChainId = function (chain_id, callback) {
   });
 };
 
-ChainInfoSchema.statics.findByFilter = function (data, callback) { // TODO: ismini değiştir convention'a uysun
+ChainInfoSchema.statics.findCahinInfoByFilters = function (data, callback) { 
   const ChainInfo = this;
 
   if (!data || typeof data != 'object')
     return callback('bad_request');
 
-  // TODO: findChainInfoByChainIdAndUpdate fonksiyonundaki gibi boş obje oluştur gerekli fieldleri check edip ekle
+  const filters = {};
 
-  ChainInfo.find(data, (err, chainInfo) => {
+  if (data.chain_id && typeof data.chain_id == 'string' && data.chain_id.trim().length > 0 && data.chain_id.trim().length <= MAX_DATABASE_TEXT_FIELD_LENGTH)
+    filters.chain_id = data.chain_id.trim();
+
+  if (data.chain_keplr_identifier && typeof data.chain_keplr_identifier == 'string' && data.chain_keplr_identifier.trim().length > 0 && data.chain_keplr_identifier.trim().length <= MAX_DATABASE_TEXT_FIELD_LENGTH)
+    filters.chain_keplr_identifier = data.chain_keplr_identifier.trim();
+  
+  if (data.chain_registry_identifier && typeof data.chain_registry_identifier == 'string' && data.chain_registry_identifier.trim().length > 0 && data.chain_registry_identifier.trim().length <= MAX_DATABASE_TEXT_FIELD_LENGTH)
+    filters.chain_registry_identifier = data.chain_registry_identifier.trim();
+
+  if (data.rpc_url && typeof data.rpc_url == 'string' && data.rpc_url.trim().length > 0 && data.rpc_url.trim().length <= MAX_DATABASE_TEXT_FIELD_LENGTH)
+    filters.rpc_url = data.rpc_url.trim();
+
+  if (data.img_url && typeof data.img_url == 'string' && data.img_url.trim().length > 0 && data.img_url.trim().length <= MAX_DATABASE_TEXT_FIELD_LENGTH)
+    filters.img_url = data.img_url.trim();
+
+  if (data.validator_address && typeof data.validator_address == 'string' && data.validator_address.trim().length > 0 && data.validator_address.trim().length <= MAX_DATABASE_TEXT_FIELD_LENGTH)
+    filters.validator_address = data.validator_address.trim();
+
+  if (data.chain_info && typeof data.chain_info == 'string' && data.chain_info.trim().length > 0 && data.chain_info.trim().length <= MAX_DATABASE_TEXT_FIELD_LENGTH)
+    filters.chain_info = data.chain_info.trim();
+
+  if ('is_active' in data && typeof data.is_active == 'boolean')
+    filters.is_active = data.is_active;
+
+  if (!Object.keys(filters).length)
+    return callback('bad_request');
+
+  
+
+
+
+  ChainInfo.find(filters, (err, chainInfo) => {
     if (err)
       return callback('database_error');
 

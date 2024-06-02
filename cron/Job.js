@@ -9,7 +9,7 @@ const formatChainInfo = require('../models/ChainInfo/functions/formatChainInfo')
 const Job = {
   start: () => {
     /* Cron('/10 * * * * *', () => { */
-      ChainInfo.findByFilter({ is_active:true }, (err, chainInfos) => { // findCahinInfoByFilters
+      ChainInfo.findCahinInfoByFilters({ is_active:true }, (err, chainInfos) => { 
         if (err)
           return console.error(err);
 

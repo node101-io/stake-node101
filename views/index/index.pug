@@ -2,19 +2,20 @@ extends ../partials/header
 block main
   - const chainInfo1 = JSON.stringify(chainInfo);
   - console.log(test);
-  - const listofToken1 = JSON.stringify(listOfToken);
+
   .container
     p(style='color: red;') #{test}
     input#chainInfoElement(style='display: none;' type="text" value=chainInfo1)
     input#validatorInfoElement(style='display:none' type="text" value=chainInfo1.validatorAddress)
-    input#listofTokenElement(style='display:none' type="text" value=listofToken1)
+    input#listofTokenElement(style='display:none' type="text" value=listofToken)
     br
     p.choose(style='color: yellow; font-size: 26px;margin-left:220px;margin-bottom:5px') choose network
     .buttonStyle
       button#mainnet.button.connectStyle Mainnet
       .tokenWrapper
-        img#tokenImg(src='' width='60px' height='60px')
-        span#tokenName
+        img#tokenImg(src=Object.values(listOfToken)[0].imgUrl width='60px' height='60px')
+        span#tokenName #{Object.values(listOfToken)[0].coinDenom}
+
     .mainStyle
       .eachRow
         p#walletchain Chain
@@ -37,3 +38,8 @@ block main
       span.close &times;
       h2 Choose Token
       .token-list
+        - Object.keys(listOfToken).forEach(tokenName => {
+          .token-tile
+            img(src=listOfToken[tokenName].imgUrl alt=tokenName width='50' height='50' class='tokenimage')
+            span.tokenimage #{tokenName}
+        - });

@@ -141,7 +141,7 @@ ChainInfoSchema.statics.findChainInfoByChainId = function (chain_id, callback) {
   });
 };
 
-ChainInfoSchema.statics.findCahinInfoByFilters = function (data, callback) { 
+ChainInfoSchema.statics.findChainInfoByFilters = function (data, callback) { 
   const ChainInfo = this;
 
   if (!data || typeof data != 'object')

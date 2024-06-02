@@ -2,7 +2,23 @@ const ChainInfo = require('../../models/ChainInfo/ChainInfo');
 
 
 module.exports = (req, res) => {
+
   const chainId = "cosmoshub-4"
+
+  ChainInfo.findChainInfoByFilters({ is_active: true }, (err, chainInfos) => {
+    if (err)
+      return console.error(err);
+    
+      const listOfToken = {};
+      for (let i = 0;i < 3 && i < chainInfos.length; i++) {
+        const chainName = JSON.parse(chainInfos[i].chain_info).chainName;
+        listOfToken[chainName] = {
+          "chainId": chainInfos[i].chain_id,
+          "imgUrl": chainInfos[i].img_url,
+          "coinDenom": JSON.parse(chainInfos[i].chain_info).currencies[0].coinDenom,
+        };
+      }
+      
   ChainInfo.findChainInfoByChainId(chainId, (err, chainInfo) => {
     if (err)
       return res.json({ error: err });
@@ -23,8 +39,11 @@ module.exports = (req, res) => {
         },
       },
       chainInfo: chainInfo,
-      //listOfToken: listOfToken,
+      listOfToken: listOfToken,
       test: 1
     });
   });
-};
+
+
+  });
+  }

@@ -9,7 +9,7 @@ const formatChainInfo = require('../models/ChainInfo/functions/formatChainInfo')
 const Job = {
   start: () => {
     /* Cron('/10 * * * * *', () => { */
-      ChainInfo.findCahinInfoByFilters({ is_active:true }, (err, chainInfos) => { 
+      ChainInfo.findChainInfoByFilters({ is_active:true }, (err, chainInfos) => { 
         if (err)
           return console.error(err);
 
@@ -29,7 +29,7 @@ const Job = {
                   return console.error(err)
 
                 ChainInfo.findChainInfoByChainIdAndUpdate(chainInfos[time].chain_id, {
-                  rpc_url: rpcUrl, //`https://rpc.cosmos.directory/${chains.chainRegistryIdentifier}`,
+                  rpc_url: `https://rpc.cosmos.directory/${registryIdentifier}`,
                   chain_info: JSON.stringify(chainInfo),
                 }, (err, chainInfo) => next(err, chainInfo)),
                 (err, chainInfo) => {

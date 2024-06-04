@@ -1,9 +1,7 @@
 extends ../partials/header
 block main
-  - const chainInfo1 = JSON.stringify(chainInfo);
-
   .all-wrapper-container
-    input#chainInfoElement(style='display: none;' type="text" value=chainInfo1)
+    input.display-none#chain-info-element(type="text" value=JSON.stringify(chainInfo))
     br
     p.selectNetworkLabel choose network
     .button-wrapper
@@ -28,7 +26,7 @@ block main
     .button-wrapper
       button#connect-button.button Connect
       button#stake-nutton.button Stake
-  .token-popup-wrapper.modal
+  .token-popup-wrapper.modal.display-none
     .modal-content
       span.close &times;
       h2 Choose Token

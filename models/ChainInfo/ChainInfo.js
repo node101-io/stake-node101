@@ -141,7 +141,7 @@ ChainInfoSchema.statics.findChainInfoByChainId = function (chain_id, callback) {
   });
 };
 
-ChainInfoSchema.statics.findChainInfoByFilters = function (data, callback) { 
+ChainInfoSchema.statics.findChainInfoByFilters = function (data, callback) {
   const ChainInfo = this;
 
   if (!data || typeof data != 'object')
@@ -154,7 +154,7 @@ ChainInfoSchema.statics.findChainInfoByFilters = function (data, callback) {
 
   if (data.chain_keplr_identifier && typeof data.chain_keplr_identifier == 'string' && data.chain_keplr_identifier.trim().length > 0 && data.chain_keplr_identifier.trim().length <= MAX_DATABASE_TEXT_FIELD_LENGTH)
     filters.chain_keplr_identifier = data.chain_keplr_identifier.trim();
-  
+
   if (data.chain_registry_identifier && typeof data.chain_registry_identifier == 'string' && data.chain_registry_identifier.trim().length > 0 && data.chain_registry_identifier.trim().length <= MAX_DATABASE_TEXT_FIELD_LENGTH)
     filters.chain_registry_identifier = data.chain_registry_identifier.trim();
 
@@ -172,9 +172,6 @@ ChainInfoSchema.statics.findChainInfoByFilters = function (data, callback) {
 
   if ('is_active' in data && typeof data.is_active == 'boolean')
     filters.is_active = data.is_active;
-
-  if (!Object.keys(filters).length)
-    return callback('bad_request');
 
   ChainInfo.find(filters, (err, chainInfo) => {
     if (err)
@@ -206,6 +203,8 @@ ChainInfoSchema.statics.findChainInfoByChainIdAndUpdate = function (chain_id, da
 
   if ('is_active' in data && typeof data.is_active == 'boolean')
     updateData.is_active = data.is_active;
+
+  // TODO: add other fields
 
   if (!Object.keys(updateData).length)
     return callback('bad_request');

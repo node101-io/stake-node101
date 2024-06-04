@@ -21,7 +21,7 @@ body {
 }
 
 .selectNetworkLabel {
-  color: yellow; 
+  color: yellow;
   font-size: 26px;
   margin-left:220px;
   margin-bottom:5px
@@ -87,7 +87,6 @@ body {
 }
 
 .token-popup-wrapper {
-  display: none;
   position: fixed;
   z-index: 1;
   left: 0;

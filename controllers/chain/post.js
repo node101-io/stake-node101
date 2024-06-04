@@ -14,7 +14,7 @@ module.exports = (req, res) => {
 
   getChainInfoFromGithub(req.body.chain_keplr_identifier, (err, chainInfo) => {
     if (err)
-      return res.status(500).json({ error: err });
+      return res.status(500).json({ error: err }); // TODO:
 
     data.chain_info = JSON.stringify(chainInfo);
 

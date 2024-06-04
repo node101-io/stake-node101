@@ -42,7 +42,7 @@ window.addEventListener('load', async () => {
 
   document.addEventListener('click', async event => {
     if (event.target.closest('.tokenWrapper')) {
-      const modal = document.getElementById('tokenModal');
+      const modal = document.querySelector('.token-popup-wrapper');
       modal.style.display = 'block';
     }
 
@@ -65,11 +65,11 @@ window.addEventListener('load', async () => {
           tokenName.textContent = JSON.parse(currentChain.chain_info).currencies[0].coinDenom
         }
       });
-      const modal = document.getElementById('tokenModal');
+      const modal = document.querySelector('.token-popup-wrapper');
       modal.style.display = 'none';
     }
     
-    if (event.target.closest('#connect')) {
+    if (event.target.closest('#connect-button')) {
 
       const chainInfoElement = document.getElementById('chainInfoElement');
       currentChain = !currentChain ? JSON.parse(chainInfoElement.value) : currentChain;
@@ -82,7 +82,7 @@ window.addEventListener('load', async () => {
       addChainToKeplr(currentChain);
     }
 
-    if (event.target.closest('#stake')) {
+    if (event.target.closest('#stake-button')) {
 
       if (!currentChain) {
         console.log("Please connect to a chain");
@@ -92,8 +92,8 @@ window.addEventListener('load', async () => {
       let currentChainInfo = JSON.parse(currentChain.chain_info);
       const validatorAddress = currentChain.validator_address;
 
-      const inputAmount = document.getElementById('amount');
-      const value = inputAmount.value;
+      const stakeAmount = document.getElementById('stake-amount');
+      const value = stakeAmount.value;
 
       const offlineSigner = keplr.getOfflineSigner(currentChain.chain_id);
       const accounts = (await offlineSigner.getAccounts())[0];

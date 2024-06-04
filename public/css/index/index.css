@@ -48,7 +48,7 @@ body {
   outline: 0px;
 }
 
-.buttonStyle {
+.button-wrapper {
   background-color: rgb(37, 26, 76);
   color: rgb(121, 80, 242);
   font-size: 30px;
@@ -62,7 +62,7 @@ body {
   box-shadow: 0px 0px 10px rgb(65, 26, 193);
 }
 
-.connectStyle {
+.button {
   background-color: rgb(25, 19, 50);
   padding: 5px;
   color: rgb(121, 80, 242);
@@ -86,7 +86,7 @@ body {
   border: 1px solid yellowgreen;
 }
 
-.modal {
+.token-popup-wrapper {
   display: none;
   position: fixed;
   z-index: 1;

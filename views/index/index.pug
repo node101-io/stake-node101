@@ -6,29 +6,29 @@ block main
     input#chainInfoElement(style='display: none;' type="text" value=chainInfo1)
     br
     p.selectNetworkLabel choose network
-    .buttonStyle
+    .button-wrapper
       button#mainnet.button.connectStyle Mainnet
       .tokenWrapper
         img#tokenImg(src=Object.values(listOfToken)[0].img_url width='60px' height='60px')
         span#tokenName #{Object.values(listOfToken)[0].coin_denom}
     .mainStyle
       .eachRow
-        p#walletchain Chain
+        p Chain
         p#walletchainValue #{Object.keys(listOfToken)[0]}
       .eachRow
-        p#walletAdd Address
+        p Address
         p#walletAddValue -
       .eachRow
-        p#walletToken Token
+        p Token
         p#walletTokenValue #{Object.values(listOfToken)[0].coin_denom}
       .eachRow
-        p#walletBal Balance
+        p Balance
         p#walletBalValue -
-      input#amount.inputStyle(type='text')
-    .buttonStyle
-      button#connect.button.connectStyle Connect
-      button#stake.button.connectStyle Stake
-  #tokenModal.modal
+      input#stake-amount.inputStyle(type='text')
+    .button-wrapper
+      button#connect-button.button Connect
+      button#stake-nutton.button Stake
+  .token-popup-wrapper.modal
     .modal-content
       span.close &times;
       h2 Choose Token

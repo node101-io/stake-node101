@@ -1,14 +1,11 @@
-
 function addChainToKeplr(currentChain, callback) {
   const keplr = window.keplr;
   let currentChainInfo = JSON.parse(currentChain.chain_info);
   const coinMinimalDen = currentChainInfo.currencies[0].coinMinimalDenom;
 
-  keplr.experimentalSuggestChain(currentChainInfo).then((err) => {
-    if (err) return callback(err);
+  keplr.experimentalSuggestChain(currentChainInfo).then(() => {
 
-    keplr.enable(currentChain.chain_id).then((err) => {
-      if (err) return callback(err);
+    keplr.enable(currentChain.chain_id).then(() => {
       
       const offlineSigner = keplr.getOfflineSigner(currentChain.chain_id);
       offlineSigner.getAccounts().then((accounts) => {
@@ -16,7 +13,6 @@ function addChainToKeplr(currentChain, callback) {
 
         SigningStargateClient.connectWithSigner(currentChain.rpc_url,offlineSigner).then((signingClient) => {
           signingClient.getBalance(address, coinMinimalDen).then(balance => {
-            if (err) return callback(err);
 
             const myBalance = balance.amount;
 
@@ -26,13 +22,22 @@ function addChainToKeplr(currentChain, callback) {
             walletTokenValue.textContent = currentChainInfo.currencies[0].coinDenom;
 
             callback(null);
+          }).catch((err) => {
+            return callback(err);
           });
+        }).catch((err) => {
+          return callback(err);
         });
+      }).catch((err) => {
+        return callback(err);
       });
+    }).catch((err) => {
+      return callback(err);
     });
+  }).catch((err) => {
+    return callback(err);
   });
 };
-
 
 function setTokenUI(currentChain) {
   const tokenImage = document.getElementById('tokenImg');
@@ -104,7 +109,6 @@ window.addEventListener('load',  () => {
   });
 });
 
-
 function completeStaking(offlineSigner, accounts, currentChain, stakingValue) {
       const currentChainInfo = JSON.parse(currentChain.chain_info);
       const validatorAddress = currentChain.validator_address
@@ -164,4 +168,3 @@ function completeStaking(offlineSigner, accounts, currentChain, stakingValue) {
     }
   ));
 }
-  

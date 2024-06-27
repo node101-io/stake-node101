@@ -97,8 +97,6 @@ window.addEventListener('load',  () => {
 
       const offlineSigner = keplr.getOfflineSigner(currentChain.chain_id);
       offlineSigner.getAccounts().then((accounts) => {
-        console.log("22222222222222");
-        console.log(accounts)
       completeStaking(offlineSigner, accounts[0], currentChain, stakingValue); 
     
       });
@@ -111,8 +109,6 @@ function completeStaking(offlineSigner, accounts, currentChain, stakingValue) {
       const currentChainInfo = JSON.parse(currentChain.chain_info);
       const validatorAddress = currentChain.validator_address
       const stakingdenom = currentChainInfo.feeCurrencies[0].coinMinimalDenom;
-
-    
       const memo = "Use your power wisely";
 
        const DelegateMsg = MsgDelegate.fromPartial({
@@ -138,18 +134,12 @@ function completeStaking(offlineSigner, accounts, currentChain, stakingValue) {
         ],
         gas: "980000", //980k 
       };
-      console.log("1111111111111");
-      console.log(DelegateTransaction);
 
       SigningStargateClient.connectWithSigner(
         currentChain.rpc_url,
         offlineSigner
       ).then((signingClient)=>
 
-      
-
-    
-      
        signingClient.signAndBroadcast(
          accounts.address,
          [DelegateTransaction],
@@ -157,7 +147,6 @@ function completeStaking(offlineSigner, accounts, currentChain, stakingValue) {
          memo
        ).then((completeStaking) => {
 
-       console.log("Gas used: ", completeStaking);
 
        if (completeStaking.code === 0) {
 
@@ -171,8 +160,8 @@ function completeStaking(offlineSigner, accounts, currentChain, stakingValue) {
         const myBalanc = balance.amount;
 
       walletBalValue.textContent = myBalanc / 1000000 + " " + stakingdenom;
-       });
+      });
     }
-       ));
+  ));
 }
   

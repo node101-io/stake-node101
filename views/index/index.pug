@@ -25,10 +25,9 @@ block main
       input#stake-amount.inputStyle(type='text')
     .button-wrapper
       button#connect-button.button Connect
-      button#stake-nutton.button Stake
+      button#stake-button.button Stake
   .token-popup-wrapper.modal.display-none
     .modal-content
-      span.close &times;
       h2 Choose Token
       .token-list
         - Object.keys(listOfToken).forEach(tokenName => {

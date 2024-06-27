@@ -1,42 +1,51 @@
-async function addChainToKeplr(currentChain, callback) {
-  try {
 
-    let currentChainInfo = JSON.parse(currentChain.chain_info);
+function addChainToKeplr(currentChain, callback) {
+  const keplr = window.keplr;
+  let currentChainInfo = JSON.parse(currentChain.chain_info);
+  const coinMinimalDen = currentChainInfo.currencies[0].coinMinimalDenom;
 
-    await keplr.experimentalSuggestChain(currentChainInfo);
-    await keplr.enable(currentChain.chain_id);
+  keplr.experimentalSuggestChain(currentChainInfo).then((err) => {
+    if (err) return callback(err);
 
-    const offlineSigner = keplr.getOfflineSigner(currentChain.chain_id);
-    const accounts = await offlineSigner.getAccounts()[0];
-    const address = accounts.address;
+    keplr.enable(currentChain.chain_id).then((err) => {
+      if (err) return callback(err);
+      
+      const offlineSigner = keplr.getOfflineSigner(currentChain.chain_id);
+      offlineSigner.getAccounts().then((accounts) => {
+        const address = accounts[0].address;
 
-    const signingClient = await SigningStargateClient.connectWithSigner(
-      currentChain.rpc_url,
-      offlineSigner
-    );
+        SigningStargateClient.connectWithSigner(currentChain.rpc_url,offlineSigner).then((signingClient) => {
+          signingClient.getBalance(address, coinMinimalDen).then(balance => {
+            if (err) return callback(err);
 
-    const coinMinimalDen = currentChainInfo.currencies[0].coinMinimalDenom;
-    const myBalanc = (
-      await signingClient.getBalance(address, coinMinimalDen)
-    ).amount;
+            const myBalance = balance.amount;
 
-    walletAddValue.textContent = address.slice(0, 5) + "..." + (accounts.address).slice(-5);
-    walletBalValue.textContent = myBalanc / 1000000 + " " + currentChainInfo.currencies[0].coinDenom
-    walletchainValue.textContent = currentChainInfo.chainName;
-    walletTokenValue.textContent = currentChainInfo.currencies[0].coinDenom
-  } catch (err) {
-    if (err instanceof Error) {
-      console.log(err.message);
-    } else {
-      console.log("Unexpected error", err);
-    };
-  };
+            walletAddValue.textContent = address.slice(0, 5) + "..." + address.slice(-5);
+            walletBalValue.textContent = myBalance / 1000000 + " " + currentChainInfo.currencies[0].coinDenom;
+            walletchainValue.textContent = currentChainInfo.chainName;
+            walletTokenValue.textContent = currentChainInfo.currencies[0].coinDenom;
+
+            callback(null);
+          });
+        });
+      });
+    });
+  });
 };
 
-window.addEventListener('load', async () => {
-  let currentChain; // TODO
 
-  document.addEventListener('click', async event => {
+function setTokenUI(currentChain) {
+  const tokenImage = document.getElementById('tokenImg');
+  const tokenName = document.getElementById('tokenName');
+
+  tokenImage.src = currentChain.img_url;
+  tokenName.textContent = JSON.parse(currentChain.chain_info).currencies[0].coinDenom
+};
+
+window.addEventListener('load',  () => {
+  let currentChain; 
+
+  document.addEventListener('click', event => {
     if (event.target.closest('.tokenWrapper')) {
       document.querySelector('.token-popup-wrapper').classList.toggle('display-none');
     };
@@ -51,14 +60,7 @@ window.addEventListener('load', async () => {
           currentChain = res.chainInfo;
 
           addChainToKeplr(currentChain);
-
-          // TODO: buna ayrı bir fonksiyon yapabiliriz mesela () buna isim düşün açıklayıcı bir şey olsun
-          const tokenImage = document.getElementById('tokenImg');
-          const tokenName = document.getElementById('tokenName');
-
-          tokenImage.src = currentChain.img_url;
-          tokenName.textContent = JSON.parse(currentChain.chain_info).currencies[0].coinDenom
-          // buraya kadarki kisim
+          setTokenUI(currentChain);
         }
       });
 
@@ -72,77 +74,105 @@ window.addEventListener('load', async () => {
         console.log("Keplr extension not installed");
         return;
       };
+      addChainToKeplr(currentChain, (err) => {
+        if (err) console.log(err);
 
-      addChainToKeplr(currentChain);
+      });
     };
 
     if (event.target.closest('#stake-button')) {
-      if (!currentChain) {
+
+     const keplr = window.keplr;
+     if (!currentChain) {
         console.log("Please connect to a chain");
         return;
       };
 
-      let currentChainInfo = JSON.parse(currentChain.chain_info);
-      const validatorAddress = currentChain.validator_address;
+      const stakingValue =  document.getElementById('stake-amount').value;
 
-      const stakeAmount = document.getElementById('stake-amount');
-      const value = stakeAmount.value;
+      if (!stakingValue || isNaN(stakingValue) || stakingValue <= 0) {
+        console.log("Please enter a valid amount");
+        return;
+      };
 
       const offlineSigner = keplr.getOfflineSigner(currentChain.chain_id);
-      const accounts = await offlineSigner.getAccounts()[0];
+      offlineSigner.getAccounts().then((accounts) => {
+        console.log("22222222222222");
+        console.log(accounts)
+      completeStaking(offlineSigner, accounts[0], currentChain, stakingValue); 
+    
+      });
+    };
+  });
+});
 
-      //  TODO: bunu bir fonksiyona çevir tabii ki callback ile sendStakeTransaction()
-       const msg = MsgDelegate.fromPartial({
+
+function completeStaking(offlineSigner, accounts, currentChain, stakingValue) {
+      const currentChainInfo = JSON.parse(currentChain.chain_info);
+      const validatorAddress = currentChain.validator_address
+      const stakingdenom = currentChainInfo.feeCurrencies[0].coinMinimalDenom;
+
+    
+      const memo = "Use your power wisely";
+
+       const DelegateMsg = MsgDelegate.fromPartial({
          delegatorAddress: accounts.address,
          validatorAddress: validatorAddress,
          amount: {
            denom: currentChainInfo.currencies[0].coinMinimalDenom,
-           amount: value
+           amount: stakingValue
          },
        });
 
-       const signingClient = await SigningStargateClient.connectWithSigner(
-         currentChain.rpc_url,
-         offlineSigner
-       );
+       const DelegateTransaction = {
+        typeUrl: "/cosmos.staking.v1beta1.MsgDelegate",
+        value: DelegateMsg,
+      };
 
-       const msgAny = {
-         typeUrl: "/cosmos.staking.v1beta1.MsgDelegate",
-         value: msg,
-       };
-       const stakingdenom = currentChainInfo.feeCurrencies[0].coinMinimalDenom;
+      const fee = {
+        amount: [
+          {
+            denom: stakingdenom,
+            amount: stakingValue,
+          },
+        ],
+        gas: "980000", //980k 
+      };
+      console.log("1111111111111");
+      console.log(DelegateTransaction);
 
-       const fee = {
-         amount: [
-           {
-             denom: stakingdenom,
-             amount: value,
-           },
-         ],
-         gas: "980000", // 180k
-       };
+      SigningStargateClient.connectWithSigner(
+        currentChain.rpc_url,
+        offlineSigner
+      ).then((signingClient)=>
 
-       const memo = "Use your power wisely";
+      
 
-       const completeStaking = await signingClient.signAndBroadcast(
+    
+      
+       signingClient.signAndBroadcast(
          accounts.address,
-         [msgAny],
+         [DelegateTransaction],
          fee,
          memo
-       );
+       ).then((completeStaking) => {
 
        console.log("Gas used: ", completeStaking);
+
        if (completeStaking.code === 0) {
 
          alert("Transaction successful");
        } else {
          alert("Transaction failed");
        };
-       const myBalanc = (
-        await signingClient.getBalance(accounts.address, stakingdenom)
-      ).amount;
+       signingClient.getBalance(address, coinMinimalDen).then(balance => {
+        if (err) return callback(err);
+
+        const myBalanc = balance.amount;
 
       walletBalValue.textContent = myBalanc / 1000000 + " " + stakingdenom;
-    };
-  });
-});
+       });
+    }
+       ));
+}
+  

@@ -201,10 +201,20 @@ ChainInfoSchema.statics.findChainInfoByChainIdAndUpdate = function (chain_id, da
   if (data.chain_info && typeof data.chain_info == 'string' && data.chain_info.trim().length > 0 && data.chain_info.trim().length <= MAX_DATABASE_TEXT_FIELD_LENGTH)
     updateData.chain_info = data.chain_info.trim();
 
+  if (data.img_url && typeof data.img_url == 'string' && data.img_url.trim().length > 0 && data.img_url.trim().length <= MAX_DATABASE_TEXT_FIELD_LENGTH)
+    updateData.img_url = data.img_url.trim();
+
+  if (data.chain_keplr_identifier && typeof data.chain_keplr_identifier == 'string' && data.chain_keplr_identifier.trim().length > 0 && data.chain_keplr_identifier.trim().length <= MAX_DATABASE_TEXT_FIELD_LENGTH)
+    updateData.chain_keplr_identifier = data.chain_keplr_identifier.trim();
+
+  if (data.chain_registry_identifier && typeof data.chain_registry_identifier == 'string' && data.chain_registry_identifier.trim().length > 0 && data.chain_registry_identifier.trim().length <= MAX_DATABASE_TEXT_FIELD_LENGTH)
+    updateData.chain_registry_identifier = data.chain_registry_identifier.trim();
+
+  if (data.validator_address && typeof data.validator_address == 'string' && data.validator_address.trim().length > 0 && data.validator_address.trim().length <= MAX_DATABASE_TEXT_FIELD_LENGTH)
+    updateData.validator_address = data.validator_address.trim();
+
   if ('is_active' in data && typeof data.is_active == 'boolean')
     updateData.is_active = data.is_active;
-
-  // TODO: add other fields
 
   if (!Object.keys(updateData).length)
     return callback('bad_request');

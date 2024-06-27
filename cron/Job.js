@@ -29,8 +29,9 @@ const Job = {
                   return console.error(err)
 
                 ChainInfo.findChainInfoByChainIdAndUpdate(chainInfos[time].chain_id, {
-                  rpc_url: `https://rpc.cosmos.directory/${registryIdentifier}`,
+                  rpc_url: `https://rpc.cosmos.directory/${registryIdentifier}`, //rpcUrl
                   chain_info: JSON.stringify(chainInfo),
+
                 }, (err, chainInfo) => next(err, chainInfo)),
                 (err, chainInfo) => {
                   if (err)

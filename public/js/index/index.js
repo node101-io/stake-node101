@@ -1,41 +1,34 @@
+let globalOfflineSigner;
+let globalAddress;
+
 function addChainToKeplr(currentChain, callback) {
   const keplr = window.keplr;
   let currentChainInfo = JSON.parse(currentChain.chain_info);
   const coinMinimalDen = currentChainInfo.currencies[0].coinMinimalDenom;
 
-  keplr.experimentalSuggestChain(currentChainInfo).then(() => {
+  keplr.experimentalSuggestChain(currentChainInfo)
+    .then(keplr.enable(currentChain.chain_id))
+    .then(keplr.getOfflineSigner(currentChain.chain_id))
+    .then((offlineSigner) => {
+      globalOfflineSigner = offlineSigner;
+      return offlineSigner.getAccounts();
+    })
+    .then((accounts) => {
+      globalAddress = accounts[0].address;
+    })
+    .then(SigningStargateClient.connectWithSigner(currentChain.rpc_url,offlineSigner))
+    .then((signingClient) => signingClient.getBalance(address, coinMinimalDen))
+    .then(balance => {
 
-    keplr.enable(currentChain.chain_id).then(() => {
-      
-      const offlineSigner = keplr.getOfflineSigner(currentChain.chain_id);
-      offlineSigner.getAccounts().then((accounts) => {
-        const address = accounts[0].address;
+      walletAddValue.textContent = address.slice(0, 5) + "..." + address.slice(-5);
+      walletBalValue.textContent =  balance.amount / 1000000 + " " + currentChainInfo.currencies[0].coinDenom;
+      walletchainValue.textContent = currentChainInfo.chainName;
+      walletTokenValue.textContent = currentChainInfo.currencies[0].coinDenom;
 
-        SigningStargateClient.connectWithSigner(currentChain.rpc_url,offlineSigner).then((signingClient) => {
-          signingClient.getBalance(address, coinMinimalDen).then(balance => {
+      return callback(null);
 
-            const myBalance = balance.amount;
-
-            walletAddValue.textContent = address.slice(0, 5) + "..." + address.slice(-5);
-            walletBalValue.textContent = myBalance / 1000000 + " " + currentChainInfo.currencies[0].coinDenom;
-            walletchainValue.textContent = currentChainInfo.chainName;
-            walletTokenValue.textContent = currentChainInfo.currencies[0].coinDenom;
-
-            callback(null);
-          }).catch((err) => {
-            return callback(err);
-          });
-        }).catch((err) => {
-          return callback(err);
-        });
-      }).catch((err) => {
-        return callback(err);
-      });
     }).catch((err) => {
       return callback(err);
-    });
-  }).catch((err) => {
-    return callback(err);
   });
 };
 
@@ -86,7 +79,6 @@ window.addEventListener('load',  () => {
     };
 
     if (event.target.closest('#stake-button')) {
-
      const keplr = window.keplr;
      if (!currentChain) {
         console.log("Please connect to a chain");
@@ -101,9 +93,12 @@ window.addEventListener('load',  () => {
       };
 
       const offlineSigner = keplr.getOfflineSigner(currentChain.chain_id);
-      offlineSigner.getAccounts().then((accounts) => {
-      completeStaking(offlineSigner, accounts[0], currentChain, stakingValue); 
-    
+      offlineSigner.getAccounts().
+      then((accounts) => {
+        completeStaking(offlineSigner, accounts[0], currentChain, stakingValue); 
+      }).catch((err) => {
+        console.log(err);
+        return;
       });
     };
   });
@@ -115,7 +110,7 @@ function completeStaking(offlineSigner, accounts, currentChain, stakingValue) {
       const stakingdenom = currentChainInfo.feeCurrencies[0].coinMinimalDenom;
       const memo = "Use your power wisely";
 
-       const DelegateMsg = MsgDelegate.fromPartial({
+      const DelegateMsg = MsgDelegate.fromPartial({
          delegatorAddress: accounts.address,
          validatorAddress: validatorAddress,
          amount: {
@@ -124,7 +119,7 @@ function completeStaking(offlineSigner, accounts, currentChain, stakingValue) {
          },
        });
 
-       const DelegateTransaction = {
+      const DelegateTransaction = {
         typeUrl: "/cosmos.staking.v1beta1.MsgDelegate",
         value: DelegateMsg,
       };
@@ -139,32 +134,16 @@ function completeStaking(offlineSigner, accounts, currentChain, stakingValue) {
         gas: "980000", //980k 
       };
 
-      SigningStargateClient.connectWithSigner(
-        currentChain.rpc_url,
-        offlineSigner
-      ).then((signingClient)=>
-
-       signingClient.signAndBroadcast(
-         accounts.address,
-         [DelegateTransaction],
-         fee,
-         memo
-       ).then((completeStaking) => {
-
-
-       if (completeStaking.code === 0) {
-
-         alert("Transaction successful");
-       } else {
-         alert("Transaction failed");
-       };
-       signingClient.getBalance(address, coinMinimalDen).then(balance => {
-        if (err) return callback(err);
-
-        const myBalanc = balance.amount;
-
-      walletBalValue.textContent = myBalanc / 1000000 + " " + stakingdenom;
+      SigningStargateClient.connectWithSigner(currentChain.rpc_url,offlineSigner)
+      .then((signingClient)=> signingClient.signAndBroadcast(accounts.address, [DelegateTransaction],fee,memo))
+      .then((code) => {
+        if (code === 0) {
+          alert("Transaction successful");
+        } else {
+          alert("Transaction failed");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
       });
-    }
-  ));
-}
+};

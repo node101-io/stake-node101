@@ -47,7 +47,7 @@ html(lang=__('en'))
         if includes.meta.title
           meta(property='og:title' content=includes.meta.title)
         if includes.meta.twitter
-          mata(name='twitter:card' content='summary_large_image')
+          meta(name='twitter:card' content='summary_large_image')
           meta(name='twitter:site' content='@node_101')
           meta(name='twitter:creator' content='@node_101')
           meta(name='twitter:title' content=includes.meta.title)
@@ -68,4 +68,4 @@ html(lang=__('en'))
             else
               script(src=`/js/functions/${file_name}.js`)
   body
-  block content
+    block main

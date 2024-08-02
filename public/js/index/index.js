@@ -3,8 +3,7 @@ let globalAddress;
 
 function addChainToKeplr(currentChain, callback) {
   const keplr = window.keplr;
-  let currentChainInfo = JSON.parse(currentChain.chain_info);
-  const coinMinimalDen = currentChainInfo.currencies[0].coinMinimalDenom;
+  const currentChainInfo = JSON.parse(currentChain.chain_info);
 
   keplr.experimentalSuggestChain(currentChainInfo)
     .then(keplr.enable(currentChain.chain_id))
@@ -17,7 +16,7 @@ function addChainToKeplr(currentChain, callback) {
       globalAddress = accounts[0].address;
     })
     .then(SigningStargateClient.connectWithSigner(currentChain.rpc_url,offlineSigner))
-    .then((signingClient) => signingClient.getBalance(address, coinMinimalDen))
+    .then((signingClient) => signingClient.getBalance(address, currentChainInfo.  currencies[0].coinMinimalDenom))
     .then(balance => {
 
       walletAddValue.textContent = address.slice(0, 5) + "..." + address.slice(-5);

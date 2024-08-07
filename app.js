@@ -52,14 +52,14 @@ if (cluster.isMaster) {
   app.use(bodyParser.urlencoded({
     extended: true
   }));
-  app.use(session({
+  /* app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
       mongoUrl: MONGODB_URI
     })
-  }));
+  })); */
   app.use(setLanguage);
 
   app.use('/', indexRouteController);

@@ -22,8 +22,8 @@ module.exports = (req, res) => {
       if (err)
         return res.json({ error: err });
 
-      return res.render('index/index', {
-        page: 'index/index',
+      return res.render('index/notification', {
+        page: 'index/notification',
         title: res.__('For you to make most of the distributed value'),
         includes: {
           external: {

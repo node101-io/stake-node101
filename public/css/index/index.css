@@ -4,7 +4,10 @@
   --primary-background-medium: #D9E0FF;
   --primary-background-white: #F4F6FF;
   --header-text-color:  #5A5975;
-  --primary-text-light: #616079;
+  --primary-text-medium: #616079;
+
+  --primary-text-black:  #2C202A;
+  --primary-text-light:   #72728F;
   --primary-arrow: #7777c9;
   --primary-border: #9695DF;
   --primary-height: 935px;
@@ -59,7 +62,7 @@ body {
   align-items: center;
   justify-content: space-between;
   margin-top: 10px;
-  color:  var(--primary-text-light);
+  color:  var(--primary-text-medium);
   font-weight: 400;
   font-size: 16px;
   line-height: 2;
@@ -135,7 +138,7 @@ body {
   font-family: 'Montserrat';
   font-size: 14px;
   font-weight: 400;
-  color: var(--primary-text-light);
+  color: var(--primary-text-medium);
   background-color: var(--primary-background-medium);
   line-height: 19px;
   margin-left: 35px;
@@ -511,7 +514,7 @@ body {
   height: 13px;
   border-radius: 50%;
   background-color: white;
-  border: 1px solid var(--primary-text-light);
+  border: 1px solid var(--primary-text-medium);
 }
 
 .content-wrapper-info-footer-each:nth-child(1) {

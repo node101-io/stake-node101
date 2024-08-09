@@ -33,7 +33,7 @@ if (cluster.isMaster) {
   const server = http.createServer(app);
 
   const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/node101';
-  const PORT = process.env.PORT || 3000;
+  const PORT = process.env.PORT || 3001;
 
   const indexRouteController = require('./routes/indexRoute');
 

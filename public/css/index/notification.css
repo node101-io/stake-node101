@@ -16,9 +16,8 @@
 
 .content-wrapper-title {
   font-family: 'Igra Sans';
-  border: 1px solid red;
   font-weight: 400;
-  font-size: var(--content-wrapper-font-size);
+  font-size: 26px;
   line-height: 1;
   margin-bottom: 50px;
 }

@@ -1,6 +1,8 @@
 @import url('./index.css');
 
-
+:root {
+  --content-wrapper-font-size: 26px;
+}
 
 .content-wrapper {
   display: flex;
@@ -14,8 +16,9 @@
 
 .content-wrapper-title {
   font-family: 'Igra Sans';
+  border: 1px solid red;
   font-weight: 400;
-  font-size: 26px;
+  font-size: var(--content-wrapper-font-size);
   line-height: 1;
   margin-bottom: 50px;
 }

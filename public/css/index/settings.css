@@ -1,0 +1,138 @@
+@import url('./index.css');
+
+.content-wrapper-body {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 56px;
+  margin: 100px auto;
+  margin-top: 200px !important;
+}
+
+
+.content-wrapper-body-title {
+  font-weight: 400;
+  font-family: 'Montserrat';
+  color: #502e4a;
+  font-size: 30px;
+  line-height: 1;
+  padding: 30px;
+  padding-top: 0px;
+  margin-left: 0px;
+}
+
+.content-wrapper-body-lang {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: row;
+  padding: 5px 30px;
+  align-items: center;
+}
+
+
+.content-wrapper-body-lang-icon {
+  width: 40px;
+}
+
+.content-wrapper-body-lang-main {
+  margin-left: 20px;
+  color: #616079;
+  font-family: 'Montserrat';
+  width: 705px;
+
+}
+
+.content-wrapper-body-lang-main-title {
+  font-size: 24px;
+  line-height: 1.4;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.content-wrapper-body-lang-main-subtitle {
+
+}
+
+.content-wrapper-body-lang-popup {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 235px;
+  height: 40px;
+  border-radius: 60px;
+  padding: 12px 16px;
+  background-color: #D4DCFF !important;
+  justify-content: space-between;
+  margin-left: 120px;
+}
+
+.content-wrapper-body-lang-popup:nth-child() {
+  background-color: transparent;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.content-wrapper-body-lang-popup-text {
+  font-family: 'Montserrat';
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #616079;
+}
+
+.content-wrapper-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+  font-weight: 'Montserrat';
+  font-size: 16px;
+  line-height: 1.4;
+  color: #72728F;
+  margin-top: 40px;
+  width: 700px;
+  padding-left: 50px;
+}
+
+
+.content-wrapper-footer-text {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 130px;  
+}
+
+.content-wrapper-footer-text:last-child {
+  width: 70px;
+
+}
+
+
+.content-wrapper-body-lang-popup-slide {
+  width: 48px;
+  height: 26px;
+  border-radius: 999px;
+  border: 2px solid #9695DF;
+  display: flex;
+  justify-content: flex-end;
+  margin: auto 5px auto 15px;
+  align-items: center;
+}
+
+.content-wrapper-body-lang-popup-slide-ball {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #9695DF;
+  margin: auto 3px;
+
+}
+
+.popup-slide {
+  background-color: transparent !important;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}

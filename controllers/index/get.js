@@ -22,12 +22,12 @@ module.exports = (req, res) => {
       if (err)
         return res.json({ error: err });
 
-      return res.render('index/notification', {
-        page: 'index/notification',
+      return res.render('index/index', {
+        page: 'index/index',
         title: res.__('For you to make most of the distributed value'),
         includes: {
           external: {
-            css: ['general', 'header', 'page'],
+            css: ['general', 'header', 'sidebar', 'stake', 'page'],
             js: ['cosmjs', 'page', 'serverRequest']
           },
           meta: {

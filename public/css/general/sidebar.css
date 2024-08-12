@@ -1,0 +1,77 @@
+:root {
+  --page-padding-horizontal: 20px;
+  --page-padding-vertical: 25px;
+  --sidebar-width: 94px;
+  --border-radius-big: 60px;
+
+  
+}
+
+.sidebar {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: var(--sidebar-width);
+  height: 100%;
+  background-color: var(--primary-background-light);
+  border-radius: var(--border-radius-big);
+  padding: var(--page-padding-horizontal);
+  margin-right: var(--page-padding-horizontal);
+}
+
+
+
+.sidebar-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--primary-background-dark);
+}
+
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  color:  var(--primary-text-medium);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 2;
+  text-transform: uppercase;
+}
+
+.sidebar-menu-title {
+  margin-top: 100px;
+}
+
+.sidebar-menu-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Igra Sans';
+  width: 100%;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.sidebar-footer {
+  margin-top: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidebar-footer-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}

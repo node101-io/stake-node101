@@ -1,21 +1,4 @@
 :root {
-  --primary-background-light: #DFE5FF;
-  --primary-background-dark: #C4CDF4;
-  --primary-background-medium: #D9E0FF;
-  --primary-background-white: #F4F6FF;
-  --header-text-color:  #5A5975;
-  --primary-text-medium: #616079;
-
-  --primary-text-black:  #2C202A;
-  --primary-text-light:   #72728F;
-  --primary-arrow: #7777c9;
-  --primary-border: #9695DF;
-  --primary-height: 935px;
-  --border-radius-big: 60px;
-
-} 
-
-:root {
   --sidebar-width: 94px;
 
   --sidebar-padding-horizontal: 20px;

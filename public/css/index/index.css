@@ -12,10 +12,11 @@
   --primary-border: #9695DF;
   --primary-height: 935px;
 
+  --border-radius-big: 60px;
+
   --page-padding-horizontal: 20px;
   --page-padding-vertical: 25px;
   --sidebar-width: 94px;
-  --border-radius-big: 60px;
 }
 
 

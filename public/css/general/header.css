@@ -1,47 +1,51 @@
 :root {
   --header-width: 240px;
   --header-right-padding: 25px;
-  --header--border-radius: 50px;
-
+  --header-border-radius: 50px;
   --header-icon-width: 50px;
   --header-icon-height: 50px;
-
   --header-title-height: 50px;
   --header-title-margin: 35px;
-
   --font-size-medium: 14px;
 }
 
 .content-header {
+  position: absolute;
+  right: var(--header-right-padding);
+  height: auto;
+  min-height: auto;
+  width: var(--header-width);
+  min-width: var(--header-width);
   display: flex;
   align-items: center;
-  position: absolute;
-  width: var(--header-width);
-  right: var(--header-right-padding);
-  border-radius: 0px var(--header--border-radius) var(--header--border-radius) 0px;
+  border-radius: 0px var(--header--order-radius) var(--header-border-radius) 0px;
   overflow: hidden;
 }
 
 .content-header-icon{
-  width: var(--header-icon-width);
-  height: var(--header-icon-height);
-  background-color: var(--primary-background-dark);
-  border-radius: 50%;
   position: absolute;
+  height: var(--header-icon-height);
+  min-height: var(--header-icon-height);
+  width: var(--header-icon-width);
+  min-width: var(--header-icon-width);
+  border-radius: 50%;
+  background-color: var(--primary-background-dark);
   z-index: 1;
 }
 
 .content-header-title {
+  height: var(--header-title-height);
+  min-height: var(--header-title-height);
+  width: 100%;
+  min-width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: var(--header-title-height);
-  font-family: 'Montserrat';
-  font-size: var(--font-size-medium);
-  font-weight: 400;
-  color: var(--primary-text-medium);
-  background-color: var(--primary-background-medium);
-  line-height: 1.4;
   margin-left: var(--header-title-margin);
+  background-color: var(--primary-background-medium);
+  font-weight: 400;
+  font-size: var(--font-size-medium);
+  font-family: 'Montserrat';
+  line-height: 140%;
+  color: var(--primary-text-medium);
 }

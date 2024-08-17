@@ -1,22 +1,57 @@
 :root {
   --content-wrapper-stake-width: 560px;
   --content-wrapper-stake-height: 690px;
-
   --content-wrapper-stake-margin-side:180px;
+
   --content-wrapper-stake-body-main-width: 500px;
   --content-wrapper-stake-body-main-height: 500px;
-
   --content-wrapper-stake-body-main-margin-top: 45px;
   --content-wrapper-stake-body-arrow-width: 18.19px;
   --content-wrapper-stake-body-arrow-height:  15.75px;
 
   --content-wrapper-stake-body-main-title-each-size: 20px;
+  
   --content-wrapper-stake-body-main-center-width: 504px;
   --content-wrapper-stake-body-main-center-height: 160px;
-  --content-wrapper-stake-body-main-center-margin-top: 60px;
-  --font-size-16: 16px;
-  --font-size-13: 13px;
+  --content-wrapper-stake-body-main-center-margin-top: 45px;
+  --content-wrapper-stake-body-main-center-title-width: 475px;
+  --content-wrapper-stake-body-main-center-body-margin-top: 20px;
+  --content-wrapper-stake-body-main-center-body-height: 120px;
+  --content-wrapper-stake-body-main-center-body-icon-width: 84px;
+  --content-wrapper-stake-body-main-center-body-icon-height: 84px;
+  --content-wrapper-stake-body-main-center-body-icon-margin-left: 16px;
+  --content-wrapper-stake-body-main-center-body-chain-margin-left: 25px;
+  --content-wrapper-stake-body-main-center-body-chain-width: 175px;
+  --content-wrapper-stake-body-main-center-body-chain-height: 60px;
+  --content-wrapper-stake-body-main-center-body-chain-padding-top-bottom: 5px;
+  --content-wrapper-stake-body-main-center-body-stake-margin-left: 60px;
+  --content-wrapper-stake-body-main-center-body-stake-height: 68px;
 
+  --content-wrapper-stake-body-main-content-margin-top: 40px;
+  --content-wrapper-stake-body-main-content-stat-title-padding:2px 20px;
+  --content-wrapper-stake-body-main-content-stat-title-buttons-icon-width: 48px;
+  --content-wrapper-stake-body-main-content-stat-title-buttons-icon-height: 26px;
+  --content-wrapper-stake-body-main-content-stat-title-buttons-icon-margin: auto 5px auto 15px;
+  --content-wrapper-stake-body-main-content-stat-title-buttons-icon-ball-margin: 2px;
+  --content-wrapper-stake-body-main-content-stat-title-buttons-icon-ball-width: 20px;
+  --content-wrapper-stake-body-main-content-stat-title-buttons-icon-ball-height: 20px;
+  --content-wrapper-stake-body-main-content-stat-title-content-margin-top: 15px;
+  --content-wrapper-stake-body-main-content-stat-title-content-padding: 0px 12px;
+  --content-wrapper-stake-body-main-content-stat-title-content-each-padding: 10px;
+  --content-wrapper-stake-body-main-content-stat-title-content-each-time-text-font-size: 18px;
+  --content-wrapper-stake-body-main-content-stat-title-content-each-time-percent-margin-top: 6px;
+  --content-wrapper-stake-body-main-content-stat-title-content-each-value-price-margin-top: 5px;
+  
+  --content-wrapper-stake-body-button-padding: 15px 20px;
+  --content-wrapper-stake-body-button-width: 185px;
+  --content-wrapper-stake-body-button-height: 48px;
+  --content-wrapper-stake-body-button-border-radius: 30px;
+
+  --font-size-13: 13px;
+  --font-size-16: 16px;
+  --font-size-18: 18px;
+  --font-size-22: 22px;
+  --font-size-40: 40px;
 }
 
 .content-wrapper-stake{
@@ -32,7 +67,6 @@
   border-radius: var(--border-radius-big);
   background-color: var(--primary-background-white);
 }
-
 
 .content-wrapper-stake-body-main{
   height: var(--content-wrapper-stake-body-main-height);
@@ -71,245 +105,316 @@
 }
 
 .content-wrapper-stake-body-main-title-each-icon {
-  width: var(--content-wrapper-stake-body-main-title-each-size);
-  min-width: var(--content-wrapper-stake-body-main-title-each-size);
   height: var(--content-wrapper-stake-body-main-title-each-size);
   min-height: var(--content-wrapper-stake-body-main-title-each-size);
+  width: var(--content-wrapper-stake-body-main-title-each-size);
+  min-width: var(--content-wrapper-stake-body-main-title-each-size);
   border-radius: 50%;
   background-color: blueviolet;
 }
 
 .content-wrapper-stake-body-main-title-each-token {
+  height: auto;
+  min-height: auto;
+  width: auto;
+  min-width: auto;
   font-family: 'Montserrat';
   font-weight: 500;
   font-size: var(--font-size-13);
-  line-height: 110%;
+  line-height: 1.1;
 }
 
 .content-wrapper-stake-body-main-title-each-price {
+  height: auto;
+  min-height: auto;
+  width: auto;
+  min-width: auto;
   font-family: 'Montserrat';
   font-weight: 500;
   font-size: var(--font-size-13);
-  line-height: 110%;
+  line-height: 1.1;
 }
 
 .content-wrapper-stake-body-main-title-each-arrow {
-  width: var(--content-wrapper-stake-body-arrow-width);
   height: var(--content-wrapper-stake-body-arrow-height);
+  min-height: var(--content-wrapper-stake-body-arrow-height);
+  width: var(--content-wrapper-stake-body-arrow-width);
+  min-width: var(--content-wrapper-stake-body-arrow-width);
 }
+
 .content-wrapper-stake-body-main-title-each-change {
+  height: auto;
+  min-height: auto;
+  width: auto;
+  min-width: auto;
   font-family: 'Montserrat';
   font-weight: 500;
   font-size: var(--font-size-13);
-  line-height: 110%;
+  line-height: 1.1;
 }
+
 .content-wrapper-stake-body-main-center {
-  width: var(--content-wrapper-stake-body-main-center-width);
   height: var(--content-wrapper-stake-body-main-center-height);
+  min-height: var(--content-wrapper-stake-body-main-center-height);
+  width: var(--content-wrapper-stake-body-main-center-width);
+  min-width: var(--content-wrapper-stake-body-main-center-width);
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: var(--content-wrapper-stake-body-main-center-margin-top);
 }
+
 .content-wrapper-stake-body-main-center-title {
+  height: auto;
+  min-height: auto;
+  width: var(--content-wrapper-stake-body-main-width);
+  min-width: var(--content-wrapper-stake-body-main-width);
   display: flex;
   justify-content: space-between;
-  width: 475px;
   font-family: 'Montserrat';
   font-weight: 300;
-  font-size: 16px;
-  line-height: 17px;
-
+  font-size: var(--font-size-16);
+  line-height: 1.2;
 }
 
 .content-wrapper-stake-body-main-center-body {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-
-  margin-top: 20px;
+  height: var(--content-wrapper-stake-body-main-center-body-height);
+  min-height: var(--content-wrapper-stake-body-main-center-body-height);
   width: 100%;
-  height: 120px;
-  border-radius: 67px;
+  min-width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: var(--content-wrapper-stake-body-main-center-body-margin-top);
+  border-radius: var(--border-radius-big);
   background-color: var(--primary-background-light);
 }
 
 .content-wrapper-stake-body-main-center-body-icon {
-  width: 84px;
-  height: 84px;
+  width: var(--content-wrapper-stake-body-main-center-body-icon-width);
+  height: var(--content-wrapper-stake-body-main-center-body-icon-height);
   border-radius: 50%;
   background-color: var(--primary-arrow);
-  margin-left: 16px;
+  margin-left: var(--content-wrapper-stake-body-main-center-body-icon-margin-left);
 }
 
 .content-wrapper-stake-body-main-center-body-chain {
-  font-family: 'Montserrat';
-  margin-left: 25px;
-  width: 175px;
-  height: 60px;
+  height: var(--content-wrapper-stake-body-main-center-body-chain-height);
+  min-height: var(--content-wrapper-stake-body-main-center-body-chain-height);
+  width: var(--content-wrapper-stake-body-main-center-body-chain-width);
+  min-width: var(--content-wrapper-stake-body-main-center-body-chain-width);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;  
+  justify-content: space-between;
   align-items: flex-start;
-  padding: 5px 0px;
+  margin-left: var(--content-wrapper-stake-body-main-center-body-chain-margin-left);
+  padding: var(--content-wrapper-stake-body-main-center-body-chain-padding-top-bottom) 0px;
 }
 
 .content-wrapper-stake-body-main-center-body-chain-name {
-  font-weight: 500;
-  font-size: 22px;
-  line-height: 17px;
+  height: auto;
+  min-height: auto;
+  width: 100%;
+  min-width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
 }
 
 .content-wrapper-stake-body-main-center-body-chain-name-network {
+  height: auto;
+  min-height: auto;
+  width: auto;
+  min-width: auto;
   font-family: 'Igra Sans';
-  font-weight: 400;
-  font-size: 22px;
-}
-
-.content-wrapper-stake-body-main-center-body-chain-name-icon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-weight: 500;
+  font-size: var(--font-size-22);
+  line-height: 1;
 }
 
 .content-wrapper-stake-body-main-center-body-chain-token {
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 17px;
+  height: auto;
+  min-height: auto;
+  width: auto;
+  min-width: auto;
   font-family: 'Montserrat';
+  font-weight: 300;
+  font-size: var(--font-size-16);
+  line-height: 1.2;
 }
 
 .content-wrapper-stake-body-main-center-body-stake {
-  margin-left: 60px;
-  overflow: hidden;
-  height: 68px;
+  height: var(--content-wrapper-stake-body-main-center-body-stake-height);
+  min-height: var(--content-wrapper-stake-body-main-center-body-stake-height);
+  width: auto;
+  min-width: auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: space-around;
-} 
+  align-items: center;
+  margin-left: var(--content-wrapper-stake-body-main-center-body-stake-margin-left);
+}
 
 .content-wrapper-stake-body-main-center-body-stake-amount {
+  height: auto;
+  min-height: auto;
+  width: auto;
+  min-width: auto;
   font-weight: 600;
+  font-size: var(--font-size-40);
   font-family: 'Montserrat';
-  font-size: 40px;
-  line-height: 17px;
+  line-height: 1;
 }
 
 .content-wrapper-stake-body-main-center-body-stake-dollar {
+  height: auto;
+  min-height: auto;
+  width: auto;
+  min-width: auto;
   font-family: 'Montserrat';
   font-weight: 300;
-  font-size: 16px;
-  line-height: 17px;
+  font-size: var(--font-size-16);
+  line-height: 1.1;
 }
 
 .content-wrapper-stake-body-main-content {
-  padding: 0px;
-  margin: 0px ;
+  height: auto;
+  min-height: auto;
   width: 100%;
-  margin-top: 40px ;
+  min-width: 100%;
+  margin-top: var(--content-wrapper-stake-body-main-content-margin-top);
 }
 
 .content-wrapper-stake-body-main-content-stat {
+  height: auto;
+  min-height: auto;
   width: 100%;
-
+  min-width: 100%;
 }
 
 .content-wrapper-stake-body-main-content-stat-title {
+  height: auto;
+  min-height: auto;
+  width: 100%;
+  min-width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 5px 20px 0px 20px;
-  width: 100%;
+  padding: var(--content-wrapper-stake-body-main-content-stat-title-padding);
   font-family: 'Montserrat';
-  font-size: 16px;
+  font-size: var(--font-size-16);
   font-weight: 300;
-  line-height: 17px;
 }
 
 .content-wrapper-stake-body-main-content-stat-title-buttons {
+  height: auto;
+  min-height: auto;
+  width: auto;
+  min-width: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .content-wrapper-stake-body-main-content-stat-title-buttons-icon {
-  width: 48px;
-  height: 26px;
-  border-radius: 999px;
-  border: 2px solid var(--primary-border);
+  height: var(--content-wrapper-stake-body-main-content-stat-title-buttons-icon-height);
+  min-height: var(--content-wrapper-stake-body-main-content-stat-title-buttons-icon-height);
+  width: var(--content-wrapper-stake-body-main-content-stat-title-buttons-icon-width);
+  min-width: var(--content-wrapper-stake-body-main-content-stat-title-buttons-icon-width);
   display: flex;
   justify-content: flex-end;
-  margin: auto 5px auto 15px;
   align-items: center;
+  margin: var(--content-wrapper-stake-body-main-content-stat-title-buttons-icon-margin);
+  border-radius: 999px;
+  border: 2px solid var(--primary-border);
 }
 
 .content-wrapper-stake-body-main-content-stat-title-buttons-icon-ball {
-  width: 20px;
-  height: 20px;
+  height: var(--content-wrapper-stake-body-main-content-stat-title-buttons-icon-ball-height);
+  min-height: var(--content-wrapper-stake-body-main-content-stat-title-buttons-icon-ball-height);
+  width: var(--content-wrapper-stake-body-main-content-stat-title-buttons-icon-ball-width);
+  min-width: var(--content-wrapper-stake-body-main-content-stat-title-buttons-icon-ball-width);
+  margin: var(--content-wrapper-stake-body-main-content-stat-title-buttons-icon-ball-margin);
   border-radius: 50%;
   background-color: var(--primary-arrow);
-  margin: auto 3px;
-
 }
 
 .content-wrapper-stake-body-main-content-stat-title-content {
-  margin-top: 15px;
-  padding: 0px 12px;
+  height: auto;
+  min-height: auto;
+  width: auto;
+  min-width: auto;
+  margin-top: var(--content-wrapper-stake-body-main-content-stat-title-content-margin-top);
+  padding: var(--content-wrapper-stake-body-main-content-stat-title-content-padding);
 }
 
 .content-wrapper-stake-body-main-content-stat-title-content-each {
+  height: auto;
+  min-height: auto;
+  width: 100%;
+  min-width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  padding: 10px;
+  padding: var(--content-wrapper-stake-body-main-content-stat-title-content-each-padding);
 }
 
-
 .content-wrapper-stake-body-main-content-stat-title-content-each-time-text {
+  height: auto;
+  min-height: auto;
+  width: auto;
+  min-width: auto;
   font-family: 'Montserrat';
   font-weight: 550;
-  font-size: 18px;
-  line-height: 17px;
+  font-size: var(--font-size-18);
 }
 
 .content-wrapper-stake-body-main-content-stat-title-content-each-time-percent {
+  height: auto;
+  min-height: auto;
+  width: auto;
+  min-width: auto;
+  margin-top: var(--content-wrapper-stake-body-main-content-stat-title-content-each-time-percent-margin-top);
   font-family: 'Montserrat';
   font-weight: 300;
-  font-size: 16px;
-  line-height: 17px;
-  margin-top: 6px;
+  font-size: var(--font-size-16);
 }
 
 .content-wrapper-stake-body-main-content-stat-title-content-each-value-token {
+  height: auto;
+  min-height: auto;
+  width: auto;
+  min-width: auto;
   font-family: 'Montserrat';
   font-weight: 500;
-  font-size: 16px;
-  line-height: 17px;
+  font-size: var(--font-size-16);
 }
 
 .content-wrapper-stake-body-main-content-stat-title-content-each-value-price {
+  height: auto;
+  min-height: auto;
+  width: auto;
+  min-width: auto;
+  margin-top: var(--content-wrapper-stake-body-main-content-stat-title-content-each-value-price-margin-top);
   font-family: 'Montserrat';
   font-weight: 300;
   font-style: italic;
-  font-size: 16px;
-  line-height: 17px;
-  margin-top: 5px;
+  font-size: var(--font-size-16);
+  line-height: 1.2;
 }
+
 .content-wrapper-stake-body-button {
+  height: var(--content-wrapper-stake-body-button-height);
+  min-height: var(--content-wrapper-stake-body-button-height);
+  width: var(--content-wrapper-stake-body-button-width);
+  min-width: var(--content-wrapper-stake-body-button-width);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px !important;
+  margin: auto;
+  padding: var(--content-wrapper-stake-body-button-padding);
+  border-radius: var(--content-wrapper-stake-body-button-border-radius);
   background-color: black;
   color: var(--primary-background-white);
-  width: 185px;
-  height: 48px;
-  border-radius: 30px;
-  margin: auto;
-} 
+  font-family: 'Montserrat';
+}

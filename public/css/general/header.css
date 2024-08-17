@@ -18,6 +18,7 @@
   min-width: var(--header-width);
   display: flex;
   align-items: center;
+  background-color: var(--primary-background-medium);
   border-radius: 0px var(--header--order-radius) var(--header-border-radius) 0px;
   overflow: hidden;
 }

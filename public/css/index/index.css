@@ -14,66 +14,96 @@
 
   --border-radius-big: 60px;
 
-  --page-padding-horizontal: 20px;
-  --page-padding-vertical: 25px;
-  --sidebar-width: 94px;
+  --body-padding: 22px;
+
+  --content-padding: 30px;
+  --content-border-radius: 40px;
+
+  --content-wrapper-info-body-width: 520px;
+  --content-wrapper-info-body-height: 520px;
+
+  --content-wrapper-info-body-border-radius: 60px;
+  --content-wrapper-info-body-margin-top: 80px;
+
+  --font-size-13: 13px;
+  --font-size-16: 16px;
+  --font-size-18: 18px;
+  --font-size-22: 22px;
+  --font-size-40: 40px;
 }
 
-
 body {
-  padding: var(--page-padding-vertical) var(--page-padding-horizontal);
   height: 100vh;
+  min-height: 100vh;
+  width: 100vw;
+  min-width: auto;
+  padding: var(--body-padding);
 }
 
 .all-wrapper {
+  height: 100%;
+  min-height: 100%;
+  width: 100%;
+  min-width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  height: 100%;
 }
 
-
 .content {
+  position: relative;
+  height: auto;
+  min-height: auto;
+  width: 100%;
+  min-width: auto;
   display: flex;
   flex-direction: column;
-  position: relative;
-  width: 100%;
- 
-  border-radius: 40px;
-  padding: 30px;
+  padding: var(--content-padding);
   background-color: var(--primary-background-light);
+  border-radius: var(--content-border-radius);
 }
 
 .content-wrapper {
+  height: auto;
+  min-height: auto;
+  width: auto;
+  min-width: auto;
   display: flex;
   flex-direction: row;
-  margin-top: 120px;
+  margin: auto;
 }
 
 .content-wrapper-info {
+  height: auto;
+  min-height: auto;
+  width: auto;
+  min-width: auto;
   display: flex;
-  flex-direction: column
+  flex-direction: column;
 }
 
 .content-wrapper-info-body {
-  width: 520px;
-  height: 520px;
+  position: relative;
+  height: var(--content-wrapper-info-body-height);
+  min-height: var(--content-wrapper-info-body-height);
+  width: var(--content-wrapper-info-body-width);
+  min-width: var(--content-wrapper-info-body-width);
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin-top: var(--content-wrapper-info-body-margin-top);
+  border-radius: var(--content-wrapper-info-body-border-radius);
   border: 2px solid var(--primary-border);
-  border-radius: 60px;
-  margin-top: 80px;
-  position: relative;
 }
 
 .content-wrapper-info-body-spiral {
   position: absolute;
   top: 0px;
-  bottom: 0px;
-  width: 100%;
-  height: 100%;
+  height: 99%;
+  min-height: 99%;
+  width: 99%;
+  min-width: 99%;
   z-index: 0;
 }
 

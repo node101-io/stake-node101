@@ -23,6 +23,7 @@
   min-width: var(--sidebar-width);
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
   margin-right: var(--sidebar-margin-horizontal);
   padding: var(--sidebar-padding-horizontal);
@@ -31,13 +32,13 @@
 }
 
 .sidebar-logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: var(--sidebar-logo-height);
   min-height: var(--sidebar-logo-height);
   width: var(--sidebar-logo-width);
   min-width: var(--sidebar-logo-width);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 50%;
   background-color: var(--primary-background-dark);
 }
@@ -72,10 +73,10 @@
 }
 
 .sidebar-footer {
-  width: auto;
-  min-width: auto;
   height: auto;
   min-height: auto;
+  width: auto;
+  min-width: auto;
   margin-top: var(--sidebar-footer-margin-top);
   display: flex;
   flex-direction: column;

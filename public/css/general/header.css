@@ -6,7 +6,7 @@
   --header-icon-height: 50px;
   --header-title-height: 50px;
   --header-title-margin: 35px;
-  --font-size-medium: 14px;
+  --font-size-14: 14px;
 }
 
 .content-header {
@@ -42,10 +42,10 @@
   align-items: center;
   justify-content: center;
   margin-left: var(--header-title-margin);
-  background-color: var(--primary-background-medium);
+  background-color: var(--primary-background-14);
   font-weight: 400;
-  font-size: var(--font-size-medium);
+  font-size: var(--font-size-14);
   font-family: 'Montserrat';
   line-height: 140%;
-  color: var(--primary-text-medium);
+  color: var(--primary-text-14);
 }

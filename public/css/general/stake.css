@@ -10,7 +10,7 @@
   --content-wrapper-stake-body-arrow-height:  15.75px;
 
   --content-wrapper-stake-body-main-title-each-size: 20px;
-  
+
   --content-wrapper-stake-body-main-center-width: 504px;
   --content-wrapper-stake-body-main-center-height: 160px;
   --content-wrapper-stake-body-main-center-margin-top: 45px;
@@ -47,11 +47,6 @@
   --content-wrapper-stake-body-button-height: 48px;
   --content-wrapper-stake-body-button-border-radius: 30px;
 
-  --font-size-13: 13px;
-  --font-size-16: 16px;
-  --font-size-18: 18px;
-  --font-size-22: 22px;
-  --font-size-40: 40px;
 }
 
 .content-wrapper-stake{

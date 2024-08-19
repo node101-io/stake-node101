@@ -171,12 +171,4 @@ body {
   border-radius: var(--content-border-radius);
 }
 
-.content-wrapper {
-  height: auto;
-  min-height: auto;
-  width: auto;
-  min-width: auto;
-  display: flex;
-  flex-direction: row;
-  margin: auto;
-}
+

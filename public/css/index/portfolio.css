@@ -38,6 +38,15 @@
   --content-wrapper-portfolio-body-buttons-each-margin:  110px 10px 10px 10px; 
 }
 
+.content-wrapper {
+  height: auto;
+  min-height: auto;
+  width: auto;
+  min-width: auto;
+  display: flex;
+  margin: auto;
+}
+
 .content-wrapper-portfolio-body {
   height: var(--content-wrapper-portfolio-body-height);
   min-height: var(--content-wrapper-portfolio-body-height);

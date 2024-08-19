@@ -11,7 +11,13 @@
 }
 
 .content-wrapper {
-  flex-direction: column !important;
+  height: auto;
+  min-height: auto;
+  width: auto;
+  min-width: auto;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
 }
 
 .content-wrapper-title {

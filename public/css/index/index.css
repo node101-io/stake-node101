@@ -19,6 +19,15 @@
 
 }
 
+.content-wrapper {
+  height: auto;
+  min-height: auto;
+  width: auto;
+  min-width: auto;
+  display: flex;
+  margin: auto;
+}
+
 .content-wrapper-info {
   height: var(--content-wrapper-info-height);
   min-height: var(--content-wrapper-info-height);

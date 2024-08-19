@@ -9,25 +9,28 @@
   --content-wrapper-stake-body-arrow-width: 18.19px;
   --content-wrapper-stake-body-arrow-height:  15.75px;
 
+  --content-wrapper-stake-body-main-title-each-padding: 5px;
   --content-wrapper-stake-body-main-title-each-size: 20px;
+  
 
-  --content-wrapper-stake-body-main-center-width: 504px;
+  --content-wrapper-stake-body-main-center-width: 500px;
   --content-wrapper-stake-body-main-center-height: 160px;
   --content-wrapper-stake-body-main-center-margin-top: 45px;
   --content-wrapper-stake-body-main-center-title-width: 475px;
   --content-wrapper-stake-body-main-center-body-margin-top: 20px;
   --content-wrapper-stake-body-main-center-body-height: 120px;
-  --content-wrapper-stake-body-main-center-body-icon-width: 84px;
-  --content-wrapper-stake-body-main-center-body-icon-height: 84px;
+  --content-wrapper-stake-body-main-center-body-icon-size: 84px;
+  --content-wrapper-stake-body-main-center-body-icon-size: 84px;
   --content-wrapper-stake-body-main-center-body-icon-margin-left: 16px;
   --content-wrapper-stake-body-main-center-body-chain-margin-left: 25px;
   --content-wrapper-stake-body-main-center-body-chain-width: 175px;
   --content-wrapper-stake-body-main-center-body-chain-height: 60px;
-  --content-wrapper-stake-body-main-center-body-chain-padding-top-bottom: 5px;
+  --content-wrapper-stake-body-main-center-body-chain-padding-vertical: 5px;
   --content-wrapper-stake-body-main-center-body-stake-margin-left: 60px;
   --content-wrapper-stake-body-main-center-body-stake-height: 68px;
 
   --content-wrapper-stake-body-main-content-margin-top: 40px;
+  
   --content-wrapper-stake-body-main-content-stat-title-padding:2px 20px;
   --content-wrapper-stake-body-main-content-stat-title-buttons-icon-width: 48px;
   --content-wrapper-stake-body-main-content-stat-title-buttons-icon-height: 26px;
@@ -49,7 +52,7 @@
 
 }
 
-.content-wrapper-stake{
+.content-wrapper-stake {
   height: auto;
   min-height: auto;
   width: var(--content-wrapper-stake-width);
@@ -63,7 +66,7 @@
   background-color: var(--primary-background-white);
 }
 
-.content-wrapper-stake-body-main{
+.content-wrapper-stake-body-main {
   height: var(--content-wrapper-stake-body-main-height);
   min-height: var(--content-wrapper-stake-body-main-height);
   width: var(--content-wrapper-stake-body-main-width);
@@ -92,10 +95,9 @@
   width: 100%;
   min-width: auto;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  flex-direction: row;
-  padding: 5px;
+  justify-content: space-between;
+  padding: var(--content-wrapper-stake-body-main-title-each-padding);
   color: var(--header-text-color);
 }
 
@@ -105,7 +107,7 @@
   width: var(--content-wrapper-stake-body-main-title-each-size);
   min-width: var(--content-wrapper-stake-body-main-title-each-size);
   border-radius: 50%;
-  background-color: blueviolet;
+  background-color: hsl(271, 76%, 53%);
 }
 
 .content-wrapper-stake-body-main-title-each-token {
@@ -186,8 +188,8 @@
 }
 
 .content-wrapper-stake-body-main-center-body-icon {
-  width: var(--content-wrapper-stake-body-main-center-body-icon-width);
-  height: var(--content-wrapper-stake-body-main-center-body-icon-height);
+  width: var(--content-wrapper-stake-body-main-center-body-icon-size);
+  height: var(--content-wrapper-stake-body-main-center-body-icon-size);
   border-radius: 50%;
   background-color: var(--primary-arrow);
   margin-left: var(--content-wrapper-stake-body-main-center-body-icon-margin-left);
@@ -203,7 +205,7 @@
   justify-content: space-between;
   align-items: flex-start;
   margin-left: var(--content-wrapper-stake-body-main-center-body-chain-margin-left);
-  padding: var(--content-wrapper-stake-body-main-center-body-chain-padding-top-bottom) 0px;
+  padding: var(--content-wrapper-stake-body-main-center-body-chain-padding-vertical) 0px;
 }
 
 .content-wrapper-stake-body-main-center-body-chain-name {

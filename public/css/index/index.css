@@ -1,24 +1,6 @@
 :root {
-  --primary-background-light: #DFE5FF;
-  --primary-background-dark: #C4CDF4;
-  --primary-background-medium: #D9E0FF;
-  --primary-background-white: #F4F6FF;
-  --header-text-color:  #5A5975;
-  --primary-text-medium: #616079;
-
-  --primary-text-black:  #2C202A;
-  --primary-text-light:   #72728F;
-  --primary-arrow: #7777c9;
-  --primary-border: #9695DF;
-  --primary-height: 935px;
-
-  --border-radius-big: 60px;
-
-  --body-padding: 22px;
-
-  --content-padding: 30px;
-  --content-border-radius: 40px;
-
+  --content-wrapper-info-width: 600px;
+  --content-wrapper-info-height: 700px;
   --content-wrapper-info-body-width: 530px;
   --content-wrapper-info-body-height: 520px;
   --content-wrapper-info-body-border-radius: 60px;
@@ -35,62 +17,13 @@
   --content-wrapper-info-footer-each-width: 13px;
   --content-wrapper-info-footer-each-height: 13px;
 
-  --font-size-13: 13px;
-  --font-size-14: 14px;
-  --font-size-16: 16px;
-  --font-size-18: 18px;
-  --font-size-22: 22px;
-  --font-size-26: 26px;
-  --font-size-30: 30px;
-  --font-size-40: 40px;
-}
-
-body {
-  height: 100vh;
-  min-height: 100vh;
-  width: 100vw;
-  min-width: auto;
-  padding: var(--body-padding);
-}
-
-.all-wrapper {
-  height: 100%;
-  min-height: 100%;
-  width: 100%;
-  min-width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-.content {
-  position: relative;
-  height: auto;
-  min-height: auto;
-  width: 100%;
-  min-width: auto;
-  display: flex;
-  flex-direction: column;
-  padding: var(--content-padding);
-  background-color: var(--primary-background-light);
-  border-radius: var(--content-border-radius);
-}
-
-.content-wrapper {
-  height: auto;
-  min-height: auto;
-  width: auto;
-  min-width: auto;
-  display: flex;
-  flex-direction: row;
-  margin: auto;
 }
 
 .content-wrapper-info {
-  height: auto;
-  min-height: auto;
-  width: auto;
-  min-width: auto;
+  height: var(--content-wrapper-info-height);
+  min-height: var(--content-wrapper-info-height);
+  width: var(--content-wrapper-info-width);
+  min-width: var(--content-wrapper-info-width);
   display: flex;
   flex-direction: column;
 }
@@ -133,7 +66,6 @@ body {
   border-radius: var(--border-radius-big);
   z-index: 10;
 }
-
 
 .content-wrapper-info-body-larrow {
   height: auto;

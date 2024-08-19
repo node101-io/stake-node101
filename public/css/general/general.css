@@ -7,6 +7,7 @@
   
   margin: 0;
   padding: 0;
+
 }
 html {
   width: 100vw;
@@ -103,4 +104,79 @@ p, h1, h2, h3, h4, h5, h6 {
   :root {
     --page-horizontal-padding: 15px;
   }
+}
+
+
+:root {
+  --primary-background-light: #DFE5FF;
+  --primary-background-dark: #C4CDF4;
+  --primary-background-medium: #D9E0FF;
+  --primary-background-white: #F4F6FF;
+  --header-text-color:  #5A5975;
+  --primary-text-medium: #616079;
+
+  --primary-text-black:  #2C202A;
+  --primary-text-light:   #72728F;
+  --primary-arrow: #7777c9;
+  --primary-border: #9695DF;
+  --primary-height: 935px;
+
+  --border-radius-big: 60px;
+  --border-radius-medium:35px;
+
+  --body-padding: 22px;
+
+  --content-padding: 30px;
+  --content-border-radius: 40px;
+
+  
+  --font-size-13: 13px;
+  --font-size-14: 14px;
+  --font-size-16: 16px;
+  --font-size-18: 18px;
+  --font-size-22: 22px;
+  --font-size-26: 26px;
+  --font-size-30: 30px;
+  --font-size-40: 40px;
+}
+
+body {
+  height: 100vh;
+  min-height: 100vh;
+  width: 100vw;
+  min-width: auto;
+  padding: var(--body-padding);
+}
+
+.all-wrapper {
+  height: 100%;
+  min-height: 100%;
+  width: 100%;
+  min-width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.content {
+  position: relative;
+  height: auto;
+  min-height: auto;
+  width: 100%;
+  min-width: auto;
+  display: flex;
+  flex-direction: column;
+  padding: var(--content-padding);
+  background-color: var(--primary-background-light);
+  border-radius: var(--content-border-radius);
+}
+
+.content-wrapper {
+  height: auto;
+  min-height: auto;
+  width: auto;
+  min-width: auto;
+  display: flex;
+  flex-direction: row;
+  margin: auto;
 }

@@ -3,55 +3,63 @@ block main
   .all-wrapper
     include ../partials/sidebar.pug
     .content
-      .content-header
-        .content-header-icon
-        .content-header-title
-          | Sign in / Connect wallet
+      include ../partials/header.pug
       .content-wrapper
         .content-wrapper-title
           | Notifications
         .content-wrapper-notification
-          .content-wrapper-notification-unread
-            .content-wrapper-notification-unread-icon
-            .content-wrapper-notification-unread-text
-              .content-wrapper-notification-unread-text-title
+          .content-wrapper-notification-list
+            .content-wrapper-notification-icon
+            .content-wrapper-notification-text
+              .content-wrapper-notification-text-title
                 | 101
-              .content-wrapper-notification-unread-text-description
+              .content-wrapper-notification-text-description
                 | Hey, your weekly performance report is ready, bro!
-              .content-wrapper-notification-unread-text-explanation
+              .content-wrapper-notification-text-explanation
                 | I can give you the report if you can get me cat food that includes ish like last time.
-            .content-wrapper-notification-unread-time
+            .content-wrapper-notification-time
               | 01:28 PM
-          .content-wrapper-notification-unread
-            .content-wrapper-notification-unread-icon
-            .content-wrapper-notification-unread-text
-              .content-wrapper-notification-unread-text-title
+          .content-wrapper-notification-list
+            .content-wrapper-notification-icon
+            .content-wrapper-notification-text
+              .content-wrapper-notification-text-title
                 | 101
-              .content-wrapper-notification-unread-text-description
+              .content-wrapper-notification-text-description
                 | Hey, your weekly performance report is ready, bro!
-              .content-wrapper-notification-unread-text-explanation
+              .content-wrapper-notification-text-explanation
                 | I can give you the report if you can get me cat food that includes ish like last time.
-            .content-wrapper-notification-unread-time
+            .content-wrapper-notification-time
               | 01:28 PM
-          .content-wrapper-notification-unread
-            .content-wrapper-notification-unread-icon
-            .content-wrapper-notification-unread-text
-              .content-wrapper-notification-unread-text-title
+          .content-wrapper-notification-list
+            .content-wrapper-notification-icon
+            .content-wrapper-notification-text
+              .content-wrapper-notification-text-title
                 | 101
-              .content-wrapper-notification-unread-text-description
+              .content-wrapper-notification-text-description
                 | Hey, your weekly performance report is ready, bro!
-              .content-wrapper-notification-unread-text-explanation
+              .content-wrapper-notification-text-explanation
                 | I can give you the report if you can get me cat food that includes ish like last time.
-            .content-wrapper-notification-unread-time
+            .content-wrapper-notification-time
               | 01:28 PM
-          .content-wrapper-notification-read
-            .content-wrapper-notification-read-icon
-            .content-wrapper-notification-read-text
-              .content-wrapper-notification-read-text-title
+          .content-wrapper-notification-list.content-wrapper-notification-read
+            .content-wrapper-notification-icon.content-wrapper-notification-icon-read
+            .content-wrapper-notification-text.content-wrapper-notification-text-read
+              .content-wrapper-notification-text-title.content-wrapper-notification-text-title-read
                 | 101
-              .content-wrapper-notification-read-text-description
+              .content-wrapper-notification-text-description.content-wrapper-notification-text-description-read 
                 | Hey, your weekly performance report is ready, bro!
-              .content-wrapper-notification-read-text-explanation
+              .content-wrapper-notification-text-explanation.content-wrapper-notification-text-explanation-read
                 | I can give you the report if you can get me cat food that includes ish like last time.
-            .content-wrapper-notification-read-time
+            .content-wrapper-notification-time.content-wrapper-notification-time-read
+              | 01:28 PM
+          .content-wrapper-notification-list.content-wrapper-notification-read
+            .content-wrapper-notification-icon.content-wrapper-notification-icon-read
+            .content-wrapper-notification-text.content-wrapper-notification-text-read
+              .content-wrapper-notification-text-title.content-wrapper-notification-text-title-read
+                | 101
+              .content-wrapper-notification-text-description.content-wrapper-notification-text-description-read 
+                | Hey, your weekly performance report is ready, bro!
+              .content-wrapper-notification-text-explanation.content-wrapper-notification-text-explanation-read
+                | I can give you the report if you can get me cat food that includes ish like last time.
+            .content-wrapper-notification-time.content-wrapper-notification-time-read
               | 01:28 PM

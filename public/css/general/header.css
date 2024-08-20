@@ -1,11 +1,11 @@
 :root {
   --header-width: 240px;
-  --header-right-padding: 25px;
+  --header-right-padding: 40px;
   --header-border-radius: 50px;
-  --header-icon-width: 50px;
-  --header-icon-height: 50px;
-  --header-title-height: 50px;
-  --header-title-margin: 35px;
+  --header-icon-size: 60px;
+  --header-title-height: 60px;
+  --header-title-width: 280px;
+  --header-title-padding-left: 50px;
 }
 
 .content-header {
@@ -13,21 +13,24 @@
   right: var(--header-right-padding);
   height: auto;
   min-height: auto;
-  width: var(--header-width);
-  min-width: var(--header-width);
+  width:fit-content;
+  min-width:fit-content;
   display: flex;
   align-items: center;
   background-color: var(--primary-background-medium);
-  border-radius: 0px var(--header--order-radius) var(--header-border-radius) 0px;
+  border-radius: 98px var(--header-border-radius) var(--header-border-radius) 98px;
   overflow: hidden;
 }
 
 .content-header-icon{
   position: absolute;
-  height: var(--header-icon-height);
-  min-height: var(--header-icon-height);
-  width: var(--header-icon-width);
-  min-width: var(--header-icon-width);
+  height: var(--header-icon-size);
+  min-height: var(--header-icon-size);
+  width: var(--header-icon-size);
+  min-width: var( --header-icon-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 50%;
   background-color: var(--primary-background-dark);
   z-index: 1;
@@ -36,16 +39,17 @@
 .content-header-title {
   height: var(--header-title-height);
   min-height: var(--header-title-height);
-  width: 100%;
-  min-width: 100%;
+  width: var(--header-title-width);
+  min-width: var(--header-title-width);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: var(--header-title-margin);
+  padding-left: var(--header-title-padding-left);
   background-color: var(--primary-background-14);
   font-weight: 400;
-  font-size: var(--font-size-14);
+  font-size: var(--font-size-16);
   font-family: 'Montserrat';
-  line-height: 140%;
+  line-height: 1.2;
   color: var(--primary-text-14);
+  z-index: 10;
 }

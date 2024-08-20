@@ -241,7 +241,7 @@ ChainInfoSchema.statics.getListOfToken = function (is_active, callback) {
   if(typeof is_active == 'boolean' && is_active == false) 
     return callback('bad_request');
 
-  ChainInfo.find({ is_active }, (err, chainInfos) => {
+  ChainInfo.find( is_active , (err, chainInfos) => {
     if (err)
       return callback('database_error');
 

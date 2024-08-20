@@ -256,12 +256,16 @@
 .content-wrapper-stake-body-main-center-body-stake-amount {
   height: auto;
   min-height: auto;
-  width: auto;
-  min-width: auto;
+  width: 100px;
+  min-width: 100px;
   font-weight: 600;
   font-size: var(--font-size-40);
   font-family: 'Montserrat';
   line-height: 1;
+  border: 0px;
+  outline: 0px;
+  border-bottom: 5px solid var(--primary-border);
+
 }
 
 .content-wrapper-stake-body-main-center-body-stake-dollar {
@@ -270,9 +274,12 @@
   width: auto;
   min-width: auto;
   font-family: 'Montserrat';
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-weight: 300;
   font-size: var(--font-size-16);
-  line-height: 1.1;
+  line-height: 2;
 }
 
 .content-wrapper-stake-body-main-content {

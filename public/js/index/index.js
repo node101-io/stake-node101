@@ -1,6 +1,6 @@
 let globalOfflineSigner;
 let globalAddress;
-
+/*
 function addChainToKeplr(currentChain, callback) {
   const keplr = window.keplr;
   const currentChainInfo = JSON.parse(currentChain.chain_info);
@@ -34,6 +34,8 @@ function addChainToKeplr(currentChain, callback) {
 function setTokenUI(currentChain) {
   const tokenImage = document.getElementById('tokenImg');
   const tokenName = document.getElementById('tokenName');
+
+  
 
   tokenImage.src = currentChain.img_url;
   tokenName.textContent = JSON.parse(currentChain.chain_info).currencies[0].coinDenom
@@ -145,4 +147,60 @@ function completeStaking(offlineSigner, accounts, currentChain, stakingValue) {
       .catch((err) => {
         console.log(err);
       });
+}; */
+
+
+function addChainToKeplr(currentChain, callback) {
+  const keplr = window.keplr;
+  const currentChainInfo = JSON.parse(currentChain.chain_info);
+
+  keplr.experimentalSuggestChain(currentChainInfo)
+    .then(() => keplr.enable(currentChain.chain_id))
+    .then(() => keplr.getOfflineSigner(currentChain.chain_id))
+    .then((offlineSigner) => {
+      globalOfflineSigner = offlineSigner;
+      console.log('11111111');
+      console.log(currentChain.rpc_url);
+      console.log('22222222');
+      return offlineSigner.getAccounts();
+    })
+    .then((accounts) => {
+      globalAddress = accounts[0].address;
+      return SigningStargateClient.connectWithSigner(currentChain.rpc_url, globalOfflineSigner);
+    })
+    .then((signingClient) => {
+  
+      signingClient.getBalance(globalAddress, currentChainInfo.  currencies[0].coinMinimalDenom)
+})
+    .then(balance => {
+
+      document.querySelector('.content-header-title').textContent = globalAddress.slice(0, 10) + "...";
+
+      return callback(null);
+
+    }).catch((err) => {
+      return callback(err);
+  });
 };
+
+window.addEventListener('load',  () => {
+  let currentChain; 
+
+  document.addEventListener('click', event => {
+    if (event.target.closest(' .content-header-title')) {
+    console.log(document.getElementById('chainInfoElement').value);
+   
+    currentChain = !currentChain ? JSON.parse(document.getElementById('chainInfoElement').value) : currentChain;
+    
+    if (!window.keplr) {
+      console.log("Keplr extension not installed");
+      return;
+    };
+    console.log("Adding chain");
+    addChainToKeplr(currentChain, (err) => {
+      if (err) console.log(err);
+
+        });
+      };
+    });
+  });

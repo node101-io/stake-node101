@@ -66,8 +66,8 @@
   width: 100%;
   min-width: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   border-radius: 50%;
   font-family: 'Igra Sans';
 }
@@ -77,11 +77,12 @@
   min-height: auto;
   width: auto;
   min-width: auto;
-  margin-top: var(--sidebar-footer-margin-top);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  margin-top: var(--sidebar-footer-margin-top);
+
 }
 
 .sidebar-footer-item {

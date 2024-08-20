@@ -78,20 +78,22 @@ ChainInfoSchema.statics.createChainInfo = function (data, callback) {
   if (!data.chain_registry_identifier || typeof data.chain_registry_identifier != 'string' || data.chain_registry_identifier.trim().length < 1 || data.chain_registry_identifier.trim().length > MAX_DATABASE_TEXT_FIELD_LENGTH)
     return callback('bad_request');
 
-  if (!data.rpc_url || typeof data.rpc_url != 'string' || data.rpc_url.trim().length < 1 || data.rpc_url.trim().length > MAX_DATABASE_TEXT_FIELD_LENGTH)
-    return callback('bad_request');
-
   if (!data.img_url || typeof data.img_url != 'string' || data.img_url.trim().length < 1 || data.img_url.trim().length > MAX_DATABASE_TEXT_FIELD_LENGTH)
     return callback('bad_request');
 
   if (!data.validator_address || typeof data.validator_address != 'string' || data.validator_address.trim().length < 1 || data.validator_address.trim().length > MAX_DATABASE_TEXT_FIELD_LENGTH)
     return callback('bad_request');
 
+  
+  if ('is_active' in data && typeof data.is_active != 'boolean')
+    return callback('bad_request');
+
+  if (!data.rpc_url || typeof data.rpc_url != 'string' || data.rpc_url.trim().length < 1 || data.rpc_url.trim().length > MAX_DATABASE_TEXT_FIELD_LENGTH)
+    return callback('bad_request');
+
   if (!data.chain_info || typeof data.chain_info != 'string' || data.chain_info.trim().length < 1 || data.chain_info.trim().length > MAX_DATABASE_TEXT_FIELD_LENGTH)
     return callback('bad_request');
 
-  if ('is_active' in data && typeof data.is_active != 'boolean')
-    return callback('bad_request');
 
   if (!Object.keys(data).length)
     return callback('bad_request');
@@ -229,6 +231,31 @@ ChainInfoSchema.statics.findChainInfoByChainIdAndUpdate = function (chain_id, da
 
       return callback(null, chainInfo);
     });
+  });
+};
+
+ChainInfoSchema.statics.getListOfToken = function (is_active, callback) {
+
+  const ChainInfo = this;
+
+  if(typeof is_active == 'boolean' && is_active == false) 
+    return callback('bad_request');
+
+  ChainInfo.find({ is_active }, (err, chainInfos) => {
+    if (err)
+      return callback('database_error');
+
+    const listOfToken = {};
+    for (let i = 0; i < chainInfos.length; i++) {
+      const chainName = JSON.parse(chainInfos[i].chain_info).chainName;
+      listOfToken[chainName] = {
+        'chain_id': chainInfos[i].chain_id,
+        'img_url': chainInfos[i].img_url,
+        'coin_denom': JSON.parse(chainInfos[i].chain_info).currencies[0].coinDenom,
+      };
+    }
+
+    return callback(null, listOfToken);
   });
 };
 

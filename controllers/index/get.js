@@ -1,23 +1,12 @@
 const ChainInfo = require('../../models/ChainInfo/ChainInfo');
 
 module.exports = (req, res) => {
-  const chain_id = 'cosmoshub-4'
 
-  ChainInfo.findChainInfoByFilters({ is_active: true }, (err, chainInfos) => {
+  const chain_id = 'cosmoshub-4'
+  ChainInfo.getListOfToken({ is_active: true }, (err, listOfToken) => {
     if (err)
       return console.error(err);
     
-    const listOfToken = {};
-    for (let i = 0; i < chainInfos.length; i++) {
-
-      const chainName = JSON.parse(chainInfos[i].chain_info).chainName;
-      listOfToken[chainName] = {
-        'chain_id': chainInfos[i].chain_id,
-        'img_url': chainInfos[i].img_url,
-        'coin_denom': JSON.parse(chainInfos[i].chain_info).currencies[0].coinDenom,
-      };
-    }
-      
     ChainInfo.findChainInfoByChainId(chain_id, (err, chainInfo) => {
       if (err)
         return res.json({ error: err });

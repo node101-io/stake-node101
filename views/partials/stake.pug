@@ -2,39 +2,20 @@
 .content-wrapper-stake
   .content-wrapper-stake-body-main
     .content-wrapper-stake-body-main-title
-      .content-wrapper-stake-body-main-title-each
-        .content-wrapper-stake-body-main-title-each-icon
-        .content-wrapper-stake-body-main-title-each-token
-          | TIA
-        .content-wrapper-stake-body-main-title-each-price
-          | $9.32
-        .content-wrapper-stake-body-main-title-each-arrow
-          svg(width='18' height='16' viewbox='0 0 18 16' fill='none' xmlns='http://www.w3.org/2000/svg')
-            path(d='M9.33975 15.1099C9.1473 15.4432 8.66617 15.4432 8.47372 15.1099L0.54807 1.38223C0.309402 0.968841 0.730422 0.488006 1.1717 0.669988L7.00051 3.07375C8.22145 3.57726 9.59202 3.57726 10.813 3.07375L16.6418 0.66999C17.083 0.488008 17.5041 0.968843 17.2654 1.38223L9.33975 15.1099Z' fill='#FF0000')
-        .content-wrapper-stake-body-main-title-each-change
-          | -0.32%
-      .content-wrapper-stake-body-main-title-each
-        .content-wrapper-stake-body-main-title-each-icon
-        .content-wrapper-stake-body-main-title-each-token
-          | TIA
-        .content-wrapper-stake-body-main-title-each-price
-          | $9.32
-        .content-wrapper-stake-body-main-title-each-arrow
-          svg(width='18' height='16' viewbox='0 0 18 16' fill='none' xmlns='http://www.w3.org/2000/svg')
-            path(d='M9.33975 15.1099C9.1473 15.4432 8.66617 15.4432 8.47372 15.1099L0.54807 1.38223C0.309402 0.968841 0.730422 0.488006 1.1717 0.669988L7.00051 3.07375C8.22145 3.57726 9.59202 3.57726 10.813 3.07375L16.6418 0.66999C17.083 0.488008 17.5041 0.968843 17.2654 1.38223L9.33975 15.1099Z' fill='#FF0000')
-        .content-wrapper-stake-body-main-title-each-change
-          | -0.32%
-      .content-wrapper-stake-body-main-title-each
-        .content-wrapper-stake-body-main-title-each-icon
-        .content-wrapper-stake-body-main-title-each-token
-          | TIA
-        .content-wrapper-stake-body-main-title-each-price
-          | $9.32
-        .content-wrapper-stake-body-main-title-each-arrow
-          svg(width='18' height='16' viewbox='0 0 18 16' fill='none' xmlns='http://www.w3.org/2000/svg')
-            path(d='M9.33975 15.1099C9.1473 15.4432 8.66617 15.4432 8.47372 15.1099L0.54807 1.38223C0.309402 0.968841 0.730422 0.488006 1.1717 0.669988L7.00051 3.07375C8.22145 3.57726 9.59202 3.57726 10.813 3.07375L16.6418 0.66999C17.083 0.488008 17.5041 0.968843 17.2654 1.38223L9.33975 15.1099Z' fill='#FF0000')
-        .content-wrapper-stake-body-main-title-each-change
-          | -0.32%
+
+      for chain in listOfToken
+        .content-wrapper-stake-body-main-title-each
+          .content-wrapper-stake-body-main-title-each-icon
+            img(src=chain.img_url, alt="")
+          .content-wrapper-stake-body-main-title-each-token
+            | #{chain.coin_denom}
+          .content-wrapper-stake-body-main-title-each-price
+            | $9.32
+          .content-wrapper-stake-body-main-title-each-arrow
+            svg(width='18' height='16' viewbox='0 0 18 16' fill='none' xmlns='http://www.w3.org/2000/svg')
+              path(d='M9.33975 15.1099C9.1473 15.4432 8.66617 15.4432 8.47372 15.1099L0.54807 1.38223C0.309402 0.968841 0.730422 0.488006 1.1717 0.669988L7.00051 3.07375C8.22145 3.57726 9.59202 3.57726 10.813 3.07375L16.6418 0.66999C17.083 0.488008 17.5041 0.968843 17.2654 1.38223L9.33975 15.1099Z' fill='#FF0000')
+          .content-wrapper-stake-body-main-title-each-change
+            | -0.32%
     .content-wrapper-stake-body-main-center
       .content-wrapper-stake-body-main-center-title
         .content-wrapper-stake-body-main-center-title-each
@@ -62,7 +43,7 @@
               input.content-wrapper-stake-body-main-center-body-chain-list-search-input(type='text' placeholder='Search')
             .content-wrapper-stake-body-main-center-body-chain-list-tile(id='chain-list')
               each chain in listOfToken
-                .content-wrapper-stake-body-main-center-body-chain-list-each(data-chainname=chain.chain_name.toLowerCase()+ chain.coin_denom.toLowerCase())
+                .content-wrapper-stake-body-main-center-body-chain-list-each(data-chain-name=chain.chain_name.toLowerCase() data-coin-name=chain.coin_denom.toLowerCase())
                   .content-wrapper-stake-body-main-center-body-chain-list-each-icon
                     img(src=chain.img_url, alt="")
                   .content-wrapper-stake-body-main-center-body-chain-list-each-chain

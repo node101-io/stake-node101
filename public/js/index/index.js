@@ -5,9 +5,9 @@ function completeStaking(offlineSigner, accounts, currentChain, stakingValue) {
       const currentChainInfo = JSON.parse(currentChain.chain_info);
       const validatorAddress = currentChain.validator_address
       const stakingdenom = currentChainInfo.feeCurrencies[0].coinMinimalDenom;
-      const memo = "Use your power wisely";
-
       stakingValue = parseFloat(stakingValue) * (10 ** currentChainInfo.currencies[0].coinDecimals);
+      const memo = "Use your power wisely";
+      console.log("Max val", stakingValue);
 
       const DelegateMsg = MsgDelegate.fromPartial({
          delegatorAddress: accounts.address,
@@ -67,10 +67,10 @@ function addChainToKeplr(currentChain, callback) {
   
       signingClient.getBalance(globalAddress, currentChainInfo.  currencies[0].coinMinimalDenom)
 })
-    .then(balance => {
+    .then((balance) => {
 
       document.querySelector('.content-header-title').textContent = globalAddress.slice(0, 10) + "...";
-
+      console.log(balance);
       return callback(null);
 
     }).catch((err) => {
@@ -90,27 +90,76 @@ function setTokenUI(currentChain) {
   chainName.textContent = JSON.parse(currentChain.chain_info).chainName;
 };
 
+const SLIDE_ANIMATION_INTERVAL = 50;
+const SLIDE_ANIMATION_STEP = 1;
+
+let boxPadding = null;
+let activeProject = null;
+let activeProjectToLeft = 0;
+
+function projectsSlideAnimation() {
+  if (activeProjectToLeft > activeProject.getBoundingClientRect().width + boxPadding * 2) {
+    activeProjectToLeft = 0;
+    removeProject(activeProject);
+    activeProject = document.querySelector('.projects-wrapper').childNodes[0];
+    activeProject.style.marginLeft = `0`;
+  } else {
+    activeProjectToLeft += SLIDE_ANIMATION_STEP;
+    activeProject.style.marginLeft = `-${activeProjectToLeft}px`;
+  }
+  setTimeout(() => {
+    projectsSlideAnimation();
+  }, SLIDE_ANIMATION_INTERVAL)
+};
+
+
+function removeProject(element) {
+  const newElement = element.cloneNode(true);
+  element.remove();
+  newElement.style.marginLeft = `${boxPadding}px`;
+  document.querySelector('.content-wrapper-stake-body-main-title').appendChild(newElement);
+};
+
+function projectsSlideAnimation() {
+  if (activeProjectToLeft > activeProject.getBoundingClientRect().width + boxPadding * 2) {
+    activeProjectToLeft = 0;
+    removeProject(activeProject);
+    activeProject = document.querySelector('.content-wrapper-stake-body-main-title').childNodes[0];
+    activeProject.style.marginLeft = `0`;
+  } else {
+    activeProjectToLeft += SLIDE_ANIMATION_STEP;
+    activeProject.style.marginLeft = `-${activeProjectToLeft}px`;
+  }
+  setTimeout(() => {
+    projectsSlideAnimation();
+  }, SLIDE_ANIMATION_INTERVAL)
+};
+
+
 
 
 window.addEventListener('load',  () => {
   let currentChain; 
 
+  //boxPadding = 10px;
+  activeProjectToLeft = boxPadding;
 
+  activeProject = document.querySelector('.content-wrapper-stake-body-main-title').childNodes[0];
+  projectsSlideAnimation();
 
 
   document.addEventListener('input', event => {
     if (event.target.closest('.content-wrapper-stake-body-main-center-body-chain-list-search-input')) {
       const searchValue = event.target.value.toLowerCase();
+      console.log(searchValue)
       const chains = document.querySelectorAll('.content-wrapper-stake-body-main-center-body-chain-list-each');
-
-      chains.forEach(function(chain) {
-        const chainName = chain.getAttribute('data-chainname');
-        if (chainName.includes(searchValue)) {
+      console.log(chains)
+      chains.forEach(chain => {   
+        if ((chain.getAttribute('data-chain-name')).includes(searchValue) || (chain.getAttribute('data-coin-name')).includes(searchValue)) 
           chain.style.display = '';
-        } else {
+        else 
           chain.style.display = 'none';
-        }
-      });
+      })
     }
   });
 

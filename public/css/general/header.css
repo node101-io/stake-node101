@@ -52,4 +52,5 @@
   line-height: 1.2;
   color: var(--primary-text-14);
   z-index: 10;
+  cursor: pointer;
 }

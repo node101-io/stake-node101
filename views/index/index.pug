@@ -1,7 +1,7 @@
 extends ../partials/head
 block main
   .all-wrapper
-    - var active = 'stake' // or 'home', depending on what you want to be active
+    - var active = 'stake' 
     input#chainInfoElement(style='display: none;', value=chainInfo)
     include ../partials/sidebar.pug
     .content

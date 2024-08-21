@@ -186,6 +186,48 @@ function addChainToKeplr(currentChain, callback) {
 window.addEventListener('load',  () => {
   let currentChain; 
 
+
+
+
+  document.addEventListener('input', event => {
+    if (event.target.closest('.content-wrapper-stake-body-main-center-body-chain-list-search-input')) {
+      const searchValue = event.target.value.toLowerCase();
+      const chains = document.querySelectorAll('.content-wrapper-stake-body-main-center-body-chain-list-each');
+
+      chains.forEach(function(chain) {
+        const chainName = chain.getAttribute('data-chainname');
+        if (chainName.includes(searchValue)) {
+          chain.style.display = '';
+        } else {
+          chain.style.display = 'none';
+        }
+      });
+    }
+  });
+
+  document.addEventListener('click', event => {
+    if (event.target.closest('.content-wrapper-stake-body-main-center-body-chain-name')) {
+      document.querySelector('.content-wrapper-stake-body-main-center-body-chain-list').classList.toggle('display-none');
+    };
+
+    if (event.target.closest('.token-tile')) {
+      const chain_id = event.target.closest('.token-tile').querySelector('#tokenId').value;
+
+      serverRequest(`/chain?chain_id=${chain_id}`, 'GET', {}, res => {
+        if (res.error) {
+          console.log(res);
+        } else {
+          currentChain = res.chainInfo;
+
+          addChainToKeplr(currentChain);
+          setTokenUI(currentChain);
+        }
+      });
+
+      document.querySelector('.token-popup-wrapper').classList.toggle('display-none');
+    };
+  });
+
   document.addEventListener('click', event => {
     if (event.target.closest(' .content-header-title')) {
     console.log(document.getElementById('chainInfoElement').value);

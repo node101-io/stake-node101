@@ -43,7 +43,7 @@
           | Half | Max
       .content-wrapper-stake-body-main-center-body
         .content-wrapper-stake-body-main-center-body-icon
-          img(src=listOfToken[0].img_url, alt=listOfToken[0].coin_denom)
+          img.content-wrapper-stake-body-main-center-body-icon-img(src=listOfToken[0].img_url, alt=listOfToken[0].coin_denom)
         .content-wrapper-stake-body-main-center-body-chain
           .content-wrapper-stake-body-main-center-body-chain-name
             .content-wrapper-stake-body-main-center-body-chain-name-network
@@ -69,11 +69,14 @@
                     | #{chain.chain_name}
                   .content-wrapper-stake-body-main-center-body-chain-list-each-token
                     | #{chain.coin_denom}
+                  .content-wrapper-stake-body-main-center-body-chain-list-each-id.display-none
+                    | #{chain.chain_id}
+                  
 
 
               
         .content-wrapper-stake-body-main-center-body-stake
-            input.content-wrapper-stake-body-main-center-body-stake-amount(type="text")
+            input.content-wrapper-stake-body-main-center-body-stake-amount(type="text", placeholder="0")
               
             .content-wrapper-stake-body-main-center-body-stake-dollar
               | $122,25

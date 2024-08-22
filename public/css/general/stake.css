@@ -94,11 +94,12 @@
 .content-wrapper-stake-body-main-title-each {
   height: auto;
   min-height: auto;
-  width: 100%;
-  min-width: auto;
+  width: 150px;
+  min-width: 150px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
+  margin:8px;
   padding: var(--content-wrapper-stake-body-main-title-each-padding);
   color: var(--header-text-color);
 }

@@ -90,7 +90,7 @@ function setTokenUI(currentChain) {
   chainName.textContent = JSON.parse(currentChain.chain_info).chainName;
 };
 
-const SLIDE_ANIMATION_INTERVAL = 50;
+const SLIDE_ANIMATION_INTERVAL = 30;
 const SLIDE_ANIMATION_STEP = 1;
 
 let boxPadding = null;
@@ -145,7 +145,7 @@ window.addEventListener('load',  () => {
   activeProjectToLeft = boxPadding;
 
   activeProject = document.querySelector('.content-wrapper-stake-body-main-title').childNodes[0];
-  projectsSlideAnimation();
+  //projectsSlideAnimation();
 
 
   document.addEventListener('input', event => {

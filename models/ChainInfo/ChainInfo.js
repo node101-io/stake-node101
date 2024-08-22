@@ -63,7 +63,15 @@ const ChainInfoSchema = new Schema({
     type: Boolean,
     required: true,
     default: DEFAULT_IS_ACTIVE
-  }
+  },
+  price: {
+    type: Number,
+    default: 0
+  },
+  price_change_24h: {
+    type: Number,
+    default: 0
+  },
 });
 
 ChainInfoSchema.statics.createChainInfo = function (data, callback) {
@@ -215,6 +223,11 @@ ChainInfoSchema.statics.findChainInfoByChainIdAndUpdate = function (chain_id, da
   if (data.validator_address && typeof data.validator_address == 'string' && data.validator_address.trim().length > 0 && data.validator_address.trim().length <= MAX_DATABASE_TEXT_FIELD_LENGTH)
     updateData.validator_address = data.validator_address.trim();
 
+  if (data.price && typeof data.price == 'number' && data.price >= 0)
+    updateData.price = data.price;
+
+  if (data.price_change_24h && typeof data.price_change_24h == 'number')
+    updateData.price_change_24h = data.price_change_24h;
   if ('is_active' in data && typeof data.is_active == 'boolean')
     updateData.is_active = data.is_active;
 
@@ -254,6 +267,8 @@ ChainInfoSchema.statics.getListOfToken = function (is_active, callback) {
         'chain_name': chainName,
         'img_url': chainInfos[i].img_url,
         'coin_denom': JSON.parse(chainInfos[i].chain_info).currencies[0].coinDenom,
+        'price': chainInfos[i].price,
+        'price_change_24h': chainInfos[i].price_change_24h,
       });
     }
 

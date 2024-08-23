@@ -6,17 +6,22 @@
   --content-wrapper-stake-body-main-width: 500px;
   --content-wrapper-stake-body-main-height: 500px;
   --content-wrapper-stake-body-main-margin-top: 45px;
+  --content-wrapper-stake-body-main-title-height: 40px;
+  --content-wrapper-stake-body-main-title-each-width: 150px;
+  --content-wrapper-stake-body-main-title-each-margin: 8px;
   --content-wrapper-stake-body-arrow-width: 18.19px;
   --content-wrapper-stake-body-arrow-height:  15.75px;
 
   --content-wrapper-stake-body-main-title-each-padding: 5px;
   --content-wrapper-stake-body-main-title-each-size: 20px;
   
-
   --content-wrapper-stake-body-main-center-width: 500px;
   --content-wrapper-stake-body-main-center-height: 160px;
   --content-wrapper-stake-body-main-center-margin-top: 45px;
+
+  
   --content-wrapper-stake-body-main-center-title-width: 475px;
+  --content-wrapper-stake-body-main-center-title-each-width: 40px;
   --content-wrapper-stake-body-main-center-body-margin-top: 20px;
   --content-wrapper-stake-body-main-center-body-height: 120px;
   --content-wrapper-stake-body-main-center-body-icon-size: 84px;
@@ -28,8 +33,18 @@
   --content-wrapper-stake-body-main-center-body-chain-padding-vertical: 5px;
   --content-wrapper-stake-body-main-center-body-stake-margin-left: 60px;
   --content-wrapper-stake-body-main-center-body-stake-height: 68px;
+  --content-wrapper-stake-body-main-center-body-stake-amount-padding-left: 10px;
+  --content-wrapper-stake-body-main-center-body-stake-amount-width: 100px;
+  --content-wrapper-stake-body-main-center-body-stake-amount-padding-left: 10px;
+  --content-wrapper-stake-body-main-center-body-stake-dollar-height: 20px;
+  --content-wrapper-stake-body-main-center-body-stake-dollar-width: 100px;
 
   --content-wrapper-stake-body-main-content-margin-top: 40px;
+
+  --content-wrapper-stake-body-main-center-body-chain-list-right:20px;
+  --content-wrapper-stake-body-main-center-body-chain-list-bottom:20px;
+  --content-wrapper-stake-body-main-center-body-chain-list-width:250px;
+  --content-wrapper-stake-body-main-center-body-chain-list-height:320px;
   
   --content-wrapper-stake-body-main-content-stat-title-padding:2px 20px;
   --content-wrapper-stake-body-main-content-stat-title-buttons-icon-width: 48px;
@@ -49,7 +64,8 @@
   --content-wrapper-stake-body-button-width: 185px;
   --content-wrapper-stake-body-button-height: 48px;
   --content-wrapper-stake-body-button-border-radius: 30px;
-
+  
+  
 }
 
 .content-wrapper-stake {
@@ -77,9 +93,10 @@
   margin-top: var(--content-wrapper-stake-body-main-margin-top);
 }
 
+
 .content-wrapper-stake-body-main-title {
-  height: 40px;
-  min-height: 40px;
+  height: var(--content-wrapper-stake-body-main-title-height);
+  min-height: var(--content-wrapper-stake-body-main-title-height);
   width: 100%;
   min-width: 100%;
   display: flex;
@@ -94,14 +111,15 @@
 .content-wrapper-stake-body-main-title-each {
   height: auto;
   min-height: auto;
-  width: 150px;
-  min-width: 150px;
+  width: var(--content-wrapper-stake-body-main-title-each-width);
+  min-width: var(--content-wrapper-stake-body-main-title-each-width);
   display: flex;
   align-items: center;
   justify-content: space-around;
-  margin:8px;
+  margin: var(--content-wrapper-stake-body-main-title-each-margin);
   padding: var(--content-wrapper-stake-body-main-title-each-padding);
   color: var(--header-text-color);
+  border: 2px solid red;
 }
 
 .content-wrapper-stake-body-main-title-each-icon {
@@ -182,6 +200,20 @@
   font-weight: 300;
   font-size: var(--font-size-16);
   line-height: 1.2;
+}
+
+.content-wrapper-stake-body-main-center-title-each {
+  height: auto;
+  min-height: auto;
+  width: var(--content-wrapper-stake-body-main-center-title-each-width);
+  min-width: fit-content;
+  display: flex;
+  justify-content: space-between;
+}
+
+.content-wrapper-stake-body-main-center-title-amount{
+  display: inline-block;
+  text-transform: uppercase;
 }
 
 .content-wrapper-stake-body-main-center-body {
@@ -272,18 +304,16 @@
 .content-wrapper-stake-body-main-center-body-stake-amount {
   height: auto;
   min-height: auto;
-  width: 100px;
-  min-width: 100px;
+  width: var(--content-wrapper-stake-body-main-center-body-stake-amount-width);
+  min-width: var(--content-wrapper-stake-body-main-center-body-stake-amount-width);
   font-weight: 600;
   font-size: var(--font-size-40);
   font-family: 'Montserrat';
   line-height: 1;
+  padding-left: var(--content-wrapper-stake-body-main-center-body-stake-amount-padding-left);
   border: 0px;
   outline: 0px;
-  padding-left: 10px;
-
   background-color: white;
-
 }
 
 .content-wrapper-stake-body-main-center-body-stake-dollar {
@@ -444,17 +474,16 @@
 
 .content-wrapper-stake-body-main-center-body-chain-list{
   position: relative;
-  right: 20px;
-  bottom: 20px;
-  width: 250px;
-  min-width: 250px;
+  right: var(--content-wrapper-stake-body-main-center-body-chain-list-right);
+  bottom: var(--content-wrapper-stake-body-main-center-body-chain-list-bottom);
+  width: var(--content-wrapper-stake-body-main-center-body-chain-list-width);
+  min-width: var(--content-wrapper-stake-body-main-center-body-chain-list-width);
   min-height: fit-content;
-  max-height: 320px;
+  max-height: var(--content-wrapper-stake-body-main-center-body-chain-list-height);
   padding-right: 20px;
-
+  border-radius: var(--border-radius-small);
   border: 1px solid #A0ABDA;
   background-color: #ECF0FF;
-  border-radius: 25px;
 }
 
 .content-wrapper-stake-body-main-center-body-chain-list-search {

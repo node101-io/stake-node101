@@ -21,9 +21,14 @@
     .content-wrapper-stake-body-main-center
       .content-wrapper-stake-body-main-center-title
         .content-wrapper-stake-body-main-center-title-each
-          | Available -  0 Atom
+          | Available - &nbsp;
+          .content-wrapper-stake-body-main-center-title-amount
+            | 0 AToM
         .content-wrapper-stake-body-main-center-title-each
-          | Half | Max
+          .content-wrapper-stake-body-main-center-title-each.content-wrapper-stake-body-main-center-title-half
+            | Half |
+          .content-wrapper-stake-body-main-center-title-each.content-wrapper-stake-body-main-center-title-max  
+            |  &nbsp; Max
       .content-wrapper-stake-body-main-center-body
         .content-wrapper-stake-body-main-center-body-icon
           img.content-wrapper-stake-body-main-center-body-icon-img(src=listOfToken[0].img_url, alt=listOfToken[0].coin_denom)
@@ -62,7 +67,7 @@
             input.content-wrapper-stake-body-main-center-body-stake-amount(type="text", placeholder="0")
               
             .content-wrapper-stake-body-main-center-body-stake-dollar
-              | $122,25
+              | $0
     .content-wrapper-stake-body-main-content
       .content-wrapper-stake-body-main-content-stat-title
         .content-wrapper-stake-body-main-content-stat-title-auto-rewards
@@ -86,7 +91,7 @@
         .content-wrapper-stake-body-main-content-stat-title-content-each
           .content-wrapper-stake-body-main-content-stat-title-content-each-time
             .content-wrapper-stake-body-main-content-stat-title-content-each-time-text
-              | Daily
+              | Monthly
             .content-wrapper-stake-body-main-content-stat-title-content-each-time-percent
               | +0.2%
           .content-wrapper-stake-body-main-content-stat-title-content-each-value
@@ -97,7 +102,7 @@
         .content-wrapper-stake-body-main-content-stat-title-content-each
           .content-wrapper-stake-body-main-content-stat-title-content-each-time
             .content-wrapper-stake-body-main-content-stat-title-content-each-time-text
-              | Daily
+              | Yearly
             .content-wrapper-stake-body-main-content-stat-title-content-each-time-percent
               | +0.2%
           .content-wrapper-stake-body-main-content-stat-title-content-each-value

@@ -12,5 +12,7 @@ module.exports = (chainInfo, callback) => {
     chain_info: chainInfo.chain_info,
     validator_address: chainInfo.validator_address,
     is_active: chainInfo.is_active,
+    price: chainInfo.price,
+    price_change_24h: chainInfo.price_change_24h,
   });
 };

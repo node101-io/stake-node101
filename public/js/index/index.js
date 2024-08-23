@@ -1,5 +1,6 @@
 let globalOfflineSigner;
 let globalAddress;
+let currentChain; 
 
 function completeStaking(offlineSigner, accounts, currentChain, stakingValue) {
       const currentChainInfo = JSON.parse(currentChain.chain_info);
@@ -30,7 +31,7 @@ function completeStaking(offlineSigner, accounts, currentChain, stakingValue) {
             amount: stakingValue,
           },
         ],
-        gas: "980000", //980k 
+        gas: "950000", //950k 
       };
 
       SigningStargateClient.connectWithSigner(currentChain.rpc_url,offlineSigner)
@@ -64,15 +65,13 @@ function addChainToKeplr(currentChain, callback) {
       return SigningStargateClient.connectWithSigner(currentChain.rpc_url, globalOfflineSigner);
     })
     .then((signingClient) => {
-  
-      signingClient.getBalance(globalAddress, currentChainInfo.  currencies[0].coinMinimalDenom)
+      return signingClient.getBalance(globalAddress, currentChainInfo.currencies[0].coinMinimalDenom)
 })
     .then((balance) => {
-
+      console.log("Balance", balance.amount);
       document.querySelector('.content-header-title').textContent = globalAddress.slice(0, 10) + "...";
-      console.log(balance);
-      return callback(null);
-
+      document.querySelector('.content-wrapper-stake-body-main-center-title-amount').textContent = Math.round(((100 * balance.amount) / (10 ** currentChainInfo.currencies[0].coinDecimals)) )/100 + " " + currentChainInfo.currencies[0].coinDenom;
+      return callback(null);s
     }).catch((err) => {
       return callback(err);
   });
@@ -90,12 +89,12 @@ function setTokenUI(currentChain) {
   chainName.textContent = JSON.parse(currentChain.chain_info).chainName;
 };
 
-const SLIDE_ANIMATION_INTERVAL = 30;
-const SLIDE_ANIMATION_STEP = 1;
+const SLIDE_ANIMATION_INTERVAL = 40;
+const SLIDE_ANIMATION_STEP = 2;
 
-let boxPadding = null;
+const boxPadding = 20;
 let activeProject = null;
-let activeProjectToLeft = 0;
+let activeProjectToLeft = 220;
 
 function projectsSlideAnimation() {
   if (activeProjectToLeft > activeProject.getBoundingClientRect().width + boxPadding * 2) {
@@ -104,8 +103,8 @@ function projectsSlideAnimation() {
     activeProject = document.querySelector('.projects-wrapper').childNodes[0];
     activeProject.style.marginLeft = `0`;
   } else {
-    activeProjectToLeft += SLIDE_ANIMATION_STEP;
-    activeProject.style.marginLeft = `-${activeProjectToLeft}px`;
+   // activeProjectToLeft += SLIDE_ANIMATION_STEP;
+  //  activeProject.style.marginLeft = `-${activeProjectToLeft}px`;
   }
   setTimeout(() => {
     projectsSlideAnimation();
@@ -116,7 +115,7 @@ function projectsSlideAnimation() {
 function removeProject(element) {
   const newElement = element.cloneNode(true);
   element.remove();
-  newElement.style.marginLeft = `${boxPadding}px`;
+  //newElement.style.marginLeft = `${boxPadding}px`;
   document.querySelector('.content-wrapper-stake-body-main-title').appendChild(newElement);
 };
 
@@ -125,7 +124,7 @@ function projectsSlideAnimation() {
     activeProjectToLeft = 0;
     removeProject(activeProject);
     activeProject = document.querySelector('.content-wrapper-stake-body-main-title').childNodes[0];
-    activeProject.style.marginLeft = `0`;
+    //activeProject.style.marginLeft = `0`;
   } else {
     activeProjectToLeft += SLIDE_ANIMATION_STEP;
     activeProject.style.marginLeft = `-${activeProjectToLeft}px`;
@@ -139,13 +138,11 @@ function projectsSlideAnimation() {
 
 
 window.addEventListener('load',  () => {
-  let currentChain; 
 
-  //boxPadding = 10px;
-  activeProjectToLeft = boxPadding;
+ 
 
   activeProject = document.querySelector('.content-wrapper-stake-body-main-title').childNodes[0];
-  //projectsSlideAnimation();
+  projectsSlideAnimation();
 
 
   document.addEventListener('input', event => {
@@ -160,6 +157,13 @@ window.addEventListener('load',  () => {
         else 
           chain.style.display = 'none';
       })
+    }
+
+    if (event.target.closest('.content-wrapper-stake-body-main-center-body-stake-amount')) {
+      console.log("here");
+      const stakingValue = event.target.value;
+      const stakingAmount = document.querySelector('.content-wrapper-stake-body-main-center-body-stake-dollar');
+      stakingAmount.textContent = "$"+ Math.round(100 * stakingValue *  currentChain.price)/100;
     }
   });
 

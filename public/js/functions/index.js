@@ -155,12 +155,12 @@ function carosoul(step="right") {
 
 
 window.addEventListener('load',  () => {
-  elx = document.querySelector('.content-wrapper-info-body-wrapper');
+/*   elx = document.querySelector('.content-wrapper-info-body-wrapper');
  children = elx.children;
   classNames =  Array.from(children);
   console.log("elx", classNames);
   
-  
+   */
 
 
 

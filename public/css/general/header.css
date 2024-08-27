@@ -20,6 +20,8 @@
   background-color: var(--primary-background-medium);
   border-radius: 98px var(--header-border-radius) var(--header-border-radius) 98px;
   overflow: hidden;
+  background-color: #DDE4FF !important;
+  border: 1px solid var(--primary-border);
 }
 
 .content-header-icon{
@@ -31,8 +33,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--border-radius-small);
+  border-radius: 26px;
   background-color: var(--primary-background-dark);
+  background-color: #9695DF;
   z-index: 1;
 }
 

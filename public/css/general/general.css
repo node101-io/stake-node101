@@ -124,6 +124,7 @@ p, h1, h2, h3, h4, h5, h6 {
   --border-radius-big: 60px;
   --border-radius-medium:35px;
   --border-radius-small: 25px;
+  --border-radius-smallest: 12px;
 
   --body-padding: 22px;
 

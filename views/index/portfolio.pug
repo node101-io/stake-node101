@@ -1,11 +1,12 @@
 extends ../partials/head
 block main
   .all-wrapper
+    input#chainInfoElement(style='display: none;', value=chainInfo)
     include ../partials/sidebar.pug
     .content
       include ../partials/header.pug
       .content-wrapper
-        include ../partials/stake.pug
+        //include ../partials/stake.pug
         .content-wrapper-portfolio-body
           .content-wrapper-portfolio-body-stat
             .content-wrapper-portfolio-body-stat-title
@@ -77,14 +78,13 @@ block main
             .content-wrapper-portfolio-body-validators-title
               | Your Validators
             .content-wrapper-portfolio-body-validators-content
-              .content-wrapper-portfolio-body-validators-content-first
-                .content-wrapper-portfolio-body-validators-content-first-icon
-                .content-wrapper-portfolio-body-validators-content-first-text
-                  | Imperator
-              .content-wrapper-portfolio-body-validators-content-second
-                .content-wrapper-portfolio-body-validators-content-second-icon
-                .content-wrapper-portfolio-body-validators-content-second-text
-                  | Chorus one
+              each validator in redelegations
+                .content-wrapper-portfolio-body-validators-content-first
+                  .content-wrapper-portfolio-body-validators-content-first-icon
+                  .content-wrapper-portfolio-body-validators-content-first-text
+                    | #{validator.moniker}
+
+    
               .content-wrapper-portfolio-body-validators-content-third
                 .content-wrapper-portfolio-body-validators-content-third-icon
                   svg(width='35' height='21' viewbox='0 0 35 21' fill='none' xmlns='http://www.w3.org/2000/svg')

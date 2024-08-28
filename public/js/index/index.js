@@ -54,6 +54,8 @@ function completeStaking(offlineSigner, accounts, currentChain, stakingValue) {
 }; 
 
 
+
+
 function addChainToKeplr(currentChain, callback) {
  
   const keplr = window.keplr;

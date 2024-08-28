@@ -80,6 +80,7 @@ block main
             .content-wrapper-portfolio-body-validators-content
               each validator in redelegations
                 .content-wrapper-portfolio-body-validators-content-first
+                  input#content-wrapper-portfolio-body-validators-content-first-address(style='display: none;', value=validator.operatorAddress)
                   .content-wrapper-portfolio-body-validators-content-first-icon
                   .content-wrapper-portfolio-body-validators-content-first-text
                     | #{validator.moniker}

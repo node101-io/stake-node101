@@ -9,7 +9,7 @@ function completeStaking(offlineSigner, accounts, currentChain, stakingValue) {
       stakingValue = parseFloat(stakingValue) * (10 ** currentChainInfo.currencies[0].coinDecimals);
       const memo = "Use your power wisely";
       console.log("Max val", stakingValue);
-
+  
       const DelegateMsg = MsgDelegate.fromPartial({
          delegatorAddress: accounts.address,
          validatorAddress: validatorAddress,
@@ -54,6 +54,61 @@ function completeStaking(offlineSigner, accounts, currentChain, stakingValue) {
 }; 
 
 
+
+function completeRedelgation(offlineSigner, accounts, currentChain, validatorAddress) {
+  const currentChainInfo = JSON.parse(currentChain.chain_info);
+  const stakingdenom = currentChainInfo.feeCurrencies[0].coinMinimalDenom;
+  const memo = "Use your power wisely";
+
+  const RedelegateMsg = 
+    MsgBeginRedelegate.fromPartial({
+      delegatorAddress: accounts.address,
+      validatorSrcAddress: validatorAddress,
+      validatorDstAddress: currentChain.validator_address,
+    amount: {
+      denom: stakingdenom,
+      amount: "10"
+    }
+  })
+
+
+
+  const RedelegateTransaction = {
+    typeUrl: "/cosmos.staking.v1beta1.MsgBeginRedelegate",
+    value: RedelegateMsg,
+  };
+
+  const fee = {
+    amount: [
+      {
+        denom: stakingdenom,
+        amount: 10,
+      },
+    ],
+    gas: "1200000", //950k 
+  };
+
+  SigningStargateClient.connectWithSigner(currentChain.rpc_url,offlineSigner)
+      .then((signingClient)=> signingClient.signAndBroadcast(accounts.address, [RedelegateTransaction],fee,memo))
+      .then((gasUsed) => {
+        console.log("Gas used: ", gasUsed);
+    console.log("codee", gasUsed.code) 
+    if (gasUsed.code === 0) {
+      alert("Transaction successful");
+      console.log(`https://www.mintscan.io/cosmos/tx/${gasUsed.transactionHash}`);
+    } else  {
+      alert("Transaction failed");
+    }
+
+    console.log("Gas used: ", gasUsed);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+}; 
+
+
+
 function addChainToKeplr(currentChain, callback) {
  
   const keplr = window.keplr;
@@ -82,7 +137,6 @@ function addChainToKeplr(currentChain, callback) {
       return callback(err);
   });
 };
-
 
 
 
@@ -155,6 +209,7 @@ function carosoul(step="right") {
 
 
 window.addEventListener('load',  () => {
+  let redelegateFrom;
 /*   elx = document.querySelector('.content-wrapper-info-body-wrapper');
  children = elx.children;
   classNames =  Array.from(children);
@@ -196,6 +251,42 @@ window.addEventListener('load',  () => {
   });
 
   document.addEventListener('click', event => {
+
+    if (event.target.closest('.content-wrapper-portfolio-body-validators-content-first')) {
+
+      const validatorAddress = document.querySelector('.content-wrapper-portfolio-body-validators-content-first')
+      const validatorAddress1 = validatorAddress.querySelector('#content-wrapper-portfolio-body-validators-content-first-address').value;
+      console.log(validatorAddress1);
+      if (!window.keplr) {
+        console.log("Keplr extension not installed");
+        return;
+      };
+      const offlineSigner = keplr.getOfflineSigner(currentChain.chain_id);
+      offlineSigner.getAccounts().
+      then((accounts) => {
+        
+        completeRedelgation(offlineSigner, accounts[0], currentChain, validatorAddress1)
+      
+      }).catch((err) => {
+        console.log(err);
+        return;
+      });
+    }; 
+  
+
+
+    if (event.target.closest('.content-wrapper-portfolio-body-validators-content-third')) {
+      const validatorAddress = event.target.closest('.content-wrapper-portfolio-body-validators-content-third').querySelector('.content-wrapper-portfolio-body-validators-content-third-address').textContent;
+      console.log(validatorAddress);
+      if (!window.keplr) {
+        console.log("Keplr extension not installed");
+        return;
+      };
+      console.log("Adding chain");
+      addChainToKeplr(currentChain, (err) => {
+        if (err) console.log(err);
+      });
+    }
 
     if (event.target.closest('.content-wrapper-info-body-larrow')) {
       

@@ -2,6 +2,35 @@ let globalOfflineSigner;
 let globalAddress;
 let currentChain; 
 
+
+function getReward(delegatorAddressx, callback) {
+  const currentChainInfo = JSON.parse(currentChain.chain_info);
+  const validatorAddressx = currentChain.validator_address
+
+  const stakingdenom = currentChainInfo.feeCurrencies[0].coinMinimalDenom;
+  const rpcEndpointx = currentChain.rpc_url;
+  Tendermint34Client.connect(rpcEndpointx).then((tendermintClient) => {
+
+    const queryClient = QueryClient.withExtensions(tendermintClient, setupDistributionExtension);
+
+    queryClient.distribution.delegationRewards(delegatorAddressx, validatorAddressx).then((rewardsResponse) => {
+      const rewards = rewardsResponse.rewards;
+      let amountx;
+      const uatomRewards = rewards.filter(reward => reward.denom === stakingdenom);
+      uatomRewards.forEach(reward => {
+        amountx = Math.floor(parseFloat(reward.amount) / 10e17);
+        console.log("reward", reward.amount);
+        console.log("Amount", amountx);
+        return callback(null, `${amountx}`);
+      });
+    });
+  }
+  ).catch(_ => {
+    return callback('document_not_found');
+  });
+}
+
+
 function completeStaking(offlineSigner, accounts, currentChain, stakingValue) {
       const currentChainInfo = JSON.parse(currentChain.chain_info);
       const validatorAddress = currentChain.validator_address
@@ -106,6 +135,63 @@ function completeRedelgation(offlineSigner, accounts, currentChain, validatorAdd
         console.log(err);
       });
 }; 
+
+
+function completeUnstake(offlineSigner, accounts, currentChain) {
+  const currentChainInfo = JSON.parse(currentChain.chain_info);
+  const stakingdenom = currentChainInfo.feeCurrencies[0].coinMinimalDenom;
+  const memo = "Use your power wisely";
+  const validatorAddress = currentChain.validator_address;
+
+  getReward(accounts.address, (err, data) => {
+  console.log("Data", data);
+  const UndelegateMsg = 
+    MsgUndelegate.fromPartial({
+      delegatorAddress: accounts.address,
+      validatorAddress: validatorAddress,
+      amount: {
+        denom: stakingdenom,
+        amount: data
+      }
+  })
+
+
+
+  const UndelegateTransaction = {
+    typeUrl: "/cosmos.staking.v1beta1.MsgUndelegate",
+    value: UndelegateMsg,
+  };
+
+  const fee = {
+    amount: [
+      {
+        denom: stakingdenom,
+        amount: data,
+      },
+    ],
+    gas: "1200000", //950k 
+  };
+
+  SigningStargateClient.connectWithSigner(currentChain.rpc_url,offlineSigner)
+      .then((signingClient)=> signingClient.signAndBroadcast(accounts.address, [UndelegateTransaction],fee,memo))
+      .then((gasUsed) => {
+        console.log("Gas used: ", gasUsed);
+    console.log("codee", gasUsed.code) 
+    if (gasUsed.code === 0) {
+      alert("Transaction successful");
+      console.log(`https://www.mintscan.io/cosmos/tx/${gasUsed.transactionHash}`);
+    } else  {
+      alert("Transaction failed");
+    }
+
+    console.log("Gas used: ", gasUsed);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+}
+  )};
+  
 
 
 
@@ -249,8 +335,24 @@ window.addEventListener('load',  () => {
       stakingAmount.textContent = "$"+ Math.round(100 * stakingValue *  currentChain.price)/100;
     }
   });
+   document.addEventListener('click', event => {
 
-  document.addEventListener('click', event => {
+    if(event.target.closest('.content-wrapper-portfolio-body-buttons-each-collect')) {
+      console.log("XYZ");
+       if (!window.keplr) {
+        console.log("Keplr extension not installed");
+        return;
+      };
+      const offlineSigner = keplr.getOfflineSigner(currentChain.chain_id);
+      offlineSigner.getAccounts().
+      then((accounts) => {
+        completeUnstake(offlineSigner, accounts[0], currentChain);
+      
+      }).catch((err) => {
+        console.log(err);
+        return;
+      }); 
+    }; 
 
     if (event.target.closest('.content-wrapper-portfolio-body-validators-content-first')) {
 
@@ -307,8 +409,7 @@ window.addEventListener('load',  () => {
     if (event.target.closest('.content-wrapper-stake-body-main-center-body-chain-list-each')) {
       
       const chain_id = event.target.closest('.content-wrapper-stake-body-main-center-body-chain-list-each').querySelector('.content-wrapper-stake-body-main-center-body-chain-list-each-id').textContent;
-      //chain_id = chain_id.querySelector('.content-wrapper-stake-body-main-center-body-chain-list-each-id').textContent;
-      console.log(chain_id);
+
       serverRequest(`/chain?chain_id=${chain_id}`, 'GET', {}, res => {
         if (res.error) {
           console.log(res);
@@ -359,11 +460,6 @@ window.addEventListener('load',  () => {
       const offlineSigner = keplr.getOfflineSigner(currentChain.chain_id);
       offlineSigner.getAccounts().
       then((accounts) => {
-        console.log("1");
-        console.log(offlineSigner);
-        console.log("2");
-        console.log(accounts[0]);
-        console.log("3");
         completeStaking(offlineSigner, accounts[0], currentChain, stakingValue); 
       }).catch((err) => {
         console.log(err);

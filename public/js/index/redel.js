@@ -9,11 +9,12 @@ function getDelegations(delegatorAddress, callback) {
   SigningStargateClient.connectWithSigner(rpcEndpoint).then((client) => {
     client.queryClient.staking.delegatorValidators(delegatorAddress).then((redelegations) => {
       redelegations.validators.forEach((validator) => {
-          validatorList.push({
+        /*   validatorList.push({
             operatorAddress: validator.operatorAddress,
             moniker: validator.description.moniker,
             identity: validator.description.identity
-          })
+          }) */
+          console.log(validator)
       });       
     });
   }).then(() => {

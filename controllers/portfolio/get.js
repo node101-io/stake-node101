@@ -13,9 +13,9 @@ module.exports = (req, res) => {
         return console.error(err);
 
       const address = 'cosmos1nhzfugalfm29htfep7tx3y5fhm8jhks5cy48sl';
-      getRedelegationList(address, (err, redelegations) => {
+       getRedelegationList(address, (err, redelegations) => {
         if (err)
-          return console.error(err);
+          return console.error(err); 
 
         return res.render('index/portfolio', {
           page: 'index/portfolio',
@@ -38,5 +38,5 @@ module.exports = (req, res) => {
         });
       });
     });
-  });
+   }); 
 }

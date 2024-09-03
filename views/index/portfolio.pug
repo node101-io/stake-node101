@@ -22,8 +22,6 @@ block main
                   .content-wrapper-portfolio-body-stat-chain-name-token-name
                     | Atom
                   .content-wrapper-portfolio-body-stat-chain-name-token-darrow
-                    svg(width='14' height='9' viewbox='0 0 14 9' fill='none' xmlns='http://www.w3.org/2000/svg')
-                      path(d='M7 6.04176L1.70711 0.895896C1.31658 0.516219 0.683417 0.516219 0.292893 0.895896C-0.0976314 1.27557 -0.0976314 1.89115 0.292893 2.27083L6.29289 8.10416C6.68342 8.48383 7.31658 8.48383 7.70711 8.10416L13.7071 2.27082C14.0976 1.89115 14.0976 1.27557 13.7071 0.895895C13.3166 0.516218 12.6834 0.516218 12.2929 0.895895L7 6.04176Z' fill='#2C202A')
               .content-wrapper-portfolio-body-stat-chain-value
                 .content-wrapper-portfolio-body-stat-chain-value-title
                   .content-wrapper-portfolio-body-stat-chain-value-title-icon
@@ -82,6 +80,7 @@ block main
                 .content-wrapper-portfolio-body-validators-content-first
                   input#content-wrapper-portfolio-body-validators-content-first-address(style='display: none;', value=validator.operatorAddress)
                   .content-wrapper-portfolio-body-validators-content-first-icon
+                    img.content-wrapper-portfolio-body-validators-content-first-icon(src=validator.picture)
                   .content-wrapper-portfolio-body-validators-content-first-text
                     | #{validator.moniker}
 
@@ -104,7 +103,7 @@ block main
               .content-wrapper-portfolio-body-buttons-spiral-left
                 svg(width='138' height='139' viewbox='0 0 138 139' fill='none' xmlns='http://www.w3.org/2000/svg')
                   path(d='M5.7077 148.687C19.736 149.313 58.4848 105.843 63.9765 85.8154C66.2617 77.4819 64.5109 64.7922 58.5007 57.88C45.5937 43.036 16.4335 53.234 34.6372 71.833C44.8461 82.2637 63.3878 79.3588 76.488 77.1272C95.7987 73.8377 105.035 63.3624 116.003 48.7058C121.573 41.2625 135.172 4.91163 132.352 5.61393' stroke='#C4CDF4' stroke-width='10' stroke-linecap='round')
-              .content-wrapper-portfolio-body-buttons-each
+              .content-wrapper-portfolio-body-buttons-each.content-wrapper-portfolio-body-buttons-each-collect
                 .content-wrapper-portfolio-body-buttons-each-text
                   | Collect Your Rewards
                 .content-wrapper-portfolio-body-buttons-each-arrow

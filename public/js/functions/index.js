@@ -310,8 +310,8 @@ window.addEventListener('load',  () => {
   activeProjectToLeft = boxPadding;
   console.log(boxPadding);
 
-  //activeProject = document.querySelector('.content-wrapper-stake-body-main-title').childNodes[0];
-  //projectsSlideAnimation();
+  activeProject = document.querySelector('.content-wrapper-stake-body-main-title').childNodes[0];
+  projectsSlideAnimation();
 
 
   document.addEventListener('input', event => {

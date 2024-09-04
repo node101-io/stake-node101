@@ -354,6 +354,23 @@ window.addEventListener('load',  () => {
       }); 
     }; 
 
+    if(event.target.closest('.content-wrapper-portfolio-body-buttons-each-restake')) {
+      console.log("123XYZ");
+       if (!window.keplr) {
+        console.log("Keplr extension not installed");
+        return;
+      };
+      const offlineSigner = keplr.getOfflineSigner(currentChain.chain_id);
+      offlineSigner.getAccounts().
+      then((accounts) => {
+        completeUnstake(offlineSigner, accounts[0], currentChain);
+      
+      }).catch((err) => {
+        console.log(err);
+        return;
+      }); 
+    }; 
+
     if (event.target.closest('.content-wrapper-portfolio-body-validators-content-first')) {
 
       const validatorAddress = document.querySelector('.content-wrapper-portfolio-body-validators-content-first')

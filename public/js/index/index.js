@@ -270,11 +270,7 @@ window.addEventListener('load',  () => {
       const offlineSigner = keplr.getOfflineSigner(currentChain.chain_id);
       offlineSigner.getAccounts().
       then((accounts) => {
-        console.log("1");
-        console.log(offlineSigner);
-        console.log("2");
-        console.log(accounts[0]);
-        console.log("3");
+     
         completeStaking(offlineSigner, accounts[0], currentChain, stakingValue); 
       }).catch((err) => {
         console.log(err);

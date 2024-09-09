@@ -1,7 +1,7 @@
 
 let globalOfflineSigner;
 let globalAddress;
-let currentChain; 
+let currentChain;
 let globalBalance;
 
 function saveToSession(data, callback) {
@@ -22,15 +22,13 @@ function setTokenUI(currentChain) {
   const chainName = document.querySelector('.content-wrapper-stake-body-main-center-body-chain-name-network');
 
   tokenImage.src = currentChain.img_url;
-  tokenName.textContent = JSON.parse(currentChain.chain_info).currencies[0].coinDenom
+  tokenName.textContent = JSON.parse(currentChain.chain_info).currencies[0].coinDenom;
   chainName.textContent = JSON.parse(currentChain.chain_info).chainName;
- 
 };
 
 
 
 function addChainToKeplr(currentChain, callback) {
- 
   const keplr = window.keplr;
   const currentChainInfo = JSON.parse(currentChain.chain_info);
 
@@ -49,27 +47,26 @@ function addChainToKeplr(currentChain, callback) {
       return SigningStargateClient.connectWithSigner(currentChain.rpc_url, globalOfflineSigner);
     })
     .then((signingClient) => {
-      return signingClient.getBalance(globalAddress, currentChainInfo.currencies[0].coinMinimalDenom)
-})
+      return signingClient.getBalance(globalAddress, currentChainInfo.currencies[0].coinMinimalDenom);
+    })
     .then((balance) => {
       globalBalance = Math.round(((100 * balance.amount) / (10 ** currentChainInfo.currencies[0].coinDecimals)) )/100 + " " + currentChainInfo.currencies[0].coinDenom;
+
       document.querySelector('.content-header-title').textContent = globalAddress.slice(0, 10) + "...";
       document.querySelector('.content-wrapper-stake-body-main-center-title-amount').textContent = Math.round(((100 * balance.amount) / (10 ** currentChainInfo.currencies[0].coinDecimals)) )/100 + " " + currentChainInfo.currencies[0].coinDenom;
 
       saveToSession({
-        "currentChainKey": currentChain.chain_id,
-        "globalAddressKey": globalAddress,
-        "globalBalanceKey": globalBalance,
+        currentChainKey: currentChain.chain_id,
+        globalAddressKey: globalAddress,
+        globalBalanceKey: globalBalance,
       }, (err,res) => {
-       if (err) console.log(err);
-        
-      return;
-    }); 
-    return callback(null);
-    }).catch((err) => {
+        if (err) return console.log(err);
+      });
 
+      return callback(null);
+    }).catch((err) => {
       return callback(err);
-  });
+    });
 };
 
 function completeStaking(offlineSigner, accounts, currentChain, stakingValue) {
@@ -100,14 +97,14 @@ function completeStaking(offlineSigner, accounts, currentChain, stakingValue) {
         amount: stakingValue,
       },
     ],
-    gas: "950000", //950k 
+    gas: "950000", //950k
   };
 
   SigningStargateClient.connectWithSigner(currentChain.rpc_url,offlineSigner)
   .then((signingClient)=> signingClient.signAndBroadcast(accounts.address, [DelegateTransaction],fee,memo))
   .then((gasUsed) => {
     console.log("Gas used: ", gasUsed);
-console.log("codee", gasUsed.code) 
+console.log("codee", gasUsed.code)
 if (gasUsed.code === 0) {
   alert("Transaction successful");
   console.log(`https://www.mintscan.io/cosmos/tx/${gasUsed.transactionHash}`);
@@ -120,7 +117,7 @@ console.log("Gas used: ", gasUsed);
   .catch((err) => {
     console.log(err);
   });
-}; 
+};
 
 
 
@@ -172,7 +169,7 @@ function carosoul(step="right") {
 
   classNames[1].style.zIndex = '100';
   counter++;
-  
+
 
   setTimeout(() => {
     carosoul();
@@ -190,8 +187,8 @@ window.addEventListener('load',  async() => {
   console.log("elx", classNames);
 
 
-  
-  
+
+
 
 
 
@@ -209,10 +206,10 @@ window.addEventListener('load',  async() => {
       console.log(searchValue)
       const chains = document.querySelectorAll('.content-wrapper-stake-body-main-center-body-chain-list-each');
       console.log(chains)
-      chains.forEach(chain => {   
-        if ((chain.getAttribute('data-chain-name')).includes(searchValue) || (chain.getAttribute('data-coin-name')).includes(searchValue)) 
+      chains.forEach(chain => {
+        if ((chain.getAttribute('data-chain-name')).includes(searchValue) || (chain.getAttribute('data-coin-name')).includes(searchValue))
           chain.style.display = '';
-        else 
+        else
           chain.style.display = 'none';
       })
     }
@@ -232,7 +229,7 @@ window.addEventListener('load',  async() => {
 
 
     if (event.target.closest('.content-wrapper-info-body-larrow')) {
-      
+
       carosoul("left");
       console.log("yy")
     }
@@ -248,7 +245,7 @@ window.addEventListener('load',  async() => {
     };
 
     if (event.target.closest('.content-wrapper-stake-body-main-center-body-chain-list-each')) {
-      
+
       const chain_id = event.target.closest('.content-wrapper-stake-body-main-center-body-chain-list-each').querySelector('.content-wrapper-stake-body-main-center-body-chain-list-each-id').textContent;
       //chain_id = chain_id.querySelector('.content-wrapper-stake-body-main-center-body-chain-list-each-id').textContent;
       console.log(chain_id);
@@ -269,12 +266,12 @@ window.addEventListener('load',  async() => {
 
       document.querySelector('.content-wrapper-stake-body-main-center-body-chain-list').classList.toggle('display-none');
     };
- 
+
 
     if (event.target.closest('.content-header-title')) {
-   
+
     currentChain = !currentChain ? JSON.parse(document.getElementById('chainInfoElement').value) : currentChain;
-    
+
     if (!window.keplr) {
       console.log("Keplr extension not installed");
       return;
@@ -290,10 +287,10 @@ window.addEventListener('load',  async() => {
     if (event.target.closest('.content-wrapper-stake-body-button')) {
       const keplr = window.keplr;
       if (!currentChain) {
-        
+
         return;
       };
-      
+
 
       const inputElement = document.querySelector('.content-wrapper-stake-body-main-center-body-stake-amount');
       const stakingValue = inputElement.value;
@@ -306,12 +303,12 @@ window.addEventListener('load',  async() => {
       const offlineSigner = keplr.getOfflineSigner(currentChain.chain_id);
       offlineSigner.getAccounts().
       then((accounts) => {
-     
-        completeStaking(offlineSigner, accounts[0], currentChain, stakingValue); 
+
+        completeStaking(offlineSigner, accounts[0], currentChain, stakingValue);
       }).catch((err) => {
         console.log(err);
         return;
       });
-    }; 
+    };
   })
 });

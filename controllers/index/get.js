@@ -1,33 +1,24 @@
 const ChainInfo = require('../../models/ChainInfo/ChainInfo');
+
+const DEFAULT_CHAIN_ID = 'cosmoshub-4';
+
 module.exports = (req, res) => {
+  let listOfTokenIndex = 0; // TODO: bundan kurtulalım, array yerine object kullanalım
 
-  let chain_id = 'cosmoshub-4'
-  let listOfTokenIndex = 0;
-  data = ['currentChainKey', 'globalAddressKey', 'globalBalanceKey']
-  items = {}
+  const chain_id = req.session.currentChainKey || DEFAULT_CHAIN_ID;
 
-  data.forEach(key => {
-    if (!key || typeof key != 'string' || !key.trim().length)
-      return;
-
-    items[key.trim()] = req.session[key.trim()];
-  });
-
-  if (items['currentChainKey']) {
-      chain_id = items['currentChainKey'];
-  }
-  
   ChainInfo.getListOfToken({ is_active: true }, (err, listOfToken) => {
     if (err)
       return console.error(err);
 
+    // TODO: bu zaten gidecek
     for (let i = 0; i < listOfToken.length; i++) {
       if (listOfToken[i].chain_id === chain_id) {
         listOfTokenIndex = i;
         break;
       }
     }
-    
+
     ChainInfo.findChainInfoByChainId(chain_id, (err, chainInfo) => {
       if (err)
         return res.json({ error: err });
@@ -50,8 +41,10 @@ module.exports = (req, res) => {
         chainInfo: chainInfo,
         listOfToken: listOfToken,
         listOfTokenIndex: listOfTokenIndex,
-        session: items
+        currentChainKey: req.session.currentChainKey,
+        globalAddressKey: req.session.globalAddressKey,
+        globalBalanceKey: req.session.globalBalanceKey
       });
     });
   });
-}
+};

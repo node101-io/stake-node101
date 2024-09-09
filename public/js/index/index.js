@@ -20,15 +20,11 @@ function setTokenUI(currentChain) {
   const tokenImage = document.querySelector('.content-wrapper-stake-body-main-center-body-icon-img');
   const tokenName = document.querySelector('.content-wrapper-stake-body-main-center-body-chain-token');
   const chainName = document.querySelector('.content-wrapper-stake-body-main-center-body-chain-name-network');
- /*  const Address = document.querySelector('.content-header-title');
-  const Balance =  document.querySelector('.content-wrapper-stake-body-main-center-title-amount')
 
- */
   tokenImage.src = currentChain.img_url;
   tokenName.textContent = JSON.parse(currentChain.chain_info).currencies[0].coinDenom
   chainName.textContent = JSON.parse(currentChain.chain_info).chainName;
- // Address.textContent = globalAddress?.slice(0, 10) + "..." || "Connect Wallet";
-  //Balance.textContent = Math.round(((100 * globalBalance.amount) / (10 ** JSON.parse(currentChain.chain_info).currencies[0].coinDecimals)) )/100 + " " + JSON.parse(currentChain.chain_info).currencies[0].coinDenom;
+ 
 };
 
 
@@ -56,7 +52,7 @@ function addChainToKeplr(currentChain, callback) {
       return signingClient.getBalance(globalAddress, currentChainInfo.currencies[0].coinMinimalDenom)
 })
     .then((balance) => {
-      globalBalance = balance.amount;
+      globalBalance = Math.round(((100 * balance.amount) / (10 ** currentChainInfo.currencies[0].coinDecimals)) )/100 + " " + currentChainInfo.currencies[0].coinDenom;
       document.querySelector('.content-header-title').textContent = globalAddress.slice(0, 10) + "...";
       document.querySelector('.content-wrapper-stake-body-main-center-title-amount').textContent = Math.round(((100 * balance.amount) / (10 ** currentChainInfo.currencies[0].coinDecimals)) )/100 + " " + currentChainInfo.currencies[0].coinDenom;
 
@@ -206,25 +202,6 @@ window.addEventListener('load',  async() => {
 
   //activeProject = document.querySelector('.content-wrapper-stake-body-main-title').childNodes[0];
   //projectsSlideAnimation();
-
-
-  
-  
-
-  // You can get the address/public keys by `getAccounts` method.
-  // It can return the array of address/public key.
-  // But, currently, Keplr extension manages only one address/public key pair.
-  // XXX: This line is needed to set the sender address for SigningCosmosClient.
-/*    const client = window.keplr.getOfflineSigner(chainId);
-  console.log("Basliyorrr");
-  console.log(client);
-
-   console.log(client.chainId);  */
-  // Initialize the gaia api with the offline signer that is injected by Keplr extension.
-
-/*   console.log(offlineSigner);
-  const accounts = await offlineSigner.getAccounts();
-  console.log(accounts[0].address); */
 
   document.addEventListener('input', event => {
     if (event.target.closest('.content-wrapper-stake-body-main-center-body-chain-list-search-input')) {

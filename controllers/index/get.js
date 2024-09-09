@@ -1,8 +1,8 @@
 const ChainInfo = require('../../models/ChainInfo/ChainInfo');
-const serverRequest = require('../../models/ChainInfo/functions/serverRequest');
 module.exports = (req, res) => {
 
   let chain_id = 'cosmoshub-4'
+  let listOfTokenIndex = 0;
   data = ['currentChainKey', 'globalAddressKey', 'globalBalanceKey']
   items = {}
 
@@ -20,6 +20,13 @@ module.exports = (req, res) => {
   ChainInfo.getListOfToken({ is_active: true }, (err, listOfToken) => {
     if (err)
       return console.error(err);
+
+    for (let i = 0; i < listOfToken.length; i++) {
+      if (listOfToken[i].chain_id === chain_id) {
+        listOfTokenIndex = i;
+        break;
+      }
+    }
     
     ChainInfo.findChainInfoByChainId(chain_id, (err, chainInfo) => {
       if (err)
@@ -42,6 +49,7 @@ module.exports = (req, res) => {
         },
         chainInfo: chainInfo,
         listOfToken: listOfToken,
+        listOfTokenIndex: listOfTokenIndex,
         session: items
       });
     });

@@ -1,4 +1,5 @@
 .content-wrapper-stake
+  - console.log(listOfToken)
   .content-wrapper-stake-body-main
     .content-wrapper-stake-body-main-title
       each chain in listOfToken
@@ -22,7 +23,8 @@
       .content-wrapper-stake-body-main-center-title
         .content-wrapper-stake-body-main-center-title-each
           | Available - &nbsp;
-          .content-wrapper-stake-body-main-center-title-amount= globalBalanceKey
+          .content-wrapper-stake-body-main-center-title-amount
+            | #{globalBalanceKey} 
         .content-wrapper-stake-body-main-center-title-each
           .content-wrapper-stake-body-main-center-title-each.content-wrapper-stake-body-main-center-title-half
             | Half |
@@ -30,16 +32,16 @@
             |  &nbsp; Max
       .content-wrapper-stake-body-main-center-body
         .content-wrapper-stake-body-main-center-body-icon
-          img.content-wrapper-stake-body-main-center-body-icon-img(src=listOfToken[listOfTokenIndex].img_url, alt=listOfToken[listOfTokenIndex].coin_denom)
+          img.content-wrapper-stake-body-main-center-body-icon-img(src=listOfToken[currentChainKey].img_url, alt=listOfToken[currentChainKey].coin_denom)
         .content-wrapper-stake-body-main-center-body-chain
           .content-wrapper-stake-body-main-center-body-chain-name
             .content-wrapper-stake-body-main-center-body-chain-name-network
-              | #{listOfToken[listOfTokenIndex].chain_name}
+              | #{listOfToken[currentChainKey].chain_name}
             .content-wrapper-stake-body-main-center-body-chain-name-icon
               svg(width='19' height='21' viewbox='0 0 19 21' fill='none' xmlns='http://www.w3.org/2000/svg')
                 path(d='M9.5 12.9671L2.69485 6.35098C2.19275 5.86283 1.37868 5.86283 0.876577 6.35098C0.374474 6.83914 0.374474 7.63059 0.876577 8.11875L8.59086 15.6187C9.09297 16.1069 9.90703 16.1069 10.4091 15.6187L18.1234 8.11875C18.6255 7.63059 18.6255 6.83914 18.1234 6.35098C17.6213 5.86282 16.8073 5.86282 16.3051 6.35098L9.5 12.9671Z' fill='#2C202A')
           .content-wrapper-stake-body-main-center-body-chain-token
-            | #{listOfToken[listOfTokenIndex].coin_denom}
+            | #{listOfToken[currentChainKey].coin_denom}
           .content-wrapper-stake-body-main-center-body-chain-list.display-none
             .content-wrapper-stake-body-main-center-body-chain-list-search
               .content-wrapper-stake-body-main-center-body-chain-list-search-icon
@@ -84,7 +86,7 @@
               | +0.2%
           .content-wrapper-stake-body-main-content-stat-title-content-each-value
             .content-wrapper-stake-body-main-content-stat-title-content-each-value-token
-              | 1,24 #{listOfToken[listOfTokenIndex].coin_denom}
+              | 1,24 #{listOfToken[currentChainKey].coin_denom}
             .content-wrapper-stake-body-main-content-stat-title-content-each-value-price
               | $14,5
         .content-wrapper-stake-body-main-content-stat-title-content-each
@@ -95,7 +97,7 @@
               | +0.2%
           .content-wrapper-stake-body-main-content-stat-title-content-each-value
             .content-wrapper-stake-body-main-content-stat-title-content-each-value-token
-              | 1,24 #{listOfToken[listOfTokenIndex].coin_denom}
+              | 1,24 #{listOfToken[currentChainKey].coin_denom}
             .content-wrapper-stake-body-main-content-stat-title-content-each-value-price
               | $14,5
         .content-wrapper-stake-body-main-content-stat-title-content-each
@@ -106,7 +108,7 @@
               | +0.2%
           .content-wrapper-stake-body-main-content-stat-title-content-each-value
             .content-wrapper-stake-body-main-content-stat-title-content-each-value-token
-              | 1,24 #{listOfToken[listOfTokenIndex].coin_denom}
+              | 1,24 #{listOfToken[currentChainKey].coin_denom}
             .content-wrapper-stake-body-main-content-stat-title-content-each-value-price
               | $14,5
   .content-wrapper-stake-body-button

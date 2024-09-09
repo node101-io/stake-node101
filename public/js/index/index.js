@@ -1,7 +1,6 @@
 
-let globalOfflineSigner;
-let globalAddress;
 let currentChain;
+let globalAddress;
 let globalBalance;
 
 function saveToSession(data, callback) {
@@ -30,10 +29,8 @@ function setTokenUI(currentChain) {
 
 function addChainToKeplr(currentChain, callback) {
   const keplr = window.keplr;
+  let globalOfflineSigner
   const currentChainInfo = JSON.parse(currentChain.chain_info);
-
-  const client = window.keplr.getOfflineSigner(currentChain.chain_id);
-  console.log(client.chainId);
 
   keplr.experimentalSuggestChain(currentChainInfo)
     .then(() => keplr.enable(currentChain.chain_id))
@@ -54,7 +51,7 @@ function addChainToKeplr(currentChain, callback) {
 
       document.querySelector('.content-header-title').textContent = globalAddress.slice(0, 10) + "...";
       document.querySelector('.content-wrapper-stake-body-main-center-title-amount').textContent = Math.round(((100 * balance.amount) / (10 ** currentChainInfo.currencies[0].coinDecimals)) )/100 + " " + currentChainInfo.currencies[0].coinDenom;
-
+      console.log(globalBalance);
       saveToSession({
         currentChainKey: currentChain.chain_id,
         globalAddressKey: globalAddress,

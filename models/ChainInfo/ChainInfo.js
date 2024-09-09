@@ -258,20 +258,19 @@ ChainInfoSchema.statics.getListOfToken = function (is_active, callback) {
     if (err)
       return callback('database_error');
 
-    const listOfToken = [];
+    const listOfToken = {};
     for (let i = 0; i < chainInfos.length; i++) {
       const chainName = JSON.parse(chainInfos[i].chain_info).chainName;
-      listOfToken.push( {
-
+    
+      listOfToken[chainInfos[i].chain_id] = {
         'chain_id': chainInfos[i].chain_id,
         'chain_name': chainName,
         'img_url': chainInfos[i].img_url,
         'coin_denom': JSON.parse(chainInfos[i].chain_info).currencies[0].coinDenom,
         'price': chainInfos[i].price,
         'price_change_24h': chainInfos[i].price_change_24h,
-      });
+      };
     }
-
     return callback(null, listOfToken);
   });
 };

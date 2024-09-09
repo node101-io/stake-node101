@@ -3,7 +3,6 @@ const ChainInfo = require('../../models/ChainInfo/ChainInfo');
 const DEFAULT_CHAIN_ID = 'cosmoshub-4';
 
 module.exports = (req, res) => {
-  let listOfTokenIndex = 0; // TODO: bundan kurtulalım, array yerine object kullanalım
 
   const chain_id = req.session.currentChainKey || DEFAULT_CHAIN_ID;
 
@@ -11,18 +10,10 @@ module.exports = (req, res) => {
     if (err)
       return console.error(err);
 
-    // TODO: bu zaten gidecek
-    for (let i = 0; i < listOfToken.length; i++) {
-      if (listOfToken[i].chain_id === chain_id) {
-        listOfTokenIndex = i;
-        break;
-      }
-    }
-
     ChainInfo.findChainInfoByChainId(chain_id, (err, chainInfo) => {
       if (err)
         return res.json({ error: err });
-
+        
       return res.render('index/index', {
         page: 'index/index',
         title: res.__('For you to make most of the distributed value'),
@@ -40,7 +31,6 @@ module.exports = (req, res) => {
         },
         chainInfo: chainInfo,
         listOfToken: listOfToken,
-        listOfTokenIndex: listOfTokenIndex,
         currentChainKey: req.session.currentChainKey,
         globalAddressKey: req.session.globalAddressKey,
         globalBalanceKey: req.session.globalBalanceKey

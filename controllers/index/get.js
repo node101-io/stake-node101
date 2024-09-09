@@ -1,8 +1,22 @@
 const ChainInfo = require('../../models/ChainInfo/ChainInfo');
-
+const serverRequest = require('../../models/ChainInfo/functions/serverRequest');
 module.exports = (req, res) => {
 
-  const chain_id = 'cosmoshub-4'
+  let chain_id = 'cosmoshub-4'
+  data = ['currentChainKey', 'globalAddressKey', 'globalBalanceKey']
+  items = {}
+
+  data.forEach(key => {
+    if (!key || typeof key != 'string' || !key.trim().length)
+      return;
+
+    items[key.trim()] = req.session[key.trim()];
+  });
+
+  if (items['currentChainKey']) {
+      chain_id = items['currentChainKey'];
+  }
+  
   ChainInfo.getListOfToken({ is_active: true }, (err, listOfToken) => {
     if (err)
       return console.error(err);
@@ -28,6 +42,7 @@ module.exports = (req, res) => {
         },
         chainInfo: chainInfo,
         listOfToken: listOfToken,
+        session: items
       });
     });
   });

@@ -1,58 +1,35 @@
+
 let globalOfflineSigner;
 let globalAddress;
 let currentChain; 
+let globalBalance;
 
-function completeStaking(offlineSigner, accounts, currentChain, stakingValue) {
-      const currentChainInfo = JSON.parse(currentChain.chain_info);
-      const validatorAddress = currentChain.validator_address
-      const stakingdenom = currentChainInfo.feeCurrencies[0].coinMinimalDenom;
-      stakingValue = parseFloat(stakingValue) * (10 ** currentChainInfo.currencies[0].coinDecimals);
-      const memo = "Use your power wisely";
-      console.log("Max val", stakingValue);
+function saveToSession(data, callback) {
+  if (!data || typeof data != 'object')
+    return callback(null);
 
-      const DelegateMsg = MsgDelegate.fromPartial({
-         delegatorAddress: accounts.address,
-         validatorAddress: validatorAddress,
-         amount: {
-           denom: stakingdenom,
-           amount: stakingValue.toString()
-         }
-       });
+  serverRequest('/session/set', 'POST' , data, (res, err) => {
+    if (err) return callback(err);
 
-      const DelegateTransaction = {
-        typeUrl: "/cosmos.staking.v1beta1.MsgDelegate",
-        value: DelegateMsg,
-      };
+    return callback(null);
+  });
+};
 
-      const fee = {
-        amount: [
-          {
-            denom: stakingdenom,
-            amount: stakingValue,
-          },
-        ],
-        gas: "950000", //950k 
-      };
 
-      SigningStargateClient.connectWithSigner(currentChain.rpc_url,offlineSigner)
-      .then((signingClient)=> signingClient.signAndBroadcast(accounts.address, [DelegateTransaction],fee,memo))
-      .then((gasUsed) => {
-        console.log("Gas used: ", gasUsed);
-    console.log("codee", gasUsed.code) 
-    if (gasUsed.code === 0) {
-      alert("Transaction successful");
-      console.log(`https://www.mintscan.io/cosmos/tx/${gasUsed.transactionHash}`);
-    } else  {
-      alert("Transaction failed");
-    }
-  
-    console.log("Gas used: ", gasUsed);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-}; 
+function setTokenUI(currentChain) {
+  const tokenImage = document.querySelector('.content-wrapper-stake-body-main-center-body-icon-img');
+  const tokenName = document.querySelector('.content-wrapper-stake-body-main-center-body-chain-token');
+  const chainName = document.querySelector('.content-wrapper-stake-body-main-center-body-chain-name-network');
+ /*  const Address = document.querySelector('.content-header-title');
+  const Balance =  document.querySelector('.content-wrapper-stake-body-main-center-title-amount')
 
+ */
+  tokenImage.src = currentChain.img_url;
+  tokenName.textContent = JSON.parse(currentChain.chain_info).currencies[0].coinDenom
+  chainName.textContent = JSON.parse(currentChain.chain_info).chainName;
+ // Address.textContent = globalAddress?.slice(0, 10) + "..." || "Connect Wallet";
+  //Balance.textContent = Math.round(((100 * globalBalance.amount) / (10 ** JSON.parse(currentChain.chain_info).currencies[0].coinDecimals)) )/100 + " " + JSON.parse(currentChain.chain_info).currencies[0].coinDenom;
+};
 
 
 
@@ -60,6 +37,9 @@ function addChainToKeplr(currentChain, callback) {
  
   const keplr = window.keplr;
   const currentChainInfo = JSON.parse(currentChain.chain_info);
+
+  const client = window.keplr.getOfflineSigner(currentChain.chain_id);
+  console.log(client.chainId);
 
   keplr.experimentalSuggestChain(currentChainInfo)
     .then(() => keplr.enable(currentChain.chain_id))
@@ -76,27 +56,77 @@ function addChainToKeplr(currentChain, callback) {
       return signingClient.getBalance(globalAddress, currentChainInfo.currencies[0].coinMinimalDenom)
 })
     .then((balance) => {
-      console.log("Balance", balance.amount);
+      globalBalance = balance.amount;
       document.querySelector('.content-header-title').textContent = globalAddress.slice(0, 10) + "...";
       document.querySelector('.content-wrapper-stake-body-main-center-title-amount').textContent = Math.round(((100 * balance.amount) / (10 ** currentChainInfo.currencies[0].coinDecimals)) )/100 + " " + currentChainInfo.currencies[0].coinDenom;
-      return callback(null);s
+
+      saveToSession({
+        "currentChainKey": currentChain.chain_id,
+        "globalAddressKey": globalAddress,
+        "globalBalanceKey": globalBalance,
+      }, (err,res) => {
+       if (err) console.log(err);
+        
+      return;
+    }); 
+    return callback(null);
     }).catch((err) => {
+
       return callback(err);
   });
 };
 
+function completeStaking(offlineSigner, accounts, currentChain, stakingValue) {
+  const currentChainInfo = JSON.parse(currentChain.chain_info);
+  const validatorAddress = currentChain.validator_address
+  const stakingdenom = currentChainInfo.feeCurrencies[0].coinMinimalDenom;
+  stakingValue = parseFloat(stakingValue) * (10 ** currentChainInfo.currencies[0].coinDecimals);
+  const memo = "Use your power wisely";
+
+  const DelegateMsg = MsgDelegate.fromPartial({
+     delegatorAddress: accounts.address,
+     validatorAddress: validatorAddress,
+     amount: {
+       denom: stakingdenom,
+       amount: stakingValue.toString()
+     }
+   });
+
+  const DelegateTransaction = {
+    typeUrl: "/cosmos.staking.v1beta1.MsgDelegate",
+    value: DelegateMsg,
+  };
+
+  const fee = {
+    amount: [
+      {
+        denom: stakingdenom,
+        amount: stakingValue,
+      },
+    ],
+    gas: "950000", //950k 
+  };
+
+  SigningStargateClient.connectWithSigner(currentChain.rpc_url,offlineSigner)
+  .then((signingClient)=> signingClient.signAndBroadcast(accounts.address, [DelegateTransaction],fee,memo))
+  .then((gasUsed) => {
+    console.log("Gas used: ", gasUsed);
+console.log("codee", gasUsed.code) 
+if (gasUsed.code === 0) {
+  alert("Transaction successful");
+  console.log(`https://www.mintscan.io/cosmos/tx/${gasUsed.transactionHash}`);
+} else  {
+  alert("Transaction failed");
+}
+
+console.log("Gas used: ", gasUsed);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+}; 
 
 
-
-function setTokenUI(currentChain) {
-  const tokenImage = document.querySelector('.content-wrapper-stake-body-main-center-body-icon-img');
-  const tokenName = document.querySelector('.content-wrapper-stake-body-main-center-body-chain-token');
-  const chainName = document.querySelector('.content-wrapper-stake-body-main-center-body-chain-name-network');
-
-  tokenImage.src = currentChain.img_url;
-  tokenName.textContent = JSON.parse(currentChain.chain_info).currencies[0].coinDenom
-  chainName.textContent = JSON.parse(currentChain.chain_info).chainName;
-};
 
 const SLIDE_ANIMATION_INTERVAL = 14;
 const SLIDE_ANIMATION_STEP = 1;
@@ -144,8 +174,7 @@ function carosoul(step="right") {
   classNames[(counter - 1) %(classNames.length)].style.zIndex = 0;
   classNames[counter  % (classNames.length)].style.zIndex = 500;
 
- /*  classNames[1].style.zIndex = '100';
-  console.log(classNames[counter%(classNames.length)]) */
+  classNames[1].style.zIndex = '100';
   counter++;
   
 
@@ -156,11 +185,15 @@ function carosoul(step="right") {
 };
 
 
-window.addEventListener('load',  () => {
+window.addEventListener('load',  async() => {
+
+  setTokenUI(JSON.parse(document.getElementById('chainInfoElement').value));
   elx = document.querySelector('.content-wrapper-info-body-wrapper');
  children = elx.children;
   classNames =  Array.from(children);
   console.log("elx", classNames);
+
+
   
   
 
@@ -174,6 +207,24 @@ window.addEventListener('load',  () => {
   //activeProject = document.querySelector('.content-wrapper-stake-body-main-title').childNodes[0];
   //projectsSlideAnimation();
 
+
+  
+  
+
+  // You can get the address/public keys by `getAccounts` method.
+  // It can return the array of address/public key.
+  // But, currently, Keplr extension manages only one address/public key pair.
+  // XXX: This line is needed to set the sender address for SigningCosmosClient.
+/*    const client = window.keplr.getOfflineSigner(chainId);
+  console.log("Basliyorrr");
+  console.log(client);
+
+   console.log(client.chainId);  */
+  // Initialize the gaia api with the offline signer that is injected by Keplr extension.
+
+/*   console.log(offlineSigner);
+  const accounts = await offlineSigner.getAccounts();
+  console.log(accounts[0].address); */
 
   document.addEventListener('input', event => {
     if (event.target.closest('.content-wrapper-stake-body-main-center-body-chain-list-search-input')) {
@@ -198,6 +249,10 @@ window.addEventListener('load',  () => {
   });
 
   document.addEventListener('click', event => {
+
+    let data = {navbar: false};
+    console.log(JSON.stringify(data));
+
 
     if (event.target.closest('.content-wrapper-info-body-larrow')) {
       
@@ -226,8 +281,12 @@ window.addEventListener('load',  () => {
         } else {
           currentChain = res.chainInfo;
 
-          addChainToKeplr(currentChain);
-          setTokenUI(currentChain);
+          addChainToKeplr(currentChain, (err) => {
+            if (err) console.log;
+
+            setTokenUI(currentChain);
+          });
+
         }
       });
 

@@ -7,4 +7,9 @@
       path(d='M1.42969 18.5718H38.5725' stroke='#DFE5FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round')
       path(d='M8.17439 3.81608C8.40402 2.43843 9.59599 1.42871 10.9926 1.42871H29.0088C30.4054 1.42871 31.5974 2.43849 31.8271 3.8162L34.286 18.5716H5.71484L8.17439 3.81608Z' stroke='#DFE5FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round')
   .content-header-title
-      | Sign in / Connect wallet
+    - console.log(session.globalAddressKey)
+    if session.globalAddressKey
+      div #{(session.globalAddressKey).slice(0, 10) + "..." }
+    else
+      div Welcome to node101
+    

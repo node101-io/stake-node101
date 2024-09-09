@@ -4,10 +4,13 @@ const { MsgBeginRedelegate } = require('cosmjs-types/cosmos/staking/v1beta1/tx')
 const { MsgUndelegate } = require('cosmjs-types/cosmos/staking/v1beta1/tx');
 
 
-const {QueryClient, setupDistributionExtension} = require("@cosmjs/stargate");
+const { QueryClient, setupDistributionExtension} = require("@cosmjs/stargate");
 const { Tendermint34Client } = require("@cosmjs/tendermint-rpc");
+const { StargateClient } = require("@cosmjs/stargate")
 
 
+
+window.StargateClient = StargateClient;
 window.Tendermint34Client = Tendermint34Client;
 window.QueryClient = QueryClient;
 window.SigningStargateClient = SigningStargateClient;

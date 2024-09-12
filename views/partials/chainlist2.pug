@@ -1,0 +1,16 @@
+.content-wrapper-stake-body-main-center-body
+  .content-wrapper-stake-body-main-center-body-icon
+    img.content-wrapper-stake-body-main-center-body-icon-img(src=listOfToken[currentChainKey].img_url, alt=listOfToken[currentChainKey].coin_denom)
+  .content-wrapper-stake-body-main-center-body-chain
+    .content-wrapper-stake-body-main-center-body-chain-name
+      .content-wrapper-stake-body-main-center-body-chain-name-network
+        | #{listOfToken[currentChainKey].chain_name}
+    .content-wrapper-stake-body-main-center-body-chain-token
+      | #{listOfToken[currentChainKey].coin_denom}
+    .content-wrapper-stake-body-main-center-body-chain-list.display-none
+
+  .content-wrapper-stake-body-main-center-body-stake
+      input.content-wrapper-stake-body-main-center-body-stake-amount(type="text", placeholder="0")
+
+      .content-wrapper-stake-body-main-center-body-stake-dollar
+        | $0

@@ -1,9 +1,12 @@
 const ChainInfo = require('../../models/ChainInfo/ChainInfo');
 const getRedelegationList = require('../../models/ChainInfo/functions/getRedelgationList');
 
+const DEFAULT_CHAIN_ID = 'cosmoshub-4';
+
 module.exports = (req, res) => {
 
-  const chain_id = 'cosmoshub-4'
+  const chain_id = req.session.currentChainKey || DEFAULT_CHAIN_ID;
+
   ChainInfo.getListOfToken({ is_active: true }, (err, listOfToken) => {
     if (err)
       return console.error(err);
@@ -12,10 +15,11 @@ module.exports = (req, res) => {
       if (err)
         return console.error(err);
 
-      const address = 'cosmos1nhzfugalfm29htfep7tx3y5fhm8jhks5cy48sl';
-       getRedelegationList(address, (err, redelegations) => {
+      const address = 'agoric1jlxcqhdk6hvepjj24y4h3ddp9mqlck0z6p4r9p';
+      const rpcEndPoint = 'https://rpc.cosmos.directory/agoric'
+       getRedelegationList( address, rpcEndPoint, (err, redelegations) => {
         if (err)
-          return console.error(err); 
+          return console.error(err);  
 
         return res.render('index/portfolio', {
           page: 'index/portfolio',
@@ -34,8 +38,11 @@ module.exports = (req, res) => {
           },
           chainInfo: chainInfo,
           listOfToken: listOfToken,
+          currentChainKey: req.session.currentChainKey || DEFAULT_CHAIN_ID,
+          globalAddressKey: req.session.globalAddressKey,
+          globalBalanceKey: req.session.globalBalanceKey,
           redelegations: redelegations,
-        });
+        }); 
       });
     });
    }); 

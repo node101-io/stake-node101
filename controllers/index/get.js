@@ -31,7 +31,7 @@ module.exports = (req, res) => {
         },
         chainInfo: chainInfo,
         listOfToken: listOfToken,
-        currentChainKey: req.session.currentChainKey,
+        currentChainKey: req.session.currentChainKey || DEFAULT_CHAIN_ID,
         globalAddressKey: req.session.globalAddressKey,
         globalBalanceKey: req.session.globalBalanceKey
       });

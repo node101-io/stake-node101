@@ -449,8 +449,12 @@ window.addEventListener('load',  () => {
   
 
 
-    if (event.target.closest('.content-wrapper-portfolio-body-validators-content-third')) {
-      const validatorAddress = event.target.closest('.content-wrapper-portfolio-body-validators-content-third').querySelector('.content-wrapper-portfolio-body-validators-content-third-address').textContent;
+    if (event.target.closest('.content-wrapper-portfolio-body-validators-content-third')) { 
+      console.log("here");
+      const redelegateWrapper = document.querySelector('.redelegate-wrapper');
+      redelegateWrapper.classList.toggle('display-none');
+
+   /*    const validatorAddress = event.target.closest('.content-wrapper-portfolio-body-validators-content-third').querySelector('.content-wrapper-portfolio-body-validators-content-third-address').textContent;
       console.log(validatorAddress);
       if (!window.keplr) {
         console.log("Keplr extension not installed");
@@ -459,7 +463,7 @@ window.addEventListener('load',  () => {
       console.log("Adding chain");
       addChainToKeplr(currentChain, (err) => {
         if (err) console.log(err);
-      });
+      }); */
     }
 
     if (event.target.closest('.content-wrapper-info-body-larrow')) {

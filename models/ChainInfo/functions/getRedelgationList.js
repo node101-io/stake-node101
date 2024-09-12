@@ -1,8 +1,7 @@
 const { SigningStargateClient } = require("@cosmjs/stargate");
 const getKeybasePicture = require("./getKeybasePicture");
 
-module.exports = (delegatorAddress, callback)  => {
-  const rpcEndpoint = "https://rpc.cosmos.directory/cosmoshub";
+module.exports = (delegatorAddress, rpcEndpoint, callback)  => {
   const validatorList = [];
 
   SigningStargateClient.connectWithSigner(rpcEndpoint)

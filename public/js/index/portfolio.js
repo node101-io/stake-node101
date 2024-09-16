@@ -388,6 +388,16 @@ window.addEventListener('load',  () => {
   });
   document.addEventListener('click', event => {
 
+    if (event.target.closest('.redelegate-content-wrapper-stake-body-main-center-body-chain-list')) {
+      const popup = document.querySelector('.redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile-wrapper');
+      popup.classList.toggle('display-none');
+    }
+
+    if (event.target.closest('.redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile')) {
+      const popup = document.querySelector('.redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile-wrapper');
+      popup.classList.toggle('display-none');
+    }
+
     if (event.target.closest('.redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile')) {
       const operatorAddress = event.target.closest('.redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile').querySelector('.redelegate-content-wrapper-stake-body-main-center-body-chain-list-each-token').textContent;
       

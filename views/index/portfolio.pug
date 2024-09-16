@@ -135,17 +135,17 @@ block main
             .redelegate-content-wrapper-stake-body-main-center-body-chain-list
               .redelegate-content-wrapper-stake-body-main-center-body-chain-list-search
                 | Choose Validator
-            .redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile-wrapper
-            if redelegations
-              each validator in redelegations
-                .redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile(id='chain-list')
-                  .redelegate-content-wrapper-stake-body-main-center-body-chain-list-each
-                    .redelegate-content-wrapper-stake-body-main-center-body-chain-list-each-icon
-                      img(src=validator.picture, alt="")
-                    .redelegate-content-wrapper-stake-body-main-center-body-chain-list-each-chain
-                      | #{validator.moniker}
-                    .redelegate-content-wrapper-stake-body-main-center-body-chain-list-each-token.display-none
-                      | #{validator.operatorAddress}
+            .redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile-wrapper.display-none
+              if redelegations
+                each validator in redelegations
+                  .redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile(id='validator-list')
+                    .redelegate-content-wrapper-stake-body-main-center-body-chain-list-each
+                      .redelegate-content-wrapper-stake-body-main-center-body-chain-list-each-icon
+                        img(src=validator.picture, alt="")
+                      .redelegate-content-wrapper-stake-body-main-center-body-chain-list-each-chain
+                        | #{validator.moniker}
+                      .redelegate-content-wrapper-stake-body-main-center-body-chain-list-each-token.display-none
+                        | #{validator.operatorAddress}
           
           .redelgate-wrapper-content-body
             include ../partials/chainlist2.pug

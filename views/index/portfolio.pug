@@ -2,11 +2,11 @@ extends ../partials/head
 block main
   .all-wrapper
     input#chainInfoElement(style='display: none;', value=chainInfo)
-    //include ../partials/sidebar.pug
+    include ../partials/sidebar.pug
     .content
       include ../partials/header.pug
       .content-wrapper
-        //include ../partials/stake.pug
+        include ../partials/stake.pug
         .content-wrapper-portfolio-body
           .content-wrapper-portfolio-body-stat
             .content-wrapper-portfolio-body-stat-title
@@ -116,8 +116,7 @@ block main
                 .content-wrapper-portfolio-body-buttons-each-arrow
                   svg(width='14' height='15' viewbox='0 0 14 15' fill='none' xmlns='http://www.w3.org/2000/svg')
                     path(d='M6.87915 14.1148C6.89181 14.1278 7.27975 14.2274 7.74116 14.3359C8.20264 14.4445 8.58519 14.5168 8.59134 14.4966C8.59743 14.4764 8.64518 14.1484 8.69739 13.7678C8.80227 13.0034 9.05621 12.111 9.32755 11.5528C10.1733 9.81332 11.6908 8.66152 13.5313 8.36216L14 8.28591V7.51748V6.74899L13.5752 6.67601C10.7921 6.19792 8.9777 4.06718 8.63827 0.87852C8.61612 0.670303 8.58964 0.5 8.57944 0.5C8.48558 0.5 6.9303 0.883787 6.90089 0.91419C6.87962 0.936175 6.89544 1.13137 6.9361 1.34789C7.38615 3.74541 8.67477 5.69634 10.347 6.51207L10.7481 6.70775L2.49949 6.72307L0 6.7328L0 8.28798L2.51291 8.29772L10.7421 8.3131L10.2357 8.57582C8.92192 9.25734 7.88179 10.5942 7.26926 12.3887C7.09471 12.8999 6.83134 14.0654 6.87915 14.1148Z' fill='#F5F5F5')
-
-      .redelegate-wrapper.display-none
+      .redelegate-wrapper
         .redelegate-wrapper-title
           .redelegate-wrapper-title-icon.opacity-none
           .redelegate-wrapper-title-text
@@ -125,27 +124,34 @@ block main
           .redelegate-wrapper-title-icon
             svg(width='20' height='20' viewbox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg')
               path(d='M19.5816 2.43872C20.1395 1.88083 20.1395 0.976311 19.5816 0.418419C19.0237 -0.139473 18.1192 -0.139473 17.5613 0.418419L10 7.9797L2.43872 0.418419C1.88083 -0.139473 0.976311 -0.139473 0.418419 0.418419C-0.139473 0.976311 -0.139473 1.88083 0.418419 2.43872L7.9797 10L0.418419 17.5613C-0.139473 18.1192 -0.139473 19.0237 0.418419 19.5816C0.976311 20.1395 1.88083 20.1395 2.43872 19.5816L10 12.0203L17.5613 19.5816C18.1192 20.1395 19.0237 20.1395 19.5816 19.5816C20.1395 19.0237 20.1395 18.1192 19.5816 17.5613L12.0203 10L19.5816 2.43872Z' fill='#2D3648')
+        
         .redelegate-wrapper-content
+
           .redelegate-wrapper-content-header
             .redelegate-wrapper-content-header-title
               | Your Validators
 
-            .redelegate-wrapper-content-header-validators
+          .redelegate-wrapper-content-validators
+            .redelegate-content-wrapper-stake-body-main-center-body-chain-list
+              .redelegate-content-wrapper-stake-body-main-center-body-chain-list-search
+                | Choose Validator
+            .redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile-wrapper
             if redelegations
               each validator in redelegations
-                .content-wrapper-stake-body-main-center-body-chain-list-each
-                  .content-wrapper-stake-body-main-center-body-chain-list-each-icon
-                    img(src=validator.picture, alt="")
-                  .content-wrapper-stake-body-main-center-body-chain-list-each-chain
-                    | #{validator.moniker}
-                  .content-wrapper-stake-body-main-center-body-chain-list-each-id.display-none
-                    | #{validator.operatorAddress}
-
+                .redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile(id='chain-list')
+                  .redelegate-content-wrapper-stake-body-main-center-body-chain-list-each
+                    .redelegate-content-wrapper-stake-body-main-center-body-chain-list-each-icon
+                      img(src=validator.picture, alt="")
+                    .redelegate-content-wrapper-stake-body-main-center-body-chain-list-each-chain
+                      | #{validator.moniker}
+                    .redelegate-content-wrapper-stake-body-main-center-body-chain-list-each-token.display-none
+                      | #{validator.operatorAddress}
+          
           .redelgate-wrapper-content-body
             include ../partials/chainlist2.pug
-           
+
           .redelegate-wrapper-content-buttons
-            .content-wrapper-portfolio-body-validators-content-third
+            .redelegate-content-wrapper-portfolio-body-validators-content-third
                   .content-wrapper-portfolio-body-validators-content-third-icon
                     svg(width='35' height='21' viewbox='0 0 35 21' fill='none' xmlns='http://www.w3.org/2000/svg')
                       path(d='M0.273107 20.2568H4.50079C4.65009 20.2568 4.7739 20.113 4.7739 19.9369V0.319882C4.7739 0.143767 4.65009 0 4.50079 0H0.273107C0.123808 0 0 0.143767 0 0.319882V19.9369C0 20.113 0.123808 20.2568 0.273107 20.2568Z' fill='#2C202A')
@@ -156,5 +162,3 @@ block main
                   .content-wrapper-portfolio-body-validators-content-third-arrow
                     svg(width='15' height='15' viewbox='0 0 15 15' fill='none' xmlns='http://www.w3.org/2000/svg')
                       path(d='M7.37915 14.1148C7.39181 14.1278 7.77975 14.2274 8.24116 14.3359C8.70264 14.4445 9.08519 14.5168 9.09134 14.4966C9.09743 14.4764 9.14518 14.1484 9.19739 13.7678C9.30227 13.0034 9.55621 12.111 9.82755 11.5528C10.6733 9.81332 12.1908 8.66152 14.0313 8.36216L14.5 8.28591V7.51748V6.74899L14.0752 6.67601C11.2921 6.19792 9.4777 4.06718 9.13827 0.87852C9.11612 0.670303 9.08964 0.5 9.07944 0.5C8.98558 0.5 7.4303 0.883787 7.40089 0.91419C7.37962 0.936175 7.39544 1.13137 7.4361 1.34789C7.88615 3.74541 9.17477 5.69634 10.847 6.51207L11.2481 6.70775L2.99949 6.72307L0.5 6.7328L0.5 8.28798L3.01291 8.29772L11.2421 8.3131L10.7357 8.57582C9.42192 9.25734 8.38179 10.5942 7.76926 12.3887C7.59471 12.8999 7.33134 14.0654 7.37915 14.1148Z' fill='#2C202A')
-              
-              

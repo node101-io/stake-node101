@@ -3,11 +3,10 @@ let globalAddress;
 let currentChain; 
 
 
-function getReward(delegatorAddressx, callback) {
-  const currentChainInfo = JSON.parse(currentChain.chain_info);
-  const validatorAddressx = currentChain.validator_address
+function getReward(delegatorAddressx, validatorAddressx, callback) {
+  //const currentChainInfo = JSON.parse(currentChain.chain_info);
 
-  const stakingdenom = currentChainInfo.feeCurrencies[0].coinMinimalDenom;
+  const stakingdenom = 'uatom';// currentChainInfo.feeCurrencies[0].coinMinimalDenom;
   const rpcEndpointx = currentChain.rpc_url;
   Tendermint34Client.connect(rpcEndpointx).then((tendermintClient) => {
 
@@ -365,7 +364,6 @@ function carosoul(step="right") {
 
 
 window.addEventListener('load',  () => {
-  let redelegateFrom;
 
   document.addEventListener('input', event => {
     if (event.target.closest('.content-wrapper-stake-body-main-center-body-chain-list-search-input')) {
@@ -389,6 +387,17 @@ window.addEventListener('load',  () => {
     }
   });
   document.addEventListener('click', event => {
+
+    if (event.target.closest('.redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile')) {
+      const operatorAddress = event.target.closest('.redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile').querySelector('.redelegate-content-wrapper-stake-body-main-center-body-chain-list-each-token').textContent;
+      
+      getReward(globalAddress,operatorAddress, (err, data) => { 
+        if (err) console.log(err);
+        
+
+       document.querySelector('.redelegate-content-wrapper-stake-body-main-center-title-amount').textContent = `${data / 10 ** JSON.parse(currentChain.chain_info).currencies[0].coinDecimals}` + " " + `${JSON.parse(currentChain.chain_info).currencies[0].coinDenom}`;
+      });
+    };
 
     if(event.target.closest('.content-wrapper-portfolio-body-buttons-each-collect')) {
       console.log("XYZ");
@@ -447,6 +456,9 @@ window.addEventListener('load',  () => {
       });
     }; 
   
+    if (event.target.closest('.redelegate-wrapper-title-icon')) {
+      document.querySelector('.redelegate-wrapper').classList.toggle('display-none');
+    }
 
 
     if (event.target.closest('.content-wrapper-portfolio-body-validators-content-third')) { 

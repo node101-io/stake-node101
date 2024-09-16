@@ -1,7 +1,7 @@
 const { SigningStargateClient } = require("@cosmjs/stargate");
 const getKeybasePicture = require("./getKeybasePicture");
 
-module.exports = (delegatorAddress, rpcEndpoint, callback)  => {
+module.exports = (delegatorAddress, rpcEndpoint, stakingDenom, callback)  => {
   const validatorList = [];
 
   SigningStargateClient.connectWithSigner(rpcEndpoint)
@@ -26,6 +26,8 @@ module.exports = (delegatorAddress, rpcEndpoint, callback)  => {
               if (validatorList.length === redelegations.validators.length) {
                 return callback(null, validatorList);
               }
+              console.log(validatorList);
+
             }
           });
         }

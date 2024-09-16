@@ -10,7 +10,6 @@ module.exports = (identifier, callback) => {
       return callback(null, res);
     })
     .catch(err => {
-      console.log(err);
       return callback('network_error');
     });
 };

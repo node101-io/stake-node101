@@ -19,16 +19,6 @@
           .content-wrapper-stake-body-main-title-each-change
             | %#{Math.round (100 * chain.price_change_24h) / 100}
     .content-wrapper-stake-body-main-center
-      .content-wrapper-stake-body-main-center-title
-        .content-wrapper-stake-body-main-center-title-each
-          | Available - &nbsp;
-          .content-wrapper-stake-body-main-center-title-amount
-            | #{globalBalanceKey} 
-        .content-wrapper-stake-body-main-center-title-each
-          .content-wrapper-stake-body-main-center-title-each.content-wrapper-stake-body-main-center-title-half
-            | Half |
-          .content-wrapper-stake-body-main-center-title-each.content-wrapper-stake-body-main-center-title-max
-            |  &nbsp; Max
       include ../partials/chainlist
     .content-wrapper-stake-body-main-content
       .content-wrapper-stake-body-main-content-stat-title

@@ -30,16 +30,15 @@ const ValidatorSchema = new Schema({
 
 ValidatorSchema.statics.createValidatorInfo = function (data, callback) {
   const ValidatorInfo = this;
-  console.log("1",data);
   if (!data.keybase_id || typeof data.keybase_id != 'string' || data.keybase_id.trim().length < KEYBASE_ID_LEN|| data.keybase_id.trim().length > KEYBASE_ID_LEN)
-    return callback('1bad_request');
+    return callback('bad_request');
 
   if (!data.image_url || typeof data.image_url != 'string' || data.image_url.trim().length < 1 || data.image_url.trim().length > MAX_DATABASE_TEXT_FIELD_LENGTH)
-    return callback('2bad_request');
+    return callback('bad_request');
 
 
   if (!Object.keys(data).length)
-    return callback('3bad_request');
+    return callback('bad_request');
 
   const newValidatorInfo = new ValidatorInfo({
     keybase_id: data.keybase_id.trim(),    
@@ -50,13 +49,11 @@ ValidatorSchema.statics.createValidatorInfo = function (data, callback) {
     if (err && err.code == DUPLICATED_UNIQUE_FIELD_ERROR_CODE)
       return callback('duplicated_unique_field');
     if (err){ 
-      console.log(validatorInfo);
-      console.log(err);
-      return callback('4database_error');
+      return callback('database_error');
     }
     formatValidatorInfo(validatorInfo, (err, validatorInfo ) => {
       if (err)
-        return callback('5database_error');
+        return callback('database_error');
 
       return callback(null, validatorInfo);
     });
@@ -67,7 +64,7 @@ ValidatorSchema.statics.findImageUrlByKeybaseId = function (keybase_id, callback
   const ChainInfo = this;
 
   if (!keybase_id || typeof keybase_id != 'string' || keybase_id.trim().length < KEYBASE_ID_LEN || keybase_id.trim().length > KEYBASE_ID_LEN)
-    return callback('1bad_request');
+    return callback('bad_request');
 
   ChainInfo.findOne({ keybase_id }, (err, validatorInfo) => {
     if (err)

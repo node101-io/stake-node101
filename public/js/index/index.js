@@ -14,7 +14,6 @@ function saveToSession(data, callback) {
   });
 };
 
-
 function setTokenUI(currentChain) {
   const tokenImage = document.querySelector('.content-wrapper-stake-body-main-center-body-icon-img');
   const tokenName = document.querySelector('.content-wrapper-stake-body-main-center-body-chain-token');
@@ -174,20 +173,28 @@ function carosoul(step="right") {
 
 };
 
+function getCurrentChain() {
+  serverRequest(`/chain?chain_id=${chain_id}`, 'GET', {}, res => {
+    if (res.error) {
+      console.log(res);
+    } else {
+      currentChain = res.chainInfo;
+    }
+  }
+)};
+
 
 window.addEventListener('load',  async() => {
 
+  currentChain = JSON.parse(document.getElementById('chainInfoElement').value);
+
   setTokenUI(JSON.parse(document.getElementById('chainInfoElement').value));
+
+
   elx = document.querySelector('.content-wrapper-info-body-wrapper');
- children = elx.children;
+  children = elx.children;
   classNames =  Array.from(children);
   console.log("elx", classNames);
-
-
-
-
-
-
 
   boxPadding = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--box-padding').replace('px',  ''));
   boxPadding = "15px";
@@ -215,6 +222,7 @@ window.addEventListener('load',  async() => {
       console.log("here");
       const stakingValue = event.target.value;
       const stakingAmount = document.querySelector('.content-wrapper-stake-body-main-center-body-stake-dollar');
+      console.log(currentChain);
       stakingAmount.textContent = "$"+ Math.round(100 * stakingValue *  currentChain.price)/100;
     }
   });

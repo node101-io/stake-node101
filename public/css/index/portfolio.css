@@ -28,10 +28,9 @@
   --content-wrapper-portfolio-body-validators-content-third-width: 200px;
   --content-wrapper-portfolio-body-validators-content-third-height: 45px;
   --content-wrapper-portfolio-body-validators-content-third-padding: 5px 15px;
-  --content-wrapper-portfolio-body-buttons-right: 20px;
   --content-wrapper-portfolio-body-buttons-width: 560px;
   --content-wrapper-portfolio-body-buttons-height: 180px;
-  --content-wrapper-portfolio-body-buttons-margin-top:58px;
+  --content-wrapper-portfolio-body-buttons-margin-top: 20px;
   --content-wrapper-portfolio-body-buttons-spiral-side: 50px;
   --content-wrapper-portfolio-body-buttons-each-width: 300px;
   --content-wrapper-portfolio-body-buttons-each-height: 50px;
@@ -79,6 +78,7 @@
   padding: var(--content-wrapper-portfolio-body-validators-padding);
   border-radius: var(--border-radius-medium);
   background-color: var(--primary-background-white);
+  border: 2px solid red;  
 }
 
 .content-wrapper-portfolio-body-validators-title {
@@ -327,6 +327,7 @@
   min-width: 100%;
   height: fit-content;
   min-height: fit-content;
+  border: 2px solid red;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -395,7 +396,6 @@
 
 .content-wrapper-portfolio-body-buttons {
   position: relative;
-  right: var(--content-wrapper-portfolio-body-buttons-right);
   width: var(--content-wrapper-portfolio-body-buttons-width);
   min-width: var(--content-wrapper-portfolio-body-buttons-width);
   height: var(--content-wrapper-portfolio-body-buttons-height);

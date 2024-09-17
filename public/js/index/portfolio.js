@@ -364,7 +364,7 @@ function carosoul(step="right") {
 
 
 window.addEventListener('load',  () => {
-
+  //carosoul();
   document.addEventListener('input', event => {
     if (event.target.closest('.content-wrapper-stake-body-main-center-body-chain-list-search-input')) {
       const searchValue = event.target.value.toLowerCase();
@@ -388,6 +388,8 @@ window.addEventListener('load',  () => {
   });
   document.addEventListener('click', event => {
 
+
+
     if (event.target.closest('.redelegate-content-wrapper-stake-body-main-center-body-chain-list')) {
       const popup = document.querySelector('.redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile-wrapper');
       popup.classList.toggle('display-none');
@@ -399,6 +401,7 @@ window.addEventListener('load',  () => {
     }
 
     if (event.target.closest('.redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile')) {
+      console.log("here");
       const operatorAddress = event.target.closest('.redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile').querySelector('.redelegate-content-wrapper-stake-body-main-center-body-chain-list-each-token').textContent;
       
       getReward(globalAddress,operatorAddress, (err, data) => { 
@@ -496,7 +499,6 @@ window.addEventListener('load',  () => {
 
 
     if (event.target.closest('.content-wrapper-info-body-rarrow')) {
-      console.log("xxx")
       carosoul();
     }
 

@@ -2,11 +2,11 @@ extends ../partials/head
 block main
   .all-wrapper
     input#chainInfoElement(style='display: none;', value=chainInfo)
-    // include ../partials/sidebar.pug
+    include ../partials/sidebar.pug
     .content
       include ../partials/header.pug
       .content-wrapper
-        // include ../partials/stake.pug
+        include ../partials/stake.pug
         .content-wrapper-portfolio-body
           .content-wrapper-portfolio-body-stat
             .content-wrapper-portfolio-body-stat-title
@@ -72,8 +72,8 @@ block main
           .content-wrapper-portfolio-body-validators
             .content-wrapper-portfolio-body-validators-title
               | Your Validators
+            .content-wrapper-portfolio-body-validators-content
             //-
-              .content-wrapper-portfolio-body-validators-content
                 if redegelations
                   each validator in redelegations
                     .content-wrapper-portfolio-body-validators-content-first

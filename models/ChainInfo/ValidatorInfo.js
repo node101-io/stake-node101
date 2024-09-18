@@ -67,13 +67,13 @@ ValidatorSchema.statics.findImageUrlByKeybaseId = function (keybase_id, callback
     return callback('bad_request');
 
   ChainInfo.findOne({ keybase_id }, (err, validatorInfo) => {
-    if (err)
+    if (err){
       return callback('database_error');
-
+    }
     formatValidatorInfo(validatorInfo, (err, validatorInfo) => {
-      if (err)
-        return callback('database_error');
-
+      if (err){
+        return callback(err);
+      }
       return callback(null, validatorInfo);
     });
   });

@@ -2,6 +2,17 @@ let globalOfflineSigner;
 let globalAddress;
 let currentChain; 
 
+const SLIDE_ANIMATION_INTERVAL = 14;
+const SLIDE_ANIMATION_STEP = 1;
+
+let boxPadding = null;
+let activeProject = null;
+let activeProjectToLeft = 0;
+let counter = 1;
+let elx;
+let children;
+let classNames;
+
 
 function getReward(delegatorAddressx, validatorAddressx, callback) {
   //const currentChainInfo = JSON.parse(currentChain.chain_info);
@@ -28,7 +39,6 @@ function getReward(delegatorAddressx, validatorAddressx, callback) {
     return callback('document_not_found');
   });
 }
-
 
 function completeStaking(offlineSigner, accounts, currentChain, stakingValue) {
       const currentChainInfo = JSON.parse(currentChain.chain_info);
@@ -81,8 +91,6 @@ function completeStaking(offlineSigner, accounts, currentChain, stakingValue) {
       });
 }; 
 
-
-
 function completeRedelgation(offlineSigner, accounts, currentChain, validatorAddress) {
   const currentChainInfo = JSON.parse(currentChain.chain_info);
   const stakingdenom = currentChainInfo.feeCurrencies[0].coinMinimalDenom;
@@ -134,7 +142,6 @@ function completeRedelgation(offlineSigner, accounts, currentChain, validatorAdd
         console.log(err);
       });
 }; 
-
 
 function completeUnstake(offlineSigner, accounts, currentChain) {
   const currentChainInfo = JSON.parse(currentChain.chain_info);
@@ -189,9 +196,8 @@ function completeUnstake(offlineSigner, accounts, currentChain) {
         console.log(err);
       });
 }
-  )};
+)};
   
-
 function completeRestake(offlineSigner, accounts, currentChain) {
     const currentChainInfo = JSON.parse(currentChain.chain_info);
     const stakingdenom = currentChainInfo.feeCurrencies[0].coinMinimalDenom;
@@ -260,9 +266,7 @@ function completeRestake(offlineSigner, accounts, currentChain) {
           console.log(err);
         });
   }
-  )};
-
-
+)};
 
 function addChainToKeplr(currentChain, callback) {
  
@@ -285,15 +289,13 @@ function addChainToKeplr(currentChain, callback) {
 })
     .then((balance) => {
       console.log("Balance", balance.amount);
-      document.querySelector('.content-header-title').textContent = globalAddress.slice(0, 10) + "...";
+      document.querySelector('.content-header-title').textContent = globalAddress;//.slice(0, 10) + "...";
       document.querySelector('.content-wrapper-stake-body-main-center-title-amount').textContent = Math.round(((100 * balance.amount) / (10 ** currentChainInfo.currencies[0].coinDecimals)) )/100 + " " + currentChainInfo.currencies[0].coinDenom;
       return callback(null);s
     }).catch((err) => {
       return callback(err);
   });
 };
-
-
 
 function setTokenUI(currentChain) {
   const tokenImage = document.querySelector('.content-wrapper-stake-body-main-center-body-icon-img');
@@ -304,13 +306,6 @@ function setTokenUI(currentChain) {
   tokenName.textContent = JSON.parse(currentChain.chain_info).currencies[0].coinDenom
   chainName.textContent = JSON.parse(currentChain.chain_info).chainName;
 };
-
-const SLIDE_ANIMATION_INTERVAL = 14;
-const SLIDE_ANIMATION_STEP = 1;
-
-let boxPadding = null;
-let activeProject = null;
-let activeProjectToLeft = 0;
 
 function removeProject(element) {
   const newElement = element.cloneNode(true);
@@ -334,13 +329,6 @@ function projectsSlideAnimation() {
   }, SLIDE_ANIMATION_INTERVAL)
 };
 
-
-let counter = 1;
-let elx ;
-let children ;
-
-let classNames;
-
 function carosoul(step="right") {
 
   if (step == "left") {
@@ -362,9 +350,90 @@ function carosoul(step="right") {
 
 };
 
+async function getValidatorList(callback) {
+  console.log("here vlist");
+  const validatorList = [];
 
-window.addEventListener('load',  () => {
-  //carosoul();
+  SigningStargateClient.connectWithSigner(currentChain.rpc_url)
+    .then( (client) =>  {
+        return  client.queryClient.staking.delegatorValidators(globalAddress)
+    }).then( (redelegations) => {
+        for (const validator of redelegations.validators) {
+          const validatorInfo = {
+            operatorAddress: validator.operatorAddress,
+            moniker: validator.description.moniker,
+            identity: validator.description.identity,
+          };
+
+          serverRequest(`/keybase?keybase_id=${ validator.description.identity}`, 'GET', {}, res => {
+          
+              validatorInfo.picture = res.validatorInfo.image_url;
+              validatorList.push(validatorInfo);
+              setDynamicValidatorUI(validatorList);
+            
+          });
+        }
+        
+        setDynamicValidatorUI(validatorList);
+      }).catch((err) => {
+        console.log(err);
+      }
+    )};
+
+
+
+function setDynamicValidatorUI(validatorList) {
+  console.log("123here");
+  
+  const validatorContainer = document.querySelector('.content-wrapper-portfolio-body-validators-content');
+  validatorContainer.innerHTML = '';
+  /**
+     input#content-wrapper-portfolio-body-validators-content-first-address(style='display: none;', value=validator.operatorAddress)
+    .content-wrapper-portfolio-body-validators-content-first-icon
+      img.content-wrapper-portfolio-body-validators-content-first-icon(src=validator.picture)
+    .content-wrapper-portfolio-body-validators-content-first-text
+      | #{validator.moniker}
+   */
+  validatorList.forEach(validator => {
+    const validatorParent = document.createElement('div');
+    validatorParent.classList.add('content-wrapper-portfolio-body-validators-content-first');
+
+    const validatorElementAddress = document.createElement('div');
+    validatorElementAddress.classList.add('content-wrapper-portfolio-body-validators-content-first-icon');
+
+    const validatorElementImgParent = document.createElement('div');
+    validatorElementImgParent.classList.add('content-wrapper-portfolio-body-validators-content-first-icon');
+
+    const validatorElementImg = document.createElement('img');
+    validatorElementImg.src = validator.picture;
+
+    validatorElementImgParent.appendChild(validatorElementImg);
+
+    const validatorElementMoniker = document.createElement('div');
+    validatorElementMoniker.classList.add('content-wrapper-portfolio-body-validators-content-first-text');
+    validatorElementMoniker.textContent = validator.moniker;
+
+    validatorParent.appendChild(validatorElementAddress);
+    validatorParent.appendChild(validatorElementImgParent);
+    validatorParent.appendChild(validatorElementMoniker);
+    validatorContainer.appendChild(validatorParent);
+  });
+};
+
+window.addEventListener('load', async () => {
+
+
+  currentChain = JSON.parse(document.getElementById('chainInfoElement').value);
+  globalAddress = document.querySelector('.content-header-title').textContent
+  console.log(globalAddress)
+  
+  await getValidatorList((err, data) => {
+    if (err) console.log(err);
+    console.log(data);
+  }); 
+  
+
+
   document.addEventListener('input', event => {
     if (event.target.closest('.content-wrapper-stake-body-main-center-body-chain-list-search-input')) {
       const searchValue = event.target.value.toLowerCase();

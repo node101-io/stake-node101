@@ -70,15 +70,15 @@
 }
 
 .content-wrapper-portfolio-body-validators {
-  height: var(--content-wrapper-portfolio-body-validators-height);
-  min-height: var(--content-wrapper-portfolio-body-validators-height);
+  height: fit-content;
+  min-height: fit-content;
+  max-height: var(--content-wrapper-portfolio-body-validators-height);
   width: var(--content-wrapper-portfolio-body-each-width);
   min-width: var(--content-wrapper-portfolio-body-each-width);
   margin-top: var(--content-wrapper-portfolio-body-validators-margin-top);
   padding: var(--content-wrapper-portfolio-body-validators-padding);
   border-radius: var(--border-radius-medium);
   background-color: var(--primary-background-white);
-  border: 2px solid red;  
 }
 
 .content-wrapper-portfolio-body-validators-title {
@@ -327,7 +327,6 @@
   min-width: 100%;
   height: fit-content;
   min-height: fit-content;
-  border: 2px solid red;
   display: flex;
   align-items: center;
   justify-content: space-between;

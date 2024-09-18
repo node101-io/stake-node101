@@ -48,7 +48,7 @@ function addChainToKeplr(currentChain, callback) {
     .then((balance) => {
       globalBalance = Math.round(((100 * balance.amount) / (10 ** currentChainInfo.currencies[0].coinDecimals)) )/100 + " " + currentChainInfo.currencies[0].coinDenom;
 
-      document.querySelector('.content-header-title').textContent = globalAddress.slice(0, 10) + "...";
+      document.querySelector('.content-header-title').textContent = globalAddress;//.slice(0, 10) + "...";
       document.querySelector('.content-wrapper-stake-body-main-center-title-amount').textContent = Math.round(((100 * balance.amount) / (10 ** currentChainInfo.currencies[0].coinDecimals)) )/100 + " " + currentChainInfo.currencies[0].coinDenom;
 
       saveToSession({
@@ -185,9 +185,10 @@ function getCurrentChain() {
 
 
 window.addEventListener('load',  async() => {
+  //carosoul();
 
   currentChain = JSON.parse(document.getElementById('chainInfoElement').value);
-
+  globalAddress = document.querySelector('.content-header-title').textContent
   setTokenUI(JSON.parse(document.getElementById('chainInfoElement').value));
 
 
@@ -236,12 +237,10 @@ window.addEventListener('load',  async() => {
     if (event.target.closest('.content-wrapper-info-body-larrow')) {
 
       carosoul("left");
-      console.log("yy")
     }
 
 
     if (event.target.closest('.content-wrapper-info-body-rarrow')) {
-      console.log("xxx")
       carosoul();
     }
 
@@ -252,8 +251,6 @@ window.addEventListener('load',  async() => {
     if (event.target.closest('.content-wrapper-stake-body-main-center-body-chain-list-each')) {
 
       const chain_id = event.target.closest('.content-wrapper-stake-body-main-center-body-chain-list-each').querySelector('.content-wrapper-stake-body-main-center-body-chain-list-each-id').textContent;
-      //chain_id = chain_id.querySelector('.content-wrapper-stake-body-main-center-body-chain-list-each-id').textContent;
-      console.log(chain_id);
       serverRequest(`/chain?chain_id=${chain_id}`, 'GET', {}, res => {
         if (res.error) {
           console.log(res);
@@ -304,7 +301,6 @@ window.addEventListener('load',  async() => {
         console.log("Please enter a valid amount");
         return;
       };
-      console.log(stakingValue);
       const offlineSigner = keplr.getOfflineSigner(currentChain.chain_id);
       offlineSigner.getAccounts().
       then((accounts) => {

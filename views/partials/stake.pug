@@ -34,34 +34,34 @@
             .content-wrapper-stake-body-main-content-stat-title-content-each-time-text
               | Daily
             .content-wrapper-stake-body-main-content-stat-title-content-each-time-percent
-              | +0.2%
+              | + #{((listOfToken[currentChainKey].apr) / 365).toFixed(2)}%
           .content-wrapper-stake-body-main-content-stat-title-content-each-value
-            .content-wrapper-stake-body-main-content-stat-title-content-each-value-token
-              | 1,24 #{listOfToken[currentChainKey].coin_denom}
-            .content-wrapper-stake-body-main-content-stat-title-content-each-value-price
-              | $14,5
+            .content-wrapper-stake-body-main-content-stat-title-content-each-value-token.content-wrapper-stake-body-main-content-stat-title-content-each-value-token-daily
+              |  0 #{listOfToken[currentChainKey].coin_denom}
+            .content-wrapper-stake-body-main-content-stat-title-content-each-value-price.content-wrapper-stake-body-main-content-stat-title-content-each-value-price-daily
+              | $0
         .content-wrapper-stake-body-main-content-stat-title-content-each
           .content-wrapper-stake-body-main-content-stat-title-content-each-time
             .content-wrapper-stake-body-main-content-stat-title-content-each-time-text
               | Monthly
             .content-wrapper-stake-body-main-content-stat-title-content-each-time-percent
-              | +0.2%
+              | + #{((listOfToken[currentChainKey].apr) / 12).toFixed(2)}%
           .content-wrapper-stake-body-main-content-stat-title-content-each-value
-            .content-wrapper-stake-body-main-content-stat-title-content-each-value-token
-              | 1,24 #{listOfToken[currentChainKey].coin_denom}
-            .content-wrapper-stake-body-main-content-stat-title-content-each-value-price
-              | $14,5
+            .content-wrapper-stake-body-main-content-stat-title-content-each-value-token.content-wrapper-stake-body-main-content-stat-title-content-each-value-token-monthly
+              | 0 #{(listOfToken[currentChainKey].coin_denom)}
+            .content-wrapper-stake-body-main-content-stat-title-content-each-value-price.content-wrapper-stake-body-main-content-stat-title-content-each-value-price-monthly
+              | $0
         .content-wrapper-stake-body-main-content-stat-title-content-each
           .content-wrapper-stake-body-main-content-stat-title-content-each-time
             .content-wrapper-stake-body-main-content-stat-title-content-each-time-text
               | Yearly
             .content-wrapper-stake-body-main-content-stat-title-content-each-time-percent
-              | +0.2%
+              | + #{listOfToken[currentChainKey].apr}%
           .content-wrapper-stake-body-main-content-stat-title-content-each-value
-            .content-wrapper-stake-body-main-content-stat-title-content-each-value-token
-              | 1,24 #{listOfToken[currentChainKey].coin_denom}
-            .content-wrapper-stake-body-main-content-stat-title-content-each-value-price
-              | $14,5
+            .content-wrapper-stake-body-main-content-stat-title-content-each-value-token.content-wrapper-stake-body-main-content-stat-title-content-each-value-token-yearly
+              | 0 #{listOfToken[currentChainKey].coin_denom}
+            .content-wrapper-stake-body-main-content-stat-title-content-each-value-price.content-wrapper-stake-body-main-content-stat-title-content-each-value-price-yearly
+              | $0
   .content-wrapper-stake-body-button
       .content-wrapper-stake-body-button-text
         | Stake

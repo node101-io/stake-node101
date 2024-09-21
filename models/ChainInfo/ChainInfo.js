@@ -72,6 +72,10 @@ const ChainInfoSchema = new Schema({
     type: Number,
     default: 0
   },
+  apr: {
+    type: Number,
+    default: 0,
+  }
 });
 
 ChainInfoSchema.statics.createChainInfo = function (data, callback) {
@@ -92,15 +96,14 @@ ChainInfoSchema.statics.createChainInfo = function (data, callback) {
   if (!data.validator_address || typeof data.validator_address != 'string' || data.validator_address.trim().length < 1 || data.validator_address.trim().length > MAX_DATABASE_TEXT_FIELD_LENGTH)
     return callback('bad_request');
 
-  
-  if ('is_active' in data && typeof data.is_active != 'boolean')
-    return callback('bad_request');
-
   if (!data.rpc_url || typeof data.rpc_url != 'string' || data.rpc_url.trim().length < 1 || data.rpc_url.trim().length > MAX_DATABASE_TEXT_FIELD_LENGTH)
     return callback('bad_request');
 
   if (!data.chain_info || typeof data.chain_info != 'string' || data.chain_info.trim().length < 1 || data.chain_info.trim().length > MAX_DATABASE_TEXT_FIELD_LENGTH)
     return callback('bad_request');
+
+  if ('is_active' in data && typeof data.is_active != 'boolean')
+  return callback('bad_request');
 
 
   if (!Object.keys(data).length)
@@ -228,6 +231,10 @@ ChainInfoSchema.statics.findChainInfoByChainIdAndUpdate = function (chain_id, da
 
   if (data.price_change_24h && typeof data.price_change_24h == 'number')
     updateData.price_change_24h = data.price_change_24h;
+
+  if (data.apr )
+    updateData.apr = data.apr;
+
   if ('is_active' in data && typeof data.is_active == 'boolean')
     updateData.is_active = data.is_active;
 
@@ -269,6 +276,7 @@ ChainInfoSchema.statics.getListOfToken = function (is_active, callback) {
         'coin_denom': JSON.parse(chainInfos[i].chain_info).currencies[0].coinDenom,
         'price': chainInfos[i].price,
         'price_change_24h': chainInfos[i].price_change_24h,
+        'apr': chainInfos[i].apr,
       };
     }
     return callback(null, listOfToken);

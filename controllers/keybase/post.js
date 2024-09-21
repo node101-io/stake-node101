@@ -1,27 +1,62 @@
-const validatorInfo = require('../../models/ChainInfo/ValidatorInfo');
+const ValidatorInfo = require('../../models/ChainInfo/ValidatorInfo');
+const async = require('async');
 const getKeybasePicture = require('../../models/ChainInfo/functions/getKeybasePicture');
 
-
 module.exports = (req, res) => {
-  if (!req.body.keybase_id || !req.body.image_url)
-    return res.status(400).json({ error: 'bad_request'});
- 
+  const keybaseIdList = req.body.keybaseIdList;
 
-  getKeybasePicture(data.keybase_id, (err, picture) => {
-    if (err)
-      return res.status(500).json({ error: err });
-    
+  if (!keybaseIdList || !Array.isArray(keybaseIdList)) {
+    return res.json({ error: 'bad_request' });
+  }
   
-      const data = {
-        "keybase_id": req.body.keybase_id,
-        "image_url": picture,
-      };
+  for (let i = 0; i < keybaseIdList.length; i++) {
+    if (typeof keybaseIdList[i] !== 'string') {
+      return res.json({ error: 'bad_request' });
+    }
+  }
 
-    validatorInfo.createValidatorInfo(data, (err, validatorInfo) => {
-      if (err)
-        return res.status(500).json({ error: err });
+  const validatorInfoList = [];
 
-      return res.json({ picture });
-    });
-  });
-}
+  async.times(
+    keybaseIdList.length,
+    (time, next) => {
+      const keybase_id = keybaseIdList[time];
+      
+      ValidatorInfo.findImageUrlByKeybaseId(keybase_id, (err, validatorInfo) => {
+        if (err && err === 'document_not_found') {
+
+          getKeybasePicture(keybase_id, (err, picture) => {
+            if (err) {
+              return next(err);
+            }
+            
+            const data = {
+              keybase_id: keybase_id,
+              image_url: picture,
+            };
+            
+            ValidatorInfo.createValidatorInfo(data, (err, newValidatorInfo) => {
+              if (err) {
+                return next(err);
+              }
+              validatorInfoList.push(newValidatorInfo);
+              return next(null, newValidatorInfo);
+            });
+          });
+        } else {
+
+          if (!err && validatorInfo) {
+            validatorInfoList.push(validatorInfo);
+          }
+          return next(err, validatorInfo);
+        }
+      });
+    }, err => {
+      if (err) {
+        return res.json({ error: err });
+      }
+      
+      return res.json({ validatorInfoList });
+    }
+  );
+};

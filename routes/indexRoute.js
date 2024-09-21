@@ -10,8 +10,7 @@ const settingsGetController = require('../controllers/settings/get');
 const findChainByChainId = require('../controllers/chain/get');
 const createChain = require('../controllers/chain/post');
 
-const findImageUrlByKeybaseId = require('../controllers/keybase/get');
-const createValidatorInfo = require('../controllers/keybase/post');
+const findImageUrlByKeybaseId = require('../controllers/keybase/post');
 
 const getPostController = require('../controllers/session/get/post');
 const setPostController = require('../controllers/session/set/post');
@@ -45,14 +44,9 @@ router.get(
     settingsGetController
 );
 
-router.get(
-    '/keybase',
-    findImageUrlByKeybaseId
-);
-
 router.post(
     '/keybase',
-    createValidatorInfo
+    findImageUrlByKeybaseId
 );
 
 router.post(

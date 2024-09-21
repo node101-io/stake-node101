@@ -13,7 +13,7 @@ module.exports = (req, res) => {
     ChainInfo.findChainInfoByChainId(chain_id, (err, chainInfo) => {
       if (err)
         return res.json({ error: err });
-        
+      
       return res.render('index/index', {
         page: 'index/index',
         title: res.__('For you to make most of the distributed value'),

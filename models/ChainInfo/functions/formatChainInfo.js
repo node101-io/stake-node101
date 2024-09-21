@@ -14,5 +14,6 @@ module.exports = (chainInfo, callback) => {
     is_active: chainInfo.is_active,
     price: chainInfo.price,
     price_change_24h: chainInfo.price_change_24h,
+    apr: chainInfo.apr,
   });
 };

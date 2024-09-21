@@ -351,49 +351,40 @@ function carosoul(step="right") {
 };
 
 async function getValidatorList(callback) {
-  console.log("here vlist");
-  const validatorList = [];
 
   SigningStargateClient.connectWithSigner(currentChain.rpc_url)
-    .then( (client) =>  {
-        return  client.queryClient.staking.delegatorValidators(globalAddress)
-    }).then( (redelegations) => {
-        for (const validator of redelegations.validators) {
-          const validatorInfo = {
-            operatorAddress: validator.operatorAddress,
-            moniker: validator.description.moniker,
-            identity: validator.description.identity,
-          };
+    .then(client => client.queryClient.staking.delegatorValidators(globalAddress))
+    .then((redelegations) => {
 
-          serverRequest(`/keybase?keybase_id=${ validator.description.identity}`, 'GET', {}, res => {
-          
-              validatorInfo.picture = res.validatorInfo.image_url;
-              validatorList.push(validatorInfo);
-              setDynamicValidatorUI(validatorList);
+          const keybaseIdList = redelegations.validators.map(validator => {
+            return validator.description.identity;
+          });
+     
+
+          serverRequest('/keybase', 'POST', { keybaseIdList }, res => {
+            
+               const validatorList = redelegations.validators.map((validator, index) => {
+                return {
+                  operatorAddress: validator.operatorAddress,
+                  moniker: validator.description.moniker,
+                  identity: validator.description.identity,
+                  picture: res.validatorInfoList[index].image_url,
+                };
+              });
+         
+              setDynamicValidatorUI(validatorList); 
             
           });
         }
         
-        setDynamicValidatorUI(validatorList);
-      }).catch((err) => {
-        console.log(err);
-      }
-    )};
+    ).catch((err) => {
+      console.log(err);
+    });
+};
 
-
-
-function setDynamicValidatorUI(validatorList) {
-  console.log("123here");
-  
+function setDynamicValidatorUI(validatorList) {  
   const validatorContainer = document.querySelector('.content-wrapper-portfolio-body-validators-content');
-  validatorContainer.innerHTML = '';
-  /**
-     input#content-wrapper-portfolio-body-validators-content-first-address(style='display: none;', value=validator.operatorAddress)
-    .content-wrapper-portfolio-body-validators-content-first-icon
-      img.content-wrapper-portfolio-body-validators-content-first-icon(src=validator.picture)
-    .content-wrapper-portfolio-body-validators-content-first-text
-      | #{validator.moniker}
-   */
+
   validatorList.forEach(validator => {
     const validatorParent = document.createElement('div');
     validatorParent.classList.add('content-wrapper-portfolio-body-validators-content-first');
@@ -453,6 +444,15 @@ window.addEventListener('load', async () => {
       const stakingValue = event.target.value;
       const stakingAmount = document.querySelector('.content-wrapper-stake-body-main-center-body-stake-dollar');
       stakingAmount.textContent = "$"+ Math.round(100 * stakingValue *  currentChain.price)/100;
+
+      document.querySelector('.content-wrapper-stake-body-main-content-stat-title-content-each-value-token-daily').innerText = (stakingValue * currentChain.apr / 365).toFixed(2) + " " + JSON.parse(currentChain.chain_info).currencies[0].coinDenom;
+      document.querySelector('.content-wrapper-stake-body-main-content-stat-title-content-each-value-token-monthly').innerText = (stakingValue * currentChain.apr / 12).toFixed(2) + " " + JSON.parse(currentChain.chain_info).currencies[0].coinDenom;
+      document.querySelector('.content-wrapper-stake-body-main-content-stat-title-content-each-value-token-yearly').innerText = (stakingValue * currentChain.apr).toFixed(2) + " " + JSON.parse(currentChain.chain_info).currencies[0].coinDenom;
+
+      document.querySelector('.content-wrapper-stake-body-main-content-stat-title-content-each-value-price-daily').innerText =  "$" + (stakingValue * (currentChain.apr / 365) * currentChain.price).toFixed(2);
+      document.querySelector('.content-wrapper-stake-body-main-content-stat-title-content-each-value-price-monthly').innerText =  "$" + (stakingValue * (currentChain.apr / 12) * currentChain.price).toFixed(2);
+      document.querySelector('.content-wrapper-stake-body-main-content-stat-title-content-each-value-price-yearly').innerText =  "$" + (stakingValue * currentChain.apr * currentChain.price).toFixed(2);
+    
     }
   });
   document.addEventListener('click', event => {

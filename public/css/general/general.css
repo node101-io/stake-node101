@@ -85,27 +85,6 @@ p, h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
-@media only screen and (min-width: 1920) {
-  :root {
-    --page-horizontal-padding: calc((100vw - 1920) / 2 + 40px);
-  }
-}
-@media only screen and (max-width: 800px) {
-  :root {
-    --page-horizontal-padding: 30px;
-  }
-}
-@media only screen and (max-width: 700px) {
-  :root {
-    --page-horizontal-padding: 20px;
-  }
-}
-@media only screen and (max-width: 500px) {
-  :root {
-    --page-horizontal-padding: 15px;
-  }
-}
-
 
 :root {
   --primary-background-light: #DFE5FF;
@@ -128,7 +107,7 @@ p, h1, h2, h3, h4, h5, h6 {
 
   --body-padding: 22px;
 
-  --content-padding: 30px;
+  --content-padding: 30px 10px;
   --content-border-radius: 40px;
 
   
@@ -141,6 +120,7 @@ p, h1, h2, h3, h4, h5, h6 {
   --font-size-30: 30px;
   --font-size-40: 40px;
 }
+
 
 body {
   height: 100vh;
@@ -173,4 +153,69 @@ body {
   border-radius: var(--content-border-radius);
 }
 
+.content-wrapper {
+  height: auto;
+  min-height: auto;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  margin: auto 0px;
+}
 
+
+
+
+
+@media only screen and (min-width: 1300px) and (max-width: 1400px) {
+
+  .content-wrapper-stake {
+      --content-wrapper-stake-width: 530px;
+  }
+
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1300px) {
+
+  .content-wrapper-stake {
+    --content-wrapper-stake-width: 480px;
+    --content-wrapper-stake-body-main-width: 390px;
+    --content-wrapper-stake-body-main-center-body-width: 460px;
+  }
+
+}
+
+@media only screen and (min-width: 1100px) and (max-width: 1200px) {
+
+  .content-wrapper-stake {
+    --content-wrapper-stake-width: 425px;
+    --content-wrapper-stake-body-main-width: 420px;
+    --content-wrapper-stake-body-main-center-body-width: 420px;
+  }
+
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1100px) {
+
+  .content-wrapper-stake {
+    --content-wrapper-stake-width: 425px;
+    --content-wrapper-stake-height: 500px;
+    --content-wrapper-stake-body-main-width: 370px;
+    --content-wrapper-stake-body-main-center-body-width:370px;
+    
+  }
+}
+
+
+@media only screen and  (max-width: 1000px) {
+
+  .content-wrapper-stake {
+    --content-wrapper-stake-width: 425px;
+    --content-wrapper-stake-height: 500px;
+    --content-wrapper-stake-body-main-width: 370px;
+    --content-wrapper-stake-body-main-center-body-width:370px;
+    
+  }
+
+}

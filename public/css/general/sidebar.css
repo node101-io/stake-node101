@@ -10,15 +10,15 @@
   --sidebar-menu-margin-top: 120px;
   --sidebar-menu-item-height: 60px;
 
-  --sidebar-footer-margin-top: 300px;
+  --sidebar-footer-margin-top: 260px;
   --sidebar-footer-item-height: 30px;
   --sidebar-footer-item-width: 30px;
   --sidebar-footer-item-margin-bottom: 10px;
 }
 
 .sidebar {
-  height: 100%;
-  min-height: 100%;
+  height: fit-content;
+  min-height: fit-content;
   width: var(--sidebar-width);
   min-width: var(--sidebar-width);
   display: flex;

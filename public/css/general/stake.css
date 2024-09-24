@@ -132,8 +132,8 @@
 .content-wrapper-stake-body-main-title-each {
   height: auto;
   min-height: auto;
-  width: var(--content-wrapper-stake-body-main-title-each-width);
-  min-width: var(--content-wrapper-stake-body-main-title-each-width);
+  width: fit-content;
+  min-width: fit-content;
   display: flex;
   align-items: center;
   justify-content: space-around;

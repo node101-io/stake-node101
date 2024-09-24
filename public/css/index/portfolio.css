@@ -37,14 +37,100 @@
   --content-wrapper-portfolio-body-buttons-each-margin:  110px 10px 10px 10px; 
 }
 
-.content-wrapper {
-  height: auto;
-  min-height: auto;
-  width: auto;
-  min-width: auto;
-  display: flex;
-  margin: auto;
+@media only screen and (min-width: 1300px) and (max-width: 1400px) {
+  .content-wrapper-portfolio-body {
+    --content-wrapper-portfolio-body-width: 500px;
+  }
+
+  .content-wrapper-portfolio-body-stat { 
+    --content-wrapper-portfolio-body-each-width: 480px;
+  }
+
+  .content-wrapper-portfolio-body-validators {
+    --content-wrapper-portfolio-body-each-width: 480px;
+  }
+
+  .content-wrapper-portfolio-body-buttons {
+   --content-wrapper-portfolio-body-buttons-width: 480px;
+  }
 }
+
+@media only screen and (min-width: 1200px) and (max-width: 1300px) {
+  .content-wrapper-portfolio-body {
+    --content-wrapper-portfolio-body-width: 460px;
+  }
+
+  .content-wrapper-portfolio-body-stat { 
+    --content-wrapper-portfolio-body-each-width: 450px;
+  }
+
+  .content-wrapper-portfolio-body-validators {
+    --content-wrapper-portfolio-body-each-width: 450px;
+  }
+
+  .content-wrapper-portfolio-body-buttons {
+   --content-wrapper-portfolio-body-buttons-width: 450px;
+  }
+}
+  
+@media only screen and (min-width: 1100px) and (max-width: 1200px) {
+
+  .content-wrapper-portfolio-body {
+    --content-wrapper-portfolio-body-width: 440px;
+  }
+
+  .content-wrapper-portfolio-body-stat { 
+    --content-wrapper-portfolio-body-each-width: 425px;
+  }
+
+  .content-wrapper-portfolio-body-validators {
+    --content-wrapper-portfolio-body-each-width: 425px;
+  }
+
+  .content-wrapper-portfolio-body-buttons {
+   --content-wrapper-portfolio-body-buttons-width: 425px;
+  }
+
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1100px) {
+  .content-wrapper-portfolio-body {
+    --content-wrapper-portfolio-body-width: 440px;
+  }
+
+  .content-wrapper-portfolio-body-stat { 
+    --content-wrapper-portfolio-body-each-width: 425px;
+  }
+
+  .content-wrapper-portfolio-body-validators {
+    --content-wrapper-portfolio-body-each-width: 425px;
+  }
+
+  .content-wrapper-portfolio-body-buttons {
+   --content-wrapper-portfolio-body-buttons-width: 425px;
+  }
+}
+
+@media only screen and  (max-width: 1000px) {
+
+  .content-wrapper-portfolio-body {
+    --content-wrapper-portfolio-body-width: 420px;
+  }
+
+  .content-wrapper-portfolio-body-stat { 
+    --content-wrapper-portfolio-body-each-width: 415px;
+  }
+
+  .content-wrapper-portfolio-body-validators {
+    --content-wrapper-portfolio-body-each-width: 415px;
+  }
+
+  .content-wrapper-portfolio-body-buttons {
+   --content-wrapper-portfolio-body-buttons-width: 415px;
+  }
+}
+
+
 
 .content-wrapper-portfolio-body {
   height: var(--content-wrapper-portfolio-body-height);

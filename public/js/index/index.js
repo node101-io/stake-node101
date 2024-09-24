@@ -186,7 +186,7 @@ function getCurrentChain() {
 
 window.addEventListener('load',  async() => {
   //carosoul();
-
+  ddocument.querySelector('.content-wrapper-stake-body-main-center-body-stake-amount').focus();
   currentChain = JSON.parse(document.getElementById('chainInfoElement').value);
   globalAddress = document.querySelector('.content-header-title').textContent
   setTokenUI(JSON.parse(document.getElementById('chainInfoElement').value));
@@ -195,12 +195,10 @@ window.addEventListener('load',  async() => {
   elx = document.querySelector('.content-wrapper-info-body-wrapper');
   children = elx.children;
   classNames =  Array.from(children);
-  console.log("elx", classNames);
 
   boxPadding = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--box-padding').replace('px',  ''));
   boxPadding = "15px";
   activeProjectToLeft = boxPadding;
-  console.log(boxPadding);
 
   //activeProject = document.querySelector('.content-wrapper-stake-body-main-title').childNodes[0];
   //projectsSlideAnimation();

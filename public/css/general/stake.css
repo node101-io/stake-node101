@@ -2,11 +2,11 @@
   --box-padding: 15px;
 
   --content-wrapper-stake-width: 560px;
-  --content-wrapper-stake-height: 690px;
+  --content-wrapper-stake-height: 710px;
 
   --content-wrapper-stake-body-main-width: 500px;
   --content-wrapper-stake-body-main-height: 500px;
-  --content-wrapper-stake-body-main-margin-top: 45px;
+  --content-wrapper-stake-body-main-margin-top: 35px;
   --content-wrapper-stake-body-main-title-height: 40px;
   --content-wrapper-stake-body-main-title-each-width: 160px;
   --content-wrapper-stake-body-main-title-each-margin: 8px 3px;
@@ -27,26 +27,26 @@
   --content-wrapper-stake-body-main-center-body-icon-size: 84px;
   --content-wrapper-stake-body-main-center-body-icon-size: 84px;
   --content-wrapper-stake-body-main-center-body-icon-margin-left: 16px;
-  --content-wrapper-stake-body-main-center-body-chain-margin-left: 25px;
+  --content-wrapper-stake-body-main-center-body-icon-margin-right: 8px;
+  --content-wrapper-stake-body-main-center-body-chain-margin-left: 5px;
   --content-wrapper-stake-body-main-center-body-chain-width: 175px;
   --content-wrapper-stake-body-main-center-body-chain-height: 60px;
   --content-wrapper-stake-body-main-center-body-chain-padding-vertical: 5px;
-  --content-wrapper-stake-body-main-center-body-stake-margin-left: 60px;
+  --content-wrapper-stake-body-main-center-body-stake-margin-left: 30px;
   --content-wrapper-stake-body-main-center-body-stake-height: 68px;
-  --content-wrapper-stake-body-main-center-body-stake-amount-padding-left: 10px;
-  --content-wrapper-stake-body-main-center-body-stake-amount-width: 100px;
-  --content-wrapper-stake-body-main-center-body-stake-amount-padding-left: 10px;
+  --content-wrapper-stake-body-main-center-body-stake-amount-padding-left: 5px;
+  --content-wrapper-stake-body-main-center-body-stake-amount-width: 150px;
   --content-wrapper-stake-body-main-center-body-stake-dollar-height: 20px;
   --content-wrapper-stake-body-main-center-body-stake-dollar-width: 100px;
 
-  --content-wrapper-stake-body-main-content-margin-top: 40px;
+  --content-wrapper-stake-body-main-content-margin-top: 25px;
 
   --content-wrapper-stake-body-main-center-body-chain-list-right:20px;
   --content-wrapper-stake-body-main-center-body-chain-list-bottom:20px;
   --content-wrapper-stake-body-main-center-body-chain-list-width:250px;
   --content-wrapper-stake-body-main-center-body-chain-list-height:320px;
   
-  --content-wrapper-stake-body-main-content-stat-title-padding:2px 20px;
+  --content-wrapper-stake-body-main-content-stat-title-padding:2px 10px;
   --content-wrapper-stake-body-main-content-stat-title-buttons-icon-width: 48px;
   --content-wrapper-stake-body-main-content-stat-title-buttons-icon-height: 26px;
   --content-wrapper-stake-body-main-content-stat-title-buttons-icon-margin: auto 5px auto 15px;
@@ -54,7 +54,7 @@
   --content-wrapper-stake-body-main-content-stat-title-buttons-icon-ball-width: 20px;
   --content-wrapper-stake-body-main-content-stat-title-buttons-icon-ball-height: 20px;
   --content-wrapper-stake-body-main-content-stat-title-content-margin-top: 15px;
-  --content-wrapper-stake-body-main-content-stat-title-content-padding: 0px 12px;
+  --content-wrapper-stake-body-main-content-stat-title-content-padding: 0px 5px;
   --content-wrapper-stake-body-main-content-stat-title-content-each-padding: 10px;
   --content-wrapper-stake-body-main-content-stat-title-content-each-time-text-font-size: 18px;
   --content-wrapper-stake-body-main-content-stat-title-content-each-time-percent-margin-top: 6px;
@@ -86,11 +86,13 @@
   --content-wrapper-stake-body-main-center-body-chain-list-tile-width: 215px;
   --content-wrapper-stake-body-main-center-body-chain-list-tile-height: 240px;
   --content-wrapper-stake-body-main-center-body-chain-list-tile-margin: 0px 20px;
+
+  --staking-inside-width: 510px;
 }
 
 .content-wrapper-stake {
-  height: auto;
-  min-height: auto;
+  height: var(--content-wrapper-stake-height);
+  min-height: var(--content-wrapper-stake-height);
   width: var(--content-wrapper-stake-width);
   min-width: var(--content-wrapper-stake-width);
   display: flex;
@@ -110,24 +112,27 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0px;
   margin-top: var(--content-wrapper-stake-body-main-margin-top);
-  background-origin: padding-box;
 }
 
 
 .content-wrapper-stake-body-main-title {
   height: var(--content-wrapper-stake-body-main-title-height);
   min-height: var(--content-wrapper-stake-body-main-title-height);
-  width: 100%;
-  min-width: 100%;
+  width: var(--staking-inside-width);
+  min-width: var(--staking-inside-width);  
+  padding: var(--content-wrapper-stake-body-main-content-stat-title-padding);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   font-size: var(--font-size-16);
-  overflow: hidden;
   position: relative;
+  overflow: hidden;
 }
+
+
 
 .content-wrapper-stake-body-main-title-each {
   height: auto;
@@ -141,9 +146,32 @@
   padding: var(--content-wrapper-stake-body-main-title-each-padding);
   color: var(--header-text-color);
   position: relative;
+  overflow: visible;
 }
 
 
+.content-test {
+  display: flex;
+  width: 2815px;
+  min-width: 2815px;
+  overflow: visible;
+  animation: slidingscalee 30s linear infinite normal; /* direction fill-mode; */
+}
+
+.content-wrapper-stake-body-main-title:hover  .content-test{
+  animation-play-state: paused;
+}
+
+@keyframes slidingscale {
+
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+  
+}
 
 .content-wrapper-stake-body-main-title-each-icon {
   height: var(--content-wrapper-stake-body-main-title-each-size);
@@ -215,8 +243,8 @@
 .content-wrapper-stake-body-main-center-title {
   height: auto;
   min-height: auto;
-  width: var(--content-wrapper-stake-body-main-width);
-  min-width: var(--content-wrapper-stake-body-main-width);
+  width: var(--staking-inside-width);
+  min-width: var(--staking-inside-width);
   display: flex;
   justify-content: space-between;
   font-family: 'Montserrat';
@@ -244,6 +272,7 @@
   min-height: var(--content-wrapper-stake-body-main-center-body-height);
   width: var(--content-wrapper-stake-body-main-center-body-width);
   min-width: var(--content-wrapper-stake-body-main-center-body-width);
+  max-width: var(--content-wrapper-stake-body-main-center-body-width);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -256,6 +285,7 @@
   width: var(--content-wrapper-stake-body-main-center-body-icon-size);
   height: var(--content-wrapper-stake-body-main-center-body-icon-size);
   margin-left: var(--content-wrapper-stake-body-main-center-body-icon-margin-left);
+  margin-right: var(--content-wrapper-stake-body-main-center-body-icon-margin-right);
 }
 
 .content-wrapper-stake-body-main-center-body-icon img {
@@ -328,6 +358,7 @@
   min-height: auto;
   width: var(--content-wrapper-stake-body-main-center-body-stake-amount-width);
   min-width: var(--content-wrapper-stake-body-main-center-body-stake-amount-width);
+  max-width: var(--content-wrapper-stake-body-main-center-body-stake-amount-width);
   font-weight: 600;
   font-size: var(--font-size-40);
   font-family: 'Montserrat';
@@ -342,7 +373,7 @@
   height: auto;
   min-height: auto;
   width: auto;
-  min-width: auto;
+  min-width: auto; 
   font-family: 'Montserrat';
   display: flex;
   align-items: center;
@@ -350,13 +381,15 @@
   font-weight: 300;
   font-size: var(--font-size-16);
   line-height: 2;
+  margin-right: 60px;
 }
+
 
 .content-wrapper-stake-body-main-content {
   height: auto;
   min-height: auto;
-  width: 100%;
-  min-width: 100%;
+  width: var(--staking-inside-width);
+  min-width: var(--staking-inside-width);
   margin-top: var(--content-wrapper-stake-body-main-content-margin-top);
 }
 
@@ -370,9 +403,9 @@
 .content-wrapper-stake-body-main-content-stat-title {
   height: auto;
   min-height: auto;
-  width: 100%;
-  min-width: 100%;
-  display: flex;
+  width: var(--staking-inside-width);
+  min-width: var(--staking-inside-width);  
+  display: flex;  
   justify-content: space-between;
   padding: var(--content-wrapper-stake-body-main-content-stat-title-padding);
   font-family: 'Montserrat';
@@ -416,8 +449,12 @@
 .content-wrapper-stake-body-main-content-stat-title-content {
   height: auto;
   min-height: auto;
-  width: auto;
-  min-width: auto;
+  width: 100%;
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin-top: var(--content-wrapper-stake-body-main-content-stat-title-content-margin-top);
   padding: var(--content-wrapper-stake-body-main-content-stat-title-content-padding);
 }

@@ -24,8 +24,6 @@ function setTokenUI(currentChain) {
   chainName.textContent = JSON.parse(currentChain.chain_info).chainName;
 };
 
-
-
 function addChainToKeplr(currentChain, callback) {
   const keplr = window.keplr;
   let globalOfflineSigner
@@ -100,77 +98,18 @@ function completeStaking(offlineSigner, accounts, currentChain, stakingValue) {
   .then((signingClient)=> signingClient.signAndBroadcast(accounts.address, [DelegateTransaction],fee,memo))
   .then((gasUsed) => {
     console.log("Gas used: ", gasUsed);
-console.log("codee", gasUsed.code)
-if (gasUsed.code === 0) {
-  alert("Transaction successful");
-  console.log(`https://www.mintscan.io/cosmos/tx/${gasUsed.transactionHash}`);
-} else  {
-  alert("Transaction failed");
-}
+    console.log("codee", gasUsed.code)
+    if (gasUsed.code === 0) {
+      alert("Transaction successful");
+      console.log(`https://www.mintscan.io/cosmos/tx/${gasUsed.transactionHash}`);
+    } else  {
+      alert("Transaction failed");
+    }
 
-console.log("Gas used: ", gasUsed);
-  })
-  .catch((err) => {
+    console.log("Gas used: ", gasUsed);
+  }).catch((err) => {
     console.log(err);
   });
-};
-
-
-
-const SLIDE_ANIMATION_INTERVAL = 14;
-const SLIDE_ANIMATION_STEP = 1;
-
-let boxPadding = null;
-let activeProject = null;
-let activeProjectToLeft = 0;
-
-function removeProject(element) {
-  const newElement = element.cloneNode(true);
-  element.remove();
-  newElement.style.marginLeft = `${boxPadding}px`;
-  document.querySelector('.content-wrapper-stake-body-main-title').appendChild(newElement);
-};
-
-function projectsSlideAnimation() {
-  if (activeProjectToLeft > activeProject.getBoundingClientRect().width + boxPadding * 2) {
-    activeProjectToLeft = 0;
-    removeProject(activeProject);
-    activeProject = document.querySelector('.content-wrapper-stake-body-main-title').childNodes[0];
-    activeProject.style.marginLeft = `0`;
-  } else {
-    activeProjectToLeft += SLIDE_ANIMATION_STEP;
-    activeProject.style.marginLeft = `-${activeProjectToLeft}px`;
-  }
-  setTimeout(() => {
-    projectsSlideAnimation();
-  }, SLIDE_ANIMATION_INTERVAL)
-};
-
-
-let counter = 1;
-let elx ;
-let children ;
-
-let classNames;
-
-function carosoul(step="right") {
-
-  if (step == "left") {
-    counter -= 3;
-  }
-
-
-  classNames[(counter - 1) %(classNames.length)].style.zIndex = 0;
-  classNames[counter  % (classNames.length)].style.zIndex = 500;
-
-  classNames[1].style.zIndex = '100';
-  counter++;
-
-
-  setTimeout(() => {
-    carosoul();
-  }, 2000);
-
 };
 
 function getCurrentChain() {
@@ -184,24 +123,43 @@ function getCurrentChain() {
 )};
 
 
+let counter = 0;
+let elx ;
+let children ;
+
+let classNames;
+
+function carosoul() {
+
+ /*  if (step == "left") {
+    counter -= 3;
+  } */
+  classNames[(counter - 1) %(classNames.length)].style.zIndex = 0;
+  classNames[(counter )  % (classNames.length)].style.zIndex = 500;
+
+  //classNames[1].style.zIndex = '100';
+  counter++;
+
+/* 
+  setTimeout(() => {
+    carosoul();
+  }, 2000); */
+};
+
+
 window.addEventListener('load',  async() => {
   //carosoul();
-  ddocument.querySelector('.content-wrapper-stake-body-main-center-body-stake-amount').focus();
+  document.querySelector('.content-wrapper-stake-body-main-center-body-stake-amount').focus();
   currentChain = JSON.parse(document.getElementById('chainInfoElement').value);
-  globalAddress = document.querySelector('.content-header-title').textContent
+  globalAddress = document.getElementById('globalAddressElement')?.value || "";
   setTokenUI(JSON.parse(document.getElementById('chainInfoElement').value));
 
+  
+  elx = document.querySelectorAll('.content-wrapper-info-body-content');
+  children = console.log(elx);
+  classNames =  Array.from(elx);
 
-  elx = document.querySelector('.content-wrapper-info-body-wrapper');
-  children = elx.children;
-  classNames =  Array.from(children);
-
-  boxPadding = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--box-padding').replace('px',  ''));
-  boxPadding = "15px";
-  activeProjectToLeft = boxPadding;
-
-  //activeProject = document.querySelector('.content-wrapper-stake-body-main-title').childNodes[0];
-  //projectsSlideAnimation();
+  console.log(classNames);
 
   document.addEventListener('input', event => {
     if (event.target.closest('.content-wrapper-stake-body-main-center-body-chain-list-search-input')) {
@@ -228,13 +186,19 @@ window.addEventListener('load',  async() => {
 
   document.addEventListener('click', event => {
 
-    let data = {navbar: false};
-    console.log(JSON.stringify(data));
+    if (event.target.closest('.content-wrapper-stake-body-main-center-title-each.content-wrapper-stake-body-main-center-title-half')) {
+      const balance = document.querySelector('.content-wrapper-stake-body-main-center-title-amount').innerText;
+      document.querySelector('.content-wrapper-stake-body-main-center-body-stake-amount').value = ((balance.match(/\d+(\.\d+)?/) || [0])[0])/2;
+    }
+
+    if (event.target.closest('.content-wrapper-stake-body-main-center-title-each.content-wrapper-stake-body-main-center-title-max')) {
+      const balance = document.querySelector('.content-wrapper-stake-body-main-center-title-amount').innerText;
+      document.querySelector('.content-wrapper-stake-body-main-center-body-stake-amount').value = ((balance.match(/\d+(\.\d+)?/) || [0])[0]) - 0.02;
+    }
 
 
     if (event.target.closest('.content-wrapper-info-body-larrow')) {
-
-      carosoul("left");
+      carosoul();
     }
 
 

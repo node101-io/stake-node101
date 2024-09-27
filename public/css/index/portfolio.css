@@ -39,7 +39,7 @@
 
 @media only screen and (min-width: 1300px) and (max-width: 1400px) {
   .content-wrapper-portfolio-body {
-    --content-wrapper-portfolio-body-width: 500px;
+    --content-wrapper-portfolio-body-width: 450px;
   }
 
   .content-wrapper-portfolio-body-stat { 

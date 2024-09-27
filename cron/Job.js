@@ -39,9 +39,10 @@ const Job = {
                 const restUrl = "https://rest.cosmos.directory/cosmoshub";
 
                 getAprFromRest(restUrl, (err, apr) => {
+                  console.log(apr);
                   ChainInfo.findChainInfoByChainIdAndUpdate(chainInfos[time].chain_id, {
-                  // rpc_url: `https://rpc.cosmos.directory/${registryIdentifier}`,
-                  rpc_url: "https://cosmos-rpc.stakeandrelax.net/",
+                  rpc_url: `https://rpc.cosmos.directory/${registryIdentifier}`,
+                  //rpc_url: "https://cosmos-rpc.stakeandrelax.net/",
                   chain_info: JSON.stringify(chainInfo),
                   price: tokenPrice.price,
                   price_change_24h: tokenPrice['24h_change'],

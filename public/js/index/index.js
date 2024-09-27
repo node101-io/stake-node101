@@ -46,7 +46,7 @@ function addChainToKeplr(currentChain, callback) {
     .then((balance) => {
       globalBalance = Math.round(((100 * balance.amount) / (10 ** currentChainInfo.currencies[0].coinDecimals)) )/100 + " " + currentChainInfo.currencies[0].coinDenom;
 
-      document.querySelector('.content-header-title').textContent = globalAddress;//.slice(0, 10) + "...";
+      document.querySelector('.content-header-title').textContent = globalAddress.slice(0, 10) + "...";
       document.querySelector('.content-wrapper-stake-body-main-center-title-amount').textContent = Math.round(((100 * balance.amount) / (10 ** currentChainInfo.currencies[0].coinDecimals)) )/100 + " " + currentChainInfo.currencies[0].coinDenom;
 
       saveToSession({
@@ -176,11 +176,26 @@ window.addEventListener('load',  async() => {
     }
 
     if (event.target.closest('.content-wrapper-stake-body-main-center-body-stake-amount')) {
-      console.log("here");
+      
       const stakingValue = event.target.value;
       const stakingAmount = document.querySelector('.content-wrapper-stake-body-main-center-body-stake-dollar');
-      console.log(currentChain);
-      stakingAmount.textContent = "$"+ Math.round(100 * stakingValue *  currentChain.price)/100;
+      stakingAmount.textContent = "$"+ (stakingValue *  currentChain.price).toFixed(2);
+
+      const aprTokenDaily = document.querySelector('.content-wrapper-stake-body-main-content-stat-title-content-each-value-token-daily');
+      aprTokenDaily.textContent = (stakingValue * (currentChain.apr/100)/365).toFixed(2) + " " + JSON.parse(currentChain.chain_info).currencies[0].coinDenom;
+      const aprPriceDaily = document.querySelector('.content-wrapper-stake-body-main-content-stat-title-content-each-value-price-daily');
+      aprPriceDaily.textContent = "$" + (stakingValue * (currentChain.apr/100)/365 * currentChain.price).toFixed(2);
+
+      const aprTokenMonthly = document.querySelector('.content-wrapper-stake-body-main-content-stat-title-content-each-value-token-monthly');
+      aprTokenMonthly.textContent = (stakingValue * (currentChain.apr/100)/12).toFixed(2) + " " + JSON.parse(currentChain.chain_info).currencies[0].coinDenom;
+      const aprPriceMonthly = document.querySelector('.content-wrapper-stake-body-main-content-stat-title-content-each-value-price-monthly');
+      aprPriceMonthly.textContent = "$" + (stakingValue * (currentChain.apr/100)/12.16 * currentChain.price).toFixed(2);
+
+      const aprTokenYearly = document.querySelector('.content-wrapper-stake-body-main-content-stat-title-content-each-value-token-yearly');
+      aprTokenYearly.textContent = ((stakingValue/100) * (currentChain.apr)).toFixed(2) + " " + JSON.parse(currentChain.chain_info).currencies[0].coinDenom;
+      const aprPriceYearly = document.querySelector('.content-wrapper-stake-body-main-content-stat-title-content-each-value-price-yearly');
+      aprPriceYearly.textContent = "$" + (stakingValue * (currentChain.apr/100) * currentChain.price).toFixed(2);
+
     }
   });
 
@@ -188,12 +203,12 @@ window.addEventListener('load',  async() => {
 
     if (event.target.closest('.content-wrapper-stake-body-main-center-title-each.content-wrapper-stake-body-main-center-title-half')) {
       const balance = document.querySelector('.content-wrapper-stake-body-main-center-title-amount').innerText;
-      document.querySelector('.content-wrapper-stake-body-main-center-body-stake-amount').value = ((balance.match(/\d+(\.\d+)?/) || [0])[0])/2;
+      document.querySelector('.content-wrapper-stake-body-main-center-body-stake-amount').value = ((balance.match(/\d+(\.\d+)?/) || [0])[0])/2 > 0.02 ? ((balance.match(/\d+(\.\d+)?/) || [0])[0])/2 : 0;
     }
 
     if (event.target.closest('.content-wrapper-stake-body-main-center-title-each.content-wrapper-stake-body-main-center-title-max')) {
       const balance = document.querySelector('.content-wrapper-stake-body-main-center-title-amount').innerText;
-      document.querySelector('.content-wrapper-stake-body-main-center-body-stake-amount').value = ((balance.match(/\d+(\.\d+)?/) || [0])[0]) - 0.02;
+      document.querySelector('.content-wrapper-stake-body-main-center-body-stake-amount').value = ((balance.match(/\d+(\.\d+)?/) || [0])[0]) > 0.02 ? ((balance.match(/\d+(\.\d+)?/) || [0])[0]) - 0.02 : 0;
     }
 
 

@@ -87,7 +87,6 @@ function calculateRealAPR(annual_provisions, blocks_per_year, nominalAPR, blocks
 }
 
 module.exports = (api_url, callback) => {
-
   getAprRelatedInfoFromApi(api_url, (err, res) => {
   
     if (err)
@@ -100,7 +99,7 @@ module.exports = (api_url, callback) => {
 
       const nominalAPR =  calculateNominalAPR(annual_provisions, community_tax, bonded_tokens);
       const actualAPR = calculateRealAPR(annual_provisions, blocks_per_year, nominalAPR, blocksYearReal) * 100 ;
-
+      console.log(actualAPR);
       return callback(null,(actualAPR * (1- COMMISION_RATE)).toFixed(2));
     });
   });
@@ -108,19 +107,3 @@ module.exports = (api_url, callback) => {
 
 
 
-/* getAprRelatedInfoFromApi("https://rest.cosmos.directory/cosmoshub", (err, res) => {
-  
-  if (err)
-    return console.log(err)
-
-  const { annual_provisions, blocks_per_year, inflation, bonded_tokens, community_tax } = res;
-  getBlocksPerYear("https://rest.cosmos.directory/cosmoshub", (err, blocksYearReal) => {
-    if (err)
-      return console.log(err);
-
-    const nominalAPR =  calculateNominalAPR(annual_provisions, community_tax, bonded_tokens);
-    const actualAPR = Math.ceil(calculateRealAPR(annual_provisions, blocks_per_year, nominalAPR, blocksYearReal) * 100 * 100) / 100;
-    console.log(res);
-    return console.log(null,actualAPR);
-  });
-}); */

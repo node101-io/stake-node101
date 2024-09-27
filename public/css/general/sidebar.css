@@ -22,7 +22,7 @@
   width: var(--sidebar-width);
   min-width: var(--sidebar-width);
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   flex-direction: column;
   margin-right: var(--sidebar-margin-horizontal);

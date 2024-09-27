@@ -24,9 +24,6 @@
 
 }
 
-
-
-
 @media only screen and (min-width: 1300px) and (max-width: 1400px) {
   :root {
     --staking-inside-width: 480px;
@@ -34,6 +31,12 @@
   }
   .content-wrapper-stake {
       --content-wrapper-stake-width: 530px;
+  }
+
+  .content-wrapper-stake-body-main-center-body-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
 }
@@ -54,6 +57,12 @@
   .content-wrapper-stake-body-main-center-body {
     --content-wrapper-stake-body-main-center-body-height: 110px;
 
+  }
+
+  .content-wrapper-stake-body-main-center-body-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .content-wrapper-stake-body-main-center-body-icon img {
@@ -218,7 +227,6 @@
   }
 
 }
-
 
 @media only screen and  (max-width: 1000px) {
 

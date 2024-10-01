@@ -340,9 +340,11 @@ window.addEventListener('load', async () => {
       };
       console.log(stakingValue);
       const offlineSigner = keplr.getOfflineSigner(currentChain.chain_id);
-      offlineSigner.getAccounts().
-      then((accounts) => {
-        completeRestake(offlineSigner, accounts[0], currentChain); 
+      offlineSigner.getAccounts()
+      .then((accounts) => {
+        completeRedelegate(offlineSigner, accounts[0], currentChain, "cosmosvaloper1gpx52r9h3zeul45amvcy2pysgvcwddxrgx6cnv", (err, data) => {
+          if (err) console.log(err);
+        });
       }).catch((err) => {
         console.log(err);
         return;

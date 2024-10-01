@@ -20,7 +20,9 @@ function getReward(delegatorAddress, validatorAddress, callback) {
         
         return callback(null, stakedAmount);
       })
+
       .catch(err => {
+        console.log(err);
         return callback('document_not_found');
       })
   }).catch(_ => {
@@ -38,7 +40,7 @@ function getStake(delegatorAddress, validatorAddress, callback) {
       if (!delegationResponse) {
         return callback('document_not_found');
       }
-      const stakedAmount = delegationResponse.delegationResponse.balance.amount;
+      const stakedAmount = `${delegationResponse.delegationResponse.balance.amount}`;
       return callback(null, stakedAmount);
     }).catch(_ => {
       return callback('document_not_found');
@@ -48,8 +50,8 @@ function getStake(delegatorAddress, validatorAddress, callback) {
     return callback('document_not_found');
   });
 }
-    
-function completeStake(offlineSigner, accounts, currentChain, stakingValue) {
+
+function completeStake(offlineSigner, accounts, currentChain, stakingValue, callback) {
   const currentChainInfo = JSON.parse(currentChain.chain_info);
   const validatorAddress = currentChain.validator_address
   const stakingdenom = currentChainInfo.feeCurrencies[0].coinMinimalDenom;
@@ -79,7 +81,7 @@ function completeStake(offlineSigner, accounts, currentChain, stakingValue) {
       const fee = {
         amount: [
           {
-            denom: currentChainInfo.feeCurrencies[0].coinMinimalDenom,
+            denom: stakingdenom,
             amount: "0",
           },  
         ],
@@ -95,12 +97,13 @@ function completeStake(offlineSigner, accounts, currentChain, stakingValue) {
       } else  {
         alert("Transaction failed");
       }
+      return callback(null);
     }).catch((err) => {
-      console.log(err);
+      return callback(err);
   });
 };
 
-function completeRestake(offlineSigner, accounts, currentChain) {
+function completeRestake(offlineSigner, accounts, currentChain, callback) {
   const currentChainInfo = JSON.parse(currentChain.chain_info);
   const stakingdenom = currentChainInfo.feeCurrencies[0].coinMinimalDenom;
   const memo = "restake from node101 website";
@@ -108,22 +111,17 @@ function completeRestake(offlineSigner, accounts, currentChain) {
 
   getReward(accounts.address, validatorAddress, (err, data) => {
     if (err) {
-      console.log(err);
-      return;
+      return callback(err);
     }
-    const UndelegateMsg = 
-    MsgUndelegate.fromPartial({
+
+    const WithdrawRewardMsg = MsgWithdrawDelegatorReward.fromPartial({
       delegatorAddress: accounts.address,
-      validatorAddress: validatorAddress,
-      amount: {
-        denom: stakingdenom,
-        amount: data
-      }
+      validatorAddress: validatorAddress
     });
 
-    const UndelegateTransaction = {
-      typeUrl: "/cosmos.staking.v1beta1.MsgUndelegate",
-      value: UndelegateMsg,
+    const WithdrawRewardTransaction = {
+      typeUrl: "/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward",
+      value: WithdrawRewardMsg,
     };
 
     const DelegateMsg = MsgDelegate.fromPartial({
@@ -144,19 +142,19 @@ function completeRestake(offlineSigner, accounts, currentChain) {
     SigningStargateClient.connectWithSigner(currentChain.rpc_url,offlineSigner)
     .then((signingClient) => {
       globalSigningClient = signingClient;
-      return signingClient.simulate(accounts.address, [UndelegateTransaction,DelegateTransaction]);
+      return signingClient.simulate(accounts.address, [WithdrawRewardTransaction,DelegateTransaction]);
     }).then((gasEstimate )=> {
       const fee = {
         amount: [
           {
-            denom: currentChainInfo.feeCurrencies[0].coinMinimalDenom,
+            denom: stakingdenom,
             amount: "0",
           },  
         ],
         gas: Math.round(gasEstimate * GAS_FEE_ADJUSTMENT).toString(),
       };
 
-      return globalSigningClient.signAndBroadcast(accounts.address, [UndelegateTransaction,DelegateTransaction], fee, memo);
+      return globalSigningClient.signAndBroadcast(accounts.address, [WithdrawRewardTransaction,DelegateTransaction], fee, memo);
     }).then((gasUsed) => {
       console.log("Gas used: ", gasUsed);
       if (gasUsed.code === 0) {
@@ -165,34 +163,81 @@ function completeRestake(offlineSigner, accounts, currentChain) {
       } else  {
         alert("Transaction failed");
       }
+      return callback(null);
     }).catch((err) => {
-      console.log(err);
+      return callback(err);
     })
   });
 };
 
-function completeUnstake(offlineSigner, accounts, currentChain) {
+function completeWithdraw(offlineSigner, accounts, currentChain, callback) {
+  const currentChainInfo = JSON.parse(currentChain.chain_info);
+  const stakingdenom = currentChainInfo.feeCurrencies[0].coinMinimalDenom;
+  const memo = "withdraw stake from node101 website";
+  const validatorAddress = currentChain.validator_address;
+
+  
+  const WithdrawRewardMsg = MsgWithdrawDelegatorReward.fromPartial({
+    delegatorAddress: accounts.address,
+    validatorAddress: validatorAddress
+  });
+
+  const WithdrawRewardTransaction = {
+    typeUrl: "/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward",
+    value: WithdrawRewardMsg,
+  };
+
+
+  let globalSigningClient;
+  SigningStargateClient.connectWithSigner(currentChain.rpc_url,offlineSigner)
+  .then((signingClient) => {
+    globalSigningClient = signingClient;
+    return signingClient.simulate(accounts.address, [WithdrawRewardTransaction]);
+  }).then((gasEstimate )=> {
+    const fee = {
+      amount: [
+        {
+          denom: stakingdenom,
+          amount: "0",
+        },  
+      ],
+      gas: Math.round(gasEstimate * GAS_FEE_ADJUSTMENT).toString(),
+    };
+
+    return globalSigningClient.signAndBroadcast(accounts.address, [WithdrawRewardTransaction], fee, memo);
+  }).then((gasUsed) => {
+    console.log("Gas used: ", gasUsed);
+    if (gasUsed.code === 0) {
+      alert("Transaction successful");
+      console.log(`https://www.mintscan.io/cosmos/tx/${gasUsed.transactionHash}`);
+    } else  {
+      alert("Transaction failed");
+    }
+    return callback(null);
+  }).catch((err) => {
+    return callback(err);
+  })
+};
+
+function completeUnstake(offlineSigner, accounts, currentChain, callback) {
   const currentChainInfo = JSON.parse(currentChain.chain_info);
   const stakingdenom = currentChainInfo.feeCurrencies[0].coinMinimalDenom;
   const memo = "unstake from node101 website";
   const validatorAddress = currentChain.validator_address;
 
-  getReward(accounts.address, validatorAddress, (err, data) => {
-  if (err) {
-    console.log(err);
-    return;
-  }
-  const UndelegateMsg = 
-    MsgUndelegate.fromPartial({
-      delegatorAddress: accounts.address,
-      validatorAddress: validatorAddress,
-      amount: {
-        denom: stakingdenom,
-        amount: data
-      }
-  })
-
-
+  getStake(accounts.address, validatorAddress, (err, data) => {
+    if (err) {
+      return callback(err);
+    }
+    const UndelegateMsg = 
+      MsgUndelegate.fromPartial({
+        delegatorAddress: accounts.address,
+        validatorAddress: validatorAddress,
+        amount: {
+          denom: stakingdenom,
+          amount: data
+        }
+    })
 
   const UndelegateTransaction = {
     typeUrl: "/cosmos.staking.v1beta1.MsgUndelegate",
@@ -208,7 +253,7 @@ function completeUnstake(offlineSigner, accounts, currentChain) {
     const fee = {
       amount: [
         {
-          denom: currentChainInfo.feeCurrencies[0].coinMinimalDenom,
+          denom: stakingdenom,
           amount: "0",
         },  
       ],
@@ -224,24 +269,21 @@ function completeUnstake(offlineSigner, accounts, currentChain) {
     } else  {
       alert("Transaction failed");
     }
+    return callback(null);
   }).catch((err) => {
-    console.log(err);
+    return callback(err);
   })
 });
 };
-  
 
-
-
-function completeRedelgation(offlineSigner, accounts, currentChain, validatorAddress) {
+function completeRedelegate(offlineSigner, accounts, currentChain, validatorAddress, callback) {
   const currentChainInfo = JSON.parse(currentChain.chain_info);
   const stakingdenom = currentChainInfo.feeCurrencies[0].coinMinimalDenom;
   const memo = "redelegate from node101 website";
 
   getStake(accounts.address, validatorAddress, (err, reward) => {
       if (err) {
-        console.log(err);
-        return;
+        return callback(err);
       }
 
       const RedelegateMsg = 
@@ -260,32 +302,34 @@ function completeRedelgation(offlineSigner, accounts, currentChain, validatorAdd
     value: RedelegateMsg,
   };
 
-  const fee = {
-    amount: [
-      {
-        denom: stakingdenom,
-        amount: 10,
-      },
-    ],
-    gas: "1200000", //950k 
-  };
-
+  let globalSigningClient;
   SigningStargateClient.connectWithSigner(currentChain.rpc_url,offlineSigner)
-      .then((signingClient)=> signingClient.signAndBroadcast(accounts.address, [RedelegateTransaction],fee,memo))
-      .then((gasUsed) => {
-        console.log("Gas used: ", gasUsed);
-    console.log("codee", gasUsed.code) 
+  .then((signingClient) => {
+    globalSigningClient = signingClient;
+    return signingClient.simulate(accounts.address, [RedelegateTransaction]);
+  }).then((gasEstimate )=> {
+    const fee = {
+      amount: [
+        {
+          denom: stakingdenom,
+          amount: "0",
+        },  
+      ],
+      gas: Math.round(gasEstimate * GAS_FEE_ADJUSTMENT).toString(),
+    };
+
+    return globalSigningClient.signAndBroadcast(accounts.address, [RedelegateTransaction], fee, memo);
+  }).then((gasUsed) => {
+    console.log("Gas used: ", gasUsed);
     if (gasUsed.code === 0) {
       alert("Transaction successful");
       console.log(`https://www.mintscan.io/cosmos/tx/${gasUsed.transactionHash}`);
     } else  {
       alert("Transaction failed");
     }
-
-    console.log("Gas used: ", gasUsed);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
+    return callback(null);
+  }).catch((err) => {
+    return callback(err);
+  })
+});
 };

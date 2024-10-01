@@ -2,9 +2,9 @@ const { SigningStargateClient } = require('@cosmjs/stargate');
 const { MsgDelegate } = require('cosmjs-types/cosmos/staking/v1beta1/tx');
 const { MsgBeginRedelegate } = require('cosmjs-types/cosmos/staking/v1beta1/tx');
 const { MsgUndelegate } = require('cosmjs-types/cosmos/staking/v1beta1/tx');
+const { MsMsgWithdrawDelegatorReward } = require('cosmjs-types/cosmos/distribution/v1beta1/tx');
 
-
-const { QueryClient, setupDistributionExtension} = require("@cosmjs/stargate");
+const { QueryClient, setupDistributionExtension, setupStakingExtension} = require("@cosmjs/stargate");
 const { Tendermint34Client } = require("@cosmjs/tendermint-rpc");
 const { StargateClient } = require("@cosmjs/stargate")
 
@@ -18,3 +18,5 @@ window.MsgDelegate = MsgDelegate;
 window.MsgBeginRedelegate = MsgBeginRedelegate;
 window.MsgUndelegate = MsgUndelegate;
 window.setupDistributionExtension = setupDistributionExtension;
+window.setupStakingExtension = setupStakingExtension;
+window.MsMsgWithdrawDelegatorReward = MsMsgWithdrawDelegatorReward;

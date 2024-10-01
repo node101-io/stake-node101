@@ -34,6 +34,7 @@ block main
                   .content-wrapper-portfolio-body-stat-chain-value-amount-token
                     |#{globalBalanceKey} 
                   .content-wrapper-portfolio-body-stat-chain-value-amount-usd
+                    - console.log(globalBalanceKey);
                     | #{listOfToken[currentChainKey].price * 2}
             .content-wrapper-portfolio-body-stat-each
               .content-wrapper-portfolio-body-stat-timeline

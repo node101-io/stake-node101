@@ -47,7 +47,7 @@ module.exports = (req, res) => {
           includes: {
             external: {
               css: ['general', 'header', 'sidebar', 'stake', 'page'],
-              js: ['cosmjs', 'page', 'serverRequest']
+              js: ['cosmjs','general','cosmjsFunctions','header', 'page', 'serverRequest']
             },
             meta: {
               title: res.__('For you to make most of the distributed value'),

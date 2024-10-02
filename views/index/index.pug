@@ -2,7 +2,7 @@ extends ../partials/head
 block main
   .all-wrapper
     input#chainInfoElement(style='display: none;', value=chainInfo)
-    include ../partials/sidebar.pug
+    //include ../partials/sidebar.pug
     .content
       include ../partials/header.pug
       .content-wrapper 
@@ -15,43 +15,80 @@ block main
                 path(d='M12.1486 14.0002L18.3237 7.82512C18.7793 7.36951 18.7793 6.63082 18.3237 6.1752C17.868 5.71959 17.1294 5.71959 16.6737 6.1752L9.67374 13.1752C9.21813 13.6308 9.21813 14.3695 9.67374 14.8251L16.6737 21.8251C17.1294 22.2807 17.868 22.2807 18.3237 21.8251C18.7793 21.3695 18.7793 20.6308 18.3237 20.1752L12.1486 14.0002Z' fill='#9695DF')
             
             .content-wrapper-info-body-wrapper
-
-              .content-wrapper-info-body-spiral
-                svg(width='470' height='470' viewbox='0 0 456 456' fill='red' xmlns='http://www.w3.org/2000/svg')
-                  path(d='M-69.2177 132.034C-63.4745 121.262 -58.235 110.197 -51.9447 99.7189C-16.5809 40.917 33.3308 -0.572798 97.422 -25.1205C128.041 -36.808 159.69 -43.3055 192.407 -43.7851C238 -44.4347 281.75 -36.246 322.634 -15.2842C382.444 15.3491 425.744 61.5291 451.557 123.587C467.481 161.796 473.71 201.455 470.824 243.035C467.97 284.095 456.57 322.026 435.271 356.92C406.391 404.212 365.422 437.341 314.048 457.928C275.013 473.621 234.486 478.143 193.046 472.702C152.383 467.352 115.781 451.736 83.5318 426.043C54.0192 402.517 31.5731 373.599 16.7342 338.976C-4.8016 288.737 -9.09422 237.291 9.03985 185.171C31.9276 119.264 77.1962 74.7968 143.872 55.6208C219.044 33.9655 286.066 51.1349 337.949 111.222C379.886 159.795 392.238 216.643 371.986 278.54C352.908 336.859 297.732 379.852 236.917 383.483C181.599 386.798 137.756 365.177 107.816 318.031C78.5055 271.966 83.5472 211.444 119.855 172.774C142.17 149.022 169.924 136.551 202.887 137.737C253.111 139.543 289.372 178.559 291.118 222.593C292.589 260.441 262.999 298.001 219.13 294.628C190.011 292.416 167.865 264.994 178.56 233.624C182.694 221.45 193.844 212.528 206.065 211.71C220.294 210.753 230.487 216.807 236.812 229.967C236.967 230.281 237.303 230.475 238.945 232.053C238.87 226.878 239.413 222.957 238.682 219.262C234.748 199.687 215.796 186.885 195.639 188.827C159.351 192.26 135.283 226.942 141.91 264.366C149.745 308.338 191.364 337.904 237.356 332.152C290.529 325.534 330.675 278.104 329.636 223.206C328.359 157.953 274.902 102.289 209.676 98.4384C158.05 95.3741 115.762 115.213 84.0913 154.818C43.2005 205.896 39.3493 262.581 65.875 321.511C84.0239 361.724 113.699 391.126 154.124 408.931C198.656 428.508 244.265 429.033 289.618 412.379C339.859 393.981 377.872 360.846 401.127 312.428C425.925 260.802 428.062 207.272 408.161 153.743C381.921 83.0125 332.268 35.5322 259.493 15.0569C191.719 -4.02683 127.995 8.81182 69.1762 46.673C29.3601 72.3114 -0.475346 106.771 -19.9811 150.03C-26.5172 164.534 -36.9568 171.066 -49.8587 168.802C-60.0076 167.009 -66.2096 160.374 -70.3581 151.43C-69.9618 144.937 -69.5681 138.487 -69.1717 131.994L-69.2177 132.034Z' fill='#DAE0FF')
               
-              .content-wrapper-info-body-content.content-wrapper-info-body-contentone
-                .content-wrapper-info-body-content-title
-                  | 1Why you should stake with node101 ?
-                .content-wrapper-info-body-content-text
-                  | Stake your assets with node; monitor assest performance in
-                  | your portfolio, auto-stake your assets without fees, and control
-                  | your assets on our mobile app
+              .content-wrapper-info-body-wrapper-each
+                .content-wrapper-info-body-spiral
+                  svg(width='500' height='500' viewbox='0 0 470 470' fill='none' xmlns='http://www.w3.org/2000/svg')
+                    path(d='M312.943 -92.6944C326.024 -86.7084 339.413 -81.3363 352.188 -74.6852C423.882 -37.2852 476.259 18.4821 509.73 92.1565C525.673 127.356 535.587 164.142 538.5 202.617C542.537 256.235 536.047 308.319 514.329 357.947C482.596 430.547 431.393 484.83 360.262 519.672C316.469 541.16 270.274 551.342 221.166 550.933C172.672 550.523 127.244 539.83 84.6773 517.267C26.9849 486.672 -14.9174 440.83 -42.8182 381.84C-64.0759 337.021 -72.3031 289.645 -68.8794 240.477C-65.5067 192.231 -49.7678 148.026 -21.867 108.222C3.68316 71.7937 36.0808 43.2961 75.7347 23.3426C133.274 -5.61549 193.47 -14.3643 256.068 3.23566C335.222 25.4403 390.769 75.5286 418.107 152.631C448.972 239.556 433.591 319.677 366.649 385.063C312.534 437.914 246.563 456.537 172.314 437.147C102.358 418.882 47.8339 357.026 39.1979 285.705C31.3285 220.831 53.6082 167.673 106.906 129.045C158.977 91.2355 230.518 92.8216 278.603 132.78C308.139 157.338 324.798 189.11 325.769 227.993C327.251 287.24 283.969 332.724 232.306 337.942C187.9 342.393 141.603 310.263 142.421 258.384C142.932 223.952 173.592 195.914 211.253 206.249C225.868 210.24 237.161 222.724 239 237.049C241.147 253.728 234.759 266.161 219.736 274.552C219.378 274.756 219.173 275.165 217.436 277.212C223.517 276.752 228.167 277.11 232.46 275.984C255.199 269.947 268.894 246.719 265.164 223.133C258.521 180.668 216.005 154.831 172.468 165.319C121.316 177.701 89.5318 228.812 99.5986 282.533C111.198 344.644 169.862 388.491 234.35 383.323C311.001 377.133 372.628 310.212 372.475 233.161C372.372 172.175 346.005 123.826 297.153 89.3937C234.146 44.9333 167.204 44.4728 99.803 79.9286C53.8126 104.18 21.3639 141.222 3.32545 190.082C-16.5015 243.905 -13.8443 297.626 8.9976 349.812C34.2412 407.626 75.9391 449.988 134.551 473.881C197.047 499.36 260.156 498.03 321.681 470.761C402.982 434.793 455.257 372.937 474.113 285.807C491.692 204.663 472.018 130.58 423.268 64.0681C390.258 19.0449 347.589 -13.5969 295.313 -33.448C277.786 -40.0992 269.354 -51.9178 271.091 -67.2666C272.471 -79.341 279.83 -87.1177 290.05 -92.6433C297.715 -92.6433 305.329 -92.6433 312.994 -92.6433L312.943 -92.6944Z' fill='#C2CAF4')
 
-              .content-wrapper-info-body-content.two
-                .content-wrapper-info-body-content-title
-                  | 2Why you should stake with node101 ?
-                .content-wrapper-info-body-content-text
-                  | Stake your assets with node; monitor assest performance in
-                  | your portfolio, auto-stake your assets without fees, and control
-                  | your assets on our mobile app
+                .content-wrapper-info-body-content
+                  .content-wrapper-info-body-content-title
+                    | Why you should stake with node101 ?
+                  .content-wrapper-info-body-content-text
+                    | Stake your assets with node; monitor assest performance in
+                    | your portfolio, auto-stake your assets without fees, and control
+                    | your assets on our mobile app
 
-              .content-wrapper-info-body-content.three
-                .content-wrapper-info-body-content-title
-                  | 3Why you should stake with node101 ?
-                .content-wrapper-info-body-content-text
-                  | Stake your assets with node; monitor assest performance in
-                  | your portfolio, auto-stake your assets without fees, and control
-                  | your assets on our mobile app
+              .content-wrapper-info-body-wrapper-each
+                .content-wrapper-info-body-spiral
+                  svg(width='500' height='500' viewbox='0 0 1080 1080' fill='none' xmlns='http://www.w3.org/2000/svg')
+                    path(d='M-507.768 1243.08C-539.671 1222.17 -572.623 1202.75 -603.457 1180.22C-776.467 1053.59 -891.512 886.549 -949.849 680.132C-977.594 581.53 -988.9 481.179 -981.181 379.199C-970.365 237.087 -932.566 103.2 -855.831 -18.1734C-743.672 -195.743 -587.787 -317.544 -387.42 -380.444C-264.047 -419.268 -138.89 -427.504 -10.3247 -406.826C116.633 -386.392 231.45 -340.236 334.028 -264.119C473.05 -160.914 564.597 -24.0626 614.192 141.654C652.03 267.582 654.689 395.011 626.092 522.481C597.997 647.558 539.098 757.107 450.074 850.271C368.559 935.525 272.26 997.265 160.35 1033.72C-2.0381 1086.63 -163.326 1085.52 -320.394 1014.41C-519.026 924.624 -644.643 771.198 -685.537 558.247C-731.753 318.147 -659.458 114.342 -457.885 -30.2681C-294.937 -147.153 -114.571 -169.614 72.3235 -89.1604C248.415 -13.3696 366.657 170.484 360.832 360.819C355.57 533.955 275.952 664.354 120.823 744.295C-30.7642 822.58 -217.665 789.862 -327.768 665.96C-395.392 589.816 -426.38 499.911 -413.408 397.634C-393.648 241.794 -262.038 139.89 -124.529 146.841C-6.34718 152.906 102.191 255.583 79.3437 391.199C64.2625 481.221 -27.2985 542.448 -121.897 500.331C-158.615 484.039 -183.237 446.818 -182.342 408.546C-181.311 363.983 -159.605 333.956 -116.875 317.967C-115.855 317.574 -115.156 316.583 -109.785 311.914C-125.909 310.692 -137.956 307.897 -149.657 309.133C-211.676 315.874 -256.845 371.272 -256.479 434.566C-256.013 548.492 -154.875 633.169 -36.5618 623.068C102.466 611.046 206.183 489.804 201.234 345.016C195.614 177.63 59.3352 39.315 -111.776 27.1091C-315.175 12.729 -503.43 163.483 -533.778 365.446C-557.849 525.293 -508.025 662.512 -393.708 772.241C-246.287 913.899 -70.993 941.831 119.841 875.834C250.077 830.648 349.92 746.539 416.705 625.709C490.159 492.587 504.632 350.758 465.582 204.892C422.483 43.3197 330.084 -84.3339 185.975 -170.343C32.3192 -262.058 -133.644 -283.768 -305.806 -236.874C-533.279 -175.085 -694.999 -33.8706 -779.2 186.915C-857.663 392.524 -835.657 594.506 -734.41 788.253C-665.845 919.41 -567.021 1021.98 -437.91 1094.87C-394.619 1119.29 -377.233 1153.63 -387.913 1193.15C-396.349 1224.24 -418.741 1241.68 -447.737 1252.08C-467.83 1249.02 -487.789 1245.98 -507.882 1242.92L-507.768 1243.08Z' fill='#E3FFF3')
+                    path(d='M928.232 2108.08C896.329 2087.17 863.377 2067.75 832.543 2045.22C659.533 1918.59 544.488 1751.55 486.151 1545.13C458.406 1446.53 447.1 1346.18 454.819 1244.2C465.635 1102.09 503.434 968.2 580.169 846.827C692.328 669.257 848.213 547.456 1048.58 484.556C1171.95 445.732 1297.11 437.496 1425.68 458.174C1552.63 478.608 1667.45 524.764 1770.03 600.881C1909.05 704.086 2000.6 840.937 2050.19 1006.65C2088.03 1132.58 2090.69 1260.01 2062.09 1387.48C2034 1512.56 1975.1 1622.11 1886.07 1715.27C1804.56 1800.52 1708.26 1862.26 1596.35 1898.72C1433.96 1951.63 1272.67 1950.52 1115.61 1879.41C916.974 1789.62 791.357 1636.2 750.463 1423.25C704.247 1183.15 776.542 979.342 978.115 834.732C1141.06 717.847 1321.43 695.386 1508.32 775.84C1684.42 851.63 1802.66 1035.48 1796.83 1225.82C1791.57 1398.96 1711.95 1529.35 1556.82 1609.29C1405.24 1687.58 1218.33 1654.86 1108.23 1530.96C1040.61 1454.82 1009.62 1364.91 1022.59 1262.63C1042.35 1106.79 1173.96 1004.89 1311.47 1011.84C1429.65 1017.91 1538.19 1120.58 1515.34 1256.2C1500.26 1346.22 1408.7 1407.45 1314.1 1365.33C1277.38 1349.04 1252.76 1311.82 1253.66 1273.55C1254.69 1228.98 1276.39 1198.96 1319.13 1182.97C1320.14 1182.57 1320.84 1181.58 1326.21 1176.91C1310.09 1175.69 1298.04 1172.9 1286.34 1174.13C1224.32 1180.87 1179.16 1236.27 1179.52 1299.57C1179.99 1413.49 1281.12 1498.17 1399.44 1488.07C1538.47 1476.05 1642.18 1354.8 1637.23 1210.02C1631.61 1042.63 1495.34 904.315 1324.22 892.109C1120.82 877.729 932.57 1028.48 902.222 1230.45C878.151 1390.29 927.975 1527.51 1042.29 1637.24C1189.71 1778.9 1365.01 1806.83 1555.84 1740.83C1686.08 1695.65 1785.92 1611.54 1852.7 1490.71C1926.16 1357.59 1940.63 1215.76 1901.58 1069.89C1858.48 908.32 1766.08 780.666 1621.98 694.657C1468.32 602.942 1302.36 581.232 1130.19 628.126C902.721 689.915 741.001 831.129 656.8 1051.91C578.337 1257.52 600.343 1459.51 701.59 1653.25C770.155 1784.41 868.979 1886.98 998.09 1959.87C1041.38 1984.29 1058.77 2018.63 1048.09 2058.15C1039.65 2089.24 1017.26 2106.68 988.263 2117.08C968.17 2114.02 948.211 2110.98 928.118 2107.92L928.232 2108.08Z' fill='#E3FFF3')
 
-              .content-wrapper-info-body-content.four
-                .content-wrapper-info-body-content-title
-                  | 4Why you should stake with node101 ?
-                .content-wrapper-info-body-content-text
-                  | Stake your assets with node; monitor assest performance in
-                  | your portfolio, auto-stake your assets without fees, and control
-                  | your assets on our mobile app
-    
+                .content-wrapper-info-body-content
+                  .content-wrapper-info-body-content-title
+                    | Minimised Commissions 
+                  .content-wrapper-info-body-content-text
+                    | At node101, we prioritize fair commission rates 
+                    | for our stakers. 101 always offers some of the 
+                    | lowest commission fees across the ecosystem, 
+                    | never exceeding 5%.
+
+              .content-wrapper-info-body-wrapper-each
+                .content-wrapper-info-body-spiral
+                  svg(width='500' height='500' viewbox='0 0 1080 1080' fill='none' xmlns='http://www.w3.org/2000/svg')
+                    path(d='M1178 78.5008C1102.5 622.001 -142 15.4988 -165 434C-188 852.501 791 254.5 820.5 645C831.19 786.5 578.537 856.696 375 803.001C13.0004 707.501 -36.9996 969.001 42.5004 1257.5' stroke='#FFDED5' stroke-width='190' stroke-linecap='round' stroke-linejoin='round')
+                    path(d='M33.9567 1168.41C625.525 1365.67 829.168 842.925 1058.49 884.552C1287.81 926.179 1064.16 1322.22 1170.22 1410.79C1243.58 1472.04 1245.26 1342.01 1375.2 1193.45C1485.58 1067.25 1669.97 1080.65 1745.63 1230.3' stroke='#FFDED5' stroke-width='194' stroke-linecap='round' stroke-linejoin='round')
+                    path(d='M-631.591 -268.532C-92.3911 -77.085 -142.732 -239.351 73.3515 -186.998C289.435 -134.645 376.985 -3.49805 486.352 -3.49805C614.352 -3.49805 619.352 -49.498 805.352 -123.998C943.947 -179.511 1025.35 -162.849 1225.85 -331.999' stroke='#FFDED5' stroke-width='194' stroke-linecap='round' stroke-linejoin='round')
+
+                .content-wrapper-info-body-content
+                  .content-wrapper-info-body-content-title
+                    | Governance Participation
+                  .content-wrapper-info-body-content-text
+                    | As a token holder, you can participate in blockchain decisions, but keeping up with debates can be time-consuming. At node101, we vote on your behalf in all chains you stake in, ensuring the best outcomes for you. 
+
+              .content-wrapper-info-body-wrapper-each
+                .content-wrapper-info-body-spiral
+                  svg(width='500' height='500' viewbox='0 0 1061 1080' fill='none' xmlns='http://www.w3.org/2000/svg')
+                    path(d='M118.999 11.9998C-171.001 716.5 963.166 -419.926 996.083 84.2871C1029 588.5 -264.501 590.999 59.9993 821.499' stroke='url(#paint0_linear_2061_1971)' stroke-width='128' stroke-linecap='square' stroke-linejoin='round')
+                    path(d='M66.9979 825C335.998 1033.5 689.498 727.999 801.998 877.5C868.594 966 705.998 1040.5 772.498 1217.5' stroke='url(#paint1_linear_2061_1971)' stroke-width='128' stroke-linecap='square' stroke-linejoin='round')
+                    defs
+                      lineargradient#paint0_linear_2061_1971(x1='930.499' y1='-19' x2='1011.41' y2='799.154' gradientunits='userSpaceOnUse')
+                        stop(offset='0.206871' stop-color='#F37372')
+                        stop(offset='0.769089' stop-color='#FFD9CD')
+                      lineargradient#paint1_linear_2061_1971(x1='-123.502' y1='704' x2='805.882' y2='797.605' gradientunits='userSpaceOnUse')
+                        stop(offset='0.388474' stop-color='#FFD9CD')
+                        stop(offset='1' stop-color='#F37372')
+                .content-wrapper-info-body-content
+                  .content-wrapper-info-body-content-title
+                    | 7/24 Support
+                  .content-wrapper-info-body-content-text
+                    | Learning about staking can be challenging, and you may have investment concerns. Our support team responds to emails at hello@node101.io within 12 hours, and even quicker on Telegram. Our tokenomics, community, and technical experts are ready to answer your blockchain questions.
+                
+              .content-wrapper-info-body-wrapper-each
+                .content-wrapper-info-body-spiral
+                  svg(width='500' height='500' viewbox='0 0 1080 1080' fill='none' xmlns='http://www.w3.org/2000/svg')
+                    path(d='M-115.524 310.114C-5.23803 353.032 467.509 299.038 819.047 -108.889' stroke='#9695DF' stroke-width='115')
+                    path(d='M1230.94 747.68C1112.78 756.126 708.524 1007.71 565.95 1527.67' stroke='#9695DF' stroke-width='115')
+                    path(d='M-45.7468 940.675C-20.361 824.964 429.443 174.382 1102.66 185.553' stroke='#9695DF' stroke-width='115')
+                    path(d='M1134.82 315.779C1100.36 430.432 792.839 1025.21 -34.2218 1149.5' stroke='#9695DF' stroke-width='115')
+
+                .content-wrapper-info-body-content
+                  .content-wrapper-info-body-content-title
+                    | One Click Staking
+                  .content-wrapper-info-body-content-text
+                    | Staking can be overwhelming with new chains and technologies emerging daily. At node101, we make staking easy across any chain we validate. Our user-friendly staking interface lets you choose and stake in just one click.
+
             .content-wrapper-info-body-rarrow
               svg(width='28' height='28' viewbox='0 0 28 28' fill='none' xmlns='http://www.w3.org/2000/svg')
                 path(d='M12.1486 14.0002L18.3237 7.82512C18.7793 7.36951 18.7793 6.63082 18.3237 6.1752C17.868 5.71959 17.1294 5.71959 16.6737 6.1752L9.67374 13.1752C9.21813 13.6308 9.21813 14.3695 9.67374 14.8251L16.6737 21.8251C17.1294 22.2807 17.868 22.2807 18.3237 21.8251C18.7793 21.3695 18.7793 20.6308 18.3237 20.1752L12.1486 14.0002Z' fill='#9695DF')
@@ -61,4 +98,6 @@ block main
             .content-wrapper-info-footer-each
             .content-wrapper-info-footer-each
             .content-wrapper-info-footer-each
+            .content-wrapper-info-footer-each
+
 

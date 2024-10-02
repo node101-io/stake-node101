@@ -2,31 +2,38 @@ let currentChain;
 let globalAddress;
 let globalBalance;
 
-function carosoul() {
+let carouselElement;
+let carouselBall;
+let counter = 0;
 
- /*  if (step == "left") {
-    counter -= 3;
-  } */
-  classNames[(counter - 1) %(classNames.length)].style.zIndex = 0;
-  classNames[(counter )  % (classNames.length)].style.zIndex = 500;
+function carousel(isLeft) {
+  const currentCounter = counter;
 
-  //classNames[1].style.zIndex = '100';
-  counter++;
+  if (isLeft) counter = counter - 1  < 0 ? carouselElement.length - counter - 1: counter - 1;
+  else counter++;
 
-/* 
-  setTimeout(() => {
-    carosoul();
-  }, 2000); */
+  carouselElement[currentCounter % carouselElement.length].style.zIndex = 0;
+  carouselElement[counter % carouselElement.length].style.zIndex = 500;
+
+  carouselBall[currentCounter % carouselBall.length].style.backgroundColor = "#FFFFFF";
+  carouselBall[counter % carouselBall.length].style.backgroundColor = "#C4CDF4";
 };
 
 window.addEventListener('load',  async() => {
 
-  //carosoul();
   document.querySelector('.content-wrapper-stake-body-main-center-body-stake-amount').focus();
   currentChain = JSON.parse(document.getElementById('chainInfoElement').value);
   globalAddress = document.getElementById('globalAddressElement')?.value || "";
   setTokenUI(JSON.parse(document.getElementById('chainInfoElement').value));
 
+  
+  carouselElement = Array.from(document.querySelectorAll('.content-wrapper-info-body-wrapper-each'));
+  carouselBall = Array.from(document.querySelectorAll('.content-wrapper-info-footer-each'));
+  console.log(carouselBall);
+
+  setInterval(() => {
+    carousel(false);
+  }, 4000);
 
   document.addEventListener('input', event => {
     if (event.target.closest('.content-wrapper-stake-body-main-center-body-chain-list-search-input')) {
@@ -80,12 +87,14 @@ window.addEventListener('load',  async() => {
 
 
     if (event.target.closest('.content-wrapper-info-body-larrow')) {
-      carosoul();
+      const isLeft = true;
+      carousel(isLeft);
     }
 
 
     if (event.target.closest('.content-wrapper-info-body-rarrow')) {
-      carosoul();
+      const isLeft = false;
+      carousel(isLeft);
     }
 
     if (event.target.closest('.content-wrapper-stake-body-main-center-body-chain-name')) {

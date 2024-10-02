@@ -149,7 +149,13 @@ window.addEventListener('load',  async() => {
       offlineSigner.getAccounts().
       then((accounts) => {
 
-        completeStaking(offlineSigner, accounts[0], currentChain, stakingValue);
+        completeStake(offlineSigner, accounts[0], currentChain, stakingValue, (err, res) => {
+          if (err) {
+            console.log(err);
+            return;
+          };
+        }
+      );
       }).catch((err) => {
         console.log(err);
         return;

@@ -143,6 +143,7 @@
   justify-content: flex-start;
   border-radius: var(--border-radius-big);
   background-color: var(--primary-background-light);
+  margin-top: 60px;
 }
 
 .content-wrapper-portfolio-body-stat {

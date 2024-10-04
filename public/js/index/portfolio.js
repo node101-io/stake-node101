@@ -237,7 +237,9 @@ window.addEventListener('load', () => {
       const offlineSigner = keplr.getOfflineSigner(currentChain.chain_id);
       offlineSigner.getAccounts().
       then((accounts) => {
-        completeUnstake(offlineSigner, accounts[0], currentChain);
+        completeWithdraw(offlineSigner, accounts[0], currentChain, (err,data) => {
+          if (err) console.log(err);
+      });
       
       }).catch((err) => {
         console.log(err);
@@ -255,7 +257,9 @@ window.addEventListener('load', () => {
       const offlineSigner = keplr.getOfflineSigner(currentChain.chain_id);
       offlineSigner.getAccounts().
       then((accounts) => {
-        completeRestake(offlineSigner, accounts[0], currentChain);
+        completeRestake(offlineSigner, accounts[0], currentChain,(err,data) => {
+          if (err) console.log(err);
+      })
       
       }).catch((err) => {
         console.log(err);
@@ -277,7 +281,9 @@ window.addEventListener('load', () => {
       offlineSigner.getAccounts().
       then((accounts) => {
         
-        completeRedelgation(offlineSigner, accounts[0], currentChain, validatorAddress1)
+        completeRestake(offlineSigner, accounts[0], currentChain, validatorAddress1, (err,data) => {
+            if (err) console.log(err);
+        })
       
       }).catch((err) => {
         console.log(err);

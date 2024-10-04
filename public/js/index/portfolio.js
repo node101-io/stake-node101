@@ -237,7 +237,7 @@ window.addEventListener('load', () => {
       const offlineSigner = keplr.getOfflineSigner(currentChain.chain_id);
       offlineSigner.getAccounts().
       then((accounts) => {
-        completeWithdraw(offlineSigner, accounts[0], currentChain (err,data) => {
+        completeWithdraw(offlineSigner, accounts[0], currentChain, (err,data) => {
           if (err) console.log(err);
       });
       

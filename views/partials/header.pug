@@ -1,6 +1,15 @@
-extends ./head
-block content
-  .all-wrapper
-    .header-wrapper header
-    .content-wrapper
-      block main
+.content-header
+  .content-header-icon
+    svg(width='30' height='30' viewbox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg')
+      path(d='M10.7137 38.5485C14.2641 38.5485 17.1423 35.6704 17.1423 32.12C17.1423 28.5696 14.2641 25.6914 10.7137 25.6914C7.16333 25.6914 4.28516 28.5696 4.28516 32.12C4.28516 35.6704 7.16333 38.5485 10.7137 38.5485Z' stroke='#DFE5FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round')
+      path(d='M29.2879 38.5485C32.8383 38.5485 35.7165 35.6704 35.7165 32.12C35.7165 28.5696 32.8383 25.6914 29.2879 25.6914C25.7375 25.6914 22.8594 28.5696 22.8594 32.12C22.8594 35.6704 25.7375 38.5485 29.2879 38.5485Z' stroke='#DFE5FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round')
+      path(d='M17.1367 32.1196C17.1367 32.1196 17.1367 29.2607 19.9953 29.2607C22.8539 29.2607 22.8539 32.1196 22.8539 32.1196' stroke='#DFE5FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round')
+      path(d='M1.42969 18.5718H38.5725' stroke='#DFE5FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round')
+      path(d='M8.17439 3.81608C8.40402 2.43843 9.59599 1.42871 10.9926 1.42871H29.0088C30.4054 1.42871 31.5974 2.43849 31.8271 3.8162L34.286 18.5716H5.71484L8.17439 3.81608Z' stroke='#DFE5FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round')
+  .content-header-title
+    if globalAddressKey
+      input#globalAddressElement(style='display: none;', value=globalAddressKey)
+      div #{globalAddressKey.slice(0, 10) + "..." }
+    else
+      div Connect Wallet
+      

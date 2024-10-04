@@ -1,26 +1,23 @@
 const ChainInfo = require('../../models/ChainInfo/ChainInfo');
 
-const DEFAULT_CHAIN_ID = 'cosmoshub-4';
-
 module.exports = (req, res) => {
 
-  const chain_id = req.session.currentChainKey || DEFAULT_CHAIN_ID;
-
+  const chain_id = 'cosmoshub-4'
   ChainInfo.getListOfToken({ is_active: true }, (err, listOfToken) => {
     if (err)
       return console.error(err);
-
+    
     ChainInfo.findChainInfoByChainId(chain_id, (err, chainInfo) => {
       if (err)
         return res.json({ error: err });
-      
-      return res.render('index/index', {
-        page: 'index/index',
+
+      return res.render('index/notification', {
+        page: 'index/notification',
         title: res.__('For you to make most of the distributed value'),
         includes: {
           external: {
             css: ['general', 'header', 'sidebar', 'stake', 'page'],
-            js: ['cosmjs','header', 'stake', 'general','cosmjsFunctions','page', 'serverRequest']
+            js: ['cosmjs', 'page', 'serverRequest']
           },
           meta: {
             title: res.__('For you to make most of the distributed value'),
@@ -31,10 +28,7 @@ module.exports = (req, res) => {
         },
         chainInfo: chainInfo,
         listOfToken: listOfToken,
-        currentChainKey: req.session.currentChainKey || DEFAULT_CHAIN_ID,
-        globalAddressKey: req.session.globalAddressKey,
-        globalBalanceKey: req.session.globalBalanceKey
       });
     });
   });
-};
+}

@@ -1,0 +1,90 @@
+.content-wrapper-stake
+  .content-wrapper-stake-body-main
+    .content-wrapper-stake-body-main-title
+      .content-test
+        each chain in listOfToken
+          .content-wrapper-stake-body-main-title-each
+            .content-wrapper-stake-body-main-title-each-icon
+              img(src=chain.img_url, alt="")
+            .content-wrapper-stake-body-main-title-each-token
+              | &nbsp; #{ chain.coin_denom }  
+            .content-wrapper-stake-body-main-title-each-price
+              | &nbsp; $#{Math.round (100 * chain.price) / 100} &nbsp;
+            .content-wrapper-stake-body-main-title-each-arrow
+              if chain.price_change_24h < 0
+                svg(width='18' height='16' viewbox='0 0 18 16' fill='none' xmlns='http://www.w3.org/2000/svg')
+                  path(d='M9.33975 15.1099C9.1473 15.4432 8.66617 15.4432 8.47372 15.1099L0.54807 1.38223C0.309402 0.968841 0.730422 0.488006 1.1717 0.669988L7.00051 3.07375C8.22145 3.57726 9.59202 3.57726 10.813 3.07375L16.6418 0.66999C17.083 0.488008 17.5041 0.968843 17.2654 1.38223L9.33975 15.1099Z' fill='#FF0000')
+              else
+                svg(width='18' height='16' viewbox='0 0 18 16' fill='none' xmlns='http://www.w3.org/2000/svg')
+                  path(d='M8.66025 0.890086C8.8527 0.556799 9.33383 0.556799 9.52628 0.890086L17.4519 14.6178C17.6906 15.0312 17.2696 15.512 16.8283 15.33L10.9995 12.9263C9.77855 12.4227 8.40798 12.4227 7.18704 12.9263L1.35822 15.33C0.917944 15.512 0.496924 15.0312 0.735592 14.6178L8.66025 0.890086Z' fill='#00FF00')
+            .content-wrapper-stake-body-main-title-each-change
+              | &nbsp; %#{Math.round (100 * chain.price_change_24h) / 100}  &nbsp; - 
+      .content-test 
+        each chain in listOfToken
+          .content-wrapper-stake-body-main-title-each
+            .content-wrapper-stake-body-main-title-each-icon
+              img(src=chain.img_url, alt="")
+            .content-wrapper-stake-body-main-title-each-token
+              | &nbsp; #{ chain.coin_denom }  
+            .content-wrapper-stake-body-main-title-each-price
+              | &nbsp; $#{Math.round (100 * chain.price) / 100} &nbsp;
+            .content-wrapper-stake-body-main-title-each-arrow
+              if chain.price_change_24h < 0
+                svg(width='18' height='16' viewbox='0 0 18 16' fill='none' xmlns='http://www.w3.org/2000/svg')
+                  path(d='M9.33975 15.1099C9.1473 15.4432 8.66617 15.4432 8.47372 15.1099L0.54807 1.38223C0.309402 0.968841 0.730422 0.488006 1.1717 0.669988L7.00051 3.07375C8.22145 3.57726 9.59202 3.57726 10.813 3.07375L16.6418 0.66999C17.083 0.488008 17.5041 0.968843 17.2654 1.38223L9.33975 15.1099Z' fill='#FF0000')
+              else
+                svg(width='18' height='16' viewbox='0 0 18 16' fill='none' xmlns='http://www.w3.org/2000/svg')
+                  path(d='M8.66025 0.890086C8.8527 0.556799 9.33383 0.556799 9.52628 0.890086L17.4519 14.6178C17.6906 15.0312 17.2696 15.512 16.8283 15.33L10.9995 12.9263C9.77855 12.4227 8.40798 12.4227 7.18704 12.9263L1.35822 15.33C0.917944 15.512 0.496924 15.0312 0.735592 14.6178L8.66025 0.890086Z' fill='#00FF00')
+            .content-wrapper-stake-body-main-title-each-change
+              | &nbsp; %#{Math.round (100 * chain.price_change_24h) / 100}  &nbsp; - &nbsp;
+   
+    .content-wrapper-stake-body-main-center
+      include ../partials/chainlist
+    .content-wrapper-stake-body-main-content
+      .content-wrapper-stake-body-main-content-stat-title
+        .content-wrapper-stake-body-main-content-stat-title-auto-rewards
+          | Rewards
+        .content-wrapper-stake-body-main-content-stat-title-buttons
+          | Auto Stake
+          .content-wrapper-stake-body-main-content-stat-title-buttons-icon
+            .content-wrapper-stake-body-main-content-stat-title-buttons-icon-ball
+      .content-wrapper-stake-body-main-content-stat-title-content
+        .content-wrapper-stake-body-main-content-stat-title-content-each
+          .content-wrapper-stake-body-main-content-stat-title-content-each-time
+            .content-wrapper-stake-body-main-content-stat-title-content-each-time-text
+              | Daily
+            .content-wrapper-stake-body-main-content-stat-title-content-each-time-percent
+              | + #{((listOfToken[currentChainKey].apr) / ( 365)).toFixed(3)}%
+          .content-wrapper-stake-body-main-content-stat-title-content-each-value
+            .content-wrapper-stake-body-main-content-stat-title-content-each-value-token.content-wrapper-stake-body-main-content-stat-title-content-each-value-token-daily
+              |  0 #{listOfToken[currentChainKey].coin_denom}
+            .content-wrapper-stake-body-main-content-stat-title-content-each-value-price.content-wrapper-stake-body-main-content-stat-title-content-each-value-price-daily
+              | $0
+        .content-wrapper-stake-body-main-content-stat-title-content-each
+          .content-wrapper-stake-body-main-content-stat-title-content-each-time
+            .content-wrapper-stake-body-main-content-stat-title-content-each-time-text
+              | Monthly
+            .content-wrapper-stake-body-main-content-stat-title-content-each-time-percent
+              | + #{((listOfToken[currentChainKey].apr) / (12)).toFixed(3)}%
+          .content-wrapper-stake-body-main-content-stat-title-content-each-value
+            .content-wrapper-stake-body-main-content-stat-title-content-each-value-token.content-wrapper-stake-body-main-content-stat-title-content-each-value-token-monthly
+              | 0 #{(listOfToken[currentChainKey].coin_denom)}
+            .content-wrapper-stake-body-main-content-stat-title-content-each-value-price.content-wrapper-stake-body-main-content-stat-title-content-each-value-price-monthly
+              | $0
+        .content-wrapper-stake-body-main-content-stat-title-content-each
+          .content-wrapper-stake-body-main-content-stat-title-content-each-time
+            .content-wrapper-stake-body-main-content-stat-title-content-each-time-text
+              | Yearly
+            .content-wrapper-stake-body-main-content-stat-title-content-each-time-percent
+              | + #{listOfToken[currentChainKey].apr }%
+          .content-wrapper-stake-body-main-content-stat-title-content-each-value
+            .content-wrapper-stake-body-main-content-stat-title-content-each-value-token.content-wrapper-stake-body-main-content-stat-title-content-each-value-token-yearly
+              | 0 #{listOfToken[currentChainKey].coin_denom}
+            .content-wrapper-stake-body-main-content-stat-title-content-each-value-price.content-wrapper-stake-body-main-content-stat-title-content-each-value-price-yearly
+              | $0
+  .content-wrapper-stake-body-button
+    .content-wrapper-stake-body-button-text
+      | Stake
+    .content-wrapper-stake-body-button-text
+      svg(width='15' height='15' viewbox='0 0 15 15' fill='none' xmlns='http://www.w3.org/2000/svg')
+        path(d='M7.37915 14.1929C7.39181 14.2059 7.77975 14.3055 8.24116 14.4141C8.70264 14.5227 9.08519 14.5949 9.09134 14.5747C9.09743 14.5545 9.14518 14.2266 9.19739 13.8459C9.30227 13.0816 9.55621 12.1891 9.82755 11.6309C10.6733 9.89144 12.1908 8.73965 14.0313 8.44028L14.5 8.36403V7.5956V6.82712L14.0752 6.75414C11.2921 6.27605 9.4777 4.14531 9.13827 0.956645C9.11612 0.748428 9.08964 0.578125 9.07944 0.578125C8.98558 0.578125 7.4303 0.961912 7.40089 0.992315C7.37962 1.0143 7.39544 1.2095 7.4361 1.42601C7.88615 3.82353 9.17477 5.77446 10.847 6.59019L11.2481 6.78587L2.99949 6.80119L0.5 6.81092L0.5 8.36611L3.01291 8.37584L11.2421 8.39123L10.7357 8.65395C9.42192 9.33547 8.38179 10.6723 7.76926 12.4668C7.59471 12.978 7.33134 14.1435 7.37915 14.1929Z' fill='#F5F5F5')

@@ -1,43 +1,60 @@
 :root {
-  --header-height: 80px;
+  --header-width: 240px;
+  --header-right-padding: 40px;
+  --header-border-radius: 50px;
+  --header-icon-size: 60px;
+  --header-title-height: 60px;
+  --header-title-width: 280px;
+  --header-title-padding-left: 50px;
 }
 
-.all-wrapper {
-  height: 100vh;
-  min-height: 100vh;
-  width: 100vw;
-  min-width: 100vw;
+.content-header {
+  position: absolute;
+  right: var(--header-right-padding);
+  height: auto;
+  min-height: auto;
+  width:fit-content;
+  min-width:fit-content;
   display: flex;
-  flex-direction: column;
-  background-color: var(--background-color);
+  align-items: center;
+  background-color: var(--primary-background-medium);
+  border-radius: 98px var(--header-border-radius) var(--header-border-radius) 98px;
   overflow: hidden;
+  background-color: #DDE4FF !important;
+  border: 1px solid var(--primary-border);
 }
 
-.header-wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: calc(var(--page-vertical-padding) + var(--header-height));
-  min-height: calc(var(--page-vertical-padding) + var(--header-height));
-  width: 100vw;
-  min-width: 100vw;
+.content-header-icon{
+  position: absolute;
+  height: var(--header-icon-size);
+  min-height: var(--header-icon-size);
+  width: var(--header-icon-size);
+  min-width: var( --header-icon-size);
   display: flex;
-  flex-direction: column;
-  z-index: 999;
+  align-items: center;
+  justify-content: center;
+  border-radius: 26px;
+  background-color: var(--primary-background-dark);
+  background-color: #9695DF;
+  z-index: 1;
 }
 
-.content-wrapper {
-  height: 100vh;
-  min-height: 100vh;
-  width: 100vw;
-  min-width: 100vw;
+.content-header-title {
+  height: var(--header-title-height);
+  min-height: var(--header-title-height);
+  width: var(--header-title-width);
+  min-width: var(--header-title-width);
   display: flex;
-  flex-direction: column;
-  padding-top: var(--page-vertical-padding);
-  overflow-x: hidden;
-  overflow-y: auto;
+  align-items: center;
+  justify-content: center;
+  padding-left: var(--header-title-padding-left);
+  background-color: var(--primary-background-14);
+  font-weight: 400;
+  font-size: var(--font-size-20);
+  font-family: 'Montserrat';
+  line-height: 1.2;
+  color: var(--primary-text-14);
+  z-index: 10;
+  cursor: pointer;
 }
 
-.content-wrapper::-webkit-scrollbar {
-  display: none;
-}

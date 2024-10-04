@@ -1,9 +1,3 @@
-let globalOfflineSigner;
-let globalAddress;
-let currentChain; 
-let globalBalance;
-
-
 let carouselElement;
 let carouselBall;
 let counter = 0;

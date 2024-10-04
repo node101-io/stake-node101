@@ -5,7 +5,7 @@ const DEFAULT_CHAIN_ID = 'cosmoshub-4';
 
 module.exports = (req, res) => {
 
-  const chain_id =  DEFAULT_CHAIN_ID;
+  const chain_id =  req.session.currentChainKey || DEFAULT_CHAIN_ID;
 
   ChainInfo.getListOfToken({ is_active: true }, (err, listOfToken) => {
     if (err)

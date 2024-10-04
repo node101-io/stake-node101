@@ -1,3 +1,8 @@
+let globalOfflineSigner;
+let globalAddress;
+let currentChain; 
+let globalBalance;
+
 window.addEventListener('load', () => {
 
   document.querySelector('.content-wrapper-stake-body-main-center-body-stake-amount').focus();

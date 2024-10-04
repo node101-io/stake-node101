@@ -22,7 +22,7 @@ window.addEventListener('load',  async() => {
 
   setInterval(() => {
     carousel(false);
-  }, 400000);
+  }, 4000);
 
 
   document.addEventListener('click', event => {

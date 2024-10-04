@@ -15,7 +15,7 @@
   --content-wrapper-info-body-body-content-height: 230px;
 
   --content-wrapper-info-body-larrow-margin-right: 15px;
-  --content-wrapper-info-body-larrow-margin-left: 15px;
+  --content-wrapper-info-body-rarrow-margin-left: 15px;
   --content-wrapper-info-body-content-text-padding:15px 10px;
 
   --content-wrapper-info-footer-width: 100px;
@@ -84,13 +84,14 @@
 }
 
 .content-wrapper-info-body-larrow {
-
+  margin-right: var(--content-wrapper-info-body-larrow-margin-right);
   font-size: var(--font-size-30);
   z-index: 10;
 }
 
 .content-wrapper-info-body-rarrow{
   transform: rotate(180deg);
+  margin-left: var(--content-wrapper-info-body-rarrow-margin-left);
   font-size: var(--font-size-30);
   z-index: 10;
 }

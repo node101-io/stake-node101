@@ -3,16 +3,10 @@ let globalAddress;
 let currentChain; 
 
 
+function getStakeAndSetUI() {
 
-function setTokenUI(currentChain) {
-  const tokenImage = document.querySelector('.content-wrapper-stake-body-main-center-body-icon-img');
-  const tokenName = document.querySelector('.content-wrapper-stake-body-main-center-body-chain-token');
-  const chainName = document.querySelector('.content-wrapper-stake-body-main-center-body-chain-name-network');
 
-  tokenImage.src = currentChain.img_url;
-  tokenName.textContent = JSON.parse(currentChain.chain_info).currencies[0].coinDenom
-  chainName.textContent = JSON.parse(currentChain.chain_info).chainName;
-};
+}
 
 function getValidatorList(callback) {
 
@@ -23,10 +17,9 @@ function getValidatorList(callback) {
           const keybaseIdList = redelegations.validators.map(validator => {
             return validator.description.identity;
           });
-     
 
           serverRequest('/keybase', 'POST', { keybaseIdList }, res => {
-            
+
                const validatorList = redelegations.validators.map((validator, index) => {
                 return {
                   operatorAddress: validator.operatorAddress,
@@ -35,7 +28,8 @@ function getValidatorList(callback) {
                   picture: res.validatorInfoList[index].image_url,
                 };
               });
-         
+              
+              console.log(validatorList);
               setDynamicValidatorUI(validatorList); 
             
           });
@@ -68,7 +62,7 @@ function setDynamicValidatorUI(validatorList) {
 
   const redelegationText = document.createElement('div');
   redelegationText.classList.add('content-wrapper-portfolio-body-validators-content-third-text');
-  redelegationText.innerHTML = redelegationText;
+  redelegationText.innerHTML = "&nbsp; Redelegate &nbsp;";
 
   const redelegationArrow = document.createElement('div');
   redelegationArrow.classList.add('content-wrapper-portfolio-body-validators-content-third-arrow');
@@ -89,9 +83,61 @@ function setDynamicValidatorUI(validatorList) {
   
   
 
-
+  const redelegatePopup = document.querySelector('.redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile-wrapper');
 
   validatorList.forEach(validator => {
+
+
+    const redelegateRadio = document.createElement('input');
+    redelegateRadio.type = 'radio';
+    redelegateRadio.id = `validator-${validator.operatorAddress}`;
+    redelegateRadio.name = 'validator';
+    redelegateRadio.classList.add('validator-radio');
+    redelegateRadio.value = validator.operatorAddress;
+
+    // ---------------------
+
+    const redelegateLabel = document.createElement('label');
+    redelegateLabel.setAttribute('for', `validator-${validator.operatorAddress}`);
+    redelegateLabel.classList.add('validator-label');
+
+
+    const redelegateWrapper = document.createElement('div');
+    redelegateWrapper.classList.add('redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile');
+
+    const redelegateInnerWrapper = document.createElement('div');
+    redelegateInnerWrapper.classList.add('redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile-inner');
+
+    const redelegateEach = document.createElement('div');
+    redelegateEach.classList.add('redelegate-content-wrapper-stake-body-main-center-body-chain-list-each');
+
+    const redelegateEachIcon = document.createElement('div');
+    redelegateEachIcon.classList.add('redelegate-content-wrapper-stake-body-main-center-body-chain-list-each-icon');
+
+    const redelegateEachIconImg = document.createElement('img');
+    redelegateEachIconImg.src = validator.picture;
+
+    redelegateEachIcon.appendChild(redelegateEachIconImg);
+
+    const redelegateEachName = document.createElement('div');
+    redelegateEachName.classList.add('redelegate-content-wrapper-stake-body-main-center-body-chain-list-each-chain');
+    redelegateEachName.textContent = validator.moniker;
+
+    const redelegateEachToken = document.createElement('div');
+    redelegateEachToken.classList.add('redelegate-content-wrapper-stake-body-main-center-body-chain-list-each-token');
+    redelegateEachToken.classList.add('display-none');
+    redelegateEachToken.textContent = validator.operatorAddress;
+
+    redelegateEach.appendChild(redelegateEachIcon);
+    redelegateEach.appendChild(redelegateEachName);
+    redelegateEach.appendChild(redelegateEachToken);
+
+
+    /* const redelegateIcon = document.createElement('div');
+    redelegateIcon.classList.add('redelegate-content-wrapper-stake-body-main-center-body-chain-list-each');
+     */
+
+    // --------------------------------
     const validatorParent = document.createElement('div');
     validatorParent.classList.add('content-wrapper-portfolio-body-validators-content-first');
 
@@ -114,82 +160,55 @@ function setDynamicValidatorUI(validatorList) {
     validatorParent.appendChild(validatorElementImgParent);
     validatorParent.appendChild(validatorElementMoniker);
     validatorContainer.appendChild(validatorParent);
+
+    redelegateLabel.append(redelegateEach);
+    redelegateInnerWrapper.appendChild(redelegateRadio);
+    redelegateInnerWrapper.appendChild(redelegateLabel);
+    redelegateWrapper.appendChild(redelegateInnerWrapper);
+    redelegatePopup.appendChild(redelegateWrapper);
+
   });
 };
 
 window.addEventListener('load', async () => {
+  
+  console.log("wtffffffff")
 
-
-  currentChain = JSON.parse(document.getElementById('chainInfoElement').value);
-  globalAddress = document.getElementById('globalAddressElement')?.value || "";
   
   await getValidatorList((err, data) => {
+    console.log("XYZ");
     if (err) console.log(err);
     console.log(data);
   }); 
   
 
-
-  document.addEventListener('input', event => {
-    if (event.target.closest('.content-wrapper-stake-body-main-center-body-chain-list-search-input')) {
-      const searchValue = event.target.value.toLowerCase();
-      console.log(searchValue)
-      const chains = document.querySelectorAll('.content-wrapper-stake-body-main-center-body-chain-list-each');
-      console.log(chains)
-      chains.forEach(chain => {   
-        if ((chain.getAttribute('data-chain-name')).includes(searchValue) || (chain.getAttribute('data-coin-name')).includes(searchValue)) 
-          chain.style.display = '';
-        else 
-          chain.style.display = 'none';
-      })
-    }
-
-    if (event.target.closest('.content-wrapper-stake-body-main-center-body-stake-amount')) {
-      console.log("here");
-      const stakingValue = event.target.value;
-      const stakingAmount = document.querySelector('.content-wrapper-stake-body-main-center-body-stake-dollar');
-      stakingAmount.textContent = "$"+ Math.round(100 * stakingValue *  currentChain.price)/100;
-
-      const aprTokenDaily = document.querySelector('.content-wrapper-stake-body-main-content-stat-title-content-each-value-token-daily');
-      aprTokenDaily.textContent = (stakingValue * (currentChain.apr/100)/365).toFixed(2) + " " + JSON.parse(currentChain.chain_info).currencies[0].coinDenom;
-      const aprPriceDaily = document.querySelector('.content-wrapper-stake-body-main-content-stat-title-content-each-value-price-daily');
-      aprPriceDaily.textContent = "$" + (stakingValue * (currentChain.apr/100)/365 * currentChain.price).toFixed(2);
-
-      const aprTokenMonthly = document.querySelector('.content-wrapper-stake-body-main-content-stat-title-content-each-value-token-monthly');
-      aprTokenMonthly.textContent = (stakingValue * (currentChain.apr/100)/12).toFixed(2) + " " + JSON.parse(currentChain.chain_info).currencies[0].coinDenom;
-      const aprPriceMonthly = document.querySelector('.content-wrapper-stake-body-main-content-stat-title-content-each-value-price-monthly');
-      aprPriceMonthly.textContent = "$" + (stakingValue * (currentChain.apr/100)/12.16 * currentChain.price).toFixed(2);
-
-      const aprTokenYearly = document.querySelector('.content-wrapper-stake-body-main-content-stat-title-content-each-value-token-yearly');
-      aprTokenYearly.textContent = ((stakingValue/100) * (currentChain.apr)).toFixed(2) + " " + JSON.parse(currentChain.chain_info).currencies[0].coinDenom;
-      const aprPriceYearly = document.querySelector('.content-wrapper-stake-body-main-content-stat-title-content-each-value-price-yearly');
-      aprPriceYearly.textContent = "$" + (stakingValue * (currentChain.apr/100) * currentChain.price).toFixed(2);
-
-    }
-  });
   document.addEventListener('click', event => {
 
-
-
-    if (event.target.closest('.redelegate-content-wrapper-stake-body-main-center-body-chain-list')) {
-      const popup = document.querySelector('.redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile-wrapper');
-      popup.classList.toggle('display-none');
+    if (event.target.closest('.redelegate-content-wrapper-stake-body-main-center-title-each.content-wrapper-stake-body-main-center-title-half')){
+      console.log("half");
+      const balance =  document.querySelector('.redelegate-content-wrapper-stake-body-main-center-title-amount').innerText;
+      const stakeAmount = ((balance.match(/\d+(\.\d+)?/) || [0])[0])/2 > 0.02 ? ((balance.match(/\d+(\.\d+)?/) || [0])[0])/2 : 0;
+      document.querySelector('.redelegate-content-wrapper-stake-body-main-center-body-stake-amount').value = stakeAmount.toFixed(2);
+      document.querySelector('.redelegate-content-wrapper-stake-body-main-center-body-stake-dollar').textContent = "$" + (stakeAmount * currentChain.price).toFixed(2);
     }
 
-    if (event.target.closest('.redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile')) {
-      const popup = document.querySelector('.redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile-wrapper');
-      popup.classList.toggle('display-none');
+    if (event.target.closest('.redelegate-content-wrapper-stake-body-main-center-title-each.content-wrapper-stake-body-main-center-title-max')){
+      console.log("full");
+      const balance =  document.querySelector('.redelegate-content-wrapper-stake-body-main-center-title-amount').innerText;
+      const stakeAmount = ((balance.match(/\d+(\.\d+)?/) || [0])[0])/1 > 0.02 ? ((balance.match(/\d+(\.\d+)?/) || [0])[0])/1 : 0;
+
+      document.querySelector('.redelegate-content-wrapper-stake-body-main-center-body-stake-amount').value = stakeAmount.toFixed(2);
+      document.querySelector('.redelegate-content-wrapper-stake-body-main-center-body-stake-dollar').textContent = "$" + (stakeAmount * currentChain.price).toFixed(2);
     }
 
-    if (event.target.closest('.redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile')) {
-      console.log("here");
-      const operatorAddress = event.target.closest('.redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile').querySelector('.redelegate-content-wrapper-stake-body-main-center-body-chain-list-each-token').textContent;
-      
-      getReward(globalAddress,operatorAddress, (err, data) => { 
+    if (event.target.closest('.validator-radio')) {
+      const validatorAddress = event.target.value;
+      const currency = JSON.parse(currentChain.chain_info).currencies[0].coinDecimals;
+      getStake(globalAddress, validatorAddress, (err, data) => {
         if (err) console.log(err);
         
-
-       document.querySelector('.redelegate-content-wrapper-stake-body-main-center-title-amount').textContent = `${data / 10 ** JSON.parse(currentChain.chain_info).currencies[0].coinDecimals}` + " " + `${JSON.parse(currentChain.chain_info).currencies[0].coinDenom}`;
+        const availableAmount = document.querySelector('.redelegate-content-wrapper-stake-body-main-center-title-amount');
+        availableAmount.textContent = data / 10 ** currency + " " + JSON.parse(currentChain.chain_info).currencies[0].coinDenom;
       });
     };
 
@@ -273,16 +292,6 @@ window.addEventListener('load', async () => {
       }); */
     }
 
-    if (event.target.closest('.content-wrapper-info-body-larrow')) {
-      
-      carosoul("left");
-      console.log("yy")
-    }
-
-
-    if (event.target.closest('.content-wrapper-info-body-rarrow')) {
-      carosoul();
-    }
 
     if (event.target.closest('.content-wrapper-stake-body-main-center-body-chain-name')) {
       document.querySelector('.content-wrapper-stake-body-main-center-body-chain-list').classList.toggle('display-none');

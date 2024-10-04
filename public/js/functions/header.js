@@ -68,3 +68,33 @@ function setTokenUI(currentChain) {
   tokenName.textContent = JSON.parse(currentChain.chain_info).currencies[0].coinDenom;
   chainName.textContent = JSON.parse(currentChain.chain_info).chainName;
 };
+
+function setAmountUI(stakingValue) {
+  document.querySelector('.content-wrapper-stake-body-main-center-body-stake-dollar').textContent = "$" + (stakingValue * currentChain.price).toFixed(2);
+  document.querySelector('.content-wrapper-stake-body-main-content-stat-title-content-each-value-token-daily').textContent = (stakingValue * (currentChain.apr/100)/365).toFixed(2) + " " + JSON.parse(currentChain.chain_info).currencies[0].coinDenom;
+  document.querySelector('.content-wrapper-stake-body-main-content-stat-title-content-each-value-price-daily').textContent = "$" + (stakingValue * (currentChain.apr/100)/365 * currentChain.price).toFixed(2);
+  document.querySelector('.content-wrapper-stake-body-main-content-stat-title-content-each-value-token-monthly').textContent = (stakingValue * (currentChain.apr/100)/12).toFixed(2) + " " + JSON.parse(currentChain.chain_info).currencies[0].coinDenom;
+  document.querySelector('.content-wrapper-stake-body-main-content-stat-title-content-each-value-price-monthly').textContent = "$" + (stakingValue * (currentChain.apr/100)/12.16 * currentChain.price).toFixed(2);
+  document.querySelector('.content-wrapper-stake-body-main-content-stat-title-content-each-value-token-yearly').textContent = ((stakingValue/100) * (currentChain.apr)).toFixed(2) + " " + JSON.parse(currentChain.chain_info).currencies[0].coinDenom;
+  document.querySelector('.content-wrapper-stake-body-main-content-stat-title-content-each-value-price-yearly').textContent = "$" + (stakingValue * (currentChain.apr/100) * currentChain.price).toFixed(2);
+
+}
+
+window.addEventListener('load', () => {
+
+  document.addEventListener('click', event => {
+    if (event.target.closest('.content-header-title')) {
+
+      currentChain = !currentChain ? JSON.parse(document.getElementById('chainInfoElement').value) : currentChain;
+
+      if (!window.keplr) {
+        console.log("Keplr extension not installed");
+        return;
+      };
+      console.log("Adding chain");
+      addChainToKeplr(currentChain, (err) => {
+        if (err) console.log(err);
+      });
+    }
+  });
+});

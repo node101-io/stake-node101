@@ -20,7 +20,6 @@ function getReward(delegatorAddress, validatorAddress, callback) {
       })
 
       .catch(err => {
-        console.log(err);
         return callback('document_not_found');
       })
   }).catch(_ => {
@@ -38,7 +37,8 @@ function getStake(delegatorAddress, validatorAddress, callback) {
       
       const stakedAmount = `${delegationResponse.delegationResponse.balance.amount}`;
       return callback(null, stakedAmount);
-    }).catch(_ => {
+    }).catch(err => {
+      console.log(err);
       return callback('document_not_found');
     });
   }
@@ -54,7 +54,7 @@ function completeStake(offlineSigner, accounts, currentChain, stakingValue, call
   const stakingdenom = currentChainInfo.feeCurrencies[0].coinMinimalDenom;
   const memo = "stake from node101 website";
   stakingValue = parseFloat(stakingValue) * (10 ** currentChainInfo.currencies[0].coinDecimals);
-
+  
   const DelegateMsg = MsgDelegate.fromPartial({
      delegatorAddress: accounts.address,
      validatorAddress: validatorAddress,

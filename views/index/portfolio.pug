@@ -2,6 +2,7 @@ extends ../partials/head
 block main
   .all-wrapper
     input#chainInfoElement(style='display: none;', value=chainInfo)
+    input#listOfTokensElement(style='display: none;', value=listOfToken)
     include ../partials/sidebar.pug
     .content
       include ../partials/header.pug
@@ -35,7 +36,7 @@ block main
                     |#{globalBalanceKey} 
                   .content-wrapper-portfolio-body-stat-chain-value-amount-usd
                     - console.log(globalBalanceKey);
-                    | #{listOfToken[currentChainKey].price * 2}
+                    | $ #{(listOfToken[currentChainKey].price * parseFloat(globalBalanceKey)).toFixed(2)}
             .content-wrapper-portfolio-body-stat-each
               .content-wrapper-portfolio-body-stat-timeline
                 .content-wrapper-portfolio-body-stat-timeline-time
@@ -43,16 +44,16 @@ block main
                 .content-wrapper-portfolio-body-stat-timeline-percent
                   .content-wrapper-portfolio-body-stat-timeline-percent-text
                     | &nbsp; $ #{(listOfToken[currentChainKey].price).toFixed(2)} &nbsp;
-                  .content-wrapper-portfolio-body-stat-timeline-percent-text
-                    if listOfToken[currentChainKey].price_change_24h < 0
+                  .content-wrapper-portfolio-body-stat-timeline-percent-text.content-wrapper-portfolio-body-stat-timeline-percent-text-arrow
+                    if (listOfToken[currentChainKey].price_change_24h) < 0  
                       svg(width='18' height='16' viewbox='0 0 18 16' fill='none' xmlns='http://www.w3.org/2000/svg')
                         path(d='M9.33975 15.1099C9.1473 15.4432 8.66617 15.4432 8.47372 15.1099L0.54807 1.38223C0.309402 0.968841 0.730422 0.488006 1.1717 0.669988L7.00051 3.07375C8.22145 3.57726 9.59202 3.57726 10.813 3.07375L16.6418 0.66999C17.083 0.488008 17.5041 0.968843 17.2654 1.38223L9.33975 15.1099Z' fill='#FF0000')
                     else
                       svg(width='18' height='16' viewbox='0 0 18 16' fill='none' xmlns='http://www.w3.org/2000/svg')
                         path(d='M8.66025 0.890086C8.8527 0.556799 9.33383 0.556799 9.52628 0.890086L17.4519 14.6178C17.6906 15.0312 17.2696 15.512 16.8283 15.33L10.9995 12.9263C9.77855 12.4227 8.40798 12.4227 7.18704 12.9263L1.35822 15.33C0.917944 15.512 0.496924 15.0312 0.735592 14.6178L8.66025 0.890086Z' fill='#00FF00')
-          
-                  .content-wrapper-portfolio-body-stat-timeline-percent-text
-                    | &nbsp; % #{(listOfToken[currentChainKey].price_change_24h).toFixed(2)} &nbsp;
+
+                  .content-wrapper-portfolio-body-stat-timeline-percent-text.content-wrapper-portfolio-body-stat-timeline-percent-text-change
+                    | &nbsp; #{(listOfToken[currentChainKey].price_change_24h).toFixed(2)} % &nbsp;
               //-
                 .content-wrapper-portfolio-body-stat-timeline
                   .content-wrapper-portfolio-body-stat-timeline-time
@@ -74,7 +75,7 @@ block main
                   | Total Available Rewards
                 .content-wrapper-portfolio-body-stat-balance-statusbar-3
               .content-wrapper-portfolio-body-stat-balance
-                .content-wrapper-portfolio-body-stat-balance-text
+                .content-wrapper-portfolio-body-stat-balance-text.content-wrapper-portfolio-body-stat-balance-text-reward
                   | Unclaimed Rewards:
           .content-wrapper-portfolio-body-validators
             .content-wrapper-portfolio-body-validators-title

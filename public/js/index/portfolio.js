@@ -67,14 +67,15 @@ function setDynamicValidatorUI(validatorList) {
   redelegateButton.appendChild(redelegateIcon);
   redelegateButton.appendChild(redelegationText);
   redelegateButton.appendChild(redelegationArrow);
-  validatorContainer.appendChild(redelegateButton);
-  
+  if (validatorList.length > 0){
+    validatorContainer.appendChild(redelegateButton);
+  }
   
 
   const redelegatePopup = document.querySelector('.redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile-wrapper');
 
   validatorList.forEach(validator => {
-
+    if (validator.operatorAddress === currentChain.validator_address) pass;
 
     const redelegateRadio = document.createElement('input');
     redelegateRadio.type = 'radio';
@@ -164,8 +165,43 @@ window.addEventListener('load', () => {
     if (err) console.log(err);
     console.log(data);
   }); 
+
+  getStake(globalAddress, currentChain.validator_address, (err, data) => {
+    if (err) console.log(err);
+    let balance = document.querySelector('.content-wrapper-portfolio-body-stat-chain-value-amount-token').innerText;
+    console.log(data);
+    balance = parseFloat((balance.match(/\d+(\.\d+)?/) || [0])[0]) * 10 ** JSON.parse(currentChain.chain_info).currencies[0].coinDecimals;
+    const width = parseFloat(data)/(balance + parseFloat(data)) * 100;
+    document.querySelector('.content-wrapper-portfolio-body-stat-balance-statusbar-1').style.background = `linear-gradient(90deg, #CDEED3 ${width+30}%, #E4E9FF ${width}%)`;
+
+  });
+
+  getReward(globalAddress, currentChain.validator_address, (err, data) => {
+    if (err) console.log(err);
+
+    let balance = document.querySelector('.content-wrapper-portfolio-body-stat-chain-value-amount-token').innerText;
+    console.log(data);
+    balance = parseFloat((balance.match(/\d+(\.\d+)?/) || [0])[0]) * 10 ** JSON.parse(currentChain.chain_info).currencies[0].coinDecimals;
+    const width = parseFloat(data)/(balance + parseFloat(data)) * 100;
+    console.log(width);
+    document.querySelector('.content-wrapper-portfolio-body-stat-balance-statusbar-3').style.background = `linear-gradient(90deg, #B1C7FF ${width}%, #E4E9FF ${width}%)`;
+    document.querySelector('.content-wrapper-portfolio-body-stat-balance-text-reward').textContent += " " + parseFloat(data) / 10 ** JSON.parse(currentChain.chain_info).currencies[0].coinDecimals + " " + JSON.parse(currentChain.chain_info).currencies[0].coinDenom;
+  });
   
   document.addEventListener('click', event => {
+
+    if (event.target.closest('.content-wrapper-stake-body-main-center-body-chain-list-each')) {
+      const chain_id = event.target.closest('.content-wrapper-stake-body-main-center-body-chain-list-each').querySelector('.content-wrapper-stake-body-main-center-body-chain-list-each-id').textContent;
+      const listOfTokens = JSON.parse(document.getElementById('listOfTokensElement').value);
+
+      document.querySelector('img.content-wrapper-portfolio-body-stat-chain-name-icon').src = listOfTokens[chain_id].img_url;
+      document.querySelector('.content-wrapper-portfolio-body-stat-chain-name-token-name').innerHTML = listOfTokens[chain_id].coin_denom;
+
+      document.querySelector('.content-wrapper-portfolio-body-stat-timeline-percent-text').textContent = "$" + (listOfTokens[chain_id].price).toFixed(2);
+      document.querySelector('.content-wrapper-portfolio-body-stat-timeline-percent-text-change').textContent = (listOfTokens[chain_id].price_change_24h).toFixed(2) + "%";
+      
+
+    };
 
     if (event.target.closest('.redelegate-content-wrapper-stake-body-main-center-title-each.content-wrapper-stake-body-main-center-title-half')){
       const balance =  document.querySelector('.redelegate-content-wrapper-stake-body-main-center-title-amount').innerText;

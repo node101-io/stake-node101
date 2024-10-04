@@ -361,7 +361,9 @@
   align-items: center;
   justify-content: space-between;
   margin: var(--content-wrapper-portfolio-body-stat-timeline-percent-margin);
+  color: var(--header-text-color);
 }
+
 
 .content-wrapper-portfolio-body-stat-timeline-percent-text {
   display: flex;
@@ -369,7 +371,6 @@
   font-weight: 500;
   font-size: var(--font-size-13);
   line-height: 1.1;
-  color: #FF3A3A;  
 }
 
 .content-wrapper-portfolio-body-stat-balance-text {
@@ -408,6 +409,10 @@
   background: linear-gradient(90deg, #B1C7FF 48.99%, #E4E9FF 49%);
 }
 
+.content-wrapper-portfolio-body-stat-balance-text-reward {
+  color: var(--primary-text-black);
+}
+
 .content-wrapper-portfolio-body-validators-content {
   width: 100%;
   min-width: 100%;
@@ -418,6 +423,7 @@
   justify-content: space-between;
   margin-top: var(--content-wrapper-portfolio-body-validators-content-margin-top);
   box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+  overflow: scroll;
 }
 
 .content-wrapper-portfolio-body-validators-content::-webkit-scrollbar {

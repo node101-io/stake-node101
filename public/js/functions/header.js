@@ -24,6 +24,10 @@ function addChainToKeplr(currentChain, callback) {
       document.querySelector('.content-header-title').textContent = globalAddress.slice(0, 10) + "...";
       document.querySelector('.content-wrapper-stake-body-main-center-title-amount').textContent = Math.round(((100 * balance.amount) / (10 ** currentChainInfo.currencies[0].coinDecimals)) )/100 + " " + currentChainInfo.currencies[0].coinDenom;
       
+      //
+      document.querySelector('.content-wrapper-portfolio-body-stat-chain-value-amount-token').innerHTML =  Math.round(((100 * balance.amount) / (10 ** currentChainInfo.currencies[0].coinDecimals)) )/100 + " " + currentChainInfo.currencies[0].coinDenom;
+      document.querySelector('.content-wrapper-portfolio-body-stat-chain-value-amount-usd').innerHTML =  "$" + (Math.round(((100 * balance.amount) / (10 ** currentChainInfo.currencies[0].coinDecimals)) )/100 * currentChain.price).toFixed(2);
+
       saveToSession({
         currentChainKey: currentChain.chain_id,
         globalAddressKey: globalAddress,

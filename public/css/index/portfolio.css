@@ -37,101 +37,6 @@
   --content-wrapper-portfolio-body-buttons-each-margin:  110px 10px 10px 10px; 
 }
 
-@media only screen and (min-width: 1300px) and (max-width: 1400px) {
-  .content-wrapper-portfolio-body {
-    --content-wrapper-portfolio-body-width: 450px;
-  }
-
-  .content-wrapper-portfolio-body-stat { 
-    --content-wrapper-portfolio-body-each-width: 480px;
-  }
-
-  .content-wrapper-portfolio-body-validators {
-    --content-wrapper-portfolio-body-each-width: 480px;
-  }
-
-  .content-wrapper-portfolio-body-buttons {
-   --content-wrapper-portfolio-body-buttons-width: 480px;
-  }
-}
-
-@media only screen and (min-width: 1200px) and (max-width: 1300px) {
-  .content-wrapper-portfolio-body {
-    --content-wrapper-portfolio-body-width: 460px;
-  }
-
-  .content-wrapper-portfolio-body-stat { 
-    --content-wrapper-portfolio-body-each-width: 450px;
-  }
-
-  .content-wrapper-portfolio-body-validators {
-    --content-wrapper-portfolio-body-each-width: 450px;
-  }
-
-  .content-wrapper-portfolio-body-buttons {
-   --content-wrapper-portfolio-body-buttons-width: 450px;
-  }
-}
-  
-@media only screen and (min-width: 1100px) and (max-width: 1200px) {
-
-  .content-wrapper-portfolio-body {
-    --content-wrapper-portfolio-body-width: 440px;
-  }
-
-  .content-wrapper-portfolio-body-stat { 
-    --content-wrapper-portfolio-body-each-width: 425px;
-  }
-
-  .content-wrapper-portfolio-body-validators {
-    --content-wrapper-portfolio-body-each-width: 425px;
-  }
-
-  .content-wrapper-portfolio-body-buttons {
-   --content-wrapper-portfolio-body-buttons-width: 425px;
-  }
-
-}
-
-@media only screen and (min-width: 1000px) and (max-width: 1100px) {
-  .content-wrapper-portfolio-body {
-    --content-wrapper-portfolio-body-width: 440px;
-  }
-
-  .content-wrapper-portfolio-body-stat { 
-    --content-wrapper-portfolio-body-each-width: 425px;
-  }
-
-  .content-wrapper-portfolio-body-validators {
-    --content-wrapper-portfolio-body-each-width: 425px;
-  }
-
-  .content-wrapper-portfolio-body-buttons {
-   --content-wrapper-portfolio-body-buttons-width: 425px;
-  }
-}
-
-@media only screen and  (max-width: 1000px) {
-
-  .content-wrapper-portfolio-body {
-    --content-wrapper-portfolio-body-width: 420px;
-  }
-
-  .content-wrapper-portfolio-body-stat { 
-    --content-wrapper-portfolio-body-each-width: 415px;
-  }
-
-  .content-wrapper-portfolio-body-validators {
-    --content-wrapper-portfolio-body-each-width: 415px;
-  }
-
-  .content-wrapper-portfolio-body-buttons {
-   --content-wrapper-portfolio-body-buttons-width: 415px;
-  }
-}
-
-
-
 .content-wrapper-portfolio-body {
   height: var(--content-wrapper-portfolio-body-height);
   min-height: var(--content-wrapper-portfolio-body-height);
@@ -424,17 +329,19 @@
   justify-content: space-between;
   margin-top: var(--content-wrapper-portfolio-body-validators-content-margin-top);
   box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
   overflow: scroll;
 }
 
 .content-wrapper-portfolio-body-validators-content::-webkit-scrollbar {
   display: none;
+
 }
 
 .content-wrapper-portfolio-body-validators-content-first {
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }
 
 .content-wrapper-portfolio-body-validators-content-first-icon {
@@ -453,6 +360,8 @@
 }
 
 .content-wrapper-portfolio-body-validators-content-first-text {
+  width: 100%;
+  min-width: 100%;
   margin-left: var(--content-wrapper-portfolio-body-validators-content-text-margin-left);
   font-weight: 400;
   font-family: 'Montserrat';
@@ -756,4 +665,114 @@
   margin-top: 25px;
   width: 230px;
   height: 60px;
+}
+
+
+
+@media only screen and (min-width: 1300px) and (max-width: 1400px) {
+ 
+  .content-wrapper-portfolio-body {
+    --content-wrapper-portfolio-body-width: 450px;
+  }
+
+  .content-wrapper-portfolio-body-stat { 
+    --content-wrapper-portfolio-body-each-width: 480px;
+
+  }
+
+  .content-wrapper-portfolio-body-validators {
+    --content-wrapper-portfolio-body-each-width: 480px;
+  }
+
+  .content-wrapper-portfolio-body-buttons {
+   --content-wrapper-portfolio-body-buttons-width: 480px;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1300px) {
+  .content-wrapper-portfolio-body {
+    --content-wrapper-portfolio-body-width: 460px;
+  }
+
+  .content-wrapper-portfolio-body-stat { 
+    --content-wrapper-portfolio-body-each-width: 450px;
+  }
+
+  .content-wrapper-portfolio-body-validators {
+    --content-wrapper-portfolio-body-each-width: 450px;
+  }
+
+  .content-wrapper-portfolio-body-buttons {
+   --content-wrapper-portfolio-body-buttons-width: 450px;
+  }
+
+
+  .content-wrapper-portfolio-body-stat-chain-value-amount-token {
+    font-size: 20px;
+  }
+}
+  
+@media only screen and (min-width: 1100px) and (max-width: 1200px) {
+
+  .content-wrapper-portfolio-body {
+    --content-wrapper-portfolio-body-width: 440px;
+  }
+
+  .content-wrapper-portfolio-body-stat { 
+    --content-wrapper-portfolio-body-each-width: 425px;
+  }
+
+  .content-wrapper-portfolio-body-validators {
+    --content-wrapper-portfolio-body-each-width: 425px;
+  }
+
+  .content-wrapper-portfolio-body-buttons {
+   --content-wrapper-portfolio-body-buttons-width: 425px;
+  }
+
+
+  .content-wrapper-portfolio-body-stat-chain-value-amount-token {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1100px) {
+  .content-wrapper-portfolio-body {
+    --content-wrapper-portfolio-body-width: 440px;
+  }
+
+  .content-wrapper-portfolio-body-stat { 
+    --content-wrapper-portfolio-body-each-width: 425px;
+  }
+
+  .content-wrapper-portfolio-body-validators {
+    --content-wrapper-portfolio-body-each-width: 425px;
+  }
+
+  .content-wrapper-portfolio-body-buttons {
+   --content-wrapper-portfolio-body-buttons-width: 425px;
+  }
+
+  .content-wrapper-portfolio-body-stat-chain-value-amount-token {
+    font-size: 16px;
+  }
+}
+
+@media only screen and  (max-width: 1000px) {
+
+  .content-wrapper-portfolio-body {
+    --content-wrapper-portfolio-body-width: 420px;
+  }
+
+  .content-wrapper-portfolio-body-stat { 
+    --content-wrapper-portfolio-body-each-width: 415px;
+  }
+
+  .content-wrapper-portfolio-body-validators {
+    --content-wrapper-portfolio-body-each-width: 415px;
+  }
+
+  .content-wrapper-portfolio-body-buttons {
+   --content-wrapper-portfolio-body-buttons-width: 415px;
+  }
 }

@@ -75,7 +75,6 @@ function setDynamicValidatorUI(validatorList) {
   const redelegatePopup = document.querySelector('.redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile-wrapper');
 
   validatorList.forEach(validator => {
-    if (validator.operatorAddress === currentChain.validator_address) pass;
 
     const redelegateRadio = document.createElement('input');
     redelegateRadio.type = 'radio';
@@ -205,14 +204,14 @@ window.addEventListener('load', () => {
 
     if (event.target.closest('.redelegate-content-wrapper-stake-body-main-center-title-each.content-wrapper-stake-body-main-center-title-half')){
       const balance =  document.querySelector('.redelegate-content-wrapper-stake-body-main-center-title-amount').innerText;
-      const stakeAmount = ((balance.match(/\d+(\.\d+)?/) || [0])[0])/2 > 0.02 ? ((balance.match(/\d+(\.\d+)?/) || [0])[0])/2 : 0;
+      const stakeAmount = ((balance.match(/\d+(\.\d+)?/) || [0])[0])/2 > 0 ? ((balance.match(/\d+(\.\d+)?/) || [0])[0])/2 : 0;
       document.querySelector('.redelegate-content-wrapper-stake-body-main-center-body-stake-amount').value = stakeAmount.toFixed(2);
       document.querySelector('.redelegate-content-wrapper-stake-body-main-center-body-stake-dollar').textContent = "$" + (stakeAmount * currentChain.price).toFixed(2);
     }
 
     if (event.target.closest('.redelegate-content-wrapper-stake-body-main-center-title-each.content-wrapper-stake-body-main-center-title-max')){
       const balance =  document.querySelector('.redelegate-content-wrapper-stake-body-main-center-title-amount').innerText;
-      const stakeAmount = ((balance.match(/\d+(\.\d+)?/) || [0])[0])/1 > 0.02 ? ((balance.match(/\d+(\.\d+)?/) || [0])[0])/1 : 0;
+      const stakeAmount = ((balance.match(/\d+(\.\d+)?/) || [0])[0])/1 > 0 ? ((balance.match(/\d+(\.\d+)?/) || [0])[0])/1 : 0;
 
       document.querySelector('.redelegate-content-wrapper-stake-body-main-center-body-stake-amount').value = stakeAmount.toFixed(2);
       document.querySelector('.redelegate-content-wrapper-stake-body-main-center-body-stake-dollar').textContent = "$" + (stakeAmount * currentChain.price).toFixed(2);
@@ -247,32 +246,8 @@ window.addEventListener('load', () => {
       }); 
     }; 
 
-    if(event.target.closest('.content-wrapper-portfolio-body-buttons-each-restakee')) {
-      const dx = document.querySelector('.content-wrapper-portfolio-body-buttons-each-restake');
-      dx.style.border = "10px solid red";
-       if (!window.keplr) {
-        console.log("Keplr extension not installed");
-        return;
-      };
-      const offlineSigner = keplr.getOfflineSigner(currentChain.chain_id);
-      offlineSigner.getAccounts().
-      then((accounts) => {
-        completeRestake(offlineSigner, accounts[0], currentChain,(err,data) => {
-          if (err) console.log(err);
-      })
-      
-      }).catch((err) => {
-        console.log(err);
-        return;
-      }); 
-    }; 
-
     if (event.target.closest('.content-wrapper-portfolio-body-buttons-each-restake')) {
 
-      //const validatorAddress = document.querySelector('.content-wrapper-portfolio-body-validators-content-first')
-      //const validatorAddress1 = validatorAddress.querySelector('#content-wrapper-portfolio-body-validators-content-first-address').value;
-      const validatorAddress1 = "cosmosvaloper1gpx52r9h3zeul45amvcy2pysgvcwddxrgx6cnv";
-      console.log(validatorAddress1);
       if (!window.keplr) {
         console.log("Keplr extension not installed");
         return;
@@ -280,8 +255,7 @@ window.addEventListener('load', () => {
       const offlineSigner = keplr.getOfflineSigner(currentChain.chain_id);
       offlineSigner.getAccounts().
       then((accounts) => {
-        
-        completeRestake(offlineSigner, accounts[0], currentChain, validatorAddress1, (err,data) => {
+        completeRestake(offlineSigner, accounts[0], currentChain, (err,data) => {
             if (err) console.log(err);
         })
       
@@ -296,21 +270,29 @@ window.addEventListener('load', () => {
     }
 
     if (event.target.closest('.content-wrapper-portfolio-body-validators-content-third')) { 
-      console.log("here");
       const redelegateWrapper = document.querySelector('.redelegate-wrapper');
       redelegateWrapper.classList.toggle('display-none');
-
-   /*    const validatorAddress = event.target.closest('.content-wrapper-portfolio-body-validators-content-third').querySelector('.content-wrapper-portfolio-body-validators-content-third-address').textContent;
-      console.log(validatorAddress);
-      if (!window.keplr) {
-        console.log("Keplr extension not installed");
-        return;
-      };
-      console.log("Adding chain");
-      addChainToKeplr(currentChain, (err) => {
-        if (err) console.log(err);
-      }); */
     }
 
+    if (event.target.closest('.redelegate-content-wrapper-portfolio-body-validators-content-third')){
+
+      const redelegateAmount = document.querySelector('.redelegate-content-wrapper-stake-body-main-center-body-stake-amount').value;
+      //console.log(event.closest.target('.validator-radio'))
+      const validatorAddress = document.querySelector('.validator-radio').value;
+
+      const offlineSigner = keplr.getOfflineSigner(currentChain.chain_id);
+      offlineSigner.getAccounts().
+      then((accounts) => {
+
+      completeRedelegate(offlineSigner, accounts[0], currentChain, validatorAddress, redelegateAmount, (err, data) => {
+        if (err) console.log(err);
+      });
+    }).catch((err) => {
+      console.log(err);
+    });
+      console.log("123", redelegateAmount);
+      console.log("456", validatorAddress);
+      console.log("Yes 1223")
+    }
   })
 });

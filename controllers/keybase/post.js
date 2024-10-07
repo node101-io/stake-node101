@@ -17,7 +17,7 @@ module.exports = (req, res) => {
 
   const validatorInfoList = [];
 
-  async.times(
+  async.timesSeries(
     keybaseIdList.length,
     (time, next) => {
       const keybase_id = keybaseIdList[time];

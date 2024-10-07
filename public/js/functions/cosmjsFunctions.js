@@ -173,11 +173,12 @@ function completeUnstake(offlineSigner, accounts, currentChain, callback) {
   });
 };
 
-function completeRedelegate(offlineSigner, accounts, currentChain, validatorAddress, callback) {
+function completeRedelegate(offlineSigner, accounts, currentChain, validatorAddress, redelegateAmount, callback) {
   const currentChainInfo = JSON.parse(currentChain.chain_info);
   const stakingdenom = currentChainInfo.feeCurrencies[0].coinMinimalDenom;
   const rpc_url = currentChain.rpc_url;
   const memo = "redelegate from node101 website";
+  redelegateAmount = parseFloat(redelegateAmount) * (10 ** currentChainInfo.currencies[0].coinDecimals);
 
   getStake(accounts.address, validatorAddress, (err, reward) => {
     if (err) {
@@ -191,17 +192,19 @@ function completeRedelegate(offlineSigner, accounts, currentChain, validatorAddr
         validatorDstAddress: currentChain.validator_address,
       amount: {
         denom: stakingdenom,
-        amount: reward
+        amount: redelegateAmount.toString(),
       }
     })
+
+    console.log(RedelegateMsg);
 
     const RedelegateTransaction = {
       typeUrl: "/cosmos.staking.v1beta1.MsgBeginRedelegate",
       value: RedelegateMsg,
     };
-
+    console.log(RedelegateTransaction)
     completeTransaction(offlineSigner, accounts, [RedelegateTransaction], rpc_url, stakingdenom, memo, (err,data) => {
-      if (err)  return callback(err);
+      if (err) return callback(err);
       return callback(null);
     });
   });

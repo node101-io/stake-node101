@@ -29,6 +29,9 @@ function getValidatorList(callback) {
 };
 
 function setDynamicValidatorUI(validatorList) {  
+  validatorList = validatorList.filter(validator => validator.operatorAddress != currentChain.validator_address);
+  if (validatorList.length == 0) return;
+
   const validatorContainer = document.querySelector('.content-wrapper-portfolio-body-validators-content');
 
   const redelegateButton = document.createElement('div');
@@ -67,9 +70,7 @@ function setDynamicValidatorUI(validatorList) {
   redelegateButton.appendChild(redelegateIcon);
   redelegateButton.appendChild(redelegationText);
   redelegateButton.appendChild(redelegationArrow);
-  if (validatorList.length > 0){
-    validatorContainer.appendChild(redelegateButton);
-  }
+  validatorContainer.appendChild(redelegateButton);
   
 
   const redelegatePopup = document.querySelector('.redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile-wrapper');
@@ -167,24 +168,31 @@ window.addEventListener('load', () => {
 
   getStake(globalAddress, currentChain.validator_address, (err, data) => {
     if (err) console.log(err);
+
     let balance = document.querySelector('.content-wrapper-portfolio-body-stat-chain-value-amount-token').innerText;
-    console.log(data);
     balance = parseFloat((balance.match(/\d+(\.\d+)?/) || [0])[0]) * 10 ** JSON.parse(currentChain.chain_info).currencies[0].coinDecimals;
     const width = parseFloat(data)/(balance + parseFloat(data)) * 100;
     document.querySelector('.content-wrapper-portfolio-body-stat-balance-statusbar-1').style.background = `linear-gradient(90deg, #CDEED3 ${width+30}%, #E4E9FF ${width}%)`;
-
   });
 
   getReward(globalAddress, currentChain.validator_address, (err, data) => {
     if (err) console.log(err);
 
     let balance = document.querySelector('.content-wrapper-portfolio-body-stat-chain-value-amount-token').innerText;
-    console.log(data);
     balance = parseFloat((balance.match(/\d+(\.\d+)?/) || [0])[0]) * 10 ** JSON.parse(currentChain.chain_info).currencies[0].coinDecimals;
     const width = parseFloat(data)/(balance + parseFloat(data)) * 100;
-    console.log(width);
+
     document.querySelector('.content-wrapper-portfolio-body-stat-balance-statusbar-3').style.background = `linear-gradient(90deg, #B1C7FF ${width}%, #E4E9FF ${width}%)`;
     document.querySelector('.content-wrapper-portfolio-body-stat-balance-text-reward').textContent += " " + parseFloat(data) / 10 ** JSON.parse(currentChain.chain_info).currencies[0].coinDecimals + " " + JSON.parse(currentChain.chain_info).currencies[0].coinDenom;
+  });
+
+  document.addEventListener('input', event => {
+
+    if (event.target.closest('.redelegate-content-wrapper-stake-body-main-center-body-stake-amount')) {
+      console.log("Yes");
+      const redelegateAmount = event.target.value;
+      document.querySelector('.redelegate-content-wrapper-stake-body-main-center-body-stake-dollar').textContent = "$" + (parseFloat(redelegateAmount) * currentChain.price)?.toFixed(2);
+    };
   });
   
   document.addEventListener('click', event => {
@@ -204,16 +212,20 @@ window.addEventListener('load', () => {
 
     if (event.target.closest('.redelegate-content-wrapper-stake-body-main-center-title-each.content-wrapper-stake-body-main-center-title-half')){
       const balance =  document.querySelector('.redelegate-content-wrapper-stake-body-main-center-title-amount').innerText;
+      console.log("say it",balance);
       const stakeAmount = ((balance.match(/\d+(\.\d+)?/) || [0])[0])/2 > 0 ? ((balance.match(/\d+(\.\d+)?/) || [0])[0])/2 : 0;
-      document.querySelector('.redelegate-content-wrapper-stake-body-main-center-body-stake-amount').value = stakeAmount.toFixed(2);
+      console.log("say it half",stakeAmount);
+      document.querySelector('.redelegate-content-wrapper-stake-body-main-center-body-stake-amount').value = stakeAmount;
       document.querySelector('.redelegate-content-wrapper-stake-body-main-center-body-stake-dollar').textContent = "$" + (stakeAmount * currentChain.price).toFixed(2);
     }
 
     if (event.target.closest('.redelegate-content-wrapper-stake-body-main-center-title-each.content-wrapper-stake-body-main-center-title-max')){
       const balance =  document.querySelector('.redelegate-content-wrapper-stake-body-main-center-title-amount').innerText;
+      console.log("say it",balance);
+
       const stakeAmount = ((balance.match(/\d+(\.\d+)?/) || [0])[0])/1 > 0 ? ((balance.match(/\d+(\.\d+)?/) || [0])[0])/1 : 0;
 
-      document.querySelector('.redelegate-content-wrapper-stake-body-main-center-body-stake-amount').value = stakeAmount.toFixed(2);
+      document.querySelector('.redelegate-content-wrapper-stake-body-main-center-body-stake-amount').value = stakeAmount;
       document.querySelector('.redelegate-content-wrapper-stake-body-main-center-body-stake-dollar').textContent = "$" + (stakeAmount * currentChain.price).toFixed(2);
     }
 
@@ -276,9 +288,8 @@ window.addEventListener('load', () => {
 
     if (event.target.closest('.redelegate-content-wrapper-portfolio-body-validators-content-third')){
 
+      const validatorAddress = document.querySelector('.validator-radio:checked').value;
       const redelegateAmount = document.querySelector('.redelegate-content-wrapper-stake-body-main-center-body-stake-amount').value;
-      //console.log(event.closest.target('.validator-radio'))
-      const validatorAddress = document.querySelector('.validator-radio').value;
 
       const offlineSigner = keplr.getOfflineSigner(currentChain.chain_id);
       offlineSigner.getAccounts().

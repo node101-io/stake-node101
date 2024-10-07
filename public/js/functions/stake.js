@@ -11,11 +11,6 @@ window.addEventListener('load', () => {
   setTokenUI(JSON.parse(document.getElementById('chainInfoElement').value));
 
   document.addEventListener('input', event => {
-
-    document.querySelector('.content-wrapper-stake-body-main-center-body-stake-amount').focus();
-    currentChain = JSON.parse(document.getElementById('chainInfoElement').value);
-    globalAddress = document.getElementById('globalAddressElement')?.value || "";
-    setTokenUI(JSON.parse(document.getElementById('chainInfoElement').value));
     
     if (event.target.closest('.content-wrapper-stake-body-main-center-body-stake-amount')) {
       const stakingValue = event.target.value;

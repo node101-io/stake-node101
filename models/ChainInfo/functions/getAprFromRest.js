@@ -99,7 +99,7 @@ module.exports = (api_url, callback) => {
 
       const nominalAPR =  calculateNominalAPR(annual_provisions, community_tax, bonded_tokens);
       const actualAPR = calculateRealAPR(annual_provisions, blocks_per_year, nominalAPR, blocksYearReal) * 100 ;
-      console.log(actualAPR);
+
       return callback(null,(actualAPR * (1- COMMISION_RATE)).toFixed(2));
     });
   });

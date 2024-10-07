@@ -20,9 +20,7 @@ window.addEventListener('load',  async() => {
   carouselElement = Array.from(document.querySelectorAll('.content-wrapper-info-body-wrapper-each'));
   carouselBall = Array.from(document.querySelectorAll('.content-wrapper-info-footer-each'));
 
-  setInterval(() => {
-    carousel(false);
-  }, 4000);
+
 
 
   document.addEventListener('click', event => {

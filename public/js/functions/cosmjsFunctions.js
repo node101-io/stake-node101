@@ -1,4 +1,3 @@
-
 const GAS_FEE_ADJUSTMENT = 1.3;
 const TOKEN_DECIMALS = 18;
 

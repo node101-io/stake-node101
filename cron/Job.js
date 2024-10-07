@@ -43,8 +43,7 @@ const Job = {
                     return console.error(err);
 
                   ChainInfo.findChainInfoByChainIdAndUpdate(chainInfos[time].chain_id, {
-                    //rpc_url: `https://rpc.cosmos.directory/${registryIdentifier}`,
-                    rpc_url: "https://cosmos-rpc.stakeandrelax.net/",
+                    rpc_url: registryIdentifier == 'cosmoshub' ? "https://cosmos-rpc.stakeandrelax.net/" : `https://rpc.cosmos.directory/${registryIdentifier}` ,
                     chain_info: JSON.stringify(chainInfo),
                     price: tokenPrice.price,
                     price_change_24h: tokenPrice['24h_change'],

@@ -1,2 +1,2 @@
 # stake-node101
-stake.node101.io
+https://stake.node101.io

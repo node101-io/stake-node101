@@ -26,11 +26,11 @@
 .content-wrapper-info {
   height: var(--content-wrapper-info-height);
   min-height: var(--content-wrapper-info-height);
-  width:auto;
-  min-width:auto;
+  width:var(--content-wrapper-info-width);
+  min-width:var(--content-wrapper-info-width);
   display: flex;
   flex-direction: column;
-  border: 0px solid red;
+  border: 1px solid red;
 }
 
 .content-wrapper-info-body {

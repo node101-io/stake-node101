@@ -19,16 +19,3 @@ module.exports = (identifier, callback) => {
       return callback('document_not_found');
     });
 };
-
-// const checkRpcUrl = (rpcUrl, callback) => {
-//   fetch(rpcUrl)
-//     .then(res => {
-//       if (!res.ok)
-//         return callback('document_not_found');
-
-//       return callback(null, rpcUrl);
-//     })
-//     .catch(_ => {
-//       return callback('document_not_found');
-//     });
-// };

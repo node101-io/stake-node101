@@ -1,6 +1,6 @@
-const ValidatorInfo = require('../../models/ChainInfo/ValidatorInfo');
 const async = require('async');
-const getKeybasePicture = require('../../models/ChainInfo/functions/getKeybasePicture');
+const ValidatorInfo = require('../../models/ValidatorInfo/ValidatorInfo');
+const getKeybasePicture = require('../../models/ValidatorInfo/functions/getKeybasePicture');
 
 module.exports = (req, res) => {
   const keybaseIdList = req.body.keybaseIdList;

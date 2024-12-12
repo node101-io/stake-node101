@@ -3,7 +3,6 @@ const ChainInfo = require('../../models/ChainInfo/ChainInfo');
 const DEFAULT_CHAIN_ID = 'cosmoshub-4';
 
 module.exports = (req, res) => {
-
   const chain_id =  req.session.currentChainKey || DEFAULT_CHAIN_ID;
 
   ChainInfo.getListOfToken({ is_active: true }, (err, listOfToken) => {
@@ -34,6 +33,7 @@ module.exports = (req, res) => {
         currentChainKey: req.session.currentChainKey || DEFAULT_CHAIN_ID,
         globalAddressKey: req.session.globalAddressKey,
         globalBalanceKey: req.session.globalBalanceKey,
+        selected: 'port'
       }); 
     });
   }); 

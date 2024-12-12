@@ -1,6 +1,6 @@
 :root {
   --content-wrapper-border-radius: 56px;
-  --content-wrapper-margin-top: 180px;
+  --content-wrapper-margin-top: 120px;
   --content-wrapper-title-padding: 30px;
   --content-wrapper-title-margin-left: 20px;
   --content-wrapper-lang-popup-width: 235px;
@@ -16,7 +16,7 @@
   --content-wrapper-lang-main-title-margin-bottom: 5px;
 
   --content-wrapper-footer-width: 700px;
-  --content-wrapper-footer-margin-top: 40px;
+  --content-wrapper-footer-margin-top: -20px;
   --content-wrapper-footer-padding-left: 50px;
 
   --content-wrapper-footer-text-last-child-width: 70px;
@@ -39,7 +39,6 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  
   margin: var(--content-wrapper-margin-top) auto;
   border-radius: var(--border-radius-big);
 }
@@ -88,7 +87,6 @@
   justify-content: space-between;
   margin-top: var(--content-wrapper-lang-margin-top);
   padding: var(--content-wrapper-lang-padding);
-  border: 2px  solid red;
 }
 
 
@@ -179,7 +177,7 @@
   min-width: var(--content-wrapper-footer-width);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   margin-top: var(--content-wrapper-footer-margin-top);
   padding-left: var(--content-wrapper-footer-padding-left);
   font-weight: 'Montserrat';

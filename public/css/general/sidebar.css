@@ -7,10 +7,10 @@
   --sidebar-logo-width: 60px;
   --sidebar-logo-height: 60px;
 
-  --sidebar-menu-margin-top: 120px;
-  --sidebar-menu-item-height: 60px;
+  --sidebar-menu-margin-top: 80px;
+  --sidebar-menu-item-height: 50px;
 
-  --sidebar-footer-margin-top: 260px;
+  --sidebar-footer-margin-top: 160px;
   --sidebar-footer-item-height: 30px;
   --sidebar-footer-item-width: 30px;
   --sidebar-footer-item-margin-bottom: 10px;
@@ -63,14 +63,21 @@
 .sidebar-menu-item {
   height: var(--sidebar-menu-item-height);
   min-height: var(--sidebar-menu-item-height);
-  width: 100%;
-  min-width: 100%;
+  width: var(--sidebar-menu-item-height);
+  min-width: var(--sidebar-menu-item-height);
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
   font-family: 'Igra Sans';
+  margin: 20px auto;
 }
+
+a.sidebar-menu-item:hover {
+  background-color: #D9E0FF;
+}
+
+
 
 .sidebar-footer {
   height: auto;

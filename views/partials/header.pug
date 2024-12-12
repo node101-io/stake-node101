@@ -1,15 +1,21 @@
 .content-header
-  .content-header-icon
-    svg(width='30' height='30' viewbox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg')
-      path(d='M10.7137 38.5485C14.2641 38.5485 17.1423 35.6704 17.1423 32.12C17.1423 28.5696 14.2641 25.6914 10.7137 25.6914C7.16333 25.6914 4.28516 28.5696 4.28516 32.12C4.28516 35.6704 7.16333 38.5485 10.7137 38.5485Z' stroke='#DFE5FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round')
-      path(d='M29.2879 38.5485C32.8383 38.5485 35.7165 35.6704 35.7165 32.12C35.7165 28.5696 32.8383 25.6914 29.2879 25.6914C25.7375 25.6914 22.8594 28.5696 22.8594 32.12C22.8594 35.6704 25.7375 38.5485 29.2879 38.5485Z' stroke='#DFE5FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round')
-      path(d='M17.1367 32.1196C17.1367 32.1196 17.1367 29.2607 19.9953 29.2607C22.8539 29.2607 22.8539 32.1196 22.8539 32.1196' stroke='#DFE5FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round')
-      path(d='M1.42969 18.5718H38.5725' stroke='#DFE5FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round')
-      path(d='M8.17439 3.81608C8.40402 2.43843 9.59599 1.42871 10.9926 1.42871H29.0088C30.4054 1.42871 31.5974 2.43849 31.8271 3.8162L34.286 18.5716H5.71484L8.17439 3.81608Z' stroke='#DFE5FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round')
-  .content-header-title
-    if globalAddressKey
+  if globalAddressKey
+    .content-header-icon
+      svg(width='30' height='30' viewbox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg')
+        path(d='M10.7137 38.5485C14.2641 38.5485 17.1423 35.6704 17.1423 32.12C17.1423 28.5696 14.2641 25.6914 10.7137 25.6914C7.16333 25.6914 4.28516 28.5696 4.28516 32.12C4.28516 35.6704 7.16333 38.5485 10.7137 38.5485Z' stroke='#DFE5FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round')
+        path(d='M29.2879 38.5485C32.8383 38.5485 35.7165 35.6704 35.7165 32.12C35.7165 28.5696 32.8383 25.6914 29.2879 25.6914C25.7375 25.6914 22.8594 28.5696 22.8594 32.12C22.8594 35.6704 25.7375 38.5485 29.2879 38.5485Z' stroke='#DFE5FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round')
+        path(d='M17.1367 32.1196C17.1367 32.1196 17.1367 29.2607 19.9953 29.2607C22.8539 29.2607 22.8539 32.1196 22.8539 32.1196' stroke='#DFE5FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round')
+        path(d='M1.42969 18.5718H38.5725' stroke='#DFE5FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round')
+        path(d='M8.17439 3.81608C8.40402 2.43843 9.59599 1.42871 10.9926 1.42871H29.0088C30.4054 1.42871 31.5974 2.43849 31.8271 3.8162L34.286 18.5716H5.71484L8.17439 3.81608Z' stroke='#DFE5FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round')
+    .content-header-title
       input#globalAddressElement(style='display: none;', value=globalAddressKey)
-      div #{globalAddressKey.slice(0, 10) + "..." }
-    else
-      div Connect Wallet
+      //- div #{globalAddressKey.slice(0, 10) + "..." }
+  else
+    .content-header-icon
+      svg(width='24' height='24' viewbox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg')
+        path(d='M10.9766 1.78564H20.8803C21.617 1.78564 22.2141 2.38283 22.2141 3.1195V13.7717C22.2141 14.5084 21.617 15.1056 20.8803 15.1056H12.7843' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round')
+        path(d='M5.94615 7.28733C7.4654 7.28733 8.69699 6.05573 8.69699 4.53648C8.69699 3.01724 7.4654 1.78564 5.94615 1.78564C4.4269 1.78564 3.19531 3.01724 3.19531 4.53648C3.19531 6.05573 4.4269 7.28733 5.94615 7.28733Z' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round')
+        path(d='M15.1423 9.68588C15.1423 8.79416 14.4194 8.07129 13.5277 8.07129H5.94776C3.64882 8.07129 1.78516 9.93494 1.78516 12.2339V15.9284H3.56912L4.16378 22.2141H7.73173L9.10212 11.3005H13.5277C14.4194 11.3005 15.1423 10.5776 15.1423 9.68588Z' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round')
+    .content-header-title
+      div Sign in / Connect wallet
       

@@ -158,6 +158,7 @@ body {
   flex-direction: column;
   padding: var(--content-padding);
   background-color: var(--primary-background-light);
+  background-color: #ECF0FF !important;
   border-radius: var(--content-border-radius);
 }
 
@@ -170,4 +171,8 @@ body {
   display: flex;
   justify-content: space-evenly;
   margin: auto 0px;
+}
+
+.sidebar-item-selected {
+  background-color: #C4CDF4 !important;
 }

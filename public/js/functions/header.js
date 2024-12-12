@@ -25,7 +25,7 @@ function addChainToKeplr(currentChain, callback) {
       document.querySelector('.content-wrapper-stake-body-main-center-title-amount').textContent = Math.round(((100 * balance.amount) / (10 ** currentChainInfo.currencies[0].coinDecimals)) )/100 + " " + currentChainInfo.currencies[0].coinDenom;
       
       //
-      document.querySelector('.content-wrapper-portfolio-body-stat-chain-value-amount-token').innerHTML =  Math.round(((100 * balance.amount) / (10 ** currentChainInfo.currencies[0].coinDecimals)) )/100 + " " + currentChainInfo.currencies[0].coinDenom;
+      //document.querySelector('.content-wrapper-portfolio-body-stat-chain-value-amount-token').innerHTML =  Math.round(((100 * balance.amount) / (10 ** currentChainInfo.currencies[0].coinDecimals)) )/100 + " " + currentChainInfo.currencies[0].coinDenom;
       document.querySelector('.content-wrapper-portfolio-body-stat-chain-value-amount-usd').innerHTML =  "$" + (Math.round(((100 * balance.amount) / (10 ** currentChainInfo.currencies[0].coinDecimals)) )/100 * currentChain.price).toFixed(2);
 
       saveToSession({
@@ -85,6 +85,8 @@ function setAmountUI(stakingValue) {
 }
 
 window.addEventListener('load', () => {
+
+  
 
   document.addEventListener('click', event => {
     if (event.target.closest('.content-header-title')) {

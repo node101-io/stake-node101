@@ -22,24 +22,24 @@
 
   --content-wrapper-stake-body-main-center-title-width: 475px;
   --content-wrapper-stake-body-main-center-title-each-width: 40px;
-  --content-wrapper-stake-body-main-center-body-margin-top: 20px;
+  --content-wrapper-stake-body-main-center-body-margin-top: 30px;
   --content-wrapper-stake-body-main-center-body-height: 120px;
   --content-wrapper-stake-body-main-center-body-icon-size: 84px;
   --content-wrapper-stake-body-main-center-body-icon-size: 84px;
   --content-wrapper-stake-body-main-center-body-icon-margin-left: 16px;
   --content-wrapper-stake-body-main-center-body-icon-margin-right: 8px;
-  --content-wrapper-stake-body-main-center-body-chain-margin-left: 5px;
+  --content-wrapper-stake-body-main-center-body-chain-margin-left: 25px;
   --content-wrapper-stake-body-main-center-body-chain-width: 175px;
-  --content-wrapper-stake-body-main-center-body-chain-height: 60px;
+  --content-wrapper-stake-body-main-center-body-chain-height: 70px;
   --content-wrapper-stake-body-main-center-body-chain-padding-vertical: 5px;
-  --content-wrapper-stake-body-main-center-body-stake-margin-left: 30px;
-  --content-wrapper-stake-body-main-center-body-stake-height: 68px;
+  --content-wrapper-stake-body-main-center-body-stake-margin-left: 60px;
+  --content-wrapper-stake-body-main-center-body-stake-height: 40px;
   --content-wrapper-stake-body-main-center-body-stake-amount-padding-left: 5px;
   --content-wrapper-stake-body-main-center-body-stake-amount-width: 150px;
   --content-wrapper-stake-body-main-center-body-stake-dollar-height: 20px;
   --content-wrapper-stake-body-main-center-body-stake-dollar-width: 100px;
 
-  --content-wrapper-stake-body-main-content-margin-top: 25px;
+  --content-wrapper-stake-body-main-content-margin-top: 55px;
 
   --content-wrapper-stake-body-main-center-body-chain-list-right:20px;
   --content-wrapper-stake-body-main-center-body-chain-list-bottom:20px;
@@ -106,8 +106,8 @@
 }
 
 .content-wrapper-stake-body-main {
-  height: var(--content-wrapper-stake-body-main-height);
-  min-height: var(--content-wrapper-stake-body-main-height);
+  height: fit-content;
+  min-height: fit-content;
   width: var(--content-wrapper-stake-body-main-width);
   min-width: var(--content-wrapper-stake-body-main-width);
   display: flex;
@@ -131,7 +131,6 @@
   font-size: var(--font-size-16);
   position: relative;
   overflow: hidden;
-  border: 1px solid red;
 }
 
 
@@ -154,10 +153,10 @@
 
 .content-test {
   display: flex;
-  width: 2720px;
-  min-width: 2720px;
+  width: 1830px;
+  min-width: 1830px;
   overflow: visible;
-  animation: slidingscale 50s linear infinite normal; /* direction fill-mode; */
+  animation: slidingscale 17s linear infinite normal; 
 }
 
 .content-wrapper-stake-body-main-title:hover  .content-test{
@@ -272,9 +271,9 @@
 .content-wrapper-stake-body-main-center-body {
   height: var(--content-wrapper-stake-body-main-center-body-height);
   min-height: var(--content-wrapper-stake-body-main-center-body-height);
-  width: var(--content-wrapper-stake-body-main-center-body-width);
-  min-width: var(--content-wrapper-stake-body-main-center-body-width);
-  max-width: var(--content-wrapper-stake-body-main-center-body-width);
+  width: var(--staking-inside-width);
+  min-width: var(--staking-inside-width);
+  max-width: var(--staking-inside-width);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -341,23 +340,28 @@
   font-weight: 300;
   font-size: var(--font-size-16);
   line-height: 1.2;
+  margin-top: 15px;
 }
 
 .content-wrapper-stake-body-main-center-body-stake {
-  height: var(--content-wrapper-stake-body-main-center-body-stake-height);
-  min-height: var(--content-wrapper-stake-body-main-center-body-stake-height);
-  width: auto;
-  min-width: auto;
+  height: var(--content-wrapper-stake-body-main-center-body-chain-height);
+  min-height: var(--content-wrapper-stake-body-main-center-body-chain-height);
+  width: var(--content-wrapper-stake-body-main-center-body-stake-amount-width);
+  min-width: var(--content-wrapper-stake-body-main-center-body-stake-amount-width);
+  max-width: var(--content-wrapper-stake-body-main-center-body-stake-amount-width);
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  align-items: center;
+  align-items: flex-start;
+  line-height: 1;
+  margin: 0px;
+  padding: 0px;
   margin-left: var(--content-wrapper-stake-body-main-center-body-stake-margin-left);
 }
 
 .content-wrapper-stake-body-main-center-body-stake-amount {
-  height: auto;
-  min-height: auto;
+  height: var(--content-wrapper-stake-body-main-center-body-stake-height);
+  min-height: var(--content-wrapper-stake-body-main-center-body-stake-height);
   width: var(--content-wrapper-stake-body-main-center-body-stake-amount-width);
   min-width: var(--content-wrapper-stake-body-main-center-body-stake-amount-width);
   max-width: var(--content-wrapper-stake-body-main-center-body-stake-amount-width);

@@ -1,3 +1,4 @@
+const { select } = require('async');
 const ChainInfo = require('../../models/ChainInfo/ChainInfo');
 
 module.exports = (req, res) => {
@@ -28,6 +29,7 @@ module.exports = (req, res) => {
         },
         chainInfo: chainInfo,
         listOfToken: listOfToken,
+        selected: 'sett'
       });
     });
   });

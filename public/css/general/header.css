@@ -11,8 +11,8 @@
 .content-header {
   position: absolute;
   right: var(--header-right-padding);
-  height: auto;
-  min-height: auto;
+  height: 60px;
+  min-height: 60px;
   width:fit-content;
   min-width:fit-content;
   display: flex;
@@ -21,7 +21,6 @@
   border-radius: 98px var(--header-border-radius) var(--header-border-radius) 98px;
   overflow: hidden;
   background-color: #DDE4FF !important;
-  border: 1px solid var(--primary-border);
 }
 
 .content-header-icon{
@@ -33,9 +32,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 26px;
-  background-color: var(--primary-background-dark);
-  background-color: #9695DF;
+  border-radius: 50%;
+  background-color:#9695DF;
   z-index: 1;
 }
 
@@ -50,10 +48,10 @@
   padding-left: var(--header-title-padding-left);
   background-color: var(--primary-background-14);
   font-weight: 400;
-  font-size: var(--font-size-20);
+  font-size: var(--font-size-16);
   font-family: 'Montserrat';
   line-height: 1.2;
-  color: var(--primary-text-14);
+  color: #616079;
   z-index: 10;
   cursor: pointer;
 }

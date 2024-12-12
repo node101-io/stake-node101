@@ -5,6 +5,10 @@ let globalBalance;
 
 window.addEventListener('load', () => {
 
+  console.log("what is the list")
+  console.log(globalAddress);
+  console.log("haberi var mi")
+
   document.querySelector('.content-wrapper-stake-body-main-center-body-stake-amount').focus();
   currentChain = JSON.parse(document.getElementById('chainInfoElement').value);
   globalAddress = document.getElementById('globalAddressElement')?.value || "";
@@ -32,6 +36,25 @@ window.addEventListener('load', () => {
   document.addEventListener('click', event => {
 
 
+    if (event.target.closest('.content-wrapper-stake-body-main-title-each')) {
+      const chain_id = event.target.closest('.content-wrapper-stake-body-main-title-each').querySelector('#chainListId').value;
+      serverRequest(`/chain?chain_id=${chain_id}`, 'GET', {}, res => {
+        if (res.error) {
+          console.log(res);
+        } else {
+
+          currentChain = res.chainInfo;
+
+          addChainToKeplr(currentChain, (err) => {
+            if (err) console.log(err);
+
+            setTokenUI(currentChain);
+          });
+
+        }
+      });
+    }
+
     if (event.target.closest('.content-wrapper-stake-body-main-center-title-each.content-wrapper-stake-body-main-center-title-half')) {
       const balance = document.querySelector('.content-wrapper-stake-body-main-center-title-amount').innerText;
       const stakeAmount = ((balance.match(/\d+(\.\d+)?/) || [0])[0])/2 > 0.02 ? ((balance.match(/\d+(\.\d+)?/) || [0])[0])/2 : 0;
@@ -48,6 +71,10 @@ window.addEventListener('load', () => {
 
     if (event.target.closest('.content-wrapper-stake-body-main-center-body-chain-name')) {
       document.querySelector('.content-wrapper-stake-body-main-center-body-chain-list').classList.toggle('display-none');
+    };
+
+    if (!event.target.closest('.content-wrapper-stake-body-main-center-body-chain-name') && !document.querySelector('.content-wrapper-stake-body-main-center-body-chain-list').classList.contains('display-none')) {
+       document.querySelector('.content-wrapper-stake-body-main-center-body-chain-list').classList.add('display-none');
     };
 
     if (event.target.closest('.content-wrapper-stake-body-main-center-body-chain-list-each')) {

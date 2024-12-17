@@ -5,9 +5,9 @@ let globalBalance;
 
 window.addEventListener('load', () => {
 
-  console.log("what is the list")
-  console.log(globalAddress);
-  console.log("haberi var mi")
+  // console.log("what is the list")
+  // console.log(globalAddress);
+  // console.log("haberi var mi")
 
   document.querySelector('.content-wrapper-stake-body-main-center-body-stake-amount').focus();
   currentChain = JSON.parse(document.getElementById('chainInfoElement').value);

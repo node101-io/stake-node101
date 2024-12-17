@@ -78,6 +78,9 @@ block main
                 .content-wrapper-portfolio-body-stat-balance-text.content-wrapper-portfolio-body-stat-balance-text-reward
                   | Unclaimed Rewards:
           .content-wrapper-portfolio-body-validators
+            .content-wrapper-portfolio-body-validators-content-no-validator-background.display-none
+              svg(width='342' height='121' viewbox='0 0 342 121' fill='none' xmlns='http://www.w3.org/2000/svg')
+                path(d='M5.59771 -28.5C5.59771 38.416 33.7288 68.541 90.5313 53.2714C140.002 36.5488 192.562 33.4492 204.452 75.1893C208.74 90.2423 199.699 106.361 190 111.5C174.657 119.629 157.472 112.997 146.921 100.431C127.756 77.6028 122.718 34.0772 148.545 12.2103C188.963 -22.0097 244.255 -15.0288 286.57 7.53919C294.999 12.0345 358.386 61.0757 320.291 48.0758C313.378 45.7164 286.271 36.5088 293.334 38.416C305.045 41.5782 311.108 40.2463 321.341 47.2189C323.373 48.6031 340.188 57.3569 335.365 48.2468C331.653 28.9992 332.56 27.915 327.753 13.2819' stroke='#C4CDF4' stroke-width='10' stroke-linecap='round')
             .content-wrapper-portfolio-body-validators-title
               .content-wrapper-portfolio-body-validators-title-name
                 | Your Validators
@@ -88,6 +91,34 @@ block main
                   path(d='M1.10587 7.77572C0.517802 4.64846 2.43156 1.54812 5.55607 0.71091C7.9473 0.0701819 10.3871 0.931963 11.8733 2.71754' stroke='#2C202A' stroke-linecap='round' stroke-linejoin='round')
                   path(d='M11.8726 0.501537V2.86499H9.50911' stroke='#2C202A' stroke-linecap='round' stroke-linejoin='round')
             .content-wrapper-portfolio-body-validators-content
+
+              .content-wrapper-portfolio-body-validators-content-no-validator.display-none
+                .content-wrapper-portfolio-body-validators-content-no-validator-text 
+                  .content-wrapper-portfolio-body-validators-content-no-validator-text-title 
+                    | Stake not found!
+
+                  .content-wrapper-portfolio-body-validators-content-no-validator-text-subtitle
+                    | You don’t have any staked assets.
+                .content-wrapper-portfolio-body-validators-content-no-validator-button
+                  .content-wrapper-portfolio-body-validators-content-third-text
+                    | Stake with node101!
+                  .content-wrapper-portfolio-body-validators-content-third-arrow-no-validator
+                    svg(width='15' height='15' viewbox='0 0 15 15' fill='none' xmlns='http://www.w3.org/2000/svg')
+                        path(d='M7.37915 14.1148C7.39181 14.1278 7.77975 14.2274 8.24116 14.3359C8.70264 14.4445 9.08519 14.5168 9.09134 14.4966C9.09743 14.4764 9.14518 14.1484 9.19739 13.7678C9.30227 13.0034 9.55621 12.111 9.82755 11.5528C10.6733 9.81332 12.1908 8.66152 14.0313 8.36216L14.5 8.28591V7.51748V6.74899L14.0752 6.67601C11.2921 6.19792 9.4777 4.06718 9.13827 0.87852C9.11612 0.670303 9.08964 0.5 9.07944 0.5C8.98558 0.5 7.4303 0.883787 7.40089 0.91419C7.37962 0.936175 7.39544 1.13137 7.4361 1.34789C7.88615 3.74541 9.17477 5.69634 10.847 6.51207L11.2481 6.70775L2.99949 6.72307L0.5 6.7328L0.5 8.28798L3.01291 8.29772L11.2421 8.3131L10.7357 8.57582C9.42192 9.25734 8.38179 10.5942 7.76926 12.3887C7.59471 12.8999 7.33134 14.0654 7.37915 14.1148Z' fill='#2C202A')
+              .content-wrapper-portfolio-body-validators-content-no-validator.content-wrapper-portfolio-body-validators-content-one-validator.display-none
+                .content-wrapper-portfolio-body-validators-content-no-validator-text 
+                  .content-wrapper-portfolio-body-validators-content-no-validator-text-title 
+                    | 🥳 Thanks for choosing node101
+
+                  .content-wrapper-portfolio-body-validators-content-no-validator-text-subtitle
+                    | Your staked assets are safe with us
+                .content-wrapper-portfolio-body-validators-content-no-validator-button
+                  .content-wrapper-portfolio-body-validators-content-third-text
+                    | Stake more 🤑
+                  .content-wrapper-portfolio-body-validators-content-third-arrow-no-validator
+                    svg(width='15' height='15' viewbox='0 0 15 15' fill='none' xmlns='http://www.w3.org/2000/svg')
+                        path(d='M7.37915 14.1148C7.39181 14.1278 7.77975 14.2274 8.24116 14.3359C8.70264 14.4445 9.08519 14.5168 9.09134 14.4966C9.09743 14.4764 9.14518 14.1484 9.19739 13.7678C9.30227 13.0034 9.55621 12.111 9.82755 11.5528C10.6733 9.81332 12.1908 8.66152 14.0313 8.36216L14.5 8.28591V7.51748V6.74899L14.0752 6.67601C11.2921 6.19792 9.4777 4.06718 9.13827 0.87852C9.11612 0.670303 9.08964 0.5 9.07944 0.5C8.98558 0.5 7.4303 0.883787 7.40089 0.91419C7.37962 0.936175 7.39544 1.13137 7.4361 1.34789C7.88615 3.74541 9.17477 5.69634 10.847 6.51207L11.2481 6.70775L2.99949 6.72307L0.5 6.7328L0.5 8.28798L3.01291 8.29772L11.2421 8.3131L10.7357 8.57582C9.42192 9.25734 8.38179 10.5942 7.76926 12.3887C7.59471 12.8999 7.33134 14.0654 7.37915 14.1148Z' fill='#2C202A')
+
             //-
                 .content-wrapper-portfolio-body-validators-content-third
                   .content-wrapper-portfolio-body-validators-content-third-icon
@@ -154,7 +185,17 @@ block main
           .redelegate-wrapper-content-header
             .redelegate-wrapper-content-header-title
               | Your Validators
-          .redelegate-wrapper-content-validators              
+          .redelegate-wrapper-content-dropdown
+            .redelegate-wrapper-content-dropdown-icon
+              img.redelegate-wrapper-content-dropdown-icon-img
+            .redelegate-wrapper-content-dropdown-text
+              | Validator
+            .redelegate-wrapper-content-dropdown-arrow
+              svg(width='14' height='9' viewbox='0 0 14 9' fill='none' xmlns='http://www.w3.org/2000/svg')
+                path(d='M7 6.04176L1.70711 0.895896C1.31658 0.516219 0.683417 0.516219 0.292893 0.895896C-0.0976314 1.27557 -0.0976314 1.89115 0.292893 2.27083L6.29289 8.10416C6.68342 8.48383 7.31658 8.48383 7.70711 8.10416L13.7071 2.27082C14.0976 1.89115 14.0976 1.27557 13.7071 0.895895C13.3166 0.516218 12.6834 0.516218 12.2929 0.895895L7 6.04176Z' fill='#2C202A')
+
+
+          .redelegate-wrapper-content-validators.display-none            
             .redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile-wrapper
              
           .redelegate-wrapper-content-body

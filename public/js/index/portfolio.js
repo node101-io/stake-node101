@@ -29,50 +29,29 @@ function getValidatorList(callback) {
 };
 
 function setDynamicValidatorUI(validatorList) {  
-  // only node101
-  validatorList = validatorList.filter(validator => validator.operatorAddress == currentChain.validator_address);
-  validatorList = validatorList.filter(validator => validator.operatorAddress != currentChain.validator_address);
-  // only include two validators
-  //validatorList = validatorList.slice(0, 2);
+  validatorList =  validatorList.slice(0, 2);
+  //validatorList = validatorList.filter(validator => validator.operatorAddress == currentChain.validator_address);
+  //validatorList = validatorList.filter(validator => validator.operatorAddress != currentChain.validator_address);
 
+  
   if (validatorList.length == 0) {
-
-    const validatorContainer = document.querySelector('.content-wrapper-portfolio-body-validators-content');
-    validatorContainer.classList.add('content-wrapper-portfolio-body-validators-content-no-validator');
-
-    const redelegateButton = document.createElement('div');
-    redelegateButton.classList.add('content-wrapper-portfolio-body-validators-content-third');
-  
-
-
-
-    const redelegationArrow = document.createElement('div');
-    redelegationArrow.classList.add('content-wrapper-portfolio-body-validators-content-third-arrow');  
-    const svgArrow = 
-    ` 
-      <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M7.37915 14.1148C7.39181 14.1278 7.77975 14.2274 8.24116 14.3359C8.70264 14.4445 9.08519 14.5168 9.09134 14.4966C9.09743 14.4764 9.14518 14.1484 9.19739 13.7678C9.30227 13.0034 9.55621 12.111 9.82755 11.5528C10.6733 9.81332 12.1908 8.66152 14.0313 8.36216L14.5 8.28591V7.51748V6.74899L14.0752 6.67601C11.2921 6.19792 9.4777 4.06718 9.13827 0.87852C9.11612 0.670303 9.08964 0.5 9.07944 0.5C8.98558 0.5 7.4303 0.883787 7.40089 0.91419C7.37962 0.936175 7.39544 1.13137 7.4361 1.34789C7.88615 3.74541 9.17477 5.69634 10.847 6.51207L11.2481 6.70775L2.99949 6.72307L0.5 6.7328L0.5 8.28798L3.01291 8.29772L11.2421 8.3131L10.7357 8.57582C9.42192 9.25734 8.38179 10.5942 7.76926 12.3887C7.59471 12.8999 7.33134 14.0654 7.37915 14.1148Z" fill="#2C202A"/>
-      </svg>
-    `;
-    redelegationArrow.innerHTML = svgArrow;
-
-
-    const redelegationText = document.createElement('div');
-    redelegationText.classList.add('content-wrapper-portfolio-body-validators-content-third-text');
-    redelegationText.innerHTML = "Stake with node101";
-
-    redelegateButton.appendChild(redelegationText);
-    redelegateButton.appendChild(redelegationArrow);
-
-
-
-
-    validatorContainer.appendChild(redelegateButton);
-
+    const backgroundSpiral = document.querySelector('.content-wrapper-portfolio-body-validators-content-no-validator-background');
+    backgroundSpiral.classList.remove('display-none');
+    const noValidator = document.querySelector('.content-wrapper-portfolio-body-validators-content-no-validator');
+    noValidator.classList.remove('display-none');
+    const reloadIcon = document.querySelector('.content-wrapper-portfolio-body-validators-reload');
+    reloadIcon.classList.add('display-none');
     return;
+  };
+
+  if (validatorList.length == 1 && validatorList[0].moniker == "node101") {
+    const reloadIcon = document.querySelector('.content-wrapper-portfolio-body-validators-reload');
+    reloadIcon.classList.add('display-none');
+
+    const validatorContainer = document.querySelector('.content-wrapper-portfolio-body-validators-content-one-validator');
+    validatorContainer.classList.remove('display-none');
   }
-  
-  if (validatorList.length == 0) return;
+
 
   const reload = document.querySelector('.content-wrapper-portfolio-body-validators-reload');
   reload.classList.add('display-none');
@@ -119,6 +98,27 @@ function setDynamicValidatorUI(validatorList) {
 
   const redelegatePopup = document.querySelector('.redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile-wrapper');
 
+  // .redelegate-wrapper-content-dropdown-icon
+  // img.redelegate-wrapper-content-dropdown-icon(src='https://www.pexels.com/photo/woman-laptop-computer-freelancer-12662811/')
+  // .redelegate-wrapper-content-dropdown-text
+
+  const redelegateDropdownIcon = document.querySelector('img.redelegate-wrapper-content-dropdown-icon-img');
+  redelegateDropdownIcon.src = validatorList[0].picture;
+
+  const redelegateDropdownText = document.querySelector('.redelegate-wrapper-content-dropdown-text');
+  redelegateDropdownText.textContent = validatorList[0].moniker;
+
+  currency = JSON.parse(currentChain.chain_info).currencies[0].coinDecimals;
+  getStake(globalAddress, validatorList[0].operatorAddress, (err, data) => {
+    if (err) console.log(err);
+   
+    const availableAmount = document.querySelector('.redelegate-content-wrapper-stake-body-main-center-title-amount');
+    console.log("Available Amount");
+    availableAmount.textContent = data / 10 ** currency + " " + JSON.parse(currentChain.chain_info).currencies[0].coinDenom;
+  
+
+
+
   validatorList.forEach(validator => {
 
     const redelegateRadio = document.createElement('input');
@@ -148,6 +148,7 @@ function setDynamicValidatorUI(validatorList) {
     redelegateEachIcon.classList.add('redelegate-content-wrapper-stake-body-main-center-body-chain-list-each-icon');
 
     const redelegateEachIconImg = document.createElement('img');
+    redelegateEachIconImg.classList.add('redelegate-content-wrapper-stake-body-main-center-body-chain-list-each-icon-img');
     redelegateEachIconImg.src = validator.picture;
 
     redelegateEachIcon.appendChild(redelegateEachIconImg);
@@ -164,11 +165,6 @@ function setDynamicValidatorUI(validatorList) {
     redelegateEach.appendChild(redelegateEachIcon);
     redelegateEach.appendChild(redelegateEachName);
     redelegateEach.appendChild(redelegateEachToken);
-
-
-    /* const redelegateIcon = document.createElement('div');
-    redelegateIcon.classList.add('redelegate-content-wrapper-stake-body-main-center-body-chain-list-each');
-     */
 
     // --------------------------------
     const validatorParent = document.createElement('div');
@@ -200,15 +196,15 @@ function setDynamicValidatorUI(validatorList) {
     validatorContainer.appendChild(redelegateButton);
 
     redelegateLabel.append(redelegateEach);
-    redelegateInnerWrapper.appendChild(redelegateRadio);
     redelegateInnerWrapper.appendChild(redelegateLabel);
     redelegateWrapper.appendChild(redelegateInnerWrapper);
     redelegatePopup.appendChild(redelegateWrapper);
   });
+});
 };
 
 window.addEventListener('load', () => {
-
+  
   getValidatorList((err, data) => {
     if (err) console.log(err);
   }); 
@@ -276,16 +272,47 @@ window.addEventListener('load', () => {
       document.querySelector('.redelegate-content-wrapper-stake-body-main-center-body-stake-dollar').textContent = "$" + (stakeAmount * currentChain.price).toFixed(2);
     }
 
-    if (event.target.closest('.validator-radio')) {
-      const validatorAddress = event.target.value;
-      const currency = JSON.parse(currentChain.chain_info).currencies[0].coinDecimals;
-      getStake(globalAddress, validatorAddress, (err, data) => {
-        if (err) console.log(err);
-        
-        const availableAmount = document.querySelector('.redelegate-content-wrapper-stake-body-main-center-title-amount');
-        availableAmount.textContent = data / 10 ** currency + " " + JSON.parse(currentChain.chain_info).currencies[0].coinDenom;
-      });
+    if (event.target.closest('.redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile-inner')) {
+      document.querySelector('.redelegate-wrapper-content-validators').classList.toggle('display-none');
+      
     };
+
+    if (event.target.closest('.redelegate-wrapper-content-dropdown')) {
+      document.querySelector('.redelegate-wrapper-content-validators').classList.toggle('display-none');
+    };
+
+    if (event.target.closest('.redelegate-wrapper-content-validators')) {
+      const listTile = event.target.closest('.redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile-inner');
+    
+      const labelElement = listTile.querySelector('label.validator-label');      
+      const validatorId = labelElement.getAttribute('for');
+      validatorAddress = validatorId.replace('validator-', '');
+
+      const redelegateImgIcon = listTile.querySelector('.redelegate-content-wrapper-stake-body-main-center-body-chain-list-each-icon-img').src;
+
+      const redelegateDropdownTextTile = event.target.closest('.redelegate-content-wrapper-stake-body-main-center-body-chain-list-each-chain').textContent;
+
+      const redelegateDropdownIcon = document.querySelector('img.redelegate-wrapper-content-dropdown-icon-img');
+      const redelegateDropdownText = document.querySelector('.redelegate-wrapper-content-dropdown-text');
+      
+      redelegateDropdownIcon.src = redelegateImgIcon;
+      redelegateDropdownText.textContent = redelegateDropdownTextTile;
+      
+
+       const currency = JSON.parse(currentChain.chain_info).currencies[0].coinDecimals;
+       getStake(globalAddress, validatorAddress, (err, data) => {
+         if (err) console.log(err);
+        
+         const availableAmount = document.querySelector('.redelegate-content-wrapper-stake-body-main-center-title-amount');
+         availableAmount.textContent = data / 10 ** currency + " " + JSON.parse(currentChain.chain_info).currencies[0].coinDenom;
+       });
+  };
+
+    if (event.target.closest('.content-wrapper-portfolio-body-validators-content-no-validator-button')) {
+      //focus input field
+      console.log("Yes");
+      document.querySelector('.content-wrapper-stake-body-main-center-body-stake-amount').focus();
+    }
 
     if(event.target.closest('.content-wrapper-portfolio-body-buttons-each-collect')) {
        if (!window.keplr) {
@@ -331,6 +358,7 @@ window.addEventListener('load', () => {
     if (event.target.closest('.content-wrapper-portfolio-body-validators-content-third')) { 
       const redelegateWrapper = document.querySelector('.redelegate-wrapper');
       redelegateWrapper.classList.toggle('display-none');
+      console.log("Woohooooo");
     }
 
     if (event.target.closest('.redelegate-content-wrapper-portfolio-body-validators-content-third')){

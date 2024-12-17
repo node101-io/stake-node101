@@ -156,7 +156,7 @@
   width: 1830px;
   min-width: 1830px;
   overflow: visible;
-  animation: slidingscale 17s linear infinite normal; 
+  animation: slidingscalee 50s linear infinite normal; 
 }
 
 .content-wrapper-stake-body-main-title:hover  .content-test{

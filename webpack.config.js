@@ -5,7 +5,6 @@ module.exports = [
   {
     entry: {
       cosmjs: "./webpack/cosmjs.js", // Entry point for cosmjs
-      protojs: "./webpack/protojs.js", // Entry point for protojs
     },
     output: {
       path: path.join(__dirname, "public/js/functions"), // Output folder
@@ -37,10 +36,7 @@ module.exports = [
     plugins: [
       new webpack.ProvidePlugin({
         Buffer: ["buffer", "Buffer"], // Provide Buffer globally
-        Long: ["long", "Long"], // Provide Long globally
-       
-        
-
+    
       }),
     ],
   },

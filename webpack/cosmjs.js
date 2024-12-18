@@ -1,15 +1,9 @@
-const { SigningStargateClient } = require('@cosmjs/stargate');
-const { StargateClient } = require("@cosmjs/stargate")
-const { QueryClient, setupDistributionExtension, setupStakingExtension} = require("@cosmjs/stargate");
+const { SigningStargateClient,StargateClient, QueryClient, setupDistributionExtension, setupStakingExtension} = require("@cosmjs/stargate");
 
-
-const { MsgDelegate } = require('cosmjs-types/cosmos/staking/v1beta1/tx');
-const { MsgBeginRedelegate } = require('cosmjs-types/cosmos/staking/v1beta1/tx');
-const { MsgUndelegate } = require('cosmjs-types/cosmos/staking/v1beta1/tx');
+const { MsgDelegate, MsgBeginRedelegate,MsgUndelegate  } = require('cosmjs-types/cosmos/staking/v1beta1/tx');
 const { MsgWithdrawDelegatorReward } = require('cosmjs-types/cosmos/distribution/v1beta1/tx');
 
 const { Tendermint34Client } = require("@cosmjs/tendermint-rpc");
-
 
 const  { AuthInfo, Fee, TxBody, TxRaw, SignerInfo } = require("cosmjs-types/cosmos/tx/v1beta1/tx");
 const { SignMode } = require("cosmjs-types/cosmos/tx/signing/v1beta1/signing");
@@ -45,4 +39,3 @@ window.TxRaw = TxRaw;
 window.SignerInfo = SignerInfo;
 window.SignMode = SignMode;
 window.PubKey = PubKey;
-// window.MsgDelegate = MsgDelegate;

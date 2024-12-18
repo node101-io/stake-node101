@@ -1,15 +1,11 @@
 function addChainToKeplr(currentChain, callback) {
   const currentChainInfo = JSON.parse(currentChain.chain_info);
-
   const keplr = window.keplr;
-  const key = keplr.getKey(currentChain.chain_id).then((key) => {
-   TryKey(currentChainInfo, key, (err) => {
-      if (err) return console.log(err);
-    });
-  });
+
+
+
   //console.log(key);
   let globalOfflineSigner;
-//  const currentChainInfo = JSON.parse(currentChain.chain_info);
 
   keplr.experimentalSuggestChain(currentChainInfo)
     .then(() => keplr.enable(currentChain.chain_id))

@@ -49,7 +49,6 @@
   border-radius: var(--border-radius-big);
   margin-top: 50px;
   overflow: hidden;
-  border: 1px solid red;
   transform: scale(0.9);
 }
 

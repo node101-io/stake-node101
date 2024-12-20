@@ -41,6 +41,7 @@ function setDynamicValidatorUI(validatorList) {
     noValidator.classList.remove('display-none');
     const reloadIcon = document.querySelector('.content-wrapper-portfolio-body-validators-reload');
     reloadIcon.classList.add('display-none');
+    
     return;
   };
 
@@ -50,11 +51,16 @@ function setDynamicValidatorUI(validatorList) {
 
     const validatorContainer = document.querySelector('.content-wrapper-portfolio-body-validators-content-one-validator');
     validatorContainer.classList.remove('display-none');
+
+    const buttonWrapper = document.querySelector('.content-wrapper-portfolio-body-buttons');
+    buttonWrapper.classList.remove('display-none');
   }
 
 
   const reload = document.querySelector('.content-wrapper-portfolio-body-validators-reload');
   reload.classList.add('display-none');
+  const buttonWrapper = document.querySelector('.content-wrapper-portfolio-body-buttons');
+  buttonWrapper.classList.remove('display-none');
 
   const validatorContainer = document.querySelector('.content-wrapper-portfolio-body-validators-content');
 

@@ -1,10 +1,10 @@
 :root {
   --box-padding: 15px;
 
-  --content-wrapper-stake-width: 560px;
-  --content-wrapper-stake-height: 710px;
+  --content-wrapper-stake-width: 525px;
+  --content-wrapper-stake-height: 680px;
 
-  --content-wrapper-stake-body-main-width: 500px;
+  --content-wrapper-stake-body-main-width: 480px;
   --content-wrapper-stake-body-main-height: 500px;
   --content-wrapper-stake-body-main-margin-top: 35px;
   --content-wrapper-stake-body-main-title-height: 40px;
@@ -18,21 +18,21 @@
   
   --content-wrapper-stake-body-main-center-width: 500px;
   --content-wrapper-stake-body-main-center-height: 160px;
-  --content-wrapper-stake-body-main-center-margin-top: 45px;
+  --content-wrapper-stake-body-main-center-margin-top: 40px;
 
   --content-wrapper-stake-body-main-center-title-width: 475px;
   --content-wrapper-stake-body-main-center-title-each-width: 40px;
   --content-wrapper-stake-body-main-center-body-margin-top: 30px;
   --content-wrapper-stake-body-main-center-body-height: 120px;
-  --content-wrapper-stake-body-main-center-body-icon-size: 84px;
-  --content-wrapper-stake-body-main-center-body-icon-size: 84px;
+  --content-wrapper-stake-body-main-center-body-icon-size: 80px;
+  --content-wrapper-stake-body-main-center-body-icon-size: 80px;
   --content-wrapper-stake-body-main-center-body-icon-margin-left: 16px;
   --content-wrapper-stake-body-main-center-body-icon-margin-right: 8px;
-  --content-wrapper-stake-body-main-center-body-chain-margin-left: 25px;
+  --content-wrapper-stake-body-main-center-body-chain-margin-left: 20px;
   --content-wrapper-stake-body-main-center-body-chain-width: 175px;
   --content-wrapper-stake-body-main-center-body-chain-height: 70px;
   --content-wrapper-stake-body-main-center-body-chain-padding-vertical: 5px;
-  --content-wrapper-stake-body-main-center-body-stake-margin-left: 60px;
+  --content-wrapper-stake-body-main-center-body-stake-margin-left: 45px;
   --content-wrapper-stake-body-main-center-body-stake-height: 40px;
   --content-wrapper-stake-body-main-center-body-stake-amount-padding-left: 5px;
   --content-wrapper-stake-body-main-center-body-stake-amount-width: 150px;
@@ -62,7 +62,7 @@
   
   --content-wrapper-stake-body-button-padding: 15px 20px;
   --content-wrapper-stake-body-button-width: 185px;
-  --content-wrapper-stake-body-button-height: 48px;
+  --content-wrapper-stake-body-button-height: 42px;
   --content-wrapper-stake-body-button-border-radius: 30px;
   
   --content-wrapper-stake-body-main-center-body-chain-list-search-height: 60px;
@@ -101,8 +101,10 @@
   justify-content: space-between;
   align-items: center;
   margin: 0px;
+  margin-top: 30px;
   border-radius: var(--border-radius-big);
   background-color: var(--primary-background-white);
+  transform: scale(0.9);
 }
 
 .content-wrapper-stake-body-main {
@@ -118,11 +120,12 @@
 }
 
 
+
 .content-wrapper-stake-body-main-title {
   height: var(--content-wrapper-stake-body-main-title-height);
   min-height: var(--content-wrapper-stake-body-main-title-height);
-  width: var(--staking-inside-width);
-  min-width: var(--staking-inside-width);  
+  width: var(--content-wrapper-stake-body-main-width);
+  min-width: var(--content-wrapper-stake-body-main-width);  
   padding: var(--content-wrapper-stake-body-main-content-stat-title-padding);
   display: flex;
   flex-direction: row;
@@ -147,7 +150,6 @@
   padding: var(--content-wrapper-stake-body-main-title-each-padding);
   color: var(--header-text-color);
   position: relative;
-  overflow: visible;
 }
 
 
@@ -156,7 +158,7 @@
   width: 1830px;
   min-width: 1830px;
   overflow: visible;
-  animation: slidingscalee 50s linear infinite normal; 
+  animation: slidingscale 45s linear infinite normal; 
 }
 
 .content-wrapper-stake-body-main-title:hover  .content-test{
@@ -230,6 +232,8 @@
   line-height: 1.1;
 }
 
+/* .
+
 .content-wrapper-stake-body-main-center {
   height: var(--content-wrapper-stake-body-main-center-height);
   min-height: var(--content-wrapper-stake-body-main-center-height);
@@ -239,19 +243,22 @@
   flex-direction: column;
   align-items: center;
   margin-top: var(--content-wrapper-stake-body-main-center-margin-top);
-}
+} */
+
 
 .content-wrapper-stake-body-main-center-title {
   height: auto;
   min-height: auto;
-  width: var(--staking-inside-width);
-  min-width: var(--staking-inside-width);
+  width: var(--content-wrapper-stake-body-main-width);
+  min-width: var(--content-wrapper-stake-body-main-width);
   display: flex;
   justify-content: space-between;
   font-family: 'Montserrat';
   font-weight: 300;
   font-size: var(--font-size-16);
   line-height: 1.2;
+  padding: 0px 35px;
+  margin-top: 50px;
 }
 
 .content-wrapper-stake-body-main-center-title-each {
@@ -271,19 +278,22 @@
 .content-wrapper-stake-body-main-center-body {
   height: var(--content-wrapper-stake-body-main-center-body-height);
   min-height: var(--content-wrapper-stake-body-main-center-body-height);
-  width: var(--staking-inside-width);
-  min-width: var(--staking-inside-width);
-  max-width: var(--staking-inside-width);
+  width: var(--content-wrapper-stake-body-main-width);
+  min-width: var(--content-wrapper-stake-body-main-width);
+  max-width: var(--content-wrapper-stake-body-main-width);
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-top: var(--content-wrapper-stake-body-main-center-body-margin-top);
   border-radius: var(--border-radius-big);
   background-color: var(--primary-background-light);
+  background-color: #ECF0FF;
 }
 
 .content-wrapper-stake-body-main-center-body-icon {
-  width: var(--content-wrapper-stake-body-main-center-body-icon-size);
+  min-width: var(--content-wrapper-stake-body-main-center-body-icon-size);
+  width: var(--content-wrapper-stake-body-main-center-body-icon-size );
+  min-height: var(--content-wrapper-stake-body-main-center-body-icon-size);
   height: var(--content-wrapper-stake-body-main-center-body-icon-size);
   margin-left: var(--content-wrapper-stake-body-main-center-body-icon-margin-left);
   margin-right: var(--content-wrapper-stake-body-main-center-body-icon-margin-right);
@@ -352,11 +362,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  align-items: flex-start;
   line-height: 1;
   margin: 0px;
   padding: 0px;
   margin-left: var(--content-wrapper-stake-body-main-center-body-stake-margin-left);
+  overflow: hidden;
 }
 
 .content-wrapper-stake-body-main-center-body-stake-amount {
@@ -382,21 +392,20 @@
   min-width: auto; 
   font-family: 'Montserrat';
   display: flex;
-  align-items: center;
-  justify-content: center;
   font-weight: 300;
   font-size: var(--font-size-16);
   line-height: 2;
-  margin-right: 60px;
+  margin-left: 18px;
 }
 
 
 .content-wrapper-stake-body-main-content {
   height: auto;
   min-height: auto;
-  width: var(--staking-inside-width);
-  min-width: var(--staking-inside-width);
+  width: var(--content-wrapper-stake-body-main-width);
+  min-width: var(--content-wrapper-stake-body-main-width);
   margin-top: var(--content-wrapper-stake-body-main-content-margin-top);
+  padding: 0px 15px;
 }
 
 .content-wrapper-stake-body-main-content-stat {
@@ -409,11 +418,10 @@
 .content-wrapper-stake-body-main-content-stat-title {
   height: auto;
   min-height: auto;
-  width: var(--staking-inside-width);
-  min-width: var(--staking-inside-width);  
+  width: auto;
+  min-width: auto;
   display: flex;  
   justify-content: space-between;
-  padding: var(--content-wrapper-stake-body-main-content-stat-title-padding);
   font-family: 'Montserrat';
   font-size: var(--font-size-16);
   font-weight: 300;
@@ -468,8 +476,8 @@
 .content-wrapper-stake-body-main-content-stat-title-content-each {
   height: auto;
   min-height: auto;
-  width: 100%;
-  min-width: 100%;
+  width: var(--content-wrapper-stake-body-main-width);
+  min-width: var(--content-wrapper-stake-body-main-width);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -537,6 +545,12 @@
   cursor: pointer;
 }
 
+.content-wrapper-stake-body-button-text {
+  font-family: 'Igra Sans';
+  color: #F1F1F1;
+  font-size: 18px;
+  line-height: 2;
+}
 
 .content-wrapper-stake-body-main-center-body-chain-list{
   right: var(--content-wrapper-stake-body-main-center-body-chain-list-right);

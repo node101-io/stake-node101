@@ -43,17 +43,27 @@ block main
                   | 24H
                 .content-wrapper-portfolio-body-stat-timeline-percent
                   .content-wrapper-portfolio-body-stat-timeline-percent-text
-                    | &nbsp; $ #{(listOfToken[currentChainKey].price).toFixed(2)} &nbsp;
+                    if (listOfToken[currentChainKey].price_change_24h) < 0  
+                      .change(style='color: #FF0000;')
+                        | &nbsp; $ #{(listOfToken[currentChainKey].price).toFixed(2)} &nbsp;
+                    else 
+                      .change(style='color: #00C524;')
+                        | &nbsp; $ #{(listOfToken[currentChainKey].price).toFixed(2)} &nbsp;
                   .content-wrapper-portfolio-body-stat-timeline-percent-text.content-wrapper-portfolio-body-stat-timeline-percent-text-arrow
                     if (listOfToken[currentChainKey].price_change_24h) < 0  
                       svg(width='18' height='16' viewbox='0 0 18 16' fill='none' xmlns='http://www.w3.org/2000/svg')
                         path(d='M9.33975 15.1099C9.1473 15.4432 8.66617 15.4432 8.47372 15.1099L0.54807 1.38223C0.309402 0.968841 0.730422 0.488006 1.1717 0.669988L7.00051 3.07375C8.22145 3.57726 9.59202 3.57726 10.813 3.07375L16.6418 0.66999C17.083 0.488008 17.5041 0.968843 17.2654 1.38223L9.33975 15.1099Z' fill='#FF0000')
                     else
                       svg(width='18' height='16' viewbox='0 0 18 16' fill='none' xmlns='http://www.w3.org/2000/svg')
-                        path(d='M8.66025 0.890086C8.8527 0.556799 9.33383 0.556799 9.52628 0.890086L17.4519 14.6178C17.6906 15.0312 17.2696 15.512 16.8283 15.33L10.9995 12.9263C9.77855 12.4227 8.40798 12.4227 7.18704 12.9263L1.35822 15.33C0.917944 15.512 0.496924 15.0312 0.735592 14.6178L8.66025 0.890086Z' fill='#00FF00')
+                        path(d='M8.66025 0.890086C8.8527 0.556799 9.33383 0.556799 9.52628 0.890086L17.4519 14.6178C17.6906 15.0312 17.2696 15.512 16.8283 15.33L10.9995 12.9263C9.77855 12.4227 8.40798 12.4227 7.18704 12.9263L1.35822 15.33C0.917944 15.512 0.496924 15.0312 0.735592 14.6178L8.66025 0.890086Z' fill='#00C524')
 
                   .content-wrapper-portfolio-body-stat-timeline-percent-text.content-wrapper-portfolio-body-stat-timeline-percent-text-change
-                    | &nbsp; #{(listOfToken[currentChainKey].price_change_24h).toFixed(2)} % &nbsp;
+                    if (listOfToken[currentChainKey].price_change_24h) < 0  
+                      .change(style='color: #FF0000;')
+                        | &nbsp; #{(listOfToken[currentChainKey].price_change_24h).toFixed(2)} % &nbsp;
+                    else 
+                      .change(style='color: #00C524;')
+                        | &nbsp; #{(listOfToken[currentChainKey].price_change_24h).toFixed(2)} % &nbsp;
               //-
                 .content-wrapper-portfolio-body-stat-timeline
                   .content-wrapper-portfolio-body-stat-timeline-time
@@ -74,9 +84,11 @@ block main
                 .content-wrapper-portfolio-body-stat-balance-text
                   | Total Available Rewards
                 .content-wrapper-portfolio-body-stat-balance-statusbar-3
-              .content-wrapper-portfolio-body-stat-balance
-                .content-wrapper-portfolio-body-stat-balance-text.content-wrapper-portfolio-body-stat-balance-text-reward
+              .content-wrapper-portfolio-body-stat-balance.content-wrapper-portfolio-body-stat-balance-unclaimed
+                .content-wrapper-portfolio-body-stat-balance-text
                   | Unclaimed Rewards:
+                .content-wrapper-portfolio-body-stat-balance-text-reward
+                  
           .content-wrapper-portfolio-body-validators
             .content-wrapper-portfolio-body-validators-content-no-validator-background.display-none
               svg(width='342' height='121' viewbox='0 0 342 121' fill='none' xmlns='http://www.w3.org/2000/svg')
@@ -153,7 +165,7 @@ block main
                 .content-wrapper-portfolio-body-validators-content-third-arrow
                   svg(width='15' height='15' viewbox='0 0 15 15' fill='none' xmlns='http://www.w3.org/2000/svg')
                     path(d='M7.37915 14.1148C7.39181 14.1278 7.77975 14.2274 8.24116 14.3359C8.70264 14.4445 9.08519 14.5168 9.09134 14.4966C9.09743 14.4764 9.14518 14.1484 9.19739 13.7678C9.30227 13.0034 9.55621 12.111 9.82755 11.5528C10.6733 9.81332 12.1908 8.66152 14.0313 8.36216L14.5 8.28591V7.51748V6.74899L14.0752 6.67601C11.2921 6.19792 9.4777 4.06718 9.13827 0.87852C9.11612 0.670303 9.08964 0.5 9.07944 0.5C8.98558 0.5 7.4303 0.883787 7.40089 0.91419C7.37962 0.936175 7.39544 1.13137 7.4361 1.34789C7.88615 3.74541 9.17477 5.69634 10.847 6.51207L11.2481 6.70775L2.99949 6.72307L0.5 6.7328L0.5 8.28798L3.01291 8.29772L11.2421 8.3131L10.7357 8.57582C9.42192 9.25734 8.38179 10.5942 7.76926 12.3887C7.59471 12.8999 7.33134 14.0654 7.37915 14.1148Z' fill='#2C202A')
-          .content-wrapper-portfolio-body-buttons
+          .content-wrapper-portfolio-body-buttons.display-none
             .content-wrapper-portfolio-body-buttons-spiral-right
               svg(width='103' height='101' viewbox='0 0 103 101' fill='none' xmlns='http://www.w3.org/2000/svg')
                 path(d='M24.6874 -54C9.77758 -28.1885 -5.85956 -17.0268 15.3131 1.17368C35.0959 16.1097 50.3608 35.8991 37.1654 51.7197C32.4067 57.4252 23.4125 56.437 18.8042 54.0059C11.5141 50.1602 9.77733 43.3966 11.8866 35.8991C15.7184 22.2793 31.4457 8.66927 46.9268 12.9555C71.1534 19.6632 83.1942 43.2186 85.6519 65.8498C86.1415 70.3577 83.8819 104.235 78.7991 85.8169C77.8766 82.4742 75.5258 72.3669 76.6656 75.6473C78.5554 81.0864 79.3809 84.2179 79.3809 90.0956C79.3809 91.2625 78.4916 97.3608 81.1911 95.2424C86.7183 90.9047 92.568 86.9963 98 82.5304' stroke='#C4CDF4' stroke-width='10' stroke-linecap='round')

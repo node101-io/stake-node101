@@ -18,9 +18,14 @@
                     path(d='M9.33975 15.1099C9.1473 15.4432 8.66617 15.4432 8.47372 15.1099L0.54807 1.38223C0.309402 0.968841 0.730422 0.488006 1.1717 0.669988L7.00051 3.07375C8.22145 3.57726 9.59202 3.57726 10.813 3.07375L16.6418 0.66999C17.083 0.488008 17.5041 0.968843 17.2654 1.38223L9.33975 15.1099Z' fill='#FF0000')
                 else
                   svg(width='18' height='16' viewbox='0 0 18 16' fill='none' xmlns='http://www.w3.org/2000/svg')
-                    path(d='M8.66025 0.890086C8.8527 0.556799 9.33383 0.556799 9.52628 0.890086L17.4519 14.6178C17.6906 15.0312 17.2696 15.512 16.8283 15.33L10.9995 12.9263C9.77855 12.4227 8.40798 12.4227 7.18704 12.9263L1.35822 15.33C0.917944 15.512 0.496924 15.0312 0.735592 14.6178L8.66025 0.890086Z' fill='#00FF00')
+                    path(d='M8.66025 0.890086C8.8527 0.556799 9.33383 0.556799 9.52628 0.890086L17.4519 14.6178C17.6906 15.0312 17.2696 15.512 16.8283 15.33L10.9995 12.9263C9.77855 12.4227 8.40798 12.4227 7.18704 12.9263L1.35822 15.33C0.917944 15.512 0.496924 15.0312 0.735592 14.6178L8.66025 0.890086Z' fill='#00C524')
               .content-wrapper-stake-body-main-title-each-change
-                | &nbsp; %#{Math.round (100 * chain.price_change_24h) / 100}  &nbsp; - 
+                if chain.price_change_24h < 0
+                  .change(style='color: #FF0000;')
+                    | &nbsp; %#{Math.round (100 * chain.price_change_24h) / 100} &nbsp; -
+                else 
+                  .change(style='color: #00C524;')
+                    | &nbsp; %#{Math.round (100 * chain.price_change_24h) / 100}  &nbsp; -
       .content-test 
         each chain in listOfToken
           if Math.round (100 * chain.price) / 100 != "0"
@@ -37,9 +42,14 @@
                     path(d='M9.33975 15.1099C9.1473 15.4432 8.66617 15.4432 8.47372 15.1099L0.54807 1.38223C0.309402 0.968841 0.730422 0.488006 1.1717 0.669988L7.00051 3.07375C8.22145 3.57726 9.59202 3.57726 10.813 3.07375L16.6418 0.66999C17.083 0.488008 17.5041 0.968843 17.2654 1.38223L9.33975 15.1099Z' fill='#FF0000')
                 else
                   svg(width='18' height='16' viewbox='0 0 18 16' fill='none' xmlns='http://www.w3.org/2000/svg')
-                    path(d='M8.66025 0.890086C8.8527 0.556799 9.33383 0.556799 9.52628 0.890086L17.4519 14.6178C17.6906 15.0312 17.2696 15.512 16.8283 15.33L10.9995 12.9263C9.77855 12.4227 8.40798 12.4227 7.18704 12.9263L1.35822 15.33C0.917944 15.512 0.496924 15.0312 0.735592 14.6178L8.66025 0.890086Z' fill='#00FF00')
+                    path(d='M8.66025 0.890086C8.8527 0.556799 9.33383 0.556799 9.52628 0.890086L17.4519 14.6178C17.6906 15.0312 17.2696 15.512 16.8283 15.33L10.9995 12.9263C9.77855 12.4227 8.40798 12.4227 7.18704 12.9263L1.35822 15.33C0.917944 15.512 0.496924 15.0312 0.735592 14.6178L8.66025 0.890086Z' fill='#00C524')
               .content-wrapper-stake-body-main-title-each-change
-                | &nbsp; %#{Math.round (100 * chain.price_change_24h) / 100}  &nbsp; - 
+                if chain.price_change_24h < 0
+                  .change(style='color: #FF0000;')
+                    | &nbsp; %#{Math.round (100 * chain.price_change_24h) / 100} &nbsp; -
+                else 
+                  .change(style='color: #00C524;')
+                    | &nbsp; %#{Math.round (100 * chain.price_change_24h) / 100}  &nbsp; -
     .content-wrapper-stake-body-main-center
       include ../partials/chainlist
     .content-wrapper-stake-body-main-content
@@ -48,7 +58,13 @@
         .content-wrapper-stake-body-main-content-stat-title-auto-rewards
           | Rewards
         .content-wrapper-stake-body-main-content-stat-title-buttons
-          | Auto Stake
+          svg(width='15' height='14' viewbox='0 0 15 14' fill='none' xmlns='http://www.w3.org/2000/svg')
+            path(d='M10.2929 13.2071C10.1054 13.3946 9.851 13.5 9.58579 13.5H5.41421C5.149 13.5 4.89464 13.3946 4.70711 13.2071L1.29289 9.79289C1.10536 9.60536 1 9.351 1 9.08579V4.91421C1 4.649 1.10536 4.39464 1.29289 4.20711L4.70711 0.792893C4.89464 0.605357 5.149 0.5 5.41421 0.5H9.58579C9.851 0.5 10.1054 0.605357 10.2929 0.792893L13.7071 4.20711C13.8946 4.39464 14 4.649 14 4.91421V9.08579C14 9.351 13.8946 9.60536 13.7071 9.79289L10.2929 13.2071Z' stroke='#72728F' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round')
+            path(d='M7.5 4V7.25' stroke='#72728F' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round')
+            path(d='M7.5 10C7.36193 10 7.25 9.88807 7.25 9.75C7.25 9.61193 7.36193 9.5 7.5 9.5' stroke='#72728F' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round')
+            path(d='M7.5 10C7.63807 10 7.75 9.88807 7.75 9.75C7.75 9.61193 7.63807 9.5 7.5 9.5' stroke='#72728F' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round')
+
+          | &nbsp; Auto Stake
           .content-wrapper-stake-body-main-content-stat-title-buttons-icon
             .content-wrapper-stake-body-main-content-stat-title-buttons-icon-ball
       .content-wrapper-stake-body-main-content-stat-title-content

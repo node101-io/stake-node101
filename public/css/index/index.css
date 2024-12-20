@@ -1,7 +1,7 @@
 :root {
   --content-wrapper-info-width: 600px;
   --content-wrapper-info-height: 700px;
-  --content-wrapper-info-body-box-size: 500px;
+  --content-wrapper-info-body-box-size: 475px;
 
   --content-wrapper-info-body-wrapper-width: 450px;
   --content-wrapper-info-body-border-radius: 60px;
@@ -12,8 +12,8 @@
   --content-wrapper-info-body-body-content-width: 280px;
   --content-wrapper-info-body-body-content-height: 230px;
 
-  --content-wrapper-info-body-larrow-margin-right: 15px;
-  --content-wrapper-info-body-rarrow-margin-left: 15px;
+  --content-wrapper-info-body-larrow-margin-right: 10px;
+  --content-wrapper-info-body-rarrow-margin-left: 10px;
   --content-wrapper-info-body-content-text-padding:15px 10px;
 
   --content-wrapper-info-footer-width: 100px;

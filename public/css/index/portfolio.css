@@ -1,8 +1,8 @@
 :root {
   --content-wrapper-portfolio-body-width: 600px;
   --content-wrapper-portfolio-body-height: 700px;
-  --content-wrapper-portfolio-body-each-width: 545px;
-  --content-wrapper-portfolio-body-stat-height: 330px;
+  --content-wrapper-portfolio-body-each-width: 535px;
+  --content-wrapper-portfolio-body-stat-height: 280px;
   --content-wrapper-portfolio-body-stat-padding: 20px 30px 30px 20px;
   --content-wrapper-portfolio-body-validators-height: 120px;
   --content-wrapper-portfolio-body-validators-margin-top: 20px;
@@ -21,7 +21,7 @@
   --content-wrapper-portfolio-body-stat-each-margin-top: 20px;
   --content-wrapper-portfolio-body-stat-timeline-percent-width: 100px;
   --content-wrapper-portfolio-body-stat-timeline-percent-margin: 6px 0px;
-  --content-wrapper-portfolio-body-stat-balance-text-margin-top: 4px 0px;
+  --content-wrapper-portfolio-body-stat-balance-text-margin-top: 5px 0px;
   --content-wrapper-portfolio-body-stat-balance-statusbar-height: 16px;
   --content-wrapper-portfolio-body-validators-content-margin-top: 10px;
   --content-wrapper-portfolio-body-validators-content-icon-size: 30px;
@@ -39,16 +39,20 @@
 }
 
 .content-wrapper-portfolio-body {
-  height: var(--content-wrapper-portfolio-body-height);
-  min-height: var(--content-wrapper-portfolio-body-height);
+  height: var(--content-wrapper-stake-height);
+  min-height: var(--content-wrapper-stake-height);
   width: var(--content-wrapper-portfolio-body-width);
   min-width: var(--content-wrapper-portfolio-body-width);
   display: flex;
   flex-direction: column;
   align-items: center;
   border-radius: var(--border-radius-big);
-  background-color: var(--primary-background-light);
+  margin-top: 50px;
+  overflow: hidden;
+  border: 1px solid red;
+  transform: scale(0.9);
 }
+
 
 .content-wrapper-portfolio-body-stat {
   height: var(--content-wrapper-portfolio-body-stat-height);
@@ -58,7 +62,8 @@
   padding: var(--content-wrapper-portfolio-body-stat-padding);
   border-radius: var(--border-radius-medium);
   background-color: var(--primary-background-white);
-  margin-top: 45px;
+  margin-top: 15px;
+  overflow: hidden;
 }
 
 .content-wrapper-portfolio-body-validators {
@@ -303,6 +308,12 @@
   line-height: 1.1;
 }
 
+.content-wrapper-portfolio-body-stat-balance-unclaimed {
+  display: flex;
+  margin-top: 7px;
+  color: #9695DF !important;
+}
+
 .content-wrapper-portfolio-body-stat-balance-text {
   font-weight: 300;
   font-family: 'Montserrat';
@@ -310,6 +321,7 @@
   line-height: 1.2;
   color: var(--primary-text-black);
   margin: var(--content-wrapper-portfolio-body-stat-balance-text-margin-top);
+  margin-right: 10px;
 }
 
 .content-wrapper-portfolio-body-stat-balance-statusbar-1 {
@@ -340,7 +352,12 @@
 }
 
 .content-wrapper-portfolio-body-stat-balance-text-reward {
-  color: var(--primary-text-black);
+  font-weight: 500;
+  font-family: 'Montserrat';
+  font-size: var(--font-size-14);
+  line-height: 1.2;
+  color: #9695DF;
+  margin: var(--content-wrapper-portfolio-body-stat-balance-text-margin-top);
 }
 
 .content-wrapper-portfolio-body-validators-content {
@@ -507,8 +524,8 @@
 
 .content-wrapper-portfolio-body-buttons {
   position: relative;
-  width: var(--content-wrapper-portfolio-body-buttons-width);
-  min-width: var(--content-wrapper-portfolio-body-buttons-width);
+  width: var(--content-wrapper-portfolio-body-each-width);
+  min-width: var(--content-wrapper-portfolio-body-each-width);
   height: var(--content-wrapper-portfolio-body-buttons-height);
   min-height: var(--content-wrapper-portfolio-body-buttons-height);
   background-color:  var(--primary-background-white);

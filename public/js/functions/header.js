@@ -1,48 +1,27 @@
 function addChainToKeplr(currentChain, callback) {
   const currentChainInfo = JSON.parse(currentChain.chain_info);
   const keplr = window.keplr;
-
-
-
+  console.log("1212");
+  console.log(currentChain);
+  //const uri = 
+  //https://rest.cosmos.directory/celestia/cosmos/bank/v1beta1/balances/celestia1xjf3jv3swc44ny4gy8pzhuy0nxslh0tnysyqn9
   //console.log(key);
-  let globalOfflineSigner;
-
   keplr.experimentalSuggestChain(currentChainInfo)
     .then(() => keplr.enable(currentChain.chain_id))
-    .then(() => keplr.getOfflineSigner(currentChain.chain_id))
-    .then((offlineSigner) => {
-      globalOfflineSigner = offlineSigner;
-      return offlineSigner.getAccounts();
-    })
-    .then((accounts) => {
-      globalAddress = accounts[0].address;
-      return SigningStargateClient.connectWithSigner(currentChain.rpc_url, globalOfflineSigner);
-    })
-    .then((signingClient) => {
-      return signingClient.getBalance(globalAddress, currentChainInfo.currencies[0].coinMinimalDenom);
-    })
-    .then((balance) => {
+    .then(() => keplr.getKey(currentChain.chain_id))
+    .then(key => {
+      console.log("key", key.bech32Address);
+      globalAddress = key.bech32Address;
+      document.cookie = `currentChainKey=${currentChain.chain_id}`;
+      document.cookie = `globalAddressKey=${globalAddress}`;
+      getBalance(globalAddress, (err, balance) => {
+        if (err)  console.log(err);
+        console.log(balance);
+        
+        document.cookie = `globalBalanceKey=${balance}`;
 
-      globalBalance = Math.round(((100 * balance.amount) / (10 ** currentChainInfo.currencies[0].coinDecimals)) )/100 + " " + currentChainInfo.currencies[0].coinDenom;
-
-      document.querySelector('.content-header-title').textContent = globalAddress.slice(0, 10) + "...";
-      document.querySelector('.content-wrapper-stake-body-main-center-title-amount').textContent = Math.round(((100 * balance.amount) / (10 ** currentChainInfo.currencies[0].coinDecimals)) )/100 + " " + currentChainInfo.currencies[0].coinDenom;
-      
-      //
-      //document.querySelector('.content-wrapper-portfolio-body-stat-chain-value-amount-token').innerHTML =  Math.round(((100 * balance.amount) / (10 ** currentChainInfo.currencies[0].coinDecimals)) )/100 + " " + currentChainInfo.currencies[0].coinDenom;
-      document.querySelector('.content-wrapper-portfolio-body-stat-chain-value-amount-usd').innerHTML =  "$" + (Math.round(((100 * balance.amount) / (10 ** currentChainInfo.currencies[0].coinDecimals)) )/100 * currentChain.price).toFixed(2);
-
-      saveToSession({
-        currentChainKey: currentChain.chain_id,
-        globalAddressKey: globalAddress,
-        globalBalanceKey: globalBalance,
-      }, (err,res) => {
-        if (err) return console.log(err);
+       
       });
-
-      return callback(null);
-    }).catch((err) => {
-      return callback(err);
     });
 };
 
@@ -94,6 +73,12 @@ window.addEventListener('load', () => {
 
   document.addEventListener('click', event => {
     if (event.target.closest('.content-header-title')) {
+      // if (globalAddress) {
+      //   return
+      // }
+      //document.querySelector('.content-wrapper-info').styles.display = 'none';
+      //console.log(document.querySelector('.content-wrapper-portfolio-body'));
+      //document.querySelector('.content-wrapper-portfolio-body').styles.display = 'block'; 
 
       currentChain = !currentChain ? JSON.parse(document.getElementById('chainInfoElement').value) : currentChain;
 

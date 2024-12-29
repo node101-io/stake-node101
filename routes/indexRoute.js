@@ -12,8 +12,7 @@ const createChain = require('../controllers/chain/post');
 
 const findImageUrlByKeybaseId = require('../controllers/keybase/post');
 
-const getPostController = require('../controllers/session/get/post');
-const setPostController = require('../controllers/session/set/post');
+
 
 router.get(
     '/',
@@ -49,14 +48,5 @@ router.post(
     findImageUrlByKeybaseId
 );
 
-router.post(
-    '/session/get',
-    getPostController
-);
-
-router.post(
-    '/session/set',
-    setPostController
-);
 
 module.exports = router;

@@ -1,4 +1,3 @@
-const { select } = require('async');
 const ChainInfo = require('../../models/ChainInfo/ChainInfo');
 
 module.exports = (req, res) => {
@@ -12,7 +11,7 @@ module.exports = (req, res) => {
       if (err)
         return res.json({ error: err });
 
-      return res.render('index/settings', {
+      return res.render('settings/index', {
         page: 'index/settings',
         title: res.__('For you to make most of the distributed value'),
         includes: {
@@ -29,6 +28,7 @@ module.exports = (req, res) => {
         },
         chainInfo: chainInfo,
         listOfToken: listOfToken,
+        globalAddressKey: req.cookies?.globalAddressKey,
         selected: 'sett'
       });
     });

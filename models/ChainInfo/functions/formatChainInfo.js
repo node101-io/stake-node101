@@ -8,6 +8,7 @@ module.exports = (chainInfo, callback) => {
     chain_keplr_identifier: chainInfo.chain_keplr_identifier,
     chain_registry_identifier: chainInfo.chain_registry_identifier,
     rpc_url: chainInfo.rpc_url,
+    rest_url: chainInfo.rest_url,
     img_url: chainInfo.img_url,
     chain_info: chainInfo.chain_info,
     validator_address: chainInfo.validator_address,

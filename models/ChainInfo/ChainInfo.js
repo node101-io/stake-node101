@@ -38,6 +38,13 @@ const ChainInfoSchema = new Schema({
     minlength: 1,
     maxlength: MAX_DATABASE_TEXT_FIELD_LENGTH
   },
+  rest_url : {
+    type: String,
+    required: true,
+    trim: true,
+    minlength: 1,
+    maxlength: MAX_DATABASE_TEXT_FIELD_LENGTH
+  },
   img_url: {
     type: String,
     required: true,
@@ -99,6 +106,9 @@ ChainInfoSchema.statics.createChainInfo = function (data, callback) {
   if (!data.rpc_url || typeof data.rpc_url != 'string' || data.rpc_url.trim().length < 1 || data.rpc_url.trim().length > MAX_DATABASE_TEXT_FIELD_LENGTH)
     return callback('bad_request');
 
+  if (!data.rest_url || typeof data.rest_url != 'string' || data.rest_url.trim().length < 1 || data.rest_url.trim().length > MAX_DATABASE_TEXT_FIELD_LENGTH)
+    return callback('bad_request');
+
   if (!data.chain_info || typeof data.chain_info != 'string' || data.chain_info.trim().length < 1 || data.chain_info.trim().length > MAX_DATABASE_TEXT_FIELD_LENGTH)
     return callback('bad_request');
 
@@ -114,6 +124,7 @@ ChainInfoSchema.statics.createChainInfo = function (data, callback) {
     chain_keplr_identifier: data.chain_keplr_identifier.trim(),
     chain_registry_identifier: data.chain_registry_identifier.trim(),
     rpc_url: data.rpc_url.trim(),
+    rest_url: data.rest_url.trim(),
     img_url: data.img_url.trim(),
     validator_address: data.validator_address.trim(),
     chain_info: data.chain_info.trim(),
@@ -174,6 +185,9 @@ ChainInfoSchema.statics.findChainInfoByFilters = function (data, callback) {
   if (data.rpc_url && typeof data.rpc_url == 'string' && data.rpc_url.trim().length > 0 && data.rpc_url.trim().length <= MAX_DATABASE_TEXT_FIELD_LENGTH)
     filters.rpc_url = data.rpc_url.trim();
 
+  if (data.rest_url && typeof data.rest_url == 'string' && data.rest_url.trim().length > 0 && data.rest_url.trim().length <= MAX_DATABASE_TEXT_FIELD_LENGTH)
+    filters.rest_url = data.rest_url.trim();
+
   if (data.img_url && typeof data.img_url == 'string' && data.img_url.trim().length > 0 && data.img_url.trim().length <= MAX_DATABASE_TEXT_FIELD_LENGTH)
     filters.img_url = data.img_url.trim();
 
@@ -210,6 +224,9 @@ ChainInfoSchema.statics.findChainInfoByChainIdAndUpdate = function (chain_id, da
 
   if (data.rpc_url && typeof data.rpc_url == 'string' && data.rpc_url.trim().length > 0 && data.rpc_url.trim().length <= MAX_DATABASE_TEXT_FIELD_LENGTH)
     updateData.rpc_url = data.rpc_url.trim();
+
+  if (data.rest_url && typeof data.rest_url == 'string' && data.rest_url.trim().length > 0 && data.rest_url.trim().length <= MAX_DATABASE_TEXT_FIELD_LENGTH)
+    updateData.rest_url = data.rest_url.trim();
 
   if (data.chain_info && typeof data.chain_info == 'string' && data.chain_info.trim().length > 0 && data.chain_info.trim().length <= MAX_DATABASE_TEXT_FIELD_LENGTH)
     updateData.chain_info = data.chain_info.trim();

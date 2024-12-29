@@ -1,95 +1,92 @@
 :root {
-  --box-padding: 15px;
+  --box-padding: 14px;
 
-  --content-wrapper-stake-width: 525px;
-  --content-wrapper-stake-height: 680px;
+  --content-wrapper-stake-width: 473px;
+  --content-wrapper-stake-height: 630px;
 
-  --content-wrapper-stake-body-main-width: 480px;
-  --content-wrapper-stake-body-main-height: 500px;
-  --content-wrapper-stake-body-main-margin-top: 35px;
-  --content-wrapper-stake-body-main-title-height: 40px;
-  --content-wrapper-stake-body-main-title-each-width: 160px;
-  --content-wrapper-stake-body-main-title-each-margin: 8px 3px;
-  --content-wrapper-stake-body-arrow-width: 18.19px;
-  --content-wrapper-stake-body-arrow-height:  15.75px;
+  --content-wrapper-stake-body-main-width: 432px;
+  --content-wrapper-stake-body-main-height: 450px;
+  --content-wrapper-stake-body-main-margin-top: 30px;
+  --content-wrapper-stake-body-main-title-height: 26px;
+  --content-wrapper-stake-body-main-title-each-width: 144px;
+  --content-wrapper-stake-body-main-title-each-margin: 7px 3px;
+  --content-wrapper-stake-body-arrow-width: 16px;
+  --content-wrapper-stake-body-arrow-height:  14px;
 
   --content-wrapper-stake-body-main-title-each-padding: 5px;
-  --content-wrapper-stake-body-main-title-each-size: 20px;
+  --content-wrapper-stake-body-main-title-each-size: 18px;
   
-  --content-wrapper-stake-body-main-center-width: 500px;
-  --content-wrapper-stake-body-main-center-height: 160px;
-  --content-wrapper-stake-body-main-center-margin-top: 40px;
+  --content-wrapper-stake-body-main-center-width: 450px;
+  --content-wrapper-stake-body-main-center-height: 144px;
+  --content-wrapper-stake-body-main-center-margin-top: 36px;
 
-  --content-wrapper-stake-body-main-center-title-width: 475px;
-  --content-wrapper-stake-body-main-center-title-each-width: 40px;
-  --content-wrapper-stake-body-main-center-body-margin-top: 30px;
-  --content-wrapper-stake-body-main-center-body-height: 120px;
+  --content-wrapper-stake-body-main-center-title-width: 427.5px;
+  --content-wrapper-stake-body-main-center-title-each-width: 36px;
+  --content-wrapper-stake-body-main-center-body-margin-top: 27px;
+  --content-wrapper-stake-body-main-center-body-height: 108px;
   --content-wrapper-stake-body-main-center-body-icon-size: 80px;
-  --content-wrapper-stake-body-main-center-body-icon-size: 80px;
-  --content-wrapper-stake-body-main-center-body-icon-margin-left: 16px;
-  --content-wrapper-stake-body-main-center-body-icon-margin-right: 8px;
-  --content-wrapper-stake-body-main-center-body-chain-margin-left: 20px;
-  --content-wrapper-stake-body-main-center-body-chain-width: 175px;
-  --content-wrapper-stake-body-main-center-body-chain-height: 70px;
+  --content-wrapper-stake-body-main-center-body-icon-margin-left: 20px;
+  --content-wrapper-stake-body-main-center-body-icon-margin-right: 5px;
+  --content-wrapper-stake-body-main-center-body-chain-margin-left: 18px;
+  --content-wrapper-stake-body-main-center-body-chain-width: 157.5px;
+  --content-wrapper-stake-body-main-center-body-chain-height: 63px;
   --content-wrapper-stake-body-main-center-body-chain-padding-vertical: 5px;
-  --content-wrapper-stake-body-main-center-body-stake-margin-left: 45px;
-  --content-wrapper-stake-body-main-center-body-stake-height: 40px;
-  --content-wrapper-stake-body-main-center-body-stake-amount-padding-left: 5px;
-  --content-wrapper-stake-body-main-center-body-stake-amount-width: 150px;
-  --content-wrapper-stake-body-main-center-body-stake-dollar-height: 20px;
-  --content-wrapper-stake-body-main-center-body-stake-dollar-width: 100px;
+  --content-wrapper-stake-body-main-center-body-stake-margin-left: 40.5px;
+  --content-wrapper-stake-body-main-center-body-stake-height: 36px;
+  --content-wrapper-stake-body-main-center-body-stake-amount-padding-left: 0px;
+  --content-wrapper-stake-body-main-center-body-stake-amount-width: 90px;
+  --content-wrapper-stake-body-main-center-body-stake-dollar-height: 18px;
+  --content-wrapper-stake-body-main-center-body-stake-dollar-width: 90px;
 
-  --content-wrapper-stake-body-main-content-margin-top: 55px;
+  --content-wrapper-stake-body-main-content-margin-top: 40px;
 
-  --content-wrapper-stake-body-main-center-body-chain-list-right:20px;
-  --content-wrapper-stake-body-main-center-body-chain-list-bottom:20px;
-  --content-wrapper-stake-body-main-center-body-chain-list-width:250px;
-  --content-wrapper-stake-body-main-center-body-chain-list-height:320px;
+  --content-wrapper-stake-body-main-center-body-chain-list-right: 18px;
+  --content-wrapper-stake-body-main-center-body-chain-list-bottom: 18px;
+  --content-wrapper-stake-body-main-center-body-chain-list-width: 225px;
+  --content-wrapper-stake-body-main-center-body-chain-list-height: 288px;
   
-  --content-wrapper-stake-body-main-content-stat-title-padding:2px 10px;
-  --content-wrapper-stake-body-main-content-stat-title-buttons-icon-width: 48px;
-  --content-wrapper-stake-body-main-content-stat-title-buttons-icon-height: 26px;
-  --content-wrapper-stake-body-main-content-stat-title-buttons-icon-margin: auto 5px auto 15px;
-  --content-wrapper-stake-body-main-content-stat-title-buttons-icon-ball-margin: 2px;
-  --content-wrapper-stake-body-main-content-stat-title-buttons-icon-ball-width: 20px;
-  --content-wrapper-stake-body-main-content-stat-title-buttons-icon-ball-height: 20px;
-  --content-wrapper-stake-body-main-content-stat-title-content-margin-top: 15px;
+  --content-wrapper-stake-body-main-content-stat-title-padding: 2px 10px;
+  --content-wrapper-stake-body-main-content-stat-title-buttons-icon-width: 43.2px;
+  --content-wrapper-stake-body-main-content-stat-title-buttons-icon-height: 23.4px;
+  --content-wrapper-stake-body-main-content-stat-title-buttons-icon-margin: auto 5px auto 13px;
+  --content-wrapper-stake-body-main-content-stat-title-buttons-icon-ball-margin: 1.8px;
+  --content-wrapper-stake-body-main-content-stat-title-buttons-icon-ball-width: 18px;
+  --content-wrapper-stake-body-main-content-stat-title-buttons-icon-ball-height: 18px;
+  --content-wrapper-stake-body-main-content-stat-title-content-margin-top: 13px;
   --content-wrapper-stake-body-main-content-stat-title-content-padding: 0px 5px;
-  --content-wrapper-stake-body-main-content-stat-title-content-each-padding: 10px;
-  --content-wrapper-stake-body-main-content-stat-title-content-each-time-text-font-size: 18px;
-  --content-wrapper-stake-body-main-content-stat-title-content-each-time-percent-margin-top: 6px;
+  --content-wrapper-stake-body-main-content-stat-title-content-each-padding: 9px;
+  --content-wrapper-stake-body-main-content-stat-title-content-each-time-text-font-size: 16.2px;
+  --content-wrapper-stake-body-main-content-stat-title-content-each-time-percent-margin-top: 5px;
   --content-wrapper-stake-body-main-content-stat-title-content-each-value-price-margin-top: 5px;
   
-  --content-wrapper-stake-body-button-padding: 15px 20px;
-  --content-wrapper-stake-body-button-width: 185px;
+  --content-wrapper-stake-body-button-padding: 14px 18px;
+  --content-wrapper-stake-body-button-width: 155px;
   --content-wrapper-stake-body-button-height: 42px;
-  --content-wrapper-stake-body-button-border-radius: 30px;
+  --content-wrapper-stake-body-button-border-radius: 27px;
   
-  --content-wrapper-stake-body-main-center-body-chain-list-search-height: 60px;
-  --content-wrapper-stake-body-main-center-body-chain-list-search-padding: 10px;
+  --content-wrapper-stake-body-main-center-body-chain-list-search-height: 54px;
+  --content-wrapper-stake-body-main-center-body-chain-list-search-padding: 0px 9px;
 
   --content-wrapper-stake-body-main-center-body-chain-list-search-icon-top: 18px;
-  --content-wrapper-stake-body-main-center-body-chain-list-search-icon-left: 30px;
-  --content-wrapper-stake-body-main-center-body-chain-list-search-icon-size: 20px;
+  --content-wrapper-stake-body-main-center-body-chain-list-search-icon-left: 14px;
+  --content-wrapper-stake-body-main-center-body-chain-list-search-icon-size: 18px;
 
-  --content-wrapper-stake-body-main-center-body-chain-list-search-input-width: 210px;
-  --content-wrapper-stake-body-main-center-body-chain-list-search-input-height: 35px;
-  --content-wrapper-stake-body-main-center-body-chain-list-search-input-margin-left: 10px;
-  --content-wrapper-stake-body-main-center-body-chain-list-search-input-padding: 5px 5px 5px 40px;
+  --content-wrapper-stake-body-main-center-body-chain-list-search-input-width: 200px;
+  --content-wrapper-stake-body-main-center-body-chain-list-search-input-height: 31px;
+  --content-wrapper-stake-body-main-center-body-chain-list-search-input-margin-left: 9px;
+  --content-wrapper-stake-body-main-center-body-chain-list-search-input-padding: 5px 5px 5px 36px;
+  --content-wrapper-stake-body-main-center-body-chain-list-each-padding: 10px 5px;
+  --content-wrapper-stake-body-main-center-body-chain-list-each-icon-size: 18px;
+  --content-wrapper-stake-body-main-center-body-chain-list-each-icon-margin-right: 9px;
+  --content-wrapper-stake-body-main-center-body-chain-list-each-chain-margin-right: 9px;
+  --content-wrapper-stake-body-main-center-body-chain-list-tile-scrollbar: 2px;
 
-  --content-wrapper-stake-body-main-center-body-chain-list-each-padding: 10px;
-  --content-wrapper-stake-body-main-center-body-chain-list-each-icon-size: 20px;
-  --content-wrapper-stake-body-main-center-body-chain-list-each-icon-margin-right: 10px;
-  --content-wrapper-stake-body-main-center-body-chain-list-each-chain-margin-right: 10px;
-  --content-wrapper-stake-body-main-center-body-chain-list-tile-scrollbar: 5px;
+  --content-wrapper-stake-body-main-center-body-chain-list-tile-width: 195px;
+  --content-wrapper-stake-body-main-center-body-chain-list-tile-height: 216px;
+  --content-wrapper-stake-body-main-center-body-chain-list-tile-margin: 0px 18px;
 
-  --content-wrapper-stake-body-main-center-body-chain-list-tile-width: 215px;
-  --content-wrapper-stake-body-main-center-body-chain-list-tile-height: 240px;
-  --content-wrapper-stake-body-main-center-body-chain-list-tile-margin: 0px 20px;
-
-  --staking-inside-width: 510px;
+  --staking-inside-width: 459px;
 }
-
 
 .content-wrapper-stake {
   height: var(--content-wrapper-stake-height);
@@ -100,11 +97,9 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  margin: 0px;
-  margin-top: 30px;
+  margin-top: 80px;
   border-radius: var(--border-radius-big);
   background-color: var(--primary-background-white);
-  transform: scale(0.85);
 }
 
 .content-wrapper-stake-body-main {
@@ -115,11 +110,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0px;
   margin-top: var(--content-wrapper-stake-body-main-margin-top);
 }
-
-
 
 .content-wrapper-stake-body-main-title {
   height: var(--content-wrapper-stake-body-main-title-height);
@@ -131,7 +123,6 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  font-size: var(--font-size-16);
   position: relative;
   overflow: hidden;
 }
@@ -150,14 +141,19 @@
   padding: var(--content-wrapper-stake-body-main-title-each-padding);
   color: var(--header-text-color);
   position: relative;
+  cursor: pointer;
 }
 
+.content-wrapper-stake-body-main-title-each-change {
+  font-size: 12px;
+}
 
 .content-test {
   display: flex;
-  width: 1830px;
-  min-width: 1830px;
+  width: 1720px;
+  min-width: 1720px;
   overflow: visible;
+  font-size: 10px;
   animation: slidingscale 45s linear infinite normal; 
 }
 
@@ -199,7 +195,7 @@
   min-width: auto;
   font-family: 'Montserrat';
   font-weight: 500;
-  font-size: var(--font-size-13);
+  font-size: 12px;
   line-height: 1.1;
 }
 
@@ -210,7 +206,7 @@
   min-width: auto;
   font-family: 'Montserrat';
   font-weight: 500;
-  font-size: var(--font-size-13);
+  font-size: 12px;
   line-height: 1.1;
 }
 
@@ -219,6 +215,9 @@
   min-height: var(--content-wrapper-stake-body-arrow-height);
   width: var(--content-wrapper-stake-body-arrow-width);
   min-width: var(--content-wrapper-stake-body-arrow-width);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .content-wrapper-stake-body-main-title-each-change {
@@ -255,10 +254,10 @@
   justify-content: space-between;
   font-family: 'Montserrat';
   font-weight: 300;
-  font-size: var(--font-size-16);
+  font-size: 15px;
   line-height: 1.2;
-  padding: 0px 35px;
-  margin-top: 50px;
+  padding: 0px 30px;
+  margin-top: 45px;
 }
 
 .content-wrapper-stake-body-main-center-title-each {
@@ -287,7 +286,6 @@
   margin-top: var(--content-wrapper-stake-body-main-center-body-margin-top);
   border-radius: var(--border-radius-big);
   background-color: var(--primary-background-light);
-  background-color: #ECF0FF;
 }
 
 .content-wrapper-stake-body-main-center-body-icon {
@@ -295,9 +293,10 @@
   width: var(--content-wrapper-stake-body-main-center-body-icon-size );
   min-height: var(--content-wrapper-stake-body-main-center-body-icon-size);
   height: var(--content-wrapper-stake-body-main-center-body-icon-size);
-  margin-left: var(--content-wrapper-stake-body-main-center-body-icon-margin-left);
   margin-right: var(--content-wrapper-stake-body-main-center-body-icon-margin-right);
+  margin-left: calc((var(--content-wrapper-stake-body-main-center-body-height) -  var(--content-wrapper-stake-body-main-center-body-icon-size))/2);
 }
+
 
 .content-wrapper-stake-body-main-center-body-icon img {
   width: 100%;
@@ -337,7 +336,7 @@
   min-width: auto;
   font-family: 'Igra Sans';
   font-weight: 500;
-  font-size: var(--font-size-22);
+  font-size: 20px;
   line-height: 1;
 }
 
@@ -363,8 +362,6 @@
   flex-direction: column;
   justify-content: space-around;
   line-height: 1;
-  margin: 0px;
-  padding: 0px;
   margin-left: var(--content-wrapper-stake-body-main-center-body-stake-margin-left);
   overflow: hidden;
 }
@@ -378,6 +375,7 @@
   font-weight: 600;
   font-size: var(--font-size-40);
   font-family: 'Montserrat';
+
   line-height: 1;
   padding-left: var(--content-wrapper-stake-body-main-center-body-stake-amount-padding-left);
   border: 0px;
@@ -395,7 +393,7 @@
   font-weight: 300;
   font-size: var(--font-size-16);
   line-height: 2;
-  margin-left: 18px;
+  margin-left: 3px;
 }
 
 
@@ -405,7 +403,6 @@
   width: var(--content-wrapper-stake-body-main-width);
   min-width: var(--content-wrapper-stake-body-main-width);
   margin-top: var(--content-wrapper-stake-body-main-content-margin-top);
-  padding: 0px 15px;
 }
 
 .content-wrapper-stake-body-main-content-stat {
@@ -425,7 +422,13 @@
   font-family: 'Montserrat';
   font-size: var(--font-size-16);
   font-weight: 300;
+  
+ 
+  width: var(--content-wrapper-stake-body-main-width);
+  min-width: var(--content-wrapper-stake-body-main-width);
+  padding: var(--content-wrapper-stake-body-main-content-stat-title-content-each-padding);
 }
+
 
 .content-wrapper-stake-body-main-content-stat-title-buttons {
   height: auto;
@@ -526,6 +529,8 @@
   font-style: italic;
   font-size: var(--font-size-16);
   line-height: 1.2;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .content-wrapper-stake-body-button {
@@ -550,11 +555,15 @@
   color: #F1F1F1;
   font-size: 18px;
   line-height: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .content-wrapper-stake-body-main-center-body-chain-list{
+  position: relative;
   right: var(--content-wrapper-stake-body-main-center-body-chain-list-right);
-  bottom: var(--content-wrapper-stake-body-main-center-body-chain-list-bottom);
+  top: -20px;
   width: var(--content-wrapper-stake-body-main-center-body-chain-list-width);
   min-width: var(--content-wrapper-stake-body-main-center-body-chain-list-width);
   min-height: fit-content;
@@ -565,6 +574,7 @@
   border: 1px solid #A0ABDA;
   background-color: #ECF0FF;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .content-wrapper-stake-body-main-center-body-chain-list-search {
@@ -576,7 +586,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--content-wrapper-stake-body-main-center-body-chain-list-search-padding);
+  margin: var(--content-wrapper-stake-body-main-center-body-chain-list-search-padding);
 }
 
 .content-wrapper-stake-body-main-center-body-chain-list-search-icon {
@@ -601,6 +611,7 @@
   border: 0px;
   outline: 0px;
   background: #DFE5FF80;
+  cursor: pointer;
 }
 
 .content-wrapper-stake-body-main-center-body-chain-list-search-input::placeholder {

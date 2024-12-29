@@ -5,11 +5,11 @@ module.exports = (identifier, callback) =>  {
     .then(res => res.json())
     .then(res => {
       if (!res)
-        return callback('document_not_found');
+        return callback('1document_not_found');
       return callback(null, res);
     })
     .catch(_ => {
-      return callback('document_not_found');
+      return callback('2document_not_found');
     });
 };
 

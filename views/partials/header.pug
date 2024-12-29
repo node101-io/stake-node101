@@ -1,4 +1,7 @@
 .content-header
+  - console.log("111111")
+  - console.log(globalAddressKey)
+  - console.log("222222")
   if globalAddressKey
     .content-header-icon
       svg(width='30' height='30' viewbox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg')
@@ -9,7 +12,7 @@
         path(d='M8.17439 3.81608C8.40402 2.43843 9.59599 1.42871 10.9926 1.42871H29.0088C30.4054 1.42871 31.5974 2.43849 31.8271 3.8162L34.286 18.5716H5.71484L8.17439 3.81608Z' stroke='#DFE5FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round')
     .content-header-title
       input#globalAddressElement(style='display: none;', value=globalAddressKey)
-      //- div #{globalAddressKey.slice(0, 10) + "..." }
+      .content-header-title-address #{globalAddressKey.slice(0, 10) + "..." }
   else
     .content-header-icon
       svg(width='24' height='24' viewbox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg')

@@ -17,6 +17,7 @@
     "buffer": "^6.0.3",
     "cluster": "^0.7.7",
     "connect-mongo": "^4.6.0",
+    "cookie-parser": "^1.4.7",
     "croner": "^8.0.2",
     "crypto-js": "^4.2.0",
     "dotenv": "^16.4.5",

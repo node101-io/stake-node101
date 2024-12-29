@@ -1,17 +1,17 @@
 :root {
   --header-width: 240px;
-  --header-right-padding: 40px;
+  --header-right-padding: 20px;
   --header-border-radius: 60px;
   --header-icon-size: 60px;
   --header-title-height: 60px;
-  --header-title-width: 250px;
+  --header-title-width: 270px;
   --header-title-padding-left: 50px;
 }
 
 .content-header {
   position: absolute;
   right: var(--header-right-padding);
-  top: 10px;
+  top: 20px;
   height:var(--header-title-height);
   min-height: var(--header-title-height);
   width:fit-content;
@@ -57,3 +57,6 @@
   cursor: pointer;
 }
 
+.content-header-title-address {
+  font-size: 18px;
+}

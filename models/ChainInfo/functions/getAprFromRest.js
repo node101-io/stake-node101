@@ -38,7 +38,7 @@ function getAprRelatedInfoFromApi(url, callback) {
               return callback(err)
 
             const community_tax = res.params.community_tax;
-
+            console.log(annual_provisions, blocks_per_year, inflation, bonded_tokens, community_tax);
             return callback(null,{
               annual_provisions,
               blocks_per_year,
@@ -59,6 +59,8 @@ function calculateNominalAPR(annual_provisions, community_tax, bonded_tokens) {
 
 function getBlocksPerYear(url, callback) {
   fetchDataFromRestApi(`${url}` + "/cosmos/base/tendermint/v1beta1/blocks/latest", (err, res) => {
+    if (err)
+      console.log("123",err);
     if (err)
       return callback(err);
 
@@ -88,7 +90,7 @@ function calculateRealAPR(annual_provisions, blocks_per_year, nominalAPR, blocks
 
 module.exports = (api_url, callback) => {
   getAprRelatedInfoFromApi(api_url, (err, res) => {
-  
+  console.log("res",res);
     if (err)
       return callback(err)
 

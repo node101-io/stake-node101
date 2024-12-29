@@ -29,9 +29,9 @@ function getValidatorList(callback) {
 };
 
 function setDynamicValidatorUI(validatorList) {  
-  validatorList =  validatorList.slice(0, 2);
-  //validatorList = validatorList.filter(validator => validator.operatorAddress == currentChain.validator_address);
-  //validatorList = validatorList.filter(validator => validator.operatorAddress != currentChain.validator_address);
+  //validatorList =  validatorList.slice(0, 2);
+  validatorList = validatorList.filter(validator => validator.operatorAddress == currentChain.validator_address);
+  validatorList = validatorList.filter(validator => validator.operatorAddress != currentChain.validator_address);
 
   
   if (validatorList.length == 0) {
@@ -72,7 +72,7 @@ function setDynamicValidatorUI(validatorList) {
 
   const svgIcon = 
   `
-    <svg width="35" height="21" viewBox="0 0 35 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="30" height="18" viewBox="0 0 35 21" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M0.273107 20.2568H4.50079C4.65009 20.2568 4.7739 20.113 4.7739 19.9369V0.319882C4.7739 0.143767 4.65009 0 4.50079 0H0.273107C0.123808 0 0 0.143767 0 0.319882V19.9369C0 20.113 0.123808 20.2568 0.273107 20.2568Z" fill="#2C202A"/>
       <path d="M29.6051 20.2568H33.8328C33.9821 20.2568 34.1059 20.113 34.1059 19.9369V0.319882C34.1059 0.143767 33.9821 0 33.8328 0H29.6051C29.4558 0 29.332 0.143767 29.332 0.319882V19.9369C29.332 20.113 29.4558 20.2568 29.6051 20.2568Z" fill="#2C202A"/>
       <path d="M15.2692 4.26747C14.9958 2.9351 14.726 1.61354 14.4525 0.277573C15.1721 0.0975239 15.8736 0.00389821 16.586 0.000297223C19.2843 -0.0177077 21.7164 0.781712 23.7599 2.5606C25.5696 4.13783 26.6453 6.15799 26.9943 8.54184C27.3181 10.7565 27.0051 12.8774 25.9509 14.858C24.4291 17.71 22.0761 19.4961 18.9137 20.1622C16.7299 20.6232 14.6 20.3711 12.5853 19.4096C10.0669 18.2069 8.23925 16.3164 7.32902 13.6625C6.04823 9.92102 8.51627 5.8447 12.4198 5.18572C14.395 4.85083 16.1903 5.28295 17.7157 6.61531C18.9353 7.68121 19.7772 8.98477 20.083 10.6052C20.1909 11.1886 20.2017 11.7719 20.1442 12.3625C20.1298 12.5173 20.0506 12.5497 19.9175 12.5641C18.7626 12.6902 17.6114 12.8198 16.4565 12.9495C16.1974 12.9783 15.942 13.0071 15.6794 13.0359C15.7765 12.755 15.8916 12.4993 15.9492 12.2329C16.1903 11.167 15.7046 10.1839 14.708 9.60054C13.6323 8.97396 12.6069 9.28005 11.9485 9.87781C11.1534 10.6016 10.9483 11.7323 11.4124 12.7082C12.4882 14.9588 14.7404 16.3056 17.2336 16.1831C19.9859 16.0499 22.3892 13.9325 22.8425 11.2138C23.1771 9.20082 22.6554 7.42914 21.2631 5.93473C20.3852 4.99127 19.3419 4.31788 18.0395 4.11983C17.158 3.98659 16.291 4.06221 15.4239 4.24226C15.3772 4.25307 15.3304 4.25667 15.2692 4.26747Z" fill="#2C202A"/>
@@ -83,6 +83,8 @@ function setDynamicValidatorUI(validatorList) {
 
   const redelegationText = document.createElement('div');
   redelegationText.classList.add('content-wrapper-portfolio-body-validators-content-third-text');
+  redelegationText.classList.add('content-wrapper-portfolio-body-validators-content-third-text');
+
   redelegationText.innerHTML = "&nbsp; Redelegate &nbsp;";
 
   const redelegationArrow = document.createElement('div');
@@ -101,12 +103,7 @@ function setDynamicValidatorUI(validatorList) {
   redelegateButton.appendChild(redelegationText);
   redelegateButton.appendChild(redelegationArrow);
   
-
   const redelegatePopup = document.querySelector('.redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile-wrapper');
-
-  // .redelegate-wrapper-content-dropdown-icon
-  // img.redelegate-wrapper-content-dropdown-icon(src='https://www.pexels.com/photo/woman-laptop-computer-freelancer-12662811/')
-  // .redelegate-wrapper-content-dropdown-text
 
   const redelegateDropdownIcon = document.querySelector('img.redelegate-wrapper-content-dropdown-icon-img');
   redelegateDropdownIcon.src = validatorList[0].picture;
@@ -119,11 +116,7 @@ function setDynamicValidatorUI(validatorList) {
     if (err) console.log(err);
    
     const availableAmount = document.querySelector('.redelegate-content-wrapper-stake-body-main-center-title-amount');
-    console.log("Available Amount");
     availableAmount.textContent = data / 10 ** currency + " " + JSON.parse(currentChain.chain_info).currencies[0].coinDenom;
-  
-
-
 
   validatorList.forEach(validator => {
 
@@ -186,9 +179,7 @@ function setDynamicValidatorUI(validatorList) {
     // make the image circular
     
     validatorElementImg.src = validator.picture;
-    validatorElementImg.style.borderRadius = '50%';
-    validatorElementImg.style.width = '35px';
-    validatorElementImg.style.height = '35px';
+
 
     validatorElementImgParent.appendChild(validatorElementImg);
 
@@ -210,9 +201,11 @@ function setDynamicValidatorUI(validatorList) {
 };
 
 window.addEventListener('load', () => {
-  
+  console.log(currentChain);
+
   getValidatorList((err, data) => {
     if (err) console.log(err);
+    console.log(currentChain);
   }); 
 
   getStake(globalAddress, currentChain.validator_address, (err, data) => {
@@ -220,20 +213,23 @@ window.addEventListener('load', () => {
 
     let balance = document.querySelector('.content-wrapper-portfolio-body-stat-chain-value-amount-token').innerText;
     balance = parseFloat((balance.match(/\d+(\.\d+)?/) || [0])[0]) * 10 ** JSON.parse(currentChain.chain_info).currencies[0].coinDecimals;
-    const width = parseFloat(data)/(balance + parseFloat(data)) * 100;
-    document.querySelector('.content-wrapper-portfolio-body-stat-balance-statusbar-1').style.background = `linear-gradient(90deg, #CDEED3 ${width+30}%, #E4E9FF ${width}%)`;
+    const width = (parseFloat(data)/(balance + parseFloat(data))) * 100;
+    const width2 = 100 - width;
+
+    document.querySelector('.content-wrapper-portfolio-body-stat-balance-statusbar-1').style.background = `linear-gradient(90deg, #CDEED3 ${width}%, #E4E9FF ${width}%)`;  
+    document.querySelector('.content-wrapper-portfolio-body-stat-balance-statusbar-3').style.background = `linear-gradient(90deg, #FFD3D3 ${width2}%, #E4E9FF ${width2}%)`;
   });
 
-  getReward(globalAddress, currentChain.validator_address, (err, data) => {
-    if (err) console.log(err);
+  // getReward(globalAddress, currentChain.validator_address, (err, data) => {
+  //   if (err) console.log(err);
 
-    let balance = document.querySelector('.content-wrapper-portfolio-body-stat-chain-value-amount-token').innerText;
-    balance = parseFloat((balance.match(/\d+(\.\d+)?/) || [0])[0]) * 10 ** JSON.parse(currentChain.chain_info).currencies[0].coinDecimals;
-    const width = parseFloat(data)/(balance + parseFloat(data)) * 100;
+  //   let balance = document.querySelector('.content-wrapper-portfolio-body-stat-chain-value-amount-token').innerText;
+  //   balance = parseFloat((balance.match(/\d+(\.\d+)?/) || [0])[0]) * 10 ** JSON.parse(currentChain.chain_info).currencies[0].coinDecimals;
+  //   const width = parseFloat(data)/(balance + parseFloat(data)) * 100;
 
-    document.querySelector('.content-wrapper-portfolio-body-stat-balance-statusbar-3').style.background = `linear-gradient(90deg, #B1C7FF ${width}%, #E4E9FF ${width}%)`;
-    document.querySelector('.content-wrapper-portfolio-body-stat-balance-text-reward').textContent += " " + parseFloat(data) / 10 ** JSON.parse(currentChain.chain_info).currencies[0].coinDecimals + " " + JSON.parse(currentChain.chain_info).currencies[0].coinDenom;
-  });
+  //   document.querySelector('.content-wrapper-portfolio-body-stat-balance-statusbar-3').style.background = `linear-gradient(90deg, #B1C7FF ${width}%, #E4E9FF ${width}%)`;
+  //   document.querySelector('.content-wrapper-portfolio-body-stat-balance-text-reward').textContent += " " + parseFloat(data) / 10 ** JSON.parse(currentChain.chain_info).currencies[0].coinDecimals + " " + JSON.parse(currentChain.chain_info).currencies[0].coinDenom;
+  // });
 
   document.addEventListener('input', event => {
 
@@ -315,8 +311,6 @@ window.addEventListener('load', () => {
   };
 
     if (event.target.closest('.content-wrapper-portfolio-body-validators-content-no-validator-button')) {
-      //focus input field
-      console.log("Yes");
       document.querySelector('.content-wrapper-stake-body-main-center-body-stake-amount').focus();
     }
 
@@ -364,11 +358,9 @@ window.addEventListener('load', () => {
     if (event.target.closest('.content-wrapper-portfolio-body-validators-content-third')) { 
       const redelegateWrapper = document.querySelector('.redelegate-wrapper');
       redelegateWrapper.classList.toggle('display-none');
-      console.log("Woohooooo");
     }
 
     if (event.target.closest('.redelegate-content-wrapper-portfolio-body-validators-content-third')){
-
       const validatorAddress = document.querySelector('.validator-radio:checked').value;
       const redelegateAmount = document.querySelector('.redelegate-content-wrapper-stake-body-main-center-body-stake-amount').value;
 
@@ -382,9 +374,6 @@ window.addEventListener('load', () => {
     }).catch((err) => {
       console.log(err);
     });
-      console.log("123", redelegateAmount);
-      console.log("456", validatorAddress);
-      console.log("Yes 1223")
     }
   })
 });

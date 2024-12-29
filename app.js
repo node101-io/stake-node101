@@ -5,14 +5,13 @@ const express = require('express');
 const favicon = require('serve-favicon');
 const http = require('http');
 const mongoose = require('mongoose');
-const MongoStore = require('connect-mongo');
 const os = require('os');
 const path = require('path');
-const session = require('express-session');
 
 const setLanguage = require('./middleware/setLanguage');
 
 const Job = require('./cron/Job');
+const cookieParser = require('cookie-parser');
 
 dotenv.config({ path: path.join(__dirname, '.env') });
 
@@ -52,19 +51,12 @@ if (cluster.isMaster) {
   app.use(bodyParser.urlencoded({
     extended: true
   }));
-   app.use(session({
-    secret: process.env.SESSION_SECRET || 'node101',
-    resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({
-      mongoUrl: MONGODB_URI
-    })
-  })); 
+
+  app.use(cookieParser());
   app.use(setLanguage);
 
   app.use('/', indexRouteController);
-
-  server.listen(PORT, () => {
+  server.listen(3000, () => {
     console.log(`Server is on port ${PORT} as Worker ${cluster.worker.id} running @ process ${cluster.worker.process.pid}`);
 
     Job.start();

@@ -36,6 +36,30 @@ window.addEventListener('load', () => {
   document.addEventListener('click', event => {
 
 
+    if (event.target.closest('.content-wrapper-stake-body-main-center-body-chain-list-each')) {
+
+      const chain_id = event.target.closest('.content-wrapper-stake-body-main-center-body-chain-list-each').querySelector('.content-wrapper-stake-body-main-center-body-chain-list-each-id').textContent;
+      serverRequest(`/chain?chain_id=${chain_id}`, 'GET', {}, res => {
+        if (res.error) {
+          console.log(res);
+        } else {
+
+          currentChain = res.chainInfo;
+          setTokenUI(currentChain);
+          // addChainToKeplr(currentChain, (err) => {
+          //   if (err) console.log(err);
+
+          //   setTokenUI(currentChain);
+          // });
+
+        }
+      });
+
+      document.querySelector('.content-wrapper-stake-body-main-center-body-chain-list').classList.toggle('display-none');
+
+    };
+
+
     if (event.target.closest('.content-wrapper-stake-body-main-title-each')) {
       const chain_id = event.target.closest('.content-wrapper-stake-body-main-title-each').querySelector('#chainListId').value;
       serverRequest(`/chain?chain_id=${chain_id}`, 'GET', {}, res => {
@@ -73,30 +97,8 @@ window.addEventListener('load', () => {
       document.querySelector('.content-wrapper-stake-body-main-center-body-chain-list').classList.toggle('display-none');
     };
 
-    if (!event.target.closest('.content-wrapper-stake-body-main-center-body-chain-name') && !document.querySelector('.content-wrapper-stake-body-main-center-body-chain-list').classList.contains('display-none')) {
-       document.querySelector('.content-wrapper-stake-body-main-center-body-chain-list').classList.add('display-none');
-    };
-
-    if (event.target.closest('.content-wrapper-stake-body-main-center-body-chain-list-each')) {
-
-      const chain_id = event.target.closest('.content-wrapper-stake-body-main-center-body-chain-list-each').querySelector('.content-wrapper-stake-body-main-center-body-chain-list-each-id').textContent;
-      serverRequest(`/chain?chain_id=${chain_id}`, 'GET', {}, res => {
-        if (res.error) {
-          console.log(res);
-        } else {
-
-          currentChain = res.chainInfo;
-
-          addChainToKeplr(currentChain, (err) => {
-            if (err) console.log(err);
-
-            setTokenUI(currentChain);
-          });
-
-        }
-      });
-
-      document.querySelector('.content-wrapper-stake-body-main-center-body-chain-list').classList.toggle('display-none');
+    if (!event.target.closest('.content-wrapper-stake-body-main-center-body-chain-list-search-input') && !event.target.closest('.content-wrapper-stake-body-main-center-body-chain-name') && !document.querySelector('.content-wrapper-stake-body-main-center-body-chain-list').classList.contains('display-none')) {
+        document.querySelector('.content-wrapper-stake-body-main-center-body-chain-list').classList.add('display-none');
     };
 
     if (event.target.closest('.content-wrapper-stake-body-button')) {

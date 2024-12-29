@@ -3,7 +3,8 @@ const ChainInfo = require('../../models/ChainInfo/ChainInfo');
 const DEFAULT_CHAIN_ID = 'celestia';
 
 module.exports = (req, res) => {
-  const chain_id = req.session.currentChainKey || DEFAULT_CHAIN_ID;
+  const chain_id = req.cookies?.currentChainKey || DEFAULT_CHAIN_ID;
+  console.log('cookie', req.cookies);
 
   ChainInfo.getListOfToken({ is_active: true }, (err, listOfToken) => {
     if (err)
@@ -18,8 +19,8 @@ module.exports = (req, res) => {
         title: res.__('For you to make most of the distributed value'),
         includes: {
           external: {
-            css: ['general', 'header', 'sidebar', 'stake', 'page'],
-            js: ['cosmjs','wallet','cosmjsFunctions','header', 'stake', 'page', 'serverRequest']
+            css: ['general', 'header', 'sidebar',  'stake', 'portfolio', 'page'],
+            js: ['cosmjs','wallet','cosmjsFunctions', 'stake', 'page', 'portfolio','header','serverRequest']
           },
           meta: {
             title: res.__('For you to make most of the distributed value'),
@@ -30,9 +31,9 @@ module.exports = (req, res) => {
         },
         chainInfo: chainInfo,
         listOfToken: listOfToken,
-        currentChainKey: req.session.currentChainKey || DEFAULT_CHAIN_ID,
-        globalAddressKey: req.session.globalAddressKey,
-        globalBalanceKey: req.session.globalBalanceKey,
+        currentChainKey: req.cookies?.currentChainKey || DEFAULT_CHAIN_ID,
+        globalAddressKey: req.cookies?.globalAddressKey,
+        globalBalanceKey: req.cookies?.globalBalanceKey,
         selected: 'home'
       });
     });

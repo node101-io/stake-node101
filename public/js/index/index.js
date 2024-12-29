@@ -3,7 +3,6 @@ let carouselBall;
 let counter = 0;
 let stop = false;
 
-
 function carousel(isLeft) {
   let currentCounter = counter;
   if (isLeft) counter = counter - 1  < 0 ? carouselElement.length - counter - 1: counter - 1;
@@ -21,6 +20,7 @@ function carousel(isLeft) {
 
 window.addEventListener('load',  async() => {
 
+
   carouselElement = Array.from(document.querySelectorAll('.content-wrapper-info-body-wrapper-each'));
   carouselBall = Array.from(document.querySelectorAll('.content-wrapper-info-footer-each'));
 
@@ -28,7 +28,7 @@ window.addEventListener('load',  async() => {
       if (!stop) {
         carousel(false); 
       }
-    }, 4000); 
+    }, 6000); 
       
   document.addEventListener('mouseover', event => {
       if (event.target.closest('.content-wrapper-info-body-wrapper-each')) {
@@ -41,11 +41,14 @@ window.addEventListener('load',  async() => {
         stop = false;
       }
   }); 
-      
-
 
   document.addEventListener('click', event => {
+    if (event.target.closest('.content-header-title')) {
+      console.log('clicked');
 
+      document.querySelector('.content-wrapper-info').style.display = 'none';
+      document.querySelector('.content-wrapper-portfolio-body').style.display = 'block';
+    }
     if (event.target.closest('.content-wrapper-info-body-larrow')) {
       const isLeft = true;
       carousel(isLeft);

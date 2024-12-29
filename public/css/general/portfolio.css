@@ -22,25 +22,25 @@
   --content-wrapper-portfolio-body-stat-timeline-percent-width: 100px;
   --content-wrapper-portfolio-body-stat-timeline-percent-margin: 6px 0px;
   --content-wrapper-portfolio-body-stat-balance-text-margin-top: 5px 0px;
-  --content-wrapper-portfolio-body-stat-balance-statusbar-height: 16px;
+  --content-wrapper-portfolio-body-stat-balance-statusbar-height: 13px;
   --content-wrapper-portfolio-body-validators-content-margin-top: 10px;
-  --content-wrapper-portfolio-body-validators-content-icon-size: 30px;
+  --content-wrapper-portfolio-body-validators-content-icon-size: 30px !important;
   --content-wrapper-portfolio-body-validators-content-text-margin-left: 10px;
   --content-wrapper-portfolio-body-validators-content-third-width: 200px;
   --content-wrapper-portfolio-body-validators-content-third-height: 45px;
-  --content-wrapper-portfolio-body-validators-content-third-padding: 5px 15px;
+  --content-wrapper-portfolio-body-validators-content-third-padding: 5px 25px;
   --content-wrapper-portfolio-body-buttons-width: 560px;
-  --content-wrapper-portfolio-body-buttons-height: 180px;
+  --content-wrapper-portfolio-body-buttons-height: 165px;
   --content-wrapper-portfolio-body-buttons-margin-top: 20px;
   --content-wrapper-portfolio-body-buttons-spiral-side: 50px;
-  --content-wrapper-portfolio-body-buttons-each-width: 300px;
-  --content-wrapper-portfolio-body-buttons-each-height: 50px;
+  --content-wrapper-portfolio-body-buttons-each-width: 240px;
+  --content-wrapper-portfolio-body-buttons-each-height: 40px;
   --content-wrapper-portfolio-body-buttons-each-margin:  110px 10px 10px 10px; 
 }
 
 .content-wrapper-portfolio-body {
-  height: var(--content-wrapper-stake-height);
-  min-height: var(--content-wrapper-stake-height);
+  height: auto;
+  min-height: auto;
   width: var(--content-wrapper-portfolio-body-width);
   min-width: var(--content-wrapper-portfolio-body-width);
   display: flex;
@@ -100,7 +100,7 @@
     font-family: 'Montserrat';
     line-height: 1.2;
     color: var(--primary-text-black);
-    margin: 10px 0px 10px 10px;
+    margin: 22px 0px 10px 10px;
     z-index: 1;
 }
 
@@ -109,7 +109,6 @@
   align-items: center;
   width: 130px;
   min-width: 130px;
-
 }
 
 .content-wrapper-portfolio-body-stat-title {
@@ -376,7 +375,6 @@
   font-size: 20px;
   font-weight: 400;
   color: #72728F;
-  margin-bottom: 30px;
 }
 
 .content-wrapper-portfolio-body-validators-content-no-validator-background {
@@ -391,7 +389,7 @@
 
 .content-wrapper-portfolio-body-validators-content-no-validator-text-title {
   font-family: Igra Sans;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 400;
   line-height: 24px;
 
@@ -399,7 +397,7 @@
 
 .content-wrapper-portfolio-body-validators-content-no-validator-text-subtitle{
   font-family: Montserrat;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 24px;
   letter-spacing: -0.01em;
@@ -433,8 +431,8 @@
   align-items: center;
   justify-content: space-between;
   background-color: #C4CDF4;
-  width:  225px;
-  height: 39px;
+  width:  215px;
+  height: 40px;
   border-radius: 30px;
   padding: 10px;
 
@@ -472,6 +470,7 @@
   min-height: 100%;
   width: 100%;
   min-width: 100%;
+  border-radius: 50%;
 }
 
 .content-wrapper-portfolio-body-validators-content-first-text {
@@ -514,13 +513,32 @@
   height: var(--content-wrapper-portfolio-body-validators-content-third-height);
   display: flex;
   align-items: center;
-  flex-direction: row;
   justify-content: space-between;
   padding: var(--content-wrapper-portfolio-body-validators-content-third-padding);
   border-radius: var(--border-radius-medium);
-  background-color: var(--primary-background-dark);
+  background-color: #DFE5FF;
 }
 
+.content-wrapper-portfolio-body-validators-content-third-text {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding-top: 0px;
+  font-weight: 400;
+  font-family: 'Igra Sans';
+  font-size: 16px;
+  line-height: 1;
+  color: #2C202A;
+}
+.content-wrapper-portfolio-body-validators-content-third-icon {
+  width: 10px;
+  min-width: 30px;
+  height : auto;
+  min-height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .content-wrapper-portfolio-body-buttons {
   position: relative;
   width: var(--content-wrapper-portfolio-body-each-width);
@@ -529,8 +547,11 @@
   min-height: var(--content-wrapper-portfolio-body-buttons-height);
   background-color:  var(--primary-background-white);
   display: flex;
+  justify-content: space-around;
   margin-top: var(--content-wrapper-portfolio-body-buttons-margin-top);
   border-radius: var(--border-radius-medium);
+  z-index: 10;
+  overflow: hidden;
 }
 
 .content-wrapper-portfolio-body-buttons-spiral-right {
@@ -559,6 +580,19 @@
   background-color: var(--primary-text-black);
   margin: var(--content-wrapper-portfolio-body-buttons-each-margin);
   z-index: 10;
+
+}
+
+.content-wrapper-portfolio-body-buttons-each-text {
+  font-family: Igra Sans;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
 }
 
 /* NEW CODE */
@@ -574,25 +608,25 @@
   flex-direction: column;
   width: 850px;
   height: 600px;
-  border: 2px solid #9695DF;
+  border: 1px solid #9695DF;
   border-radius: var(--border-radius-big);
   background-color: #ECF0FF;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
   z-index: 10;
   /* make it draggable */
-
 }
 
 
 
 .redelegate-wrapper-title {
-  width: 100%;
-  min-width: 100%;
+  width: 800px;
+  min-width: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 5px 20px;
-  margin-top: 30px;
+  margin: 40px 50px;
+  
 }
 
 .redelegate-wrapper-content {
@@ -623,6 +657,7 @@
   font-family: 'Montserrat';
   color: #616079;
   margin-bottom: 10px;
+  font-size: 400;
 }
 .redelegate-wrapper-content-dropdown {
   width: 230px;
@@ -635,7 +670,6 @@
   border-radius: 30px;
   background-color: #DFE5FF !important;
   margin: 0px;
-  margin-bottom: 60px;
 }
 
 .redelegate-wrapper-content-dropdown-text {
@@ -709,11 +743,11 @@
   border: 1px solid #A0ABDA;
   background-color: var(--primary-background-light);
   overflow: hidden;
-  padding-right: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-top: 10px;
 
 
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Slightly more intense shadow */
@@ -736,14 +770,7 @@
   border: 1px solid red;
 } */
 
-.redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile {
-  width: 100%;
-  min-width: 100%;
-  min-height: fit-content;
-  max-height: var(--content-wrapper-stake-body-main-center-body-chain-list-tile-height);
-  margin: 0px !important;  /*var(--content-wrapper-stake-body-main-center-body-chain-list-tile-margin); */
 
-}
 
 .redelegate-content-wrapper-stake-body-main-center-body-chain-list-each {
   height: 40px;
@@ -753,7 +780,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 15px 40px;
+  padding: 5px;
   margin: 0px;
   z-index: 999;
 }
@@ -797,11 +824,18 @@
   background-color: transparent;
 }
 
+.redelegate-wrapper-content-buttons {
+  margin-top: 55px;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 
 .redelegate-content-wrapper-portfolio-body-validators-content-third {
-
-  width: 100%;
-  height: 100%;
+  width:  230px;
+  height: 50px;
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -809,6 +843,7 @@
   padding: var(--content-wrapper-portfolio-body-validators-content-third-padding);
   border-radius: var(--border-radius-medium);
   background-color: var(--primary-background-dark);
+
 }
 
 
@@ -819,6 +854,10 @@
 
 
 /** dropdown height */
+.redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile{
+  min-width: 200px;
+  width: 200px;
+}
 .redelegate-content-wrapper-stake-body-main-center-body-chain-list-tile-inner {
   height: 45px;
   min-height: 45px;
@@ -826,24 +865,20 @@
   min-width: 100%;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
+  padding: 10px;
+}
+.redelegate-content-wrapper-stake-body-main-center-body-chain-list-each-chain {
+  height: 40px;
+  min-height: 40px;
+  width: 100%;
+  min-width: 100%;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  margin:0px;  
+  margin: 0px;
+  z-index: 999;
 }
-
-.validator-radio {
-  appearance: auto;
-  width: 25px;
-  height: 25px;
-  margin-right: 10px;
-}
-
-.redelegate-wrapper-content-buttons {
-  margin-top: 55px;
-  width: 230px;
-  height: 60px;
-}
-
-
 
 @media only screen and (min-width: 1300px) and (max-width: 1400px) {
  

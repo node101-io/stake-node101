@@ -1,6 +1,24 @@
 const GAS_FEE_ADJUSTMENT = 1.3;
 const TOKEN_DECIMALS = 18;
 
+function getBalance(address, callback) {  
+
+  const rest_url= currentChain.rest_url;
+  console.log(`${rest_url}/cosmos/bank/v1beta1/balances/${address}`);
+  fetch(`${rest_url}/cosmos/bank/v1beta1/balances/${address}`).
+    then(response => response.json()).
+    then(data => {
+      if (data.error) return callback(data.error);
+      console.log(data);
+      const balance = data.balances[0]?.amount || '0';
+      console.log(balance);
+      return callback(null, balance);
+    }
+  ).catch(err => {
+    return callback('document_not_found');
+  });
+}
+
 function getReward(delegatorAddress, validatorAddress, callback) {
   const currentChainInfo = JSON.parse(currentChain.chain_info);
   const stakingdenom = currentChainInfo.feeCurrencies[0].coinMinimalDenom;

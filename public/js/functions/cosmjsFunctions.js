@@ -1,5 +1,34 @@
 const GAS_FEE_ADJUSTMENT = 1.3;
 const TOKEN_DECIMALS = 18;
+function getValidatorList(callback) {
+  SigningStargateClient.connectWithSigner(currentChain.rpc_url)
+    .then(client => client.queryClient.staking.delegatorValidators(globalAddress))
+    .then((redelegations) => {
+
+          const keybaseIdList = redelegations.validators.map(validator => {
+            return validator.description.identity;
+          });
+
+          serverRequest('/keybase', 'POST', { keybaseIdList }, res => {
+
+               const validatorList = redelegations.validators.map((validator, index) => {
+                return {
+                  operatorAddress: validator.operatorAddress,
+                  moniker: validator.description.moniker,
+                  identity: validator.description.identity,
+                  picture: res.validatorInfoList[index].image_url,
+                };
+              });
+              
+              console.log(validatorList);
+              setDynamicValidatorUI(validatorList); 
+            
+          });
+        }
+    ).catch((err) => {
+      console.log(err);
+    });
+};
 
 function getBalance(address, callback) {  
 
@@ -64,34 +93,11 @@ function getStake(delegatorAddress, validatorAddress, callback) {
   });
 }
 
-function completeStake(offlineSigner, accounts, currentChain, stakingValue, callback) {
+function sendStake( currentChain, stakingValue, callback) {
   const currentChainInfo = JSON.parse(currentChain.chain_info);
-  const rpc_url = currentChain.rpc_url;
-  const validatorAddress = currentChain.validator_address;
-  const stakingdenom = currentChainInfo.feeCurrencies[0].coinMinimalDenom;
-  const memo = "stake from node101 website";
   stakingValue = parseFloat(stakingValue) * (10 ** currentChainInfo.currencies[0].coinDecimals);
-  
-  const DelegateMsg = MsgDelegate.fromPartial({
-     delegatorAddress: accounts.address,
-     validatorAddress: validatorAddress,
-     amount: {
-       denom: stakingdenom,
-       amount: stakingValue.toString()
-     }
-   });
 
-  const DelegateTransaction = {
-    typeUrl: "/cosmos.staking.v1beta1.MsgDelegate",
-    value: DelegateMsg,
-  };
-
-  // completeTransaction(offlineSigner, accounts, [DelegateTransaction], rpc_url, stakingdenom, memo, (err,data) => {
-  //   if (err) return callback(err);
-
-  //   return callback(null);
-  // });
-  const key = keplr.getKey(currentChain.chain_id).then((key) => {
+   keplr.getKey(currentChain.chain_id).then((key) => {
    
     TestStake(currentChainInfo,stakingValue, key, (err) => {
        if (err) return console.log(err);
@@ -268,8 +274,12 @@ function completeTransaction(offlineSigner, accounts, msgs, rpc_url, stakingdeno
 };
 
 async function TestStake(network,amount, key,  callback) {
-  const myaddress = "celestia1v69uuyn2vujg9f9svy2u47tft925yj67ffygj8"
-  const valiaddress = "celestiavaloper1lrzxwu4dmy8030waevcpft7rpxjjz26csrtqm4";
+  const myaddress = key.bech32Address;
+  const valiaddress = currentChain.validator_address;
+  const coinDenom = JSON.parse(currentChain.chain_info).currencies[0].coinMinimalDenom;
+
+  console.log("myaddress", myaddress);
+  console.log("valiaddress", valiaddress);
   const proto = [
     {
       typeUrl: "/cosmos.staking.v1beta1.MsgDelegate",
@@ -277,7 +287,7 @@ async function TestStake(network,amount, key,  callback) {
         delegatorAddress: myaddress,
         validatorAddress: valiaddress,
         amount: {
-          denom: "utia",
+          denom: coinDenom,
           amount: amount.toString(),
         },
       }).finish(),
@@ -286,7 +296,7 @@ async function TestStake(network,amount, key,  callback) {
   const stdFee = {
     amount: [
       {
-        denom: "utia",
+        denom: coinDenom,
         amount: 0,
       },
     ],

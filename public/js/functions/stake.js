@@ -45,13 +45,13 @@ window.addEventListener('load', () => {
         } else {
 
           currentChain = res.chainInfo;
-          setTokenUI(currentChain);
-          // addChainToKeplr(currentChain, (err) => {
-          //   if (err) console.log(err);
+          const stakingValue = document.querySelector('.content-wrapper-stake-body-main-center-body-stake-amount').value;
+          setAmountUI(stakingValue);
+          addChainToKeplr(currentChain, (err) => {
+             if (err) console.log(err);
 
-          //   setTokenUI(currentChain);
-          // });
-
+             setTokenUI(currentChain);
+           });
         }
       });
 
@@ -102,11 +102,11 @@ window.addEventListener('load', () => {
     };
 
     if (event.target.closest('.content-wrapper-stake-body-button')) {
-      const keplr = window.keplr;
+     
+
       if (!currentChain) {
         return;
       };
-
 
       const inputElement = document.querySelector('.content-wrapper-stake-body-main-center-body-stake-amount');
       const stakingValue = inputElement.value;
@@ -115,17 +115,12 @@ window.addEventListener('load', () => {
         console.log("Please enter a valid amount");
         return;
       };
-      const offlineSigner = keplr.getOfflineSigner(currentChain.chain_id);
-      offlineSigner.getAccounts().
-      then((accounts) => {
-
-        completeStake(offlineSigner, accounts[0], currentChain, stakingValue, (err, res) => {
+    
+        sendStake(currentChain, stakingValue, (err, res) => {
           if (err) {
             console.log(err);
             return;
           };
-        }
-      );
       }).catch((err) => {
         console.log(err);
         return;

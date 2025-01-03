@@ -328,7 +328,7 @@
   height: var(--content-wrapper-portfolio-body-stat-balance-statusbar-height);
   min-height: var(--content-wrapper-portfolio-body-stat-balance-statusbar-height);
   border-radius: var(--border-radius-medium);
-  background: linear-gradient(90deg, #CDEED3 48.99%, #E4E9FF 49%);
+  background: linear-gradient(90deg, #CDEED3 0%, #E4E9FF 0%);
 }
 
 .content-wrapper-portfolio-body-stat-balance-statusbar-2 {
@@ -337,7 +337,7 @@
   height: var(--content-wrapper-portfolio-body-stat-balance-statusbar-height);
   min-height: var(--content-wrapper-portfolio-body-stat-balance-statusbar-height);
   border-radius: var(--border-radius-medium);
-  background: linear-gradient(90deg, #FFE2D9 48.99%, #E4E9FF 49%);
+  background: linear-gradient(90deg, #CDEED3 0%, #E4E9FF 0%);
 }
 
 .content-wrapper-portfolio-body-stat-balance-statusbar-3 {
@@ -346,7 +346,7 @@
   height: var(--content-wrapper-portfolio-body-stat-balance-statusbar-height);
   min-height: var(--content-wrapper-portfolio-body-stat-balance-statusbar-height);
   border-radius: var(--border-radius-medium);
-  background: linear-gradient(90deg, #B1C7FF 48.99%, #E4E9FF 49%);
+  background: linear-gradient(90deg, #CDEED3 0%, #E4E9FF 0%);
 }
 
 .content-wrapper-portfolio-body-stat-balance-text-reward {
@@ -520,15 +520,17 @@
 }
 
 .content-wrapper-portfolio-body-validators-content-third-text {
+  height: fit-content;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  padding-top: 0px;
   font-weight: 400;
   font-family: 'Igra Sans';
   font-size: 16px;
-  line-height: 1;
   color: #2C202A;
+  padding: 0px;
+  margin: 0px;
+  vertical-align: middle;
 }
 .content-wrapper-portfolio-body-validators-content-third-icon {
   width: 10px;
@@ -602,7 +604,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-52%, -50%);
   display: flex;
   align-items: center;
   flex-direction: column;

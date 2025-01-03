@@ -1,56 +1,38 @@
-function getValidatorList(callback) {
-  SigningStargateClient.connectWithSigner(currentChain.rpc_url)
-    .then(client => client.queryClient.staking.delegatorValidators(globalAddress))
-    .then((redelegations) => {
-
-          const keybaseIdList = redelegations.validators.map(validator => {
-            return validator.description.identity;
-          });
-
-          serverRequest('/keybase', 'POST', { keybaseIdList }, res => {
-
-               const validatorList = redelegations.validators.map((validator, index) => {
-                return {
-                  operatorAddress: validator.operatorAddress,
-                  moniker: validator.description.moniker,
-                  identity: validator.description.identity,
-                  picture: res.validatorInfoList[index].image_url,
-                };
-              });
-              
-              console.log(validatorList);
-              setDynamicValidatorUI(validatorList); 
-            
-          });
-        }
-    ).catch((err) => {
-      console.log(err);
-    });
-};
-
 function setDynamicValidatorUI(validatorList) {  
-  //validatorList =  validatorList.slice(0, 2);
-  validatorList = validatorList.filter(validator => validator.operatorAddress == currentChain.validator_address);
-  validatorList = validatorList.filter(validator => validator.operatorAddress != currentChain.validator_address);
+  validatorList =  validatorList.slice(0, 2);
+  //validatorList = validatorList.filter(validator => validator.operatorAddress == currentChain.validator_address);
+  //validatorList = validatorList.filter(validator => validator.operatorAddress != currentChain.validator_address);
 
   
   if (validatorList.length == 0) {
+    console.log("No validators");
     const backgroundSpiral = document.querySelector('.content-wrapper-portfolio-body-validators-content-no-validator-background');
     backgroundSpiral.classList.remove('display-none');
+
     const noValidator = document.querySelector('.content-wrapper-portfolio-body-validators-content-no-validator');
     noValidator.classList.remove('display-none');
+    
     const reloadIcon = document.querySelector('.content-wrapper-portfolio-body-validators-reload');
     reloadIcon.classList.add('display-none');
+
+    const buttonWrapper = document.querySelector('.content-wrapper-portfolio-body-buttons');
+    buttonWrapper.classList.add('display-none');
     
     return;
   };
 
   if (validatorList.length == 1 && validatorList[0].moniker == "node101") {
+    console.log("Only node101");
     const reloadIcon = document.querySelector('.content-wrapper-portfolio-body-validators-reload');
     reloadIcon.classList.add('display-none');
 
+
     const validatorContainer = document.querySelector('.content-wrapper-portfolio-body-validators-content-one-validator');
+    console.log(validatorContainer.classList);
     validatorContainer.classList.remove('display-none');
+
+    const nodeValidatorContainer = document.querySelector('.content-wrapper-portfolio-body-validators');
+    nodeValidatorContainer.classList.remove('display-none');
 
     const buttonWrapper = document.querySelector('.content-wrapper-portfolio-body-buttons');
     buttonWrapper.classList.remove('display-none');
@@ -83,9 +65,8 @@ function setDynamicValidatorUI(validatorList) {
 
   const redelegationText = document.createElement('div');
   redelegationText.classList.add('content-wrapper-portfolio-body-validators-content-third-text');
-  redelegationText.classList.add('content-wrapper-portfolio-body-validators-content-third-text');
 
-  redelegationText.innerHTML = "&nbsp; Redelegate &nbsp;";
+  redelegationText.innerHTML = "Redelegate";
 
   const redelegationArrow = document.createElement('div');
   redelegationArrow.classList.add('content-wrapper-portfolio-body-validators-content-third-arrow');
@@ -209,12 +190,20 @@ window.addEventListener('load', () => {
   }); 
 
   getStake(globalAddress, currentChain.validator_address, (err, data) => {
-    if (err) console.log(err);
+    console.log(globalAddress);
+    console.log(currentChain.validator_address);
+    if (err) data = 0;
+    
 
     let balance = document.querySelector('.content-wrapper-portfolio-body-stat-chain-value-amount-token').innerText;
     balance = parseFloat((balance.match(/\d+(\.\d+)?/) || [0])[0]) * 10 ** JSON.parse(currentChain.chain_info).currencies[0].coinDecimals;
-    const width = (parseFloat(data)/(balance + parseFloat(data))) * 100;
-    const width2 = 100 - width;
+    let width = (parseFloat(data)/(balance + parseFloat(data))) * 100;
+    let width2 = 100 - width;
+
+    if (balance == 0) {
+      width = 0;
+      width2 = 0;
+    }
 
     document.querySelector('.content-wrapper-portfolio-body-stat-balance-statusbar-1').style.background = `linear-gradient(90deg, #CDEED3 ${width}%, #E4E9FF ${width}%)`;  
     document.querySelector('.content-wrapper-portfolio-body-stat-balance-statusbar-3').style.background = `linear-gradient(90deg, #FFD3D3 ${width2}%, #E4E9FF ${width2}%)`;

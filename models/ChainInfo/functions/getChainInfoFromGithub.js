@@ -1,7 +1,5 @@
-const fetch = require('node-fetch');
-
 module.exports = (identifier, callback) => {
-  fetch(`https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/cosmos/${identifier}.json`)
+  fetch(`https://raw.githubusercontent.com/chainapsis/keplr-chain-registry/main/cosmos/${identifier.trim()}.json`)
     .then(res => res.json())
     .then(res => {
       if (!res)

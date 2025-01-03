@@ -161,7 +161,12 @@ async function simulateMsgs(network, sender, proto, fee) {
 }
 
 async function sendMsgs(network, sender, proto, fee) {
-    const account = await fetchAccountInfo("network", sender);
+    const chainName = network.chainName.toLowerCase().replace(/\s/g, "");
+    // also trim out if there is a space inside the chain name
+
+    console.log(network);
+    const restUrl = `https://rest.cosmos.directory/${chainName}`;
+    const account = await fetchAccountInfo(restUrl, sender);
     const { pubKey } = await keplr.getKey('celestia');
 
    
@@ -227,8 +232,8 @@ async function sendMsgs(network, sender, proto, fee) {
     }
 }
 
-async function fetchAccountInfo(network, address) {
-  const rest = "https://rest.cosmos.directory/celestia";
+async function fetchAccountInfo(rest, address) {
+  
     try {
         const uri = `${rest}/cosmos/auth/v1beta1/accounts/${address}`;
         console.log(uri);
